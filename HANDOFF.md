@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-05
+Last updated: 2026-09-06
 
 ## Project
 
@@ -44,6 +44,16 @@ Last updated: 2026-09-05
     - **Clipping fixed:** audited every drop-shadowed node against its clipping ancestors, found 2 real clips (hero red "REMEMBER" box, contact CTA), set `clipsContent = false` on 121 auto-layout containers while preserving intentional clippers (thumbnails, portrait, home icon, page frames, full-bleed contact). Re-audit returns 0 issues.
 17. Looked at (but did not install — it's not a plugin) `voltagent/awesome-design-md`: a reference library of ~100+ brand `DESIGN.md` style-guide files. Usage model: user picks a brand, we fetch that one file, I use it as a style spec. No action taken yet — waiting on user to pick a brand if they want this route for a future redesign.
 
+18. **About page reworked to be personality-first (2026-09-06).** User's brief: lead with who they are, not a stacks-and-skills resume — movies, video games, cooking, drumming — and keep the factual blocks lower on the same page. Of the three concepts offered (Four Obsessions poster cards / The Personal Stack / Now Playing board), the user chose the **Now Playing board**.
+    - Built as a new `Now Playing` section on the About page (node `2210:2`), inserted between `Header` and `Skills`, so the page order is now Nav / Header / **Now Playing** / Skills / Software / Experience / Education / Contact / Footer. About page height went 3251 → 4282.
+    - Structure: red mono eyebrow `OFF THE CLOCK` + Archivo Black 44 title `WHAT I'M INTO RIGHT NOW`, then a full-width **ink `#0A0A0A` board panel** (node `2210:7`) — the only dark block on the page above the footer, which makes it the visual anchor.
+    - Inside the board: a header strip (`◉ NOW PLAYING` in red, `UPDATED SEP 2026` right-aligned in muted mono), a hairline rule, four pinned cards, a second rule, and a through-line footer: `ALL FOUR ARE THE SAME SKILL — TIMING. I DESIGN THE WAY I PLAY.`
+    - **Four cards** (552x240, radius 0, 9px hard offset shadow, slight rotations of −1.5°/+1.2°/+1.4°/−1.1°, each with a 14px pin dot straddling the top edge): `LAST WATCHED`, `CURRENTLY PLAYING`, `ON THE STOVE`, `LEARNING THIS GROOVE`. Three are white with red shadows; the drumming card is red-filled with a paper shadow as the accent. Card anatomy: mono label → Archivo Black 30 title → Geist 15 detail line → mono meta pinned to the bottom.
+    - **The argument the page makes:** all four hobbies are timing-and-composition disciplines (editing, feedback loops, seasoning, tempo), so the section reads as a claim about how the user designs rather than a hobby list. Every card's detail line is written to land that point.
+    - **Content is dummy and must be swapped** — currently Whiplash / Disco Elysium / Butter Chicken / Rosanna Shuffle. Needs the user's real specifics.
+    - The `UPDATED SEP 2026` stamp is the deliberate answer to the board going stale: it dates the content honestly rather than pretending it is live. Refresh the cards every month or two.
+    - Not built: hover states for these cards (suggested spec — rotation eases to 0° and the shadow grows on hover), and no entry was added to the `Cursor & Hover States` frame for them.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
@@ -59,7 +69,7 @@ Last updated: 2026-09-05
   **Page structure agreed:** (1) intro block — project name, one-line description, role / timeline / tools as chips reusing the existing tag component; (2) stacked slide images + Download PDF button; (3) one closing line on outcome or what they would change; (4) next-project card + contact CTA. User has PDFs ready for all 6 case studies.
 - Iteration 06 is the chosen direction; iterations 01-05 remain on the page for reference only.
 - Once pages are signed off, build the real site in HTML/CSS/JS (GSAP already wired into the repo).
-- **About page creative rework — recommended, not built.** User wants personality rather than a stacks-and-skills resume, with the factual blocks moved below. Directions given, in recommended order: (1) **annotated self-portrait** with Figma-inspect-style hotspot annotations; (2) **design opinions** as poster cards or sliders (highest signal for a student, since taste is the axis where they can beat more experienced people); (3) **scrollytelling chapters** with a GSAP-pinned transforming element (most premium, most expensive, easiest to get wrong); (4) **process honesty** showing rejected directions and messy first frames; (5) **micro-interaction layer** over the existing lower half (software tiles flip to show why each tool is used). Advice given: lead with the personality act, then keep a fast scannable facts block below it, because two different readers use the page. Any scroll-driven version needs a `prefers-reduced-motion` fallback.
+- **About page personality rework — DONE (2026-09-06), see item 18.** The `Now Playing` board is built and in place. Remaining from the original five directions, still unbuilt and still viable as *additions* rather than replacements: (1) **annotated self-portrait** with Figma-inspect-style hotspot annotations — would pair well with the existing portrait slot in the Header; (2) **design opinions** as poster cards or sliders; (3) **scrollytelling chapters** with a GSAP-pinned transforming element (most premium, most expensive, easiest to get wrong — and would need a `prefers-reduced-motion` fallback); (4) **process honesty** showing rejected directions and messy first frames; (5) **micro-interaction layer** over the lower half (software tiles flip to show why each tool is used). The lead-with-personality-then-facts structure the advice called for is now actually in the page.
 - Work tiles are placeholders, not real imagery — the Figma plugin API blocks `createImageAsync`, so real project images must be dropped in manually. In Iteration 04 the tiles are flat colour posters with the project name set inside, so they read as intentional even before real images land.
 - Custom home icon still to be designed — every iteration has a placeholder icon slot in the nav, layer-named so it is easy to find.
 - User's stated dislikes to respect going forward: **gradients** (audited: 0 gradient fills across iterations 04-06). User's stated likes: Bricolage Grotesque for display, uppercase mono nav labels, the pill nav shape, normal (non-bento) work grids, tall portrait work cards with tag chips, Awwwards-style playful detail.
