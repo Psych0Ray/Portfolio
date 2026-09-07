@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-06
+Last updated: 2026-09-08
 
 ## Project
 
@@ -59,6 +59,19 @@ Last updated: 2026-09-06
     - Two **image slots** to fill manually (plugin API blocks `createImageAsync`): film poster, game screenshot. The cooking and riding cards are drawn entirely in vector and need no image.
     - `UPDATED SEP 2026` is the deliberate answer to the format going stale — it dates the content honestly. Refresh every month or two.
     - Clipping audit on the section returns 0 issues; `clipsContent = false` on the section and collage.
+
+19. **Motion prototype built in code: `lab.html` (2026-09-08).** User's brief: the design system is good but the site needs to be *unique* — Selected Work stays as-is on Home, but a **separate work page** should show the projects dynamically with scroll animation; the **hero is too basic**; and the site should have a **splash screen**. Asked for something that would blow people away.
+    - **Built in code, not Figma, for two reasons.** The Figma MCP server disconnected mid-session (right after the motorcycle glyph) and its tools were pulled from the session. Separately, all three asks are *motion* — timing, easing and scroll feel cannot be judged from static frames. User chose "finish the prototype first, rebuild approved parts as Figma artboards later" over waiting for Figma.
+    - **The concept spine: the site is a riso print coming off a press.** Not a theme bolted on — it falls out of the Riso Press language already chosen (misregistration, plate registration, crop marks, sheet counts). One idea drives the splash, the hero and the work page instead of three unrelated tricks.
+    - **`lab.html`** is a single self-contained prototype file (inline CSS + JS) at the repo root, deliberately separate from `index.html` so the placeholder site is untouched. GSAP 3.15.0 (SRI-pinned, matching `index.html`) + ScrollTrigger from cdnjs. **ScrollTrigger is not SRI-pinned** — add a hash before this goes near production.
+    - **Splash — "PRESS CHECK".** Paper ground, crop marks, a sheet edge. The name prints in two plates: the red plate lands first out of register, the ink plate slams down, then the red **snaps into registration** with a shake. A press counter runs 000→100% and a six-swatch colour bar fills. Then the sheet is pulled up off the press. Click to skip; `sessionStorage` key `pressed` means it only plays once per session; skipped entirely under `prefers-reduced-motion`.
+    - **Hero — live misregistration.** Press-sheet framing: crop marks at the corners, a slug line (`JOB: PORTFOLIO-2026 · SHEET 01 · 2 INKS · 300 DPI`), an ink colour bar down the right edge, the rotated sticker. The headline is set twice — an ink plate and a red plate with `mix-blend-mode: multiply` — and **the cursor knocks the red plate out of register** as it moves across the hero (±26px / ±16px, eased with `gsap.quickTo`). Static small offset under reduced motion.
+    - **Work page — "THE PRESS RUN".** A pinned ScrollTrigger sequence where each project is a sheet fed through a press. Per sheet: paper feeds in from below → the red plate **snaps into register** with a 3px shake (the money moment) → image slot, tags and CTA settle in → hold → the sheet is pulled up and the next feeds in. Fixed chrome around the press bed: crop marks, `SHEET 03 / 06` counter, a live status line (`FEEDING SHEET 02` / `REGISTRATION OK`) with a dot that dims while feeding, and a red progress gauge. Sheets alternate image left/right. Falls back to a plain stacked list under reduced motion.
+    - **Also in the prototype:** a **registration-crosshair cursor** (red crosshair + ring, multiply blend, hover devices only), an SVG **paper grain** overlay at 7% multiply, and a **colophon footer** written as print credits ("Printed in two inks… No gradients were used in the making of this site").
+    - **Verified running**, not just written: served over `python -m http.server 8080` and driven with `playwright-cli`. GSAP and ScrollTrigger both load, 6 sheets build, zero JS errors (only the known `favicon.ico` 404). Confirmed by reading computed transforms mid-scroll that sheet 01's red plate sits at (0,0) registered while sheets 02-06 wait at (20,-13) — the registration mechanic works as designed. Screenshots captured of the splash mid-registration, the hero, and sheet 02 caught mid-print.
+    - **Fixed during the build:** the progress gauge collided with the sheet's right edge (sheet inset changed to `110px 92px 110px 44px`); sheets were vertically centred leaving dead space (text column now uses `justify-content:space-between` so it fills the sheet like a poster, title up to 96px); the next sheet peeked in early (off-stage travel raised from `yPercent` 112 to 125).
+    - **To view it:** serve over HTTP (`python -m http.server 8080` from the repo root) and open `http://localhost:8080/lab.html` — `file://` is blocked by the Playwright CLI and the fonts need a real origin. Clear `sessionStorage` to replay the splash.
+    - **Not done / open:** all content is the same dummy project set; image slots are placeholders; nothing here is merged into `index.html`; the About and Resume pages have no coded equivalent yet; ScrollTrigger needs an SRI hash; and none of this exists in Figma yet — the approved parts still need to be rebuilt as artboards so the canvas stays the source of truth.
 
 ## In progress / not yet confirmed
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutujeet — Press Run (Lab)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500;700&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F3E9; --ink:#0A0A0A; --red:#FF3B21;
+  --muted:#5E5B54; --rule:#D9D4C6; --slot:#E6E1D4;
+  --bw:2.5px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Geist',system-ui,-apple-system,sans-serif;
+  overflow-x:hidden;
+}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em}
+.display{font-family:'Archivo Black',Impact,sans-serif;letter-spacing:-.03em;line-height:.92}
+
+/* paper grain */
+.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.07;mix-blend-mode:multiply;z-index:9998}
+
+/* registration crosshair cursor */
+.cursor{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;pointer-events:none;z-index:9999;opacity:0;mix-blend-mode:multiply}
+.cursor::before,.cursor::after{content:'';position:absolute;background:var(--red)}
+.cursor::before{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
+.cursor::after{top:50%;left:0;height:1.5px;width:100%;transform:translateY(-50%)}
+.cursor i{position:absolute;inset:9px;border:1.5px solid var(--red);border-radius:50%}
+@media (hover:none){.cursor{display:none}}
+
+/* misregistration type */
+.mis{position:relative;display:inline-block}
+.mis .plate{display:block}
+.mis .plate-red{position:absolute;inset:0;color:var(--red);mix-blend-mode:multiply;will-change:transform}
+.mis .plate-ink{position:relative;color:var(--ink)}
+
+/* crop marks */
+.crop{position:absolute;width:26px;height:26px;pointer-events:none}
+.crop::before,.crop::after{content:'';position:absolute;background:var(--ink)}
+.crop::before{width:1.5px;height:100%;left:0;top:0}
+.crop::after{height:1.5px;width:100%;left:0;top:0}
+.crop.tr{transform:scaleX(-1)} .crop.bl{transform:scaleY(-1)} .crop.br{transform:scale(-1)}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9000;background:var(--paper);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden}
+#splash .sheet-edge{position:absolute;inset:34px;border:1.5px solid var(--rule)}
+.splash-word{font-size:clamp(48px,11vw,150px)}
+.splash-sub{margin-top:26px;font-size:11px;color:var(--muted)}
+.splash-hud{position:absolute;left:56px;right:56px;bottom:52px;display:flex;justify-content:space-between;
+  align-items:flex-end;font-size:11px;color:var(--muted)}
+.bar{display:flex;gap:4px;margin-top:12px}
+.bar span{width:34px;height:12px;border:1.5px solid var(--ink);background:transparent}
+.bar span.on:nth-child(odd){background:var(--red)}
+.bar span.on:nth-child(even){background:var(--ink)}
+.splash-skip{position:absolute;right:56px;top:52px;font-size:10px;color:var(--muted)}
+
+/* NAV */
+.nav{position:fixed;top:26px;left:50%;transform:translateX(-50%);z-index:400;display:flex;align-items:center;
+  gap:6px;padding:7px;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:100px}
+.nav a{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:11px;
+  font-weight:700;color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:100px}
+.nav a.on,.nav a:hover{background:var(--ink);color:var(--paper)}
+.nav .home{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;
+  font-size:11px;color:var(--ink);font-weight:700}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;padding:150px 56px 60px;display:flex;flex-direction:column;justify-content:center}
+.hero .slug{display:flex;gap:22px;font-size:10px;color:var(--muted);margin-bottom:34px;flex-wrap:wrap}
+.hero h1{font-size:clamp(46px,8.6vw,124px);max-width:14ch}
+.hero .lede{margin-top:36px;max-width:46ch;font-size:17px;line-height:1.65;color:var(--muted)}
+.hero .strip{position:absolute;right:56px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:5px}
+.hero .strip span{width:15px;height:44px;border:1.5px solid var(--ink)}
+.hero .strip span:nth-child(1){background:var(--red)}
+.hero .strip span:nth-child(2){background:var(--ink)}
+.hero .strip span:nth-child(3){background:var(--slot)}
+.hero .strip span:nth-child(4){background:var(--paper)}
+.sticker{position:absolute;right:120px;top:180px;transform:rotate(-9deg);background:var(--red);
+  border:var(--bw) solid var(--ink);padding:11px 17px;font-size:11px;font-weight:700}
+.cue{position:absolute;left:56px;bottom:44px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.cue i{display:block;width:34px;height:1.5px;background:var(--ink)}
+
+/* PRESS RUN */
+.pressrun{position:relative}
+.pr-stage{position:relative;height:100vh;overflow:hidden;background:var(--paper);
+  border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink)}
+.pr-chrome{position:absolute;inset:0;z-index:5;pointer-events:none}
+.pr-label{position:absolute;left:44px;top:38px;font-size:11px;font-weight:700}
+.pr-count{position:absolute;right:44px;top:38px;font-size:11px;font-weight:700}
+.pr-count b{color:var(--red)}
+.pr-status{position:absolute;left:44px;bottom:38px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:9px}
+.pr-status i{width:8px;height:8px;border-radius:50%;background:var(--red);display:block}
+.pr-gauge{position:absolute;right:44px;top:50%;transform:translateY(-50%);width:13px;height:230px;
+  border:1.5px solid var(--ink)}
+.pr-gauge div{position:absolute;left:0;bottom:0;width:100%;height:0%;background:var(--red)}
+
+.pr-sheets{position:absolute;inset:0}
+.sheet{position:absolute;inset:110px 92px 110px 44px;display:flex;gap:52px;align-items:stretch;
+  background:var(--paper);border:var(--bw) solid var(--ink);padding:44px;will-change:transform}
+.sheet:nth-child(even){flex-direction:row-reverse}
+.sheet .txt{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between}
+.sheet .shot{align-self:center}
+.sheet .num{font-size:11px;color:var(--red);font-weight:700;margin-bottom:20px;display:block}
+.sheet h2{font-size:clamp(40px,6.6vw,96px)}
+.sheet .rule{height:1.5px;background:var(--rule);margin:26px 0 20px}
+.sheet .meta{font-size:10px;color:var(--muted);margin-bottom:20px}
+.sheet .tags{display:flex;gap:8px;flex-wrap:wrap}
+.sheet .tags span{border:2px solid var(--ink);border-radius:100px;padding:7px 14px;font-size:9px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.sheet .shot{width:40%;aspect-ratio:4/3;background:var(--slot);border:2px solid var(--ink);
+  display:grid;place-items:center;font-size:10px;color:var(--muted);flex:none}
+.sheet .go{margin-top:28px;display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700}
+
+/* COLOPHON */
+.colophon{padding:80px 56px;border-top:var(--bw) solid var(--ink);display:flex;gap:60px;flex-wrap:wrap}
+.colophon h3{font-size:11px;color:var(--red);margin-bottom:18px}
+.colophon p{font-size:13px;line-height:1.8;color:var(--muted);max-width:40ch}
+.colophon .k{color:var(--ink);font-weight:500}
+
+@media (max-width:900px){
+  .hero,.colophon{padding-left:26px;padding-right:26px}
+  .hero .strip,.sticker,.pr-gauge{display:none}
+  .sheet{inset:60px 20px;flex-direction:column!important;padding:26px;gap:22px;align-items:flex-start;justify-content:center}
+  .sheet .shot{width:100%}
+  .splash-hud{left:26px;right:26px}
+}
+</style>
+</head>
+<body>
+
+<svg class="grain" aria-hidden="true"><filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#grainf)"/></svg>
+<div class="cursor" id="cursor"><i></i></div>
+
+<!-- SPLASH: PRESS CHECK -->
+<div id="splash">
+  <div class="sheet-edge"></div>
+  <span class="crop tl" style="left:34px;top:34px"></span>
+  <span class="crop tr" style="right:34px;top:34px"></span>
+  <span class="crop bl" style="left:34px;bottom:34px"></span>
+  <span class="crop br" style="right:34px;bottom:34px"></span>
+
+  <h1 class="display mis splash-word" id="splashWord">
+    <span class="plate plate-red" aria-hidden="true">RUTUJEET</span>
+    <span class="plate plate-ink">RUTUJEET</span>
+  </h1>
+  <p class="mono splash-sub" id="splashSub">Registering plates</p>
+
+  <div class="splash-hud mono">
+    <div>
+      <div>Press check</div>
+      <div class="bar" id="bar"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div style="font-weight:700;color:var(--ink)"><span id="count">000</span>%</div>
+  </div>
+  <div class="splash-skip mono">Click to skip</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="home mono">R</span>
+  <a href="#run" class="on">Work</a>
+  <a href="#">About</a>
+  <a href="#">Resume</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <span class="crop tl" style="left:26px;top:26px"></span>
+  <span class="crop tr" style="right:26px;top:26px"></span>
+  <span class="crop bl" style="left:26px;bottom:26px"></span>
+  <span class="crop br" style="right:26px;bottom:26px"></span>
+
+  <div class="slug mono">
+    <span>Job: portfolio-2026</span><span>Sheet 01</span><span>2 inks</span><span>300 dpi</span>
+  </div>
+
+  <h1 class="display mis" id="heroType">
+    <span class="plate plate-red" aria-hidden="true">Design student,<br>currently building.</span>
+    <span class="plate plate-ink">Design student,<br>currently building.</span>
+  </h1>
+
+  <p class="lede">Interface and product design. I care about the details most people never notice — and I like being in the room while things actually get built.</p>
+
+  <div class="sticker mono">Open for Q1 2026</div>
+  <div class="strip"><span></span><span></span><span></span><span></span></div>
+  <div class="cue mono"><i></i> Scroll to run the press</div>
+</header>
+
+<!-- THE PRESS RUN -->
+<section class="pressrun" id="run">
+  <div class="pr-stage" id="prStage">
+    <div class="pr-chrome">
+      <span class="crop tl" style="left:20px;top:20px"></span>
+      <span class="crop tr" style="right:20px;top:20px"></span>
+      <span class="crop bl" style="left:20px;bottom:20px"></span>
+      <span class="crop br" style="right:20px;bottom:20px"></span>
+      <div class="pr-label mono">The press run</div>
+      <div class="pr-count mono">Sheet <b id="prNum">01</b> / 06</div>
+      <div class="pr-status mono"><i id="prDot"></i> <span id="prState">In registration</span></div>
+      <div class="pr-gauge"><div id="prGauge"></div></div>
+    </div>
+    <div class="pr-sheets" id="prSheets"></div>
+  </div>
+</section>
+
+<!-- COLOPHON -->
+<footer class="colophon">
+  <div>
+    <h3 class="mono">Colophon</h3>
+    <p>Set in <span class="k">Archivo Black</span> and <span class="k">JetBrains Mono</span>. Printed in two inks:
+    <span class="k">#0A0A0A</span> and <span class="k">#FF3B21</span>. Radius zero throughout.
+    No gradients were used in the making of this site.</p>
+  </div>
+  <div>
+    <h3 class="mono">Registration</h3>
+    <p>Move your cursor across the headline to knock the red plate out of register — the way a real two-colour
+    print drifts when the paper shifts.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const WORK = [
+  {n:'01', name:'Sonder Health', cat:'Product UI',     yr:'2026', tags:['UI Design','Design System','Research']},
+  {n:'02', name:'Atlas Transit', cat:'Wayfinding',     yr:'2025', tags:['Signage','Iconography','Print']},
+  {n:'03', name:'Form &amp; Fold',   cat:'Brand Identity', yr:'2025', tags:['Identity','Packaging','Type']},
+  {n:'04', name:'Night Shift',   cat:'Motion',         yr:'2025', tags:['Motion','Art Direction']},
+  {n:'05', name:'Paper Route',   cat:'Editorial',      yr:'2024', tags:['Editorial','Layout','Web']},
+  {n:'06', name:'Halftone',      cat:'Design System',  yr:'2024', tags:['System','Tokens','Docs']}
+];
+
+const sheetsWrap = document.getElementById('prSheets');
+sheetsWrap.innerHTML = WORK.map(function(p){
+  return '<article class="sheet">'
+    + '<div class="txt">'
+    +   '<span class="num mono">Sheet ' + p.n + '</span>'
+    +   '<h2 class="display mis">'
+    +     '<span class="plate plate-red" aria-hidden="true">' + p.name + '</span>'
+    +     '<span class="plate plate-ink">' + p.name + '</span>'
+    +   '</h2>'
+    +   '<div class="rule"></div>'
+    +   '<div class="meta mono">' + p.cat + ' &nbsp;·&nbsp; ' + p.yr + '</div>'
+    +   '<div class="tags">' + p.tags.map(function(t){return '<span>' + t + '</span>';}).join('') + '</div>'
+    +   '<div class="go mono">View the sheet &nbsp;→</div>'
+    + '</div>'
+    + '<div class="shot mono">Image</div>'
+    + '</article>';
+}).join('');
+
+const sheets = Array.prototype.slice.call(document.querySelectorAll('.sheet'));
+
+/* registration crosshair cursor */
+if (!REDUCED && window.matchMedia('(hover:hover)').matches) {
+  const cur = document.getElementById('cursor');
+  const cx = gsap.quickTo(cur,'x',{duration:.18,ease:'power3'});
+  const cy = gsap.quickTo(cur,'y',{duration:.18,ease:'power3'});
+  window.addEventListener('mousemove', function(e){ cx(e.clientX); cy(e.clientY); gsap.to(cur,{opacity:1,duration:.2}); });
+  document.addEventListener('mouseleave', function(){ gsap.to(cur,{opacity:0,duration:.2}); });
+}
+
+/* SPLASH — plates registering */
+function runSplash(){
+  const splash = document.getElementById('splash');
+  const red  = splash.querySelector('.plate-red');
+  const ink  = splash.querySelector('.plate-ink');
+  const sub  = document.getElementById('splashSub');
+  const cnt  = document.getElementById('count');
+  const bars = Array.prototype.slice.call(document.querySelectorAll('#bar span'));
+  let finished = false;
+  function done(){
+    if (finished) return;
+    finished = true;
+    if (splash.parentNode) splash.parentNode.removeChild(splash);
+    document.body.style.overflow = '';
+    ScrollTrigger.refresh();
+  }
+
+  if (REDUCED || sessionStorage.getItem('pressed')) { done(); return; }
+  sessionStorage.setItem('pressed','1');
+  document.body.style.overflow = 'hidden';
+
+  const counter = {v:0};
+  const tl = gsap.timeline({onComplete:done});
+
+  tl.set([red,ink],{opacity:0})
+    .to(red,{opacity:1,duration:.01})
+    .fromTo(red,{x:-70,y:26,rotation:-1.4},{x:-16,y:7,rotation:-.5,duration:.7,ease:'power3.out'})
+    .to(ink,{opacity:1,duration:.01},'-=.25')
+    .fromTo(ink,{x:64,y:-22},{x:0,y:0,duration:.55,ease:'power4.out'},'<')
+    .call(function(){ sub.textContent = 'Plates down — checking register'; })
+    .to(red,{x:0,y:0,rotation:0,duration:.4,ease:'power4.inOut'},'+=.28')
+    .to(splash,{x:2,duration:.05,yoyo:true,repeat:3,ease:'none'},'<')
+    .call(function(){ sub.textContent = 'Registration OK'; })
+    .to(counter,{v:100,duration:1.5,ease:'power1.inOut',
+        onUpdate:function(){
+          const v = Math.round(counter.v);
+          cnt.textContent = String(v).padStart(3,'0');
+          bars.forEach(function(b,i){ b.classList.toggle('on', v > (i+1)*100/bars.length - 1); });
+        }},0)
+    .to(splash,{yPercent:-102,duration:.85,ease:'power4.inOut'},'+=.2');
+
+  splash.addEventListener('click', function(){ tl.progress(1); });
+}
+
+/* HERO — cursor knocks the red plate out of register */
+(function heroMisreg(){
+  const hero = document.getElementById('hero');
+  const red  = document.querySelector('#heroType .plate-red');
+  if (REDUCED){ gsap.set(red,{x:-3,y:2}); return; }
+  const rx = gsap.quickTo(red,'x',{duration:.5,ease:'power3'});
+  const ry = gsap.quickTo(red,'y',{duration:.5,ease:'power3'});
+  hero.addEventListener('mousemove', function(e){
+    const r = hero.getBoundingClientRect();
+    rx((( e.clientX - r.left ) / r.width  - .5) * 26);
+    ry((( e.clientY - r.top  ) / r.height - .5) * 16);
+  });
+  hero.addEventListener('mouseleave', function(){ rx(0); ry(0); });
+})();
+
+/* THE PRESS RUN */
+(function pressRun(){
+  const num   = document.getElementById('prNum');
+  const state = document.getElementById('prState');
+  const dot   = document.getElementById('prDot');
+  const gauge = document.getElementById('prGauge');
+
+  if (REDUCED){
+    gsap.set(sheets,{position:'relative',inset:'auto',margin:'0 44px 44px'});
+    document.getElementById('prStage').style.height = 'auto';
+    return;
+  }
+
+  gsap.set(sheets,{yPercent:125});
+  sheets.forEach(function(s){
+    gsap.set(s.querySelector('.plate-red'),{x:20,y:-13});
+    gsap.set(s.querySelector('.shot'),{opacity:0,y:22});
+    gsap.set(s.querySelector('.tags'),{opacity:0,y:14});
+    gsap.set(s.querySelector('.go'),{opacity:0});
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger:{
+      trigger:'.pressrun',
+      start:'top top',
+      end:function(){ return '+=' + (sheets.length * window.innerHeight * 0.92); },
+      pin:'#prStage',
+      scrub:.55,
+      anticipatePin:1,
+      invalidateOnRefresh:true,
+      onUpdate:function(self){
+        const i = Math.min(sheets.length-1, Math.floor(self.progress * sheets.length));
+        num.textContent = WORK[i].n;
+        gauge.style.height = (self.progress*100).toFixed(1) + '%';
+      }
+    }
+  });
+
+  sheets.forEach(function(s,i){
+    const red = s.querySelector('.plate-red');
+    const L = 'sheet' + i;
+    tl.addLabel(L)
+      .fromTo(s,{yPercent:125},{yPercent:0,duration:1,ease:'power3.out'},L)
+      .call(function(){ state.textContent = 'Feeding sheet ' + WORK[i].n; gsap.to(dot,{opacity:.3,duration:.1}); },null,L)
+      .to(red,{x:0,y:0,duration:.42,ease:'power4.inOut'},L+'+=0.72')
+      .to(s,{x:-3,duration:.05,yoyo:true,repeat:3,ease:'none'},L+'+=0.72')
+      .call(function(){ state.textContent = 'Registration OK'; gsap.to(dot,{opacity:1,duration:.1}); },null,L+'+=1.05')
+      .to(s.querySelector('.shot'),{opacity:1,y:0,duration:.42,ease:'power2.out'},L+'+=0.86')
+      .to(s.querySelector('.tags'),{opacity:1,y:0,duration:.36,ease:'power2.out'},L+'+=0.96')
+      .to(s.querySelector('.go'),{opacity:1,duration:.3},L+'+=1.06')
+      .to({},{duration:.85})
+      .to(s,{yPercent:-125,duration:.95,ease:'power3.in'});
+  });
+})();
+
+runSplash();
+</script>
+</body>
+</html>
