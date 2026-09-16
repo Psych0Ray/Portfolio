@@ -1,97 +1,131 @@
-/* ══ Rutujeet — shared design system ══════════════════════════ */
+/* ══ Rutujeet · shared system ════════════════════════════════════
+   Type: Bricolage Grotesque (variable: opsz / wdth / wght) for every
+   display and heading role. Weight contrast does the emphasis work,
+   never a second family. Geist for reading. JetBrains Mono for labels.
+   The eight ransom faces are loaded only for the hero name + logo.
+   Shape rule: cards and slots are sharp (0). Chips, nav, buttons are pill.
+═══════════════════════════════════════════════════════════════════ */
 :root{
   --paper:#F2EFE6; --bone:#E8DCC8; --ink:#0A0A0A;
   --blue:#002FA7; --blue70:#4969BA; --blue40:#91A2CD; --blue15:#CED2DD;
   --muted:#6B655A; --rule:#D8D2C4; --bw:3px;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Geist',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:'Geist',system-ui,sans-serif;overflow-x:hidden;cursor:none}
-a{cursor:none;color:inherit}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.09em}
+html{font-optical-sizing:auto}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);overflow-x:hidden}
+a{color:inherit}
+@media (hover:hover){ body,a,button{cursor:none} }
+
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-weight:500}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
 
-/* ── CURSOR SYSTEM: dot → labelled disc ── */
-.cursor{position:fixed;top:0;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
-  background:var(--blue);display:grid;place-items:center;pointer-events:none;z-index:9999;opacity:0}
-.cursor span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--paper);opacity:0;white-space:nowrap}
-.cursor.ring{background:transparent;border:2.5px solid var(--blue)}
-.cursor.ring span{color:var(--blue)}
-@media (hover:none){.cursor{display:none} body{cursor:auto} a{cursor:pointer}}
+/* display roles: one family, three weights */
+.h-xl{font-family:var(--display);font-weight:800;letter-spacing:-.045em;line-height:.88}
+.h-lg{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:.92}
+.h-md{font-family:var(--display);font-weight:700;letter-spacing:-.025em;line-height:1}
+.lt{font-weight:300;letter-spacing:-.03em;color:var(--blue)}          /* the emphasis word */
+.cond{font-stretch:75%;font-weight:800;letter-spacing:.005em}          /* condensed, for marquee + stamps */
 
-/* ── NAV — inset, raised off the page, its own ground ── */
+/* ── CURSOR · a sticker dot that grows a label ── */
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
+.cursor .dot{width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
+  box-shadow:3px 3px 0 var(--ink);transform:translate(-50%,-50%)}
+.cursor .tag{position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);border-radius:100px;padding:9px 15px;font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
+  opacity:0;transform-origin:left top}
+@media (hover:none){.cursor{display:none}}
+
+/* ── NAV · inset, raised, its own ground ── */
 .navwrap{position:fixed;left:0;right:0;top:22px;z-index:500;display:flex;justify-content:center;padding:0 24px}
-.nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:6px;height:66px;padding:9px 9px 9px 12px;
+.nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:4px;height:66px;padding:9px 9px 9px 22px;
   background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink)}
 .nav .grow{flex:1}
-.nav a.lnk{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.13em;font-size:11px;
-  font-weight:700;color:var(--ink);text-decoration:none;padding:12px 18px;border-radius:100px;position:relative}
+.nav a.lnk{font-family:var(--mono);text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:500;
+  color:var(--ink);text-decoration:none;padding:12px 18px;border-radius:100px;position:relative}
 .nav a.lnk:hover{background:var(--ink);color:var(--bone)}
+.nav a.lnk.on{font-weight:700}
 .nav a.lnk.on::after{content:'';position:absolute;left:18px;right:18px;bottom:6px;height:2.5px;background:var(--blue)}
 .nav a.lnk.on:hover::after{background:var(--bone)}
-.nav .cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink)}
-.nav .cta:hover{background:var(--ink);color:var(--paper)}
-.nav .cta.on::after{display:none}
+.nav .cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700}
+.nav .cta:hover{background:var(--ink)}
 
-/* ── LOGO — RT/JT monogram, three faces like the hero but its own lockup ── */
-.logo{display:flex;align-items:stretch;text-decoration:none;border:2.5px solid var(--ink);
-  border-radius:7px;overflow:hidden;flex:none;line-height:1;align-self:stretch;box-shadow:3px 3px 0 var(--ink)}
-.logo span{display:grid;place-items:center;padding:0 12px;font-size:22px}
-.logo .g1{font-family:'Archivo Black',sans-serif;background:var(--blue);color:var(--paper);letter-spacing:-.04em}
-.logo .g2{font-family:'Anton',sans-serif;background:var(--ink);color:var(--paper);padding:0 7px;font-size:24px}
-.logo .g3{font-family:'Rubik Mono One',monospace;background:var(--paper);color:var(--ink);font-size:17px}
-.logo:hover .g1{background:var(--ink)}
-.logo:hover .g3{background:var(--blue);color:var(--paper)}
+/* ── LOGO · RT/JT hand-set like the name, no box ── */
+.logo{display:flex;align-items:flex-end;text-decoration:none;gap:0;line-height:1;padding:4px 2px}
+.logo span{display:block;font-size:24px;line-height:.8}
+.logo .l1{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue);transform:rotate(-8deg);font-size:30px}
+.logo .l2{font-family:'Bebas Neue',sans-serif;transform:rotate(4deg) translateY(1px);font-size:32px;margin-left:-2px}
+.logo .l3{font-family:'Courier Prime',monospace;font-weight:700;color:var(--blue);transform:rotate(-12deg);margin:0 -1px 0 1px;font-size:29px}
+.logo .l4{font-family:'Abril Fatface',serif;transform:rotate(6deg) translateY(2px);font-size:29px}
+.logo .l5{font-family:'JetBrains Mono',monospace;font-weight:700;transform:rotate(-5deg);font-size:23px;margin-left:1px;
+  background:var(--blue);color:var(--paper);padding:2px 4px 3px}
+.logo:hover span{transform:none}
 
-/* ── MARQUEE (home only: under the hero + above the footer) ── */
+/* ── MARQUEE · home only, twice, by request ── */
 .marquee{overflow:hidden;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
   background:var(--blue);color:var(--paper);display:flex;white-space:nowrap}
-.marquee.ink{background:var(--ink);color:var(--paper)}
-.marquee.bone{background:var(--bone);color:var(--ink)}
-.marquee > div{display:flex;animation:slide 30s linear infinite;flex:none}
+.marquee.ink{background:var(--ink)}
+.marquee > div{display:flex;animation:slide 34s linear infinite;flex:none}
 .marquee.rev > div{animation-direction:reverse}
-.marquee span.w{font-family:'Anton',sans-serif;font-size:clamp(28px,4.4vw,58px);letter-spacing:.01em;
-  padding:12px 0;text-transform:uppercase;display:block}
-.marquee i{font-style:normal;padding:0 24px;display:flex;align-items:center;font-size:22px}
+.marquee span.w{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:clamp(28px,4.4vw,56px);
+  letter-spacing:0;padding:10px 0;text-transform:uppercase;display:block}
+.marquee i{font-style:normal;padding:0 26px;display:flex;align-items:center}
+.marquee i::before{content:'';width:10px;height:10px;background:currentColor;transform:rotate(45deg)}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.marquee > div{animation:none}}
 
 /* ── SECTION FURNITURE ── */
-.sec{padding:92px 40px}
-.sechead{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
-.sechead h2{font-family:'Archivo Black',sans-serif;font-size:clamp(44px,8.6vw,120px);letter-spacing:-.04em;line-height:.86}
-.sechead h2 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue)}
-.sechead .cnt{font-family:'Anton',sans-serif;font-size:clamp(32px,4.8vw,66px);color:transparent;
-  -webkit-text-stroke:2px var(--ink);line-height:.9}
-.eyebrow{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.16em;font-size:11px;
-  font-weight:700;color:var(--blue);display:block;margin-bottom:18px}
+.sec{padding:96px 40px}
+.sechead{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;margin-bottom:52px}
+.sechead h2{font-family:var(--display);font-weight:800;font-size:clamp(44px,8.4vw,116px);letter-spacing:-.045em;line-height:.88}
+.sechead h2 .lt{font-weight:300;color:var(--blue)}
+.sechead .count{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:500}
 
-/* ── CARD: flat at rest, lifts on hover ── */
-.card{background:var(--paper);border:var(--bw) solid var(--ink);
-  transition:transform .18s ease, box-shadow .18s ease}
+/* ── CARD · flat at rest, lifts on hover ── */
+.card{background:var(--paper);border:var(--bw) solid var(--ink);transition:transform .18s ease,box-shadow .18s ease}
 .card:hover{transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink)}
 
-/* halftone media slot */
-.slot{background-color:var(--bone);border:2px solid var(--ink);display:grid;place-items:center;
+/* media slot */
+.slot{background-color:var(--bone);border:2.5px solid var(--ink);display:grid;place-items:center;
   background-image:radial-gradient(var(--blue40) 1.7px,transparent 1.8px);background-size:10px 10px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
   overflow:hidden;position:relative}
 .slot video,.slot img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* ── CHIP — bordered pill with a hard shadow ── */
-.chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 17px;font-size:10px;font-weight:700;
-  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.09em;display:inline-block;
-  background:var(--paper);box-shadow:3px 3px 0 var(--ink)}
+/* chip · bordered pill, hard shadow */
+.chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 16px;font-size:10px;font-weight:700;
+  font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;display:inline-block;
+  background:var(--paper);box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
 .chip.fill{background:var(--blue);color:var(--paper)}
 
+/* round arrow button */
+.rbtn{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper);
+  display:grid;place-items:center;font-family:var(--mono);font-size:18px;flex:none;
+  transition:background .15s,color .15s}
+.card:hover .rbtn{background:var(--blue);color:var(--paper)}
+
+/* pill button */
+.btn{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  text-decoration:none;padding:17px 28px;border:var(--bw) solid var(--ink);border-radius:100px;display:inline-block;
+  background:var(--paper);color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+.btn.fill{background:var(--blue);color:var(--paper)}
+
 /* ── FOOTER ── */
-.foot{background:var(--ink);color:var(--paper);padding:82px 40px 58px}
-.foot h2{font-family:'Archivo Black',sans-serif;font-size:clamp(42px,8.6vw,124px);letter-spacing:-.04em;line-height:.86}
-.foot h2 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue40)}
-.foot .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:52px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue40)}
+.foot{background:var(--ink);color:var(--paper);padding:84px 40px 60px}
+.foot h2{font-family:var(--display);font-weight:800;font-size:clamp(42px,8.4vw,120px);letter-spacing:-.045em;line-height:.88}
+.foot h2 .lt{font-weight:300;color:var(--blue40)}
+.foot .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:54px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue40)}
+.foot .row a{text-decoration:none}
+.foot .row a:hover{color:var(--paper)}
 
 @media (max-width:900px){
   .sec{padding:60px 22px}
+  .nav{padding-left:16px}
   .nav a.lnk:not(.cta){display:none}
+  .foot{padding:60px 22px 44px}
 }

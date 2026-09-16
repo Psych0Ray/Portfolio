@@ -3,69 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonder Health — Case</title>
+<title>Sonder Health · Rutujeet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
-.chead{padding:150px 40px 60px}
-.back{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
-.chead h1{font-family:'Archivo Black',sans-serif;font-size:clamp(50px,10vw,148px);letter-spacing:-.04em;line-height:.85}
-.chead h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue)}
+.chead{padding:150px 40px 64px}
+.back{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
+.chead h1{font-family:var(--display);font-weight:800;font-size:clamp(50px,9.6vw,144px);letter-spacing:-.05em;line-height:.86;text-transform:uppercase}
+.chead h1 .lt{font-weight:300;color:var(--blue);text-transform:none}
 .chead .one{margin-top:26px;max-width:52ch;font-size:18px;line-height:1.65;color:var(--muted)}
-.meta{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border:var(--bw) solid var(--ink)}
-.meta div{flex:1;min-width:170px;padding:20px 22px;border-right:1.5px solid var(--ink)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border:var(--bw) solid var(--ink)}
+.meta div{padding:22px 24px;border-right:2px solid var(--ink)}
 .meta div:last-child{border-right:0}
-.meta b{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--blue);display:block;margin-bottom:8px}
-.meta span{font-size:14px;line-height:1.5}
-.ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-.btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  text-decoration:none;padding:17px 28px;border:var(--bw) solid var(--ink);border-radius:100px;display:inline-block;
-  transition:transform .18s ease, box-shadow .18s ease}
-.btn:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
-.btn.fill{background:var(--blue);color:var(--paper);border-color:var(--blue)}
-.btn.fill:hover{box-shadow:8px 8px 0 var(--ink)}
+.meta b{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px;font-weight:700}
+.meta span{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.35;letter-spacing:-.01em}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 
-/* stacked full-width slides — export PDF pages to images and drop them in */
-.slides{padding:0 40px 20px;display:flex;flex-direction:column;gap:26px}
+.slides{padding:0 40px 20px;display:flex;flex-direction:column;gap:28px}
 .slide{width:100%;aspect-ratio:16/9}
 .slide.tall{aspect-ratio:4/3}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .two .slide{aspect-ratio:1/1}
 
-.band{background:var(--ink);color:var(--paper);padding:82px 40px;margin-top:40px}
-.band h2{font-family:'Archivo Black',sans-serif;font-size:clamp(34px,5.6vw,78px);letter-spacing:-.04em;line-height:.9;max-width:20ch}
-.band h2 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue40)}
-.band p{margin-top:24px;max-width:56ch;font-size:16px;line-height:1.75;color:var(--blue15)}
+.band{background:var(--blue);color:var(--paper);padding:84px 40px;margin-top:44px}
+.band h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.6vw,78px);letter-spacing:-.045em;line-height:.9;max-width:20ch;text-transform:uppercase}
+.band h2 .lt{font-weight:300;color:var(--blue15);text-transform:none}
+.band p{margin-top:26px;max-width:56ch;font-size:16px;line-height:1.75;color:var(--blue15)}
 
-.outcome{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.out{padding:30px}
-.out b{font-family:'Anton',sans-serif;font-size:clamp(40px,5vw,68px);color:var(--blue);display:block;line-height:1}
-.out span{display:block;margin-top:12px;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.outcome{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.out{padding:32px}
+.out b{font-family:var(--display);font-weight:800;font-stretch:75%;font-size:clamp(44px,5.4vw,72px);color:var(--blue);display:block;line-height:1;letter-spacing:0}
+.out span{display:block;margin-top:14px;font-size:15px;line-height:1.6;color:var(--muted)}
 
 .next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:44px;flex-wrap:wrap;text-decoration:none;color:inherit}
-.next h3{font-family:'Archivo Black',sans-serif;font-size:clamp(30px,4.6vw,64px);letter-spacing:-.035em;line-height:.92}
-.next .arr{font-family:'Anton',sans-serif;font-size:clamp(46px,7vw,96px);color:var(--blue);line-height:.8}
+.next .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
+.next h3{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,64px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
+.next .rbtn{width:64px;height:64px;font-size:26px}
 
 @media (max-width:900px){
   .chead{padding:118px 22px 44px}
   .slides{padding:0 22px 16px}
   .band{padding:60px 22px}
   .two,.outcome{grid-template-columns:1fr}
-  .meta div{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta div{border-bottom:2px solid var(--ink)}
+  .meta div:nth-child(even){border-right:0}
 }
 </style>
 </head>
 <body>
 
 <svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
-<div class="cursor" id="cursor"><span></span></div>
+<div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="lab.html" class="logo" data-cursor="Home"><span class="g1">RT</span><span class="g2">/</span><span class="g3">JT</span></a>
+  <a href="lab.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
   <span class="grow"></span>
   <a href="lab.html#work" class="lnk on">Work</a>
   <a href="about.html" class="lnk">About</a>
@@ -75,38 +69,36 @@
 
 <header class="chead">
   <a href="lab.html#work" class="back">&larr; All work</a>
-  <h1>SONDER <em>health</em></h1>
+  <h1>Sonder <span class="lt">health</span></h1>
   <p class="one">A care platform rebuilt around the twenty seconds a nurse actually has. Shipped as a design system, not a screen.</p>
-
   <div class="meta">
     <div><b>Role</b><span>UI design, design system, research support</span></div>
-    <div><b>Timeline</b><span>Jan — Apr 2026, 14 weeks</span></div>
+    <div><b>Timeline</b><span>Jan to Apr 2026, fourteen weeks</span></div>
     <div><b>Team</b><span>Two designers, four engineers</span></div>
     <div><b>Tools</b><span>Figma, After Effects, Framer</span></div>
   </div>
-
   <div class="ctas">
-    <a href="#" class="btn fill">Download case study (PDF)</a>
-    <a href="#" class="btn">View live site</a>
+    <a href="#" class="btn fill">Download the PDF</a>
+    <a href="#" class="btn">Live site</a>
   </div>
 </header>
 
 <div class="slides">
-  <div class="slide slot card" data-reveal>Slide 01 — full bleed</div>
+  <div class="slide slot card" data-reveal>Slide 01</div>
 </div>
 
 <div class="band">
-  <h2>THE <em>problem</em> WAS NEVER THE SCREEN.</h2>
-  <p>Nurses were not struggling to read the interface. They were struggling to reach it — three taps deep, on a device they were holding in one hand, in a corridor, mid-handover. Every design decision after this point came from watching that happen.</p>
+  <h2>The problem <span class="lt">was never</span> the screen.</h2>
+  <p>Nurses were not struggling to read the interface. They were struggling to reach it: three taps deep, on a device held in one hand, in a corridor, mid-handover. Every design decision after this point came from watching that happen.</p>
 </div>
 
-<div class="slides" style="padding-top:26px">
-  <div class="slide slot card" data-reveal>Slide 02 — full bleed</div>
+<div class="slides" style="padding-top:28px">
+  <div class="slide slot card" data-reveal>Slide 02</div>
   <div class="two">
     <div class="slide slot card" data-reveal>Slide 03</div>
     <div class="slide slot card" data-reveal>Slide 04</div>
   </div>
-  <div class="slide tall slot card" data-reveal>Slide 05 — full bleed</div>
+  <div class="slide tall slot card" data-reveal>Slide 05</div>
   <div class="two">
     <div class="slide slot card" data-reveal>Slide 06</div>
     <div class="slide slot card" data-reveal>Slide 07</div>
@@ -114,29 +106,26 @@
 </div>
 
 <section class="sec">
-  <div class="sechead"><h2>WHERE IT <em>landed</em></h2></div>
+  <div class="sechead"><h2>WHERE IT <span class="lt">landed</span></h2></div>
   <div class="outcome">
-    <div class="out card" data-reveal><b>3 &rarr; 1</b><span>Taps to reach the handover view, down from three.</span></div>
-    <div class="out card" data-reveal><b>41</b><span>Components shipped into the shared library.</span></div>
-    <div class="out card" data-reveal><b>2 wards</b><span>Piloted before the wider rollout was approved.</span></div>
+    <div class="out card" data-reveal><b>3 &rarr; 1</b><span>Taps to reach the handover view, down from three. <!-- mock --></span></div>
+    <div class="out card" data-reveal><b>41</b><span>Components shipped into the shared library. <!-- mock --></span></div>
+    <div class="out card" data-reveal><b>2 wards</b><span>Piloted before the wider rollout was approved. <!-- mock --></span></div>
   </div>
 </section>
 
 <section class="sec" style="padding-top:0">
   <a class="next card" href="case.html" data-reveal data-cursor="Next">
-    <div>
-      <span class="eyebrow">Next project</span>
-      <h3>ATLAS TRANSIT</h3>
-    </div>
-    <span class="arr">&rarr;</span>
+    <div><span class="lab">Next project</span><h3>Atlas Transit</h3></div>
+    <span class="rbtn" aria-hidden="true">&rarr;</span>
   </a>
 </section>
 
 <footer class="foot" id="contact">
-  <h2>GOT SOMETHING<br>WORTH <em>building</em>?</h2>
+  <h2>GOT SOMETHING<br>WORTH <span class="lt">building?</span></h2>
   <div class="row">
-    <span>rutujeetnayak@gmail.com</span>
-    <span>Instagram — Behance — LinkedIn</span>
+    <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
+    <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>
     <span>© 2026 Rutujeet</span>
   </div>
 </footer>
