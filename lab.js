@@ -38,6 +38,20 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
+/* ── NAV · hide going down, show on any scroll up ──────────────── */
+(function navScroll(){
+  var wrap = document.querySelector('.navwrap');
+  if (!wrap) return;
+  var last = window.scrollY;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY, d = y - last;
+    if (Math.abs(d) < 6) return;            // ignore jitter, so a nudge up is enough
+    if (d > 0 && y > 150) wrap.classList.add('hid');
+    else if (d < 0) wrap.classList.remove('hid');
+    last = y;
+  }, {passive:true});
+})();
+
 /* marquee  <div class="marquee"><div data-words="a|b|c"></div></div> */
 (function marquees(){
   document.querySelectorAll('.marquee > div[data-words]').forEach(function(el){

@@ -40,7 +40,10 @@ a{color:inherit}
 @media (hover:none){.cursor{display:none}}
 
 /* ── NAV · inset, raised, its own ground ── */
-.navwrap{position:fixed;left:0;right:0;top:22px;z-index:500;display:flex;justify-content:center;padding:0 24px}
+.navwrap{position:fixed;left:0;right:0;top:22px;z-index:500;display:flex;justify-content:center;padding:0 24px;
+  transition:transform .32s cubic-bezier(.4,0,.2,1)}
+.navwrap.hid{transform:translateY(-160%)}
+@media (prefers-reduced-motion:reduce){.navwrap{transition:none}}
 .nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:4px;height:66px;padding:9px 9px 9px 22px;
   background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink)}
 .nav .grow{flex:1}
@@ -80,7 +83,7 @@ a{color:inherit}
 /* ── SECTION FURNITURE ── */
 .sec{padding:96px 40px}
 .sechead{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;margin-bottom:52px}
-.sechead h2{font-family:var(--display);font-weight:800;font-size:clamp(44px,8.4vw,116px);letter-spacing:-.045em;line-height:.88}
+.sechead h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.4vw,68px);letter-spacing:-.045em;line-height:.88}
 .sechead h2 .lt{font-weight:300;color:var(--blue)}
 .sechead .count{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:500}
 
@@ -116,7 +119,7 @@ a{color:inherit}
 
 /* ── FOOTER ── */
 .foot{background:var(--ink);color:var(--paper);padding:84px 40px 60px}
-.foot h2{font-family:var(--display);font-weight:800;font-size:clamp(42px,8.4vw,120px);letter-spacing:-.045em;line-height:.88}
+.foot h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.6vw,72px);letter-spacing:-.045em;line-height:.88}
 .foot h2 .lt{font-weight:300;color:var(--blue40)}
 .foot .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:54px;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue40)}
