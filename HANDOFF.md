@@ -97,6 +97,12 @@ Last updated: 2026-09-16
     - **Verified:** 8 letters, 6 tiles, 3 cases render; all 9 font families load; no JS errors.
     - **Interpretation flagged to the user:** the line *"for displaying work in hero section we are still using the 6 square grid only with those tiny bits of subheadings"* was read as a **spec to keep** (consistent with the earlier "selected work should stay the way it is on home page"), not as a complaint. If it was a complaint, the grid needs redesigning.
 
+22. **Recovery + ransom revert (2026-09-16, later still).** User accidentally deleted `lab.html` from the working folder and could not find it. **It was recoverable from git** (`git status` showed ` D lab.html`, restored with `git restore lab.html`) — nothing else was lost and the tree came back clean. Worth remembering: the file only ever lives in the repo root, and every version of it is in the history, so a deletion is always a one-command fix.
+    - User also spotted two regressions from the maximalist pass that had not been flagged: **three ransom letters had silently changed treatment** when the hero was rebuilt, and a **stray pale-blue slab** behind the name read as "a random blue square".
+    - **Reverted to the treatments the user originally approved, keeping the larger size:** `E` back to black Anton over a **blue halftone dot field** (had become a solid blue block); `e` back onto **blue** (had become black); `T` back to a **2px dashed** cut-out border (had become 3px solid).
+    - **`.slab.a` deleted entirely** — CSS rule and markup. The bone slab on the right stays because it frames the big arrow and therefore reads as deliberate; the left one framed nothing. Only one slab remains in the hero.
+    - **Lesson:** when rebuilding a component the user has already approved, diff the old and new versions and call out anything that changed, rather than quietly re-authoring details they had signed off on.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).

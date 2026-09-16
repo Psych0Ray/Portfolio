@@ -52,7 +52,6 @@ a{cursor:none}
 /* ── HERO ── */
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .slab{position:absolute;z-index:0}
-.slab.a{left:-100px;top:96px;width:600px;height:340px;background:var(--blue15);transform:rotate(-3deg)}
 .slab.b{right:-140px;bottom:44px;width:380px;height:220px;background:var(--bone);border:var(--bw) solid var(--ink);transform:rotate(4deg)}
 .ghostnum{position:absolute;right:-24px;top:58px;font-family:'Anton',sans-serif;font-size:clamp(190px,29vw,420px);
   line-height:.78;color:transparent;-webkit-text-stroke:2.5px var(--blue40);z-index:1;pointer-events:none}
@@ -64,9 +63,10 @@ a{cursor:none}
 .L3{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,17.2vw,234px);background:var(--ink);color:var(--paper);transform:rotate(-1.5deg);z-index:2}
 .L4{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(44px,11.2vw,150px);background:var(--bone);color:var(--ink);border:var(--bw) solid var(--ink);transform:rotate(5deg) translateY(10px);z-index:6}
 .L5{font-family:'Abril Fatface',serif;font-size:clamp(58px,14.8vw,200px);color:var(--ink);transform:rotate(-6deg) translateY(-8px);z-index:4}
-.L6{font-family:'Anton',sans-serif;font-size:clamp(64px,16.2vw,220px);color:var(--paper);background:var(--blue);transform:rotate(2deg);z-index:3}
-.L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--ink);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
-.L8{font-family:'Rubik Mono One',monospace;font-size:clamp(42px,10.6vw,142px);color:var(--ink);border:3px solid var(--ink);transform:rotate(4deg) translateY(-6px);z-index:2}
+.L6{font-family:'Anton',sans-serif;font-size:clamp(64px,16.2vw,220px);color:var(--ink);transform:rotate(2deg);z-index:3;
+  background-image:radial-gradient(var(--blue) 1.6px,transparent 1.7px);background-size:8px 8px}
+.L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--blue);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
+.L8{font-family:'Rubik Mono One',monospace;font-size:clamp(42px,10.6vw,142px);color:var(--ink);border:2px dashed var(--ink);transform:rotate(4deg) translateY(-6px);z-index:2}
 
 .statement{position:relative;z-index:4;margin-top:38px;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
 .statement .a{font-family:'Archivo Black',sans-serif;font-size:clamp(28px,5.2vw,72px);letter-spacing:-.035em;line-height:.9}
@@ -150,7 +150,6 @@ a{cursor:none}
 </nav>
 
 <header class="hero" id="hero">
-  <div class="slab a"></div>
   <div class="slab b"></div>
   <div class="ghostnum">26</div>
 
