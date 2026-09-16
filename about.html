@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutujeet — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
+<style>
+/* ── HEADER ── */
+.ahead{position:relative;padding:150px 40px 70px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
+.ahead .copy{flex:1;min-width:320px}
+.ahead h1{font-family:'Archivo Black',sans-serif;font-size:clamp(46px,8.4vw,116px);letter-spacing:-.04em;line-height:.86}
+.ahead h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue)}
+.ahead p{margin-top:28px;max-width:46ch;font-size:16px;line-height:1.75;color:var(--muted)}
+.ahead .portrait{width:330px;flex:none;aspect-ratio:4/5}
+
+/* ── OFF THE CLOCK — the four, given real room ── */
+.four{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.ic{padding:28px;display:flex;flex-direction:column}
+.ic .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+.ic .lab{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--blue)}
+.ic h3{font-family:'Archivo Black',sans-serif;font-size:clamp(28px,3.6vw,50px);letter-spacing:-.035em;line-height:.9;margin-bottom:16px}
+.ic .media{aspect-ratio:16/10;margin-bottom:18px}
+.ic p{font-size:14.5px;line-height:1.7;color:var(--muted);margin-bottom:16px}
+.ic .cfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.stars{display:flex;gap:4px;font-size:15px;color:var(--blue);letter-spacing:2px}
+.bar{height:15px;border:2px solid var(--ink);flex:1;max-width:190px;position:relative}
+.bar i{position:absolute;inset:2px auto 2px 2px;background:var(--blue);display:block}
+.checks{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.checks li{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.checks b{width:13px;height:13px;border:2px solid var(--ink);display:block;flex:none}
+.checks li.done b{background:var(--blue);border-color:var(--blue)}
+.checks li.done{color:var(--ink)}
+.stat{font-family:'Anton',sans-serif;font-size:clamp(22px,2.4vw,32px);color:var(--ink);letter-spacing:.01em}
+
+/* ── SKILLS / SOFTWARE ── */
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.sw{padding:22px}
+.sw h4{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
+.sw span{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ── EXPERIENCE / EDUCATION ── */
+.roles{display:flex;flex-direction:column;gap:22px}
+.role{padding:30px;display:flex;gap:30px;align-items:flex-start;flex-wrap:wrap}
+.role .when{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);width:170px;flex:none;padding-top:8px}
+.role .rbody{flex:1;min-width:260px}
+.role h3{font-family:'Archivo Black',sans-serif;font-size:clamp(24px,3vw,40px);letter-spacing:-.03em;line-height:.94}
+.role .org{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin:8px 0 14px;display:block}
+.role p{font-size:14.5px;line-height:1.7;color:var(--muted);max-width:62ch}
+.role .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.role.feat{background:var(--blue);color:var(--paper);border-color:var(--blue)}
+.role.feat .org,.role.feat .when{color:var(--blue15)}
+.role.feat p{color:var(--blue15)}
+.role.feat .chip{border-color:var(--paper);color:var(--paper)}
+
+@media (max-width:1100px){ .tiles{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:900px){
+  .ahead{padding:118px 22px 50px;gap:32px}
+  .ahead .portrait{width:100%}
+  .four{grid-template-columns:1fr;gap:22px}
+  .role .when{width:100%}
+}
+</style>
+</head>
+<body>
+
+<svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+<div class="cursor" id="cursor"></div>
+
+<nav class="nav">
+  <a href="lab.html" class="home">R</a>
+  <span class="grow"></span>
+  <a href="lab.html#work" class="lnk">Work</a>
+  <a href="about.html" class="lnk on">About</a>
+  <a href="#" class="lnk">Resume</a>
+  <a href="#contact" class="lnk cta">Get in touch</a>
+</nav>
+
+<!-- HEADER -->
+<header class="ahead">
+  <div class="copy">
+    <span class="eyebrow">About me</span>
+    <h1>DESIGN STUDENT,<br><em>currently</em> BUILDING.</h1>
+    <p>I am a design student working across brand and product. I care about the details most people never notice, and I like being in the room while things actually get built.</p>
+    <p>Right now I am taking on two or three freelance projects at a time alongside my degree, and looking for a design internship for summer 2026.</p>
+  </div>
+  <div class="portrait slot card">Portrait</div>
+</header>
+
+<div class="marquee"><div data-words="Movies|Video games|Cooking|Motorcycles|Design|Repeat"></div></div>
+
+<!-- OFF THE CLOCK -->
+<section class="sec">
+  <div class="sechead">
+    <h2>OFF THE <em>clock</em></h2>
+    <span class="cnt">004</span>
+  </div>
+
+  <div class="four">
+
+    <article class="ic card" data-reveal>
+      <div class="top"><span class="lab">Last watched</span><span class="stars">★★★★☆</span></div>
+      <h3>WHIPLASH</h3>
+      <div class="media slot" data-video="">Clip — mp4 / gif</div>
+      <p>Third rewatch. The edit is the performance — every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
+      <div class="cfoot"><span>Dir. Chazelle · 2014</span><span>106 min</span></div>
+    </article>
+
+    <article class="ic card" data-reveal>
+      <div class="top"><span class="lab">Currently playing</span><span class="mono" style="font-size:10px;color:var(--muted)">Save slot 03</span></div>
+      <h3>DISCO ELYSIUM</h3>
+      <div class="media slot" data-video="">Clip — mp4 / gif</div>
+      <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
+      <div class="cfoot"><span>Completion</span><span class="bar"><i style="right:38%"></i></span><span>62%</span></div>
+    </article>
+
+    <article class="ic card" data-reveal>
+      <div class="top"><span class="lab">On the stove</span><span class="mono" style="font-size:10px;color:var(--muted)">Attempt 04</span></div>
+      <h3>BUTTER CHICKEN</h3>
+      <div class="media slot" data-video="">Clip — mp4 / gif</div>
+      <ul class="checks">
+        <li class="done"><b></b> Marinade · 12 hrs</li>
+        <li class="done"><b></b> Char on the flame</li>
+        <li><b></b> Finish with butter</li>
+      </ul>
+      <div class="cfoot"><span>Still chasing the char</span><span>Getting closer</span></div>
+    </article>
+
+    <article class="ic card" data-reveal>
+      <div class="top"><span class="lab">Clearing my head</span><span class="mono" style="font-size:10px;color:var(--muted)">Mostly evenings</span></div>
+      <h3>THE LONG WAY HOME</h3>
+      <div class="media slot" data-video="">Clip — mp4 / gif</div>
+      <p>No route, no reason. The ride ends exactly where it started, which is the entire point of it.</p>
+      <div class="cfoot"><span class="stat">0 KM FROM HOME</span><span>No Strava</span></div>
+    </article>
+
+  </div>
+</section>
+
+<div class="marquee ink rev"><div data-words="What I do|What I use|Where I have worked|Where I study"></div></div>
+
+<!-- SKILLS -->
+<section class="sec">
+  <div class="sechead"><h2>WHAT I <em>do</em></h2></div>
+  <div class="chips">
+    <span class="chip fill">UI Design</span><span class="chip">UX Research</span><span class="chip">Brand Identity</span>
+    <span class="chip">Design Systems</span><span class="chip">Prototyping</span><span class="chip">Art Direction</span>
+    <span class="chip">Typography</span><span class="chip">Motion Design</span><span class="chip">Information Architecture</span>
+    <span class="chip">Usability Testing</span>
+  </div>
+</section>
+
+<!-- SOFTWARE -->
+<section class="sec" style="padding-top:0">
+  <div class="sechead"><h2>WHAT I <em>use</em></h2></div>
+  <div class="tiles">
+    <div class="sw card" data-reveal><h4>Figma</h4><span>Interface, systems, prototyping</span></div>
+    <div class="sw card" data-reveal><h4>After Effects</h4><span>Motion and interface animation</span></div>
+    <div class="sw card" data-reveal><h4>Illustrator</h4><span>Marks, type drawing, vector</span></div>
+    <div class="sw card" data-reveal><h4>Photoshop</h4><span>Retouching and composition</span></div>
+    <div class="sw card" data-reveal><h4>Blender</h4><span>3D assets and product renders</span></div>
+    <div class="sw card" data-reveal><h4>Framer</h4><span>High-fidelity web prototypes</span></div>
+    <div class="sw card" data-reveal><h4>Webflow</h4><span>Production sites and CMS</span></div>
+    <div class="sw card" data-reveal><h4>Notion</h4><span>Docs, research, project tracking</span></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec" style="padding-top:0">
+  <div class="sechead"><h2>WHERE I HAVE <em>worked</em></h2><span class="cnt">003</span></div>
+  <div class="roles">
+
+    <article class="role card feat" data-reveal>
+      <div class="when">Jun 2025 — Aug 2025</div>
+      <div class="rbody">
+        <h3>DESIGN INTERN</h3>
+        <span class="org">Accenture</span>
+        <p>Worked on brand and product surfaces for enterprise clients. Built and documented component libraries, sat in on design reviews, and shipped interface work alongside engineering teams.</p>
+        <div class="tags"><span class="chip">Design Systems</span><span class="chip">UI Design</span><span class="chip">Client Work</span></div>
+      </div>
+    </article>
+
+    <article class="role card" data-reveal>
+      <div class="when">2024 — Present</div>
+      <div class="rbody">
+        <h3>FREELANCE DESIGNER</h3>
+        <span class="org">Independent</span>
+        <p>Brand identity and product design for founders and small teams. Two or three projects at a time so each one gets proper attention.</p>
+        <div class="tags"><span class="chip">Branding</span><span class="chip">Product</span><span class="chip">Art Direction</span></div>
+      </div>
+    </article>
+
+    <article class="role card" data-reveal>
+      <div class="when">2024 — 2025</div>
+      <div class="rbody">
+        <h3>DESIGN LEAD</h3>
+        <span class="org">Campus Design Collective</span>
+        <p>Led a team of four on campus design work, from event identity to printed collateral and social campaigns.</p>
+        <div class="tags"><span class="chip">Identity</span><span class="chip">Print</span><span class="chip">Team Lead</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="sec" style="padding-top:0">
+  <div class="sechead"><h2>WHERE I <em>study</em></h2></div>
+  <div class="roles">
+    <article class="role card" data-reveal>
+      <div class="when">2023 — 2027</div>
+      <div class="rbody">
+        <h3>BACHELOR OF DESIGN</h3>
+        <span class="org">University name</span>
+        <p>Communication design, with electives in interaction design and typography. Relevant coursework: design systems, motion principles, front-end fundamentals and type design.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="marquee bone"><div data-words="Open to internships|Summer 2026|Say hello"></div></div>
+
+<footer class="foot" id="contact">
+  <h2>LOOKING FOR AN<br>INTERN WORTH <em>keeping</em>?</h2>
+  <div class="row">
+    <span>rutujeetnayak@gmail.com</span>
+    <span>Instagram — Behance — LinkedIn</span>
+    <span>© 2026 Rutujeet</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>gsap.registerPlugin(ScrollTrigger);</script>
+<script src="lab.js"></script>
+</body>
+</html>

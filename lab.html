@@ -3,59 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rutujeet — Hand-Set (Lab)</title>
+<title>Rutujeet — Design Student</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab.css">
 <style>
-:root{
-  --paper:#F2EFE6; --bone:#E8DCC8; --ink:#0A0A0A;
-  --blue:#002FA7; --blue70:#4969BA; --blue40:#91A2CD; --blue15:#CED2DD;
-  --muted:#6B655A; --rule:#D8D2C4; --bw:3px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:'Geist',system-ui,sans-serif;overflow-x:hidden;cursor:none}
-a{cursor:none}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.09em}
-.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
-
-/* dot cursor */
-.cursor{position:fixed;top:0;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;
-  background:var(--blue);pointer-events:none;z-index:9999;opacity:0;mix-blend-mode:multiply}
-@media (hover:none){.cursor{display:none} body{cursor:auto} a{cursor:pointer}}
-
-/* ── NAV — Figma style: wide pill, home dot, CTA at the end ── */
-.nav{position:fixed;left:24px;right:24px;top:20px;z-index:500;display:flex;align-items:center;gap:6px;
-  height:64px;padding:8px 8px 8px 10px;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:100px}
-.nav .home{width:42px;height:42px;border-radius:50%;background:var(--blue);color:var(--paper);
-  display:grid;place-items:center;font-family:'Archivo Black',sans-serif;font-size:16px}
-.nav .grow{flex:1}
-.nav a{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.13em;font-size:11px;
-  font-weight:700;color:var(--ink);text-decoration:none;padding:12px 20px;border-radius:100px}
-.nav a.on,.nav a:hover{background:var(--ink);color:var(--paper)}
-.nav .cta{background:var(--blue);color:var(--paper);padding:14px 24px}
-.nav .cta:hover{background:var(--ink)}
-
-/* ── MARQUEE — connective tissue between every section ── */
-.marquee{overflow:hidden;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
-  background:var(--blue);color:var(--paper);display:flex;white-space:nowrap}
-.marquee.ink{background:var(--ink);color:var(--paper)}
-.marquee.bone{background:var(--bone);color:var(--ink)}
-.marquee > div{display:flex;animation:slide 30s linear infinite;flex:none}
-.marquee.rev > div{animation-direction:reverse}
-.marquee span.w{font-family:'Anton',sans-serif;font-size:clamp(28px,4.4vw,58px);letter-spacing:.01em;
-  padding:12px 0;text-transform:uppercase;display:block}
-.marquee i{font-style:normal;padding:0 24px;display:flex;align-items:center;font-size:22px}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.marquee > div{animation:none}}
-
 /* ── HERO ── */
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .slab{position:absolute;z-index:0}
 .slab.b{right:-140px;bottom:44px;width:380px;height:220px;background:var(--bone);border:var(--bw) solid var(--ink);transform:rotate(4deg)}
 .ghostnum{position:absolute;right:-24px;top:58px;font-family:'Anton',sans-serif;font-size:clamp(190px,29vw,420px);
   line-height:.78;color:transparent;-webkit-text-stroke:2.5px var(--blue40);z-index:1;pointer-events:none}
-
 .ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
 .ransom span{display:block;line-height:.74;padding:8px 12px 14px;margin-right:-15px;position:relative}
 .L1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,14.4vw,194px);background:var(--blue);color:var(--paper);transform:rotate(-4deg);z-index:3}
@@ -67,7 +26,6 @@ a{cursor:none}
   background-image:radial-gradient(var(--blue) 1.6px,transparent 1.7px);background-size:8px 8px}
 .L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--blue);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
 .L8{font-family:'Rubik Mono One',monospace;font-size:clamp(42px,10.6vw,142px);color:var(--ink);border:2px dashed var(--ink);transform:rotate(4deg) translateY(-6px);z-index:2}
-
 .statement{position:relative;z-index:4;margin-top:38px;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
 .statement .a{font-family:'Archivo Black',sans-serif;font-size:clamp(28px,5.2vw,72px);letter-spacing:-.035em;line-height:.9}
 .statement .b{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue);font-size:clamp(30px,5.6vw,78px);line-height:.9}
@@ -76,63 +34,24 @@ a{cursor:none}
 .bigarrow{position:absolute;right:60px;bottom:70px;font-family:'Anton',sans-serif;font-size:clamp(80px,12vw,168px);
   line-height:.7;color:var(--blue);z-index:4}
 
-/* ── SECTIONS ── */
-.sec{padding:92px 40px}
-.sechead{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
-.sechead h2{font-family:'Archivo Black',sans-serif;font-size:clamp(44px,8.6vw,120px);letter-spacing:-.04em;line-height:.86}
-.sechead h2 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue)}
-.sechead .cnt{font-family:'Anton',sans-serif;font-size:clamp(32px,4.8vw,66px);color:transparent;-webkit-text-stroke:2px var(--ink);line-height:.9}
-
-/* 6-square grid */
-.grid6{display:grid;grid-template-columns:repeat(3,1fr);border:var(--bw) solid var(--ink)}
-.tile{position:relative;background:var(--paper);aspect-ratio:1/1;padding:26px;display:flex;flex-direction:column;
-  justify-content:space-between;outline:1.5px solid var(--ink);text-decoration:none;color:var(--ink);overflow:hidden}
+/* ── WORK GRID — separate cards that lift ── */
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.tile{position:relative;aspect-ratio:1/1;padding:24px;display:flex;flex-direction:column;
+  justify-content:space-between;text-decoration:none;color:var(--ink)}
+.tile .n{position:absolute;right:16px;top:8px;font-family:'Anton',sans-serif;font-size:82px;line-height:1;
+  color:transparent;-webkit-text-stroke:2px var(--blue40);pointer-events:none}
+.tile:hover .n{-webkit-text-stroke:2px var(--blue)}
 .tile .cat{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;color:var(--blue)}
-.tile .n{position:absolute;right:14px;top:6px;font-family:'Anton',sans-serif;font-size:82px;line-height:1;
-  color:transparent;-webkit-text-stroke:2px var(--blue40)}
+.tile .thumb{flex:1;margin:16px 0}
 .tile h3{font-family:'Archivo Black',sans-serif;font-size:clamp(22px,2.6vw,38px);letter-spacing:-.03em;line-height:.92}
-.tile .go{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;margin-top:12px}
-.tile .thumb{flex:1;margin:16px 0;border:2px solid var(--ink);background-color:var(--bone);
-  background-image:radial-gradient(var(--blue40) 1.6px,transparent 1.7px);background-size:9px 9px}
-.tile:hover .thumb{background-color:var(--blue70);border-color:var(--paper)}
-.tile:hover{background:var(--blue);color:var(--paper)}
-.tile:hover .cat{color:var(--paper)}
-
-/* full-length cases — static, no scroll choreography */
-.long{border:var(--bw) solid var(--ink)}
-.case{display:flex;align-items:stretch;border-bottom:var(--bw) solid var(--ink);background:var(--paper)}
-.case:last-child{border-bottom:0}
-.case:nth-child(even){flex-direction:row-reverse}
-.case .body{flex:1;padding:44px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
-.case .shot{width:42%;flex:none;background:var(--bone);border-left:var(--bw) solid var(--ink);
-  display:grid;place-items:center;min-height:360px;font-family:'JetBrains Mono',monospace;font-size:10px;
-  letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
-  background-image:radial-gradient(var(--blue40) 1.7px,transparent 1.8px);background-size:10px 10px}
-.case:nth-child(even) .shot{border-left:0;border-right:var(--bw) solid var(--ink)}
-.case h3{font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5.4vw,78px);letter-spacing:-.035em;line-height:.9}
-.case .cat{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;color:var(--blue);margin-bottom:14px;display:block}
-.case .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
-.case .tags span{border:2px solid var(--ink);border-radius:100px;padding:7px 15px;font-size:9px;font-weight:700;
-  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.09em}
-.case p{max-width:44ch;font-size:15px;line-height:1.7;color:var(--muted);margin-top:24px}
-.case .go{margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue)}
-
-/* footer */
-.foot{background:var(--ink);color:var(--paper);padding:82px 40px 58px}
-.foot h2{font-family:'Archivo Black',sans-serif;font-size:clamp(42px,8.6vw,124px);letter-spacing:-.04em;line-height:.86}
-.foot h2 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue40)}
-.foot .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:52px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue40)}
+.tile .go{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;margin-top:10px;color:var(--blue);display:block}
 
 @media (max-width:900px){
   .hero{padding:118px 22px 40px}
-  .sec{padding:60px 22px}
-  .grid6{grid-template-columns:1fr 1fr}
-  .case,.case:nth-child(even){flex-direction:column}
-  .case .shot,.case:nth-child(even) .shot{width:100%;border:0;border-top:var(--bw) solid var(--ink);min-height:230px}
+  .grid6{grid-template-columns:1fr;gap:22px}
   .slab,.ghostnum,.bigarrow{display:none}
-  .nav a:not(.cta){display:none}
 }
+@media (min-width:901px) and (max-width:1200px){ .grid6{grid-template-columns:repeat(2,1fr)} }
 </style>
 </head>
 <body>
@@ -141,12 +60,12 @@ a{cursor:none}
 <div class="cursor" id="cursor"></div>
 
 <nav class="nav">
-  <span class="home">R</span>
+  <a href="lab.html" class="home">R</a>
   <span class="grow"></span>
-  <a href="#work" class="on">Work</a>
-  <a href="#">About</a>
-  <a href="#">Resume</a>
-  <a href="#contact" class="cta">Get in touch</a>
+  <a href="#work" class="lnk on">Work</a>
+  <a href="about.html" class="lnk">About</a>
+  <a href="#" class="lnk">Resume</a>
+  <a href="#contact" class="lnk cta">Get in touch</a>
 </nav>
 
 <header class="hero" id="hero">
@@ -167,7 +86,7 @@ a{cursor:none}
   <div class="bigarrow">↓</div>
 </header>
 
-<div class="marquee"><div id="mq1"></div></div>
+<div class="marquee"><div data-words="Service design|E-commerce|Product UI|Wayfinding|Design systems|Motion"></div></div>
 
 <section class="sec" id="work">
   <div class="sechead">
@@ -177,17 +96,7 @@ a{cursor:none}
   <div class="grid6" id="grid"></div>
 </section>
 
-<div class="marquee ink rev"><div id="mq2"></div></div>
-
-<section class="sec">
-  <div class="sechead">
-    <h2>THE <em>long</em> READ</h2>
-    <span class="cnt">003</span>
-  </div>
-  <div class="long" id="cases"></div>
-</section>
-
-<div class="marquee bone"><div id="mq3"></div></div>
+<div class="marquee ink rev"><div data-words="Selected work|2024 — 2026|Six projects|Open to internships"></div></div>
 
 <footer class="foot" id="contact">
   <h2>GOT SOMETHING<br>WORTH <em>building</em>?</h2>
@@ -199,18 +108,9 @@ a{cursor:none}
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function marquee(el, words){
-  const run = words.map(function(w){ return '<span class="w">' + w + '</span><i>&#10022;</i>'; }).join('');
-  el.innerHTML = '<span style="display:flex">' + run + '</span><span style="display:flex">' + run + '</span>';
-}
-marquee(document.getElementById('mq1'), ['Service design','E-commerce','Product UI','Wayfinding','Design systems','Motion']);
-marquee(document.getElementById('mq2'), ['Selected work','2024 &mdash; 2026','Six projects','Open to internships']);
-marquee(document.getElementById('mq3'), ['Say hello','Let us build something','Available Q1']);
-
-const SIX = [
+var SIX = [
   {n:'01', name:'Sonder Health', cat:'Service Design'},
   {n:'02', name:'Atlas Transit', cat:'Wayfinding'},
   {n:'03', name:'Form &amp; Fold', cat:'E-Commerce'},
@@ -219,58 +119,33 @@ const SIX = [
   {n:'06', name:'Halftone',      cat:'Design System'}
 ];
 document.getElementById('grid').innerHTML = SIX.map(function(p){
-  return '<a class="tile" href="#"><span class="n">' + p.n + '</span>'
+  return '<a class="tile card" data-reveal href="case.html"><span class="n">' + p.n + '</span>'
     + '<span class="cat">' + p.cat + '</span>'
-    + '<span class="thumb"></span>'
-    + '<span><h3>' + p.name + '</h3><div class="go">View &rarr;</div></span></a>';
+    + '<span class="thumb slot"></span>'
+    + '<span><h3>' + p.name + '</h3><span class="go">Read the case &rarr;</span></span></a>';
 }).join('');
-
-const CASES = [
-  {name:'Sonder Health', cat:'Service Design &middot; 2026', tags:['UI Design','Design System','Research'],
-   copy:'A care platform rebuilt around the twenty seconds a nurse actually has. Shipped as a design system, not a screen.'},
-  {name:'Atlas Transit', cat:'Wayfinding &middot; 2025', tags:['Signage','Iconography','Print'],
-   copy:'Signage for a metro line that carries more people than the city it sits under. Tested at walking pace, in the rain.'},
-  {name:'Form &amp; Fold', cat:'E-Commerce &middot; 2025', tags:['Identity','Packaging','Type'],
-   copy:'An identity for a furniture label that flat-packs everything. The logo folds too.'}
-];
-document.getElementById('cases').innerHTML = CASES.map(function(p){
-  return '<article class="case"><div class="body"><div>'
-    + '<span class="cat">' + p.cat + '</span><h3>' + p.name + '</h3>'
-    + '<div class="tags">' + p.tags.map(function(t){return '<span>'+t+'</span>';}).join('') + '</div></div>'
-    + '<div><p>' + p.copy + '</p><div class="go">Read the case &rarr;</div></div></div>'
-    + '<div class="shot">Image</div></article>';
-}).join('');
-
-if (window.matchMedia('(hover:hover)').matches) {
-  const cur = document.getElementById('cursor');
-  const cx = gsap.quickTo(cur,'x',{duration:.14,ease:'power3'});
-  const cy = gsap.quickTo(cur,'y',{duration:.14,ease:'power3'});
-  window.addEventListener('mousemove', function(e){ cx(e.clientX); cy(e.clientY); gsap.to(cur,{opacity:1,duration:.2}); });
-  document.addEventListener('mouseleave', function(){ gsap.to(cur,{opacity:0,duration:.2}); });
-  document.querySelectorAll('a').forEach(function(el){
-    el.addEventListener('mouseenter', function(){ gsap.to(cur,{scale:2.6,duration:.22}); });
-    el.addEventListener('mouseleave', function(){ gsap.to(cur,{scale:1,duration:.22}); });
-  });
-}
-
+</script>
+<script src="lab.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
 (function ransom(){
-  const letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));
+  var letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));
   if (!letters.length || REDUCED) return;
   gsap.from(letters,{
     yPercent:function(i){ return i % 2 ? -110 : 110; },
     rotation:function(i){ return i % 2 ? -16 : 13; },
     opacity:0, duration:.8, ease:'back.out(1.5)', stagger:{each:.05, from:'random'}, delay:.1
   });
-  const hero = document.getElementById('hero');
-  const set = letters.map(function(el){
+  var hero = document.getElementById('hero');
+  var set = letters.map(function(el){
     return { x: gsap.quickTo(el,'x',{duration:.7,ease:'power3'}),
              y: gsap.quickTo(el,'y',{duration:.7,ease:'power3'}) };
   });
   hero.addEventListener('mousemove', function(e){
-    const r = hero.getBoundingClientRect();
-    const dx = (e.clientX - r.left)/r.width - .5, dy = (e.clientY - r.top)/r.height - .5;
+    var r = hero.getBoundingClientRect();
+    var dx = (e.clientX - r.left)/r.width - .5, dy = (e.clientY - r.top)/r.height - .5;
     set.forEach(function(s,i){
-      const d = (i % 3 + 1) * 5;
+      var d = (i % 3 + 1) * 5;
       s.x(dx * d * (i % 2 ? -1 : 1));
       s.y(dy * d * .6);
     });
