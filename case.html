@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
-.chead{padding:140px 40px 60px}
+.chead{padding:150px 40px 60px}
 .back{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;
   text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
 .chead h1{font-family:'Archivo Black',sans-serif;font-size:clamp(50px,10vw,148px);letter-spacing:-.04em;line-height:.85}
@@ -62,16 +62,16 @@
 <body>
 
 <svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
-<div class="cursor" id="cursor"></div>
+<div class="cursor" id="cursor"><span></span></div>
 
-<nav class="nav">
-  <a href="lab.html" class="home">R</a>
+<div class="navwrap"><nav class="nav">
+  <a href="lab.html" class="logo" data-cursor="Home"><span class="g1">RT</span><span class="g2">/</span><span class="g3">JT</span></a>
   <span class="grow"></span>
   <a href="lab.html#work" class="lnk on">Work</a>
   <a href="about.html" class="lnk">About</a>
   <a href="#" class="lnk">Resume</a>
   <a href="#contact" class="lnk cta">Get in touch</a>
-</nav>
+</nav></div>
 
 <header class="chead">
   <a href="lab.html#work" class="back">&larr; All work</a>
@@ -123,7 +123,7 @@
 </section>
 
 <section class="sec" style="padding-top:0">
-  <a class="next card" href="case.html" data-reveal>
+  <a class="next card" href="case.html" data-reveal data-cursor="Next">
     <div>
       <span class="eyebrow">Next project</span>
       <h3>ATLAS TRANSIT</h3>
@@ -131,8 +131,6 @@
     <span class="arr">&rarr;</span>
   </a>
 </section>
-
-<div class="marquee bone"><div data-words="Read the next one|Or just say hello|Open to internships"></div></div>
 
 <footer class="foot" id="contact">
   <h2>GOT SOMETHING<br>WORTH <em>building</em>?</h2>

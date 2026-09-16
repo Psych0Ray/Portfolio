@@ -113,6 +113,21 @@ Last updated: 2026-09-16
     - **Two real bugs found by running it, not by reading it:** (1) the scroll-reveal tween left an **inline transform** on every card, which silently overrode the CSS `:hover` lift — fixed with `clearProps:'transform'`; (2) the interest-card footer was given `class="foot"`, colliding with the **global site-footer rule** and painting a black block inside each card — renamed to `.cfoot`. Both were invisible in the markup and obvious on screen.
     - **Still open:** Resume page has no coded version; all content is dummy; image and video slots are empty; nothing is in Figma.
 
+24. **Identity + hierarchy pass (2026-09-16, final round).** Figma still disconnected; user sent two reference screenshots instead (a shadowed chip row, and the Figma nav bar) plus the Cursor & Hover States node URL.
+    - **Chips** now match the reference: 2.5px ink border, pill radius, **3px hard offset shadow**.
+    - **The massive outlined `26`** removed from the hero.
+    - **Nav rebuilt for hierarchy** from the user's screenshot: no longer edge-to-edge. Now `max-width:1120px` centred inside a `.navwrap`, sitting on **bone** (a different ground from the paper page) with a 3px ink border and a **hard `0 5px 0` drop shadow** so it reads as raised. Active page gets a blue underline rule rather than a filled pill.
+    - **Logo: `RT/JT` monogram** replaces the circled `R`. Three faces in one lockup, echoing the ransom without repeating it — `RT` in Archivo Black knocked out of blue, a `/` in Anton on ink, `JT` in Rubik Mono One on paper. Hard shadow, and on hover the blue and paper cells swap inks.
+    - **Cursor system** (matching the Figma frame the user linked): the dot now **swells into an 88px labelled disc** on anything carrying `data-cursor="…"` — work cards say READ, interest cards say WATCH / PLAY / TASTE / RIDE, the logo says HOME, the next-project card says NEXT. `data-cursor-style="ring"` gives a hollow ring variant. Plain links just scale the dot 2.4x.
+    - **About cards rebuilt as real objects again** — user said the flat versions were "plain and static and boring" next to the Figma originals. Each is now its own artefact, in Klein blue, with the video slot kept:
+      - **Ticket** — blue header strip with a drawn filmstrip glyph and star rating; the media slot is framed by **real sprocket columns** (`repeating-linear-gradient`, so it costs one element per side); dashed **tear line**; `ADMIT ONE` stub row.
+      - **HUD** — ink header strip with a CSS **d-pad** glyph and `SAVE SLOT 03`; bordered **completion bar** filled to 62%.
+      - **Recipe card** — bone header with a steaming-pot glyph over a blue rule; body is **ruled index-card stock** (`repeating-linear-gradient`) with a blue margin line; checklist items sit **on** the rules, ticked ones filled blue.
+      - **Route strip** — blue spine down the edge, filled **motorcycle silhouette**, an inline **SVG route** that wanders, crosses itself and returns to its blue home dot, and `0 KM FROM HOME`.
+    - **Marquees cut back to two, both on the home page** (under the hero, above the footer) per the user. Removed entirely from About and the case page.
+    - **Home is no longer treated as the Work page** — nav `WORK` is a plain anchor to the grid with no active state; the grid stays on home and each tile opens the long read.
+    - **Reference for future sessions:** the user's design language is **objects, big type and solid colour**. Anything small, quiet and annotation-like gets rejected (see item 21). Distinct physical artefacts get praised.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).

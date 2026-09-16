@@ -10,23 +10,40 @@ a{cursor:none;color:inherit}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.09em}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
 
-.cursor{position:fixed;top:0;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;
-  background:var(--blue);pointer-events:none;z-index:9999;opacity:0;mix-blend-mode:multiply}
+/* ── CURSOR SYSTEM: dot → labelled disc ── */
+.cursor{position:fixed;top:0;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
+  background:var(--blue);display:grid;place-items:center;pointer-events:none;z-index:9999;opacity:0}
+.cursor span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--paper);opacity:0;white-space:nowrap}
+.cursor.ring{background:transparent;border:2.5px solid var(--blue)}
+.cursor.ring span{color:var(--blue)}
 @media (hover:none){.cursor{display:none} body{cursor:auto} a{cursor:pointer}}
 
-/* ── NAV ── */
-.nav{position:fixed;left:24px;right:24px;top:20px;z-index:500;display:flex;align-items:center;gap:6px;
-  height:64px;padding:8px 8px 8px 10px;background:var(--paper);border:var(--bw) solid var(--ink);border-radius:100px}
-.nav .home{width:42px;height:42px;border-radius:50%;background:var(--blue);color:var(--paper);
-  display:grid;place-items:center;font-family:'Archivo Black',sans-serif;font-size:16px;text-decoration:none}
+/* ── NAV — inset, raised off the page, its own ground ── */
+.navwrap{position:fixed;left:0;right:0;top:22px;z-index:500;display:flex;justify-content:center;padding:0 24px}
+.nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:6px;height:66px;padding:9px 9px 9px 12px;
+  background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink)}
 .nav .grow{flex:1}
 .nav a.lnk{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.13em;font-size:11px;
-  font-weight:700;color:var(--ink);text-decoration:none;padding:12px 20px;border-radius:100px}
-.nav a.lnk.on,.nav a.lnk:hover{background:var(--ink);color:var(--paper)}
-.nav .cta{background:var(--blue);color:var(--paper);padding:14px 24px}
-.nav .cta:hover{background:var(--ink)}
+  font-weight:700;color:var(--ink);text-decoration:none;padding:12px 18px;border-radius:100px;position:relative}
+.nav a.lnk:hover{background:var(--ink);color:var(--bone)}
+.nav a.lnk.on::after{content:'';position:absolute;left:18px;right:18px;bottom:6px;height:2.5px;background:var(--blue)}
+.nav a.lnk.on:hover::after{background:var(--bone)}
+.nav .cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink)}
+.nav .cta:hover{background:var(--ink);color:var(--paper)}
+.nav .cta.on::after{display:none}
 
-/* ── MARQUEE ── */
+/* ── LOGO — RT/JT monogram, three faces like the hero but its own lockup ── */
+.logo{display:flex;align-items:stretch;text-decoration:none;border:2.5px solid var(--ink);
+  border-radius:7px;overflow:hidden;flex:none;line-height:1;align-self:stretch;box-shadow:3px 3px 0 var(--ink)}
+.logo span{display:grid;place-items:center;padding:0 12px;font-size:22px}
+.logo .g1{font-family:'Archivo Black',sans-serif;background:var(--blue);color:var(--paper);letter-spacing:-.04em}
+.logo .g2{font-family:'Anton',sans-serif;background:var(--ink);color:var(--paper);padding:0 7px;font-size:24px}
+.logo .g3{font-family:'Rubik Mono One',monospace;background:var(--paper);color:var(--ink);font-size:17px}
+.logo:hover .g1{background:var(--ink)}
+.logo:hover .g3{background:var(--blue);color:var(--paper)}
+
+/* ── MARQUEE (home only: under the hero + above the footer) ── */
 .marquee{overflow:hidden;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
   background:var(--blue);color:var(--paper);display:flex;white-space:nowrap}
 .marquee.ink{background:var(--ink);color:var(--paper)}
@@ -49,7 +66,7 @@ a{cursor:none;color:inherit}
 .eyebrow{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.16em;font-size:11px;
   font-weight:700;color:var(--blue);display:block;margin-bottom:18px}
 
-/* ── THE CARD: no shadow at rest, lifts on hover ── */
+/* ── CARD: flat at rest, lifts on hover ── */
 .card{background:var(--paper);border:var(--bw) solid var(--ink);
   transition:transform .18s ease, box-shadow .18s ease}
 .card:hover{transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink)}
@@ -61,10 +78,11 @@ a{cursor:none;color:inherit}
   overflow:hidden;position:relative}
 .slot video,.slot img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* chips */
-.chip{border:2px solid var(--ink);border-radius:100px;padding:9px 17px;font-size:10px;font-weight:700;
-  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.09em;display:inline-block}
-.chip.fill{background:var(--blue);color:var(--paper);border-color:var(--blue)}
+/* ── CHIP — bordered pill with a hard shadow ── */
+.chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 17px;font-size:10px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.09em;display:inline-block;
+  background:var(--paper);box-shadow:3px 3px 0 var(--ink)}
+.chip.fill{background:var(--blue);color:var(--paper)}
 
 /* ── FOOTER ── */
 .foot{background:var(--ink);color:var(--paper);padding:82px 40px 58px}

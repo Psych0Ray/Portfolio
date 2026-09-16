@@ -13,8 +13,6 @@
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .slab{position:absolute;z-index:0}
 .slab.b{right:-140px;bottom:44px;width:380px;height:220px;background:var(--bone);border:var(--bw) solid var(--ink);transform:rotate(4deg)}
-.ghostnum{position:absolute;right:-24px;top:58px;font-family:'Anton',sans-serif;font-size:clamp(190px,29vw,420px);
-  line-height:.78;color:transparent;-webkit-text-stroke:2.5px var(--blue40);z-index:1;pointer-events:none}
 .ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
 .ransom span{display:block;line-height:.74;padding:8px 12px 14px;margin-right:-15px;position:relative}
 .L1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,14.4vw,194px);background:var(--blue);color:var(--paper);transform:rotate(-4deg);z-index:3}
@@ -49,7 +47,7 @@
 @media (max-width:900px){
   .hero{padding:118px 22px 40px}
   .grid6{grid-template-columns:1fr;gap:22px}
-  .slab,.ghostnum,.bigarrow{display:none}
+  .slab,.bigarrow{display:none}
 }
 @media (min-width:901px) and (max-width:1200px){ .grid6{grid-template-columns:repeat(2,1fr)} }
 </style>
@@ -57,20 +55,19 @@
 <body>
 
 <svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
-<div class="cursor" id="cursor"></div>
+<div class="cursor" id="cursor"><span></span></div>
 
-<nav class="nav">
-  <a href="lab.html" class="home">R</a>
+<div class="navwrap"><nav class="nav">
+  <a href="lab.html" class="logo" data-cursor="Home"><span class="g1">RT</span><span class="g2">/</span><span class="g3">JT</span></a>
   <span class="grow"></span>
-  <a href="#work" class="lnk on">Work</a>
+  <a href="#work" class="lnk">Work</a>
   <a href="about.html" class="lnk">About</a>
   <a href="#" class="lnk">Resume</a>
   <a href="#contact" class="lnk cta">Get in touch</a>
-</nav>
+</nav></div>
 
 <header class="hero" id="hero">
   <div class="slab b"></div>
-  <div class="ghostnum">26</div>
 
   <div class="ransom" aria-label="Rutujeet">
     <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
@@ -119,7 +116,7 @@ var SIX = [
   {n:'06', name:'Halftone',      cat:'Design System'}
 ];
 document.getElementById('grid').innerHTML = SIX.map(function(p){
-  return '<a class="tile card" data-reveal href="case.html"><span class="n">' + p.n + '</span>'
+  return '<a class="tile card" data-reveal data-cursor="Read" href="case.html"><span class="n">' + p.n + '</span>'
     + '<span class="cat">' + p.cat + '</span>'
     + '<span class="thumb slot"></span>'
     + '<span><h3>' + p.name + '</h3><span class="go">Read the case &rarr;</span></span></a>';

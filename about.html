@@ -10,36 +10,75 @@
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HEADER ── */
-.ahead{position:relative;padding:150px 40px 70px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
+.ahead{position:relative;padding:160px 40px 70px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
 .ahead h1{font-family:'Archivo Black',sans-serif;font-size:clamp(46px,8.4vw,116px);letter-spacing:-.04em;line-height:.86}
 .ahead h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue)}
 .ahead p{margin-top:28px;max-width:46ch;font-size:16px;line-height:1.75;color:var(--muted)}
 .ahead .portrait{width:330px;flex:none;aspect-ratio:4/5}
 
-/* ── OFF THE CLOCK — the four, given real room ── */
-.four{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-.ic{padding:28px;display:flex;flex-direction:column}
-.ic .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
-.ic .lab{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--blue)}
-.ic h3{font-family:'Archivo Black',sans-serif;font-size:clamp(28px,3.6vw,50px);letter-spacing:-.035em;line-height:.9;margin-bottom:16px}
-.ic .media{aspect-ratio:16/10;margin-bottom:18px}
-.ic p{font-size:14.5px;line-height:1.7;color:var(--muted);margin-bottom:16px}
-.ic .cfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
-.stars{display:flex;gap:4px;font-size:15px;color:var(--blue);letter-spacing:2px}
-.bar{height:15px;border:2px solid var(--ink);flex:1;max-width:190px;position:relative}
+/* ══ OFF THE CLOCK — four objects, not four boxes ══ */
+.four{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.ic{padding:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.ic .pad{padding:26px 28px 28px;display:flex;flex-direction:column;flex:1}
+.ic h3{font-family:'Archivo Black',sans-serif;font-size:clamp(28px,3.6vw,50px);letter-spacing:-.035em;line-height:.9;margin-bottom:18px}
+.ic p{font-size:14.5px;line-height:1.7;color:var(--muted);margin-top:16px}
+.ic .media{aspect-ratio:16/10}
+
+/* the header strip — each card gets its own ground */
+.strip{display:flex;align-items:center;gap:11px;padding:0 20px;height:48px;
+  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;
+  border-bottom:var(--bw) solid var(--ink)}
+.strip .sp{flex:1}
+.strip.blue{background:var(--blue);color:var(--paper)}
+.strip.ink{background:var(--ink);color:var(--paper)}
+.strip.bone{background:var(--bone);color:var(--ink);border-bottom-color:var(--blue);border-bottom-width:3px}
+.strip svg{display:block;flex:none}
+.stars{letter-spacing:2px;font-size:13px}
+
+/* 01 · TICKET — filmstrip frame, tear line, stub */
+.film{display:flex;align-items:stretch}
+.film .sprock{width:20px;flex:none;
+  background:repeating-linear-gradient(to bottom, var(--ink) 0 9px, var(--paper) 9px 21px)}
+.film .media{flex:1;border-left:0;border-right:0}
+.tear{border-top:2.5px dashed var(--ink);margin-top:auto}
+.stub{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 28px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stub b{color:var(--ink);font-weight:700}
+
+/* 02 · HUD — d-pad + completion bar */
+.dpad{width:17px;height:17px;position:relative;flex:none}
+.dpad::before,.dpad::after{content:'';position:absolute;background:currentColor}
+.dpad::before{left:6px;top:0;width:5px;height:17px}
+.dpad::after{top:6px;left:0;height:5px;width:17px}
+.hud{display:flex;align-items:center;gap:14px;margin-top:20px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:700}
+.bar{height:16px;border:2.5px solid var(--ink);flex:1;position:relative;background:var(--paper)}
 .bar i{position:absolute;inset:2px auto 2px 2px;background:var(--blue);display:block}
-.checks{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
-.checks li{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.checks b{width:13px;height:13px;border:2px solid var(--ink);display:block;flex:none}
+
+/* 03 · RECIPE — ruled stock, blue margin, checklist on the lines */
+.ruled{position:relative;flex:1;padding:26px 28px 28px 50px;
+  background-image:repeating-linear-gradient(to bottom, transparent 0 25px, var(--rule) 25px 26px)}
+.ruled::before{content:'';position:absolute;left:30px;top:0;bottom:0;width:2px;background:var(--blue)}
+.checks{list-style:none;display:flex;flex-direction:column;gap:0;margin-top:18px}
+.checks li{display:flex;align-items:center;gap:11px;height:26px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.checks b{width:13px;height:13px;border:2.5px solid var(--ink);display:block;flex:none;background:var(--paper)}
 .checks li.done b{background:var(--blue);border-color:var(--blue)}
-.checks li.done{color:var(--ink)}
-.stat{font-family:'Anton',sans-serif;font-size:clamp(22px,2.4vw,32px);color:var(--ink);letter-spacing:.01em}
+.checks li.done{color:var(--ink);font-weight:700}
+
+/* 04 · ROUTE — blue spine, drawn route that returns home */
+.rd{padding-left:14px}
+.rd .spine{position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--blue)}
+.inline-lab{display:flex;align-items:center;gap:11px;margin-bottom:16px;
+  font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--blue)}
+.route{width:100%;height:76px;margin-top:18px;display:block}
+.cfoot{margin-top:auto;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.stat{font-family:'Anton',sans-serif;font-size:clamp(24px,2.6vw,34px);color:var(--ink);letter-spacing:.01em}
 
 /* ── SKILLS / SOFTWARE ── */
-.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:14px}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .sw{padding:22px}
 .sw h4{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
@@ -55,17 +94,17 @@
 .role .org{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--blue);margin:8px 0 14px;display:block}
 .role p{font-size:14.5px;line-height:1.7;color:var(--muted);max-width:62ch}
-.role .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.role.feat{background:var(--blue);color:var(--paper);border-color:var(--blue)}
+.role .tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.role.feat{background:var(--blue);color:var(--paper);border-color:var(--ink)}
 .role.feat .org,.role.feat .when{color:var(--blue15)}
 .role.feat p{color:var(--blue15)}
-.role.feat .chip{border-color:var(--paper);color:var(--paper)}
+.role.feat .chip{border-color:var(--ink);color:var(--ink);background:var(--paper)}
 
 @media (max-width:1100px){ .tiles{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:900px){
-  .ahead{padding:118px 22px 50px;gap:32px}
+  .ahead{padding:126px 22px 50px;gap:32px}
   .ahead .portrait{width:100%}
-  .four{grid-template-columns:1fr;gap:22px}
+  .four{grid-template-columns:1fr;gap:24px}
   .role .when{width:100%}
 }
 </style>
@@ -73,18 +112,17 @@
 <body>
 
 <svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
-<div class="cursor" id="cursor"></div>
+<div class="cursor" id="cursor"><span></span></div>
 
-<nav class="nav">
-  <a href="lab.html" class="home">R</a>
+<div class="navwrap"><nav class="nav">
+  <a href="lab.html" class="logo" data-cursor="Home"><span class="g1">RT</span><span class="g2">/</span><span class="g3">JT</span></a>
   <span class="grow"></span>
   <a href="lab.html#work" class="lnk">Work</a>
   <a href="about.html" class="lnk on">About</a>
   <a href="#" class="lnk">Resume</a>
   <a href="#contact" class="lnk cta">Get in touch</a>
-</nav>
+</nav></div>
 
-<!-- HEADER -->
 <header class="ahead">
   <div class="copy">
     <span class="eyebrow">About me</span>
@@ -95,8 +133,6 @@
   <div class="portrait slot card">Portrait</div>
 </header>
 
-<div class="marquee"><div data-words="Movies|Video games|Cooking|Motorcycles|Design|Repeat"></div></div>
-
 <!-- OFF THE CLOCK -->
 <section class="sec">
   <div class="sechead">
@@ -106,49 +142,83 @@
 
   <div class="four">
 
-    <article class="ic card" data-reveal>
-      <div class="top"><span class="lab">Last watched</span><span class="stars">★★★★☆</span></div>
-      <h3>WHIPLASH</h3>
-      <div class="media slot" data-video="">Clip — mp4 / gif</div>
-      <p>Third rewatch. The edit is the performance — every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
-      <div class="cfoot"><span>Dir. Chazelle · 2014</span><span>106 min</span></div>
+    <!-- 01 · THE TICKET -->
+    <article class="ic card" data-reveal data-cursor="Watch">
+      <div class="strip blue">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="14" fill="currentColor"/><rect x="2" y="2" width="3" height="2.4" fill="#002FA7"/><rect x="8.5" y="2" width="3" height="2.4" fill="#002FA7"/><rect x="15" y="2" width="3" height="2.4" fill="#002FA7"/><rect x="2" y="9.6" width="3" height="2.4" fill="#002FA7"/><rect x="8.5" y="9.6" width="3" height="2.4" fill="#002FA7"/><rect x="15" y="9.6" width="3" height="2.4" fill="#002FA7"/></svg>
+        <span>Last watched</span><span class="sp"></span><span class="stars">★★★★☆</span>
+      </div>
+      <div class="pad">
+        <h3>WHIPLASH</h3>
+        <div class="film">
+          <span class="sprock"></span>
+          <div class="media slot" data-video="">Clip — mp4 / gif</div>
+          <span class="sprock"></span>
+        </div>
+        <p>Third rewatch. The edit is the performance — every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
+      </div>
+      <div class="tear"></div>
+      <div class="stub"><b>Admit one</b><span>Dir. Chazelle · 2014</span><span>106 min</span></div>
     </article>
 
-    <article class="ic card" data-reveal>
-      <div class="top"><span class="lab">Currently playing</span><span class="mono" style="font-size:10px;color:var(--muted)">Save slot 03</span></div>
-      <h3>DISCO ELYSIUM</h3>
-      <div class="media slot" data-video="">Clip — mp4 / gif</div>
-      <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
-      <div class="cfoot"><span>Completion</span><span class="bar"><i style="right:38%"></i></span><span>62%</span></div>
+    <!-- 02 · THE HUD -->
+    <article class="ic card" data-reveal data-cursor="Play">
+      <div class="strip ink">
+        <span class="dpad"></span>
+        <span>Currently playing</span><span class="sp"></span><span>Save slot 03</span>
+      </div>
+      <div class="pad">
+        <h3>DISCO ELYSIUM</h3>
+        <div class="media slot" data-video="">Clip — mp4 / gif</div>
+        <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
+        <div class="hud">
+          <span>Completion</span><span class="bar"><i style="right:38%"></i></span><span style="color:var(--blue)">62%</span>
+        </div>
+      </div>
     </article>
 
-    <article class="ic card" data-reveal>
-      <div class="top"><span class="lab">On the stove</span><span class="mono" style="font-size:10px;color:var(--muted)">Attempt 04</span></div>
-      <h3>BUTTER CHICKEN</h3>
-      <div class="media slot" data-video="">Clip — mp4 / gif</div>
-      <ul class="checks">
-        <li class="done"><b></b> Marinade · 12 hrs</li>
-        <li class="done"><b></b> Char on the flame</li>
-        <li><b></b> Finish with butter</li>
-      </ul>
-      <div class="cfoot"><span>Still chasing the char</span><span>Getting closer</span></div>
+    <!-- 03 · THE RECIPE CARD -->
+    <article class="ic card" data-reveal data-cursor="Taste">
+      <div class="strip bone">
+        <svg width="20" height="17" viewBox="0 0 20 17" fill="none"><path d="M6.5 5C6.5 3.6 8 3.6 8 2.1M10.5 5C10.5 3.1 12 3.1 12 1.2M14.5 5C14.5 3.6 16 3.6 16 2.1" stroke="#002FA7" stroke-width="1.7" stroke-linecap="round"/><rect x="0.8" y="6.8" width="18.4" height="2.5" fill="currentColor"/><path d="M3 10.2h14v3a3.2 3.2 0 0 1-3.2 3.2H6.2A3.2 3.2 0 0 1 3 13.2z" fill="currentColor"/></svg>
+        <span>On the stove</span><span class="sp"></span><span>Attempt 04</span>
+      </div>
+      <div class="ruled">
+        <h3>BUTTER CHICKEN</h3>
+        <div class="media slot" data-video="">Clip — mp4 / gif</div>
+        <ul class="checks">
+          <li class="done"><b></b> Marinade · 12 hrs</li>
+          <li class="done"><b></b> Char on the flame</li>
+          <li><b></b> Finish with butter</li>
+          <li><b></b> Feed someone else</li>
+        </ul>
+      </div>
     </article>
 
-    <article class="ic card" data-reveal>
-      <div class="top"><span class="lab">Clearing my head</span><span class="mono" style="font-size:10px;color:var(--muted)">Mostly evenings</span></div>
-      <h3>THE LONG WAY HOME</h3>
-      <div class="media slot" data-video="">Clip — mp4 / gif</div>
-      <p>No route, no reason. The ride ends exactly where it started, which is the entire point of it.</p>
-      <div class="cfoot"><span class="stat">0 KM FROM HOME</span><span>No Strava</span></div>
+    <!-- 04 · THE ROUTE -->
+    <article class="ic rd card" data-reveal data-cursor="Ride">
+      <span class="spine"></span>
+      <div class="pad">
+        <div class="inline-lab">
+          <svg width="30" height="17" viewBox="0 0 32 18" fill="none"><circle cx="7" cy="12.2" r="5.3" fill="#0A0A0A"/><circle cx="7" cy="12.2" r="2.1" fill="#F2EFE6"/><circle cx="25" cy="12.2" r="5.3" fill="#0A0A0A"/><circle cx="25" cy="12.2" r="2.1" fill="#F2EFE6"/><path d="M2.4 8.2h6.4c1.4-2.2 3.8-3 6.4-3h3.4l2 2.8 3.6 1.3-1.1 2.2-3.3-1.5h-8.2c-1.2 0-2.2-.6-2.8-1.5z" fill="#0A0A0A"/><path d="M19.6 6l3.2-2.7M21.2 2.9h4.2" stroke="#0A0A0A" stroke-width="1.9" stroke-linecap="round"/></svg>
+          <span>Clearing my head</span>
+        </div>
+        <h3>THE LONG WAY HOME</h3>
+        <div class="media slot" data-video="">Clip — mp4 / gif</div>
+        <svg class="route" viewBox="0 0 540 76" preserveAspectRatio="none" fill="none">
+          <path d="M18 50 C62 12 126 72 198 42 C262 16 314 66 388 38 C446 15 494 50 500 28 C526 17 522 6 466 8 C390 11 390 56 352 60 C268 63 236 20 168 16 C104 12 44 26 18 50"
+                stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="18" cy="50" r="6" fill="#002FA7"/>
+        </svg>
+        <div class="cfoot"><span class="stat">0 KM FROM HOME</span><span>No route · no reason</span></div>
+      </div>
     </article>
 
   </div>
 </section>
 
-<div class="marquee ink rev"><div data-words="What I do|What I use|Where I have worked|Where I study"></div></div>
-
 <!-- SKILLS -->
-<section class="sec">
+<section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHAT I <em>do</em></h2></div>
   <div class="chips">
     <span class="chip fill">UI Design</span><span class="chip">UX Research</span><span class="chip">Brand Identity</span>
@@ -177,7 +247,6 @@
 <section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHERE I HAVE <em>worked</em></h2><span class="cnt">003</span></div>
   <div class="roles">
-
     <article class="role card feat" data-reveal>
       <div class="when">Jun 2025 — Aug 2025</div>
       <div class="rbody">
@@ -187,7 +256,6 @@
         <div class="tags"><span class="chip">Design Systems</span><span class="chip">UI Design</span><span class="chip">Client Work</span></div>
       </div>
     </article>
-
     <article class="role card" data-reveal>
       <div class="when">2024 — Present</div>
       <div class="rbody">
@@ -197,7 +265,6 @@
         <div class="tags"><span class="chip">Branding</span><span class="chip">Product</span><span class="chip">Art Direction</span></div>
       </div>
     </article>
-
     <article class="role card" data-reveal>
       <div class="when">2024 — 2025</div>
       <div class="rbody">
@@ -207,7 +274,6 @@
         <div class="tags"><span class="chip">Identity</span><span class="chip">Print</span><span class="chip">Team Lead</span></div>
       </div>
     </article>
-
   </div>
 </section>
 
@@ -225,8 +291,6 @@
     </article>
   </div>
 </section>
-
-<div class="marquee bone"><div data-words="Open to internships|Summer 2026|Say hello"></div></div>
 
 <footer class="foot" id="contact">
   <h2>LOOKING FOR AN<br>INTERN WORTH <em>keeping</em>?</h2>
