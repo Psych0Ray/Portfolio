@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-08
+Last updated: 2026-09-16
 
 ## Project
 
@@ -72,6 +72,17 @@ Last updated: 2026-09-08
     - **Fixed during the build:** the progress gauge collided with the sheet's right edge (sheet inset changed to `110px 92px 110px 44px`); sheets were vertically centred leaving dead space (text column now uses `justify-content:space-between` so it fills the sheet like a poster, title up to 96px); the next sheet peeked in early (off-stage travel raised from `yPercent` 112 to 125).
     - **To view it:** serve over HTTP (`python -m http.server 8080` from the repo root) and open `http://localhost:8080/lab.html` — `file://` is blocked by the Playwright CLI and the fonts need a real origin. Clear `sessionStorage` to replay the splash.
     - **Not done / open:** all content is the same dummy project set; image slots are placeholders; nothing here is merged into `index.html`; the About and Resume pages have no coded equivalent yet; ScrollTrigger needs an SRI hash; and none of this exists in Figma yet — the approved parts still need to be rebuilt as artboards so the canvas stays the source of truth.
+
+20. **Design language overhauled — Klein blue + ransom-note hero (2026-09-16).** User called the work so far "very AI sloppish" and asked for five things: (1) a fun, unique hero; (2) kill the `OPEN FOR Q1 2026` sticker; (3) get the See-the-work / Get-in-touch buttons out of the hero; (4) give the personal-interests cards far more space and make them dynamic with video/GIF; (5) drop the orange entirely for blue, and push the whole language to **maximalist**.
+    - **Figma was still disconnected** for this session too (`/mcp` needed to reconnect the claude.ai Figma server). Per the user's own instruction — work around the limitation and get to hosting — the work was done in code in `lab.html`. **None of it exists on the Figma canvas yet; it all still needs porting.**
+    - **Diagnosis given for why it read as AI slop** (worth keeping, it drives the rest): the off-white + black + one-hot-accent palette is a template default; every section used the same eyebrow → title → content rhythm and identical margins; nothing overlapped, broke its container or bled off the edge; the type scale was safe (one display, one body, one mono); everything was a bordered box. Maximalism = **density, layering, collision and marginalia**, not more colour.
+    - **Palette chosen: Klein blue + bone.** `--blue #002FA7` (International Klein Blue), `--bone #E8DCC8`, `--paper #F2EFE6` (cooler than the old paper), `--ink #0A0A0A`, plus **screen tints** `--blue70 #4969BA` / `--blue40 #91A2CD` / `--blue15 #CED2DD`. Tints of a single ink are how real 1-2 colour print gets depth — they carry the density without colour noise. User was offered ultramarine+fluoro-pink (louder, authentic riso) and riso-blue+yellow, and picked Klein.
+    - **Deliberate tension, resolved:** Klein+bone was presented as the *restrained* option while the brief asked for maximalist. Kept on purpose — it produces **Swiss-punk density rather than circus density**: noise comes from layering, collision and type-scale extremes, not loud colour. Harder to get wrong, reads more expensive.
+    - **Hero: THE RANSOM NOTE.** The name is hand-set letter by letter — eight letters, **eight different typefaces**, each with its own size, rotation, ground and ink: Archivo Black on a blue box / Playfair italic 900 / Bebas Neue reversed out of black / JetBrains Mono on bone with a border / Abril Fatface / Anton over a blue halftone / Courier Prime on blue / Rubik Mono One in a dashed box. Letters overlap via negative margins. On load they fly in from random directions with a `back.out` stagger; on mousemove each letter drifts at a different depth so the collage parallaxes. Chosen over three alternatives (The Broadsheet, The Contact Sheet, The Overprint Portrait).
+    - **Density layer added:** a right-hand column carrying a `SPECIMEN` spec block (paper/inks/screens/faces), a halftoned **portrait image slot** with a rotated `PROOF · NOT FOR PRESS` stamp, and an **ink screen scale** showing the 100/70/40/15 tints. Plus rotated **marginalia** in the gutters ("Eight faces. One name. ↓ no two alike", "Cut, angled and pasted by hand. The grid is still under there.", "↖ yes, really — hire me").
+    - **Done per the user's list:** (1) ransom hero built; (2) Q1 sticker gone; (3) no CTA buttons in the hero — only a scroll cue; (5) palette fully swapped everywhere including splash, press run, cursor and colophon.
+    - **Fixed during the build:** the first margin note rendered behind the R and was unreadable; the right 40% of the hero was empty (fatal for maximalism) — hence the density column; the box note then landed on top of the lede; and the column overflowed below the fold, so the portrait was shortened and a redundant Contents block was dropped.
+    - **Verified:** 8 letters and 6 sheets render, all 9 font families load, zero JS errors, press run still pins and registers correctly in the new palette.
 
 ## In progress / not yet confirmed
 
