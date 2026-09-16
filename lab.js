@@ -48,15 +48,24 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-/* media slot  <div class="slot" data-video="clip.mp4">  →  <video> */
+/* media slots. Drop a filename into the attribute and the placeholder is replaced.
+   <div class="slot" data-video="clip.mp4">  →  <video>
+   <div class="poster" data-img="cover.jpg">  →  <img>  (the flat glyph is the empty state) */
 (function media(){
-  document.querySelectorAll('.slot[data-video]').forEach(function(el){
+  document.querySelectorAll('[data-video]').forEach(function(el){
     var src = el.getAttribute('data-video');
     if (!src) return;
     var v = document.createElement('video');
     v.src = src; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
     v.setAttribute('playsinline','');
     el.textContent = ''; el.appendChild(v);
+  });
+  document.querySelectorAll('[data-img]').forEach(function(el){
+    var src = el.getAttribute('data-img');
+    if (!src) return;
+    var i = document.createElement('img');
+    i.src = src; i.alt = el.getAttribute('data-alt') || '';
+    el.textContent = ''; el.appendChild(i);
   });
 })();
 

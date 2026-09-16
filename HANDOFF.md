@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-16
+Last updated: 2026-09-17
 
 ## Project
 
@@ -150,11 +150,26 @@ Last updated: 2026-09-16
     - **Verified in the browser**: `THREE` loaded, 4 canvases sized 327x437 and rendering, 1 pin (653 to 4493), zero console errors. Screenshots of all four slides: every object is recognisable at a glance. Controller scaled to .78 after its grip clipped the card edge.
     - **Still open**: media slots empty on all four slides (the `data-video` upgrade path is wired); Resume page; nothing in Figma; ScrollTrigger and Three.js not SRI-pinned.
 
+27. **3D objects replaced by poster cards; hobby copy made legible (2026-09-17).** User rejected the procedural 3D outright: "the 3d models are soo bad". Also asked for the section title to read *What I do off the clock*, and for each slide to make plain what it is conveying.
+    - **Why the 3D failed, recorded so it is not retried:** objects assembled from boxes, cylinders and spheres keep every primitive joint in the silhouette, and no lighting fixes that. It reads as programmer art. Worse, the 3D object and the clip beside it were doing the *same job* (say what this hobby is) and the object lost that fight every time.
+    - **Four options were put to the user:** (A) delete the column, two columns only; (B) a poster card holding real cover art or their own photo, with a flat SVG glyph as the empty state; (C) flat SVG objects only, no images; (D) keep 3D but load CC0 GLBs from Poly Pizza / Quaternius with a toon material. **User chose B.**
+    - **`hobby3d.js` deleted** and the three.js script tag removed from `about.html`. Nothing else referenced either.
+    - **New poster column** (`.pwrap` / `.poster` / `.pstamp` in about.html): the frame is rotated `-1.6deg` with a 3px ink border and a hard `10px 10px 0` shadow so it reads as a physical print. Ground is bone, and **paper on the bone slide** so it never sits on its own colour. A blue **stamp** (GAME / FILM / DISH / RIDE) rotated `-6deg` bleeds off the bottom-left corner.
+    - **Drop-in upgrade path, same idea as the video slots:** put a filename in `data-img="cover.jpg"` and the glyph is replaced by an `<img>`; `object-fit:contain` so a cover of any ratio is shown whole rather than cropped. Optional `data-alt`. `lab.js` `media()` was generalised from `.slot[data-video]` to any `[data-video]` and any `[data-img]`.
+    - **Empty state is four flat SVG glyphs**, inline in about.html, drawn in the exact palette with 4px ink strokes. Flat 2D is far more forgiving than 3D here: no lighting, no perspective, just a silhouette, and it sits inside the riso-print language instead of fighting it.
+    - **Two glyphs were redrawn only because the renders were looked at.** The **controller**'s two analog sticks collided with both the d-pad and the button cluster at that size, so the sticks were **dropped entirely** and a centre strip added; a d-pad plus a four-button cluster reads as a controller on its own. The **helmet** read as a blob or a computer mouse, so it was rebuilt symmetric with a visor band spanning nearly the full shell width and a chin bar below it. Clapperboard and pot were right first time. Glyph scale raised (`max-width:88%`, `max-height:58%`) because all four sat small in a large frame.
+    - **Copy legibility:** the slide label now reads `What I do off the clock` on all four. Each text card leads with a mono blue kicker, **LAST PLAYED / LAST WATCHED / LAST COOKED / LAST RIDE**, and the rating block moved *below* the title and gained a real number (`REPLAY VALUE 4 OF 5`), because five anonymous squares said nothing. The motorcycle slide's deliberately empty rating now reads `DESTINATIONS REACHED 0 OF 5`, so the joke actually lands.
+    - **Mobile:** stacked slide top padding raised 64px to 92px so the hobby heading clears the fixed nav when a slide lands at the top of the viewport.
+    - **Verified in the browser at 1600x950 and 420x860**: four posters, four glyphs, one pin, zero console errors beyond the known favicon 404; all four slides screenshotted and each object is recognisable at a glance.
+    - **Still open:** real cover art and photos for the four posters and clips for the four media slots (both are one-attribute drops now); Resume page; nothing in Figma; ScrollTrigger still unpinned by SRI.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 
 ## Next up (not started)
+
+- **Resume page was started this session and parked.** Nav on all three pages still points `RESUME` at `#`. The plan when it resumes: `resume.html` on the shared system, header with a Download PDF CTA, a four-cell fact strip reusing the `.meta` pattern from case.html, EXPERIENCE as cards with a solid colour year spine (distinct from the About `.role` pattern), EDUCATION and RECOGNITION on a bone band to break the section-head rhythm, a blue download band, then the shared footer, plus a `@media print` block. The PDF file itself does not exist yet.
 
 - **Project Detail page BUILT** (2026-09-06) with dummy content, at x=4640 in the Iteration 06 section. Structure: back link, intro (project name, one-liner, ROLE / TIMELINE / TEAM / TOOLS meta strip, Download Case Study + View Live Site CTAs), full-width hero slot, "The Problem" two-column band, then case-study slides in a varied rhythm (full-width / two-up / red pull-quote band / full-width / two-up), "Where it landed" outcome trio, next-project card, contact CTA, footer. All slide slots are bordered image placeholders — swap in exported PDF pages. Clipping audit on this page returns 0.
 
