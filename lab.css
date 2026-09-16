@@ -31,9 +31,9 @@ a{color:inherit}
 
 /* ── CURSOR · a sticker dot that grows a label ── */
 .cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
-.cursor .dot{width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
+.cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
   box-shadow:3px 3px 0 var(--ink);transform:translate(-50%,-50%)}
-.cursor .tag{position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
+.cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
   box-shadow:4px 4px 0 var(--ink);border-radius:100px;padding:9px 15px;font-family:var(--mono);font-size:10px;
   font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
   opacity:0;transform-origin:left top}

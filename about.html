@@ -10,72 +10,47 @@
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HEADER ── */
-.ahead{padding:160px 40px 72px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
+.ahead{padding:160px 40px 80px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
 .ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,8.2vw,112px);letter-spacing:-.045em;line-height:.88}
 .ahead h1 .lt{font-weight:300;color:var(--blue)}
 .ahead p{margin-top:28px;max-width:46ch;font-size:16px;line-height:1.75;color:var(--muted)}
 .ahead .portrait{width:330px;flex:none;aspect-ratio:4/5}
 
-/* ══ OFF THE CLOCK · four objects with four grounds ══ */
-.four{display:grid;grid-template-columns:1fr 1fr;gap:34px}
-.ic{position:relative;display:flex;flex-direction:column;padding:28px 30px 30px;overflow:visible}
-.ic .lab{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:700}
-.ic h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.2vw,58px);letter-spacing:-.045em;line-height:.88;margin:14px 0 20px;text-transform:uppercase}
-.ic p{font-size:15px;line-height:1.65;margin-top:18px}
-.ic .media{aspect-ratio:16/10}
-.ic .head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+/* ══ OFF THE CLOCK · one slide per hobby, horizontal pan ══ */
+.hob{position:relative;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink)}
+.hob-pin{height:100vh;overflow:hidden}
+.track{display:flex;height:100%;will-change:transform}
+.slide{flex:none;width:100vw;height:100%;padding:112px 40px 40px;display:flex;flex-direction:column;gap:24px;background:var(--paper)}
+.slide.dark{color:var(--paper)}
+.slide.s2{background:var(--blue)}
+.slide.s3{background:var(--bone)}
+.slide.s4{background:var(--ink)}
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.s-head .lab{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:700;color:var(--blue);display:block;margin-bottom:10px}
+.dark .s-head .lab{color:var(--blue40)}
+.s-head h2{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,92px);letter-spacing:-.045em;line-height:.86;text-transform:uppercase}
+.s-head h2 .lt{font-weight:300;color:var(--blue);text-transform:none}
+.dark .s-head h2 .lt{color:var(--blue40)}
+.s-nav{display:flex;align-items:center;gap:12px;flex:none}
+.s-nav .cnt{font-family:var(--mono);font-size:12px;letter-spacing:.16em;margin-right:8px}
+.s-nav .cnt b{font-weight:700}
+.s-nav button{cursor:none}
+.s-nav .rbtn:hover{background:var(--blue);color:var(--paper)}
 
-/* 01 · TICKET  (blue ground) */
-.tk{background:var(--blue);color:var(--paper)}
-.tk .stars{font-size:24px;letter-spacing:3px;line-height:1}
-.tk .film{display:flex}
-.tk .sprock{width:26px;flex:none;background:repeating-linear-gradient(to bottom,var(--ink) 0 11px,var(--paper) 11px 26px)}
-.tk .media{flex:1;border-left:0;border-right:0}
-.tk p{color:var(--blue15)}
-.tk .tear{position:relative;border-top:3px dashed var(--paper);margin:24px -30px 0}
-.tk .tear::before,.tk .tear::after{content:'';position:absolute;top:-16px;width:30px;height:30px;border-radius:50%;
-  background:var(--paper);border:var(--bw) solid var(--ink)}
-.tk .tear::before{left:-18px}.tk .tear::after{right:-18px}
-.tk .stub{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px}
-.tk .admit{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:34px;letter-spacing:.02em;line-height:1}
-.tk .stub .lab{color:var(--blue15);font-weight:500}
-
-/* 02 · HUD  (ink ground, bracket corners) */
-.hud{background:var(--ink);color:var(--paper)}
-.hud::before,.hud::after{content:'';position:absolute;width:34px;height:34px;border:5px solid var(--blue);pointer-events:none}
-.hud::before{left:12px;top:12px;border-right:0;border-bottom:0}
-.hud::after{right:12px;bottom:12px;border-left:0;border-top:0}
-.hud .head .lab{color:var(--blue40)}
-.hud p{color:var(--blue40)}
-.hud .bar{display:flex;align-items:center;gap:16px;margin-top:22px}
-.hud .segs{display:flex;gap:5px;flex:1}
-.hud .segs i{flex:1;height:22px;border:2.5px solid var(--paper);display:block}
-.hud .segs i.on{background:var(--blue);border-color:var(--blue)}
-.hud .pct{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:44px;line-height:1;letter-spacing:0}
-
-/* 03 · RECIPE  (bone ground, ruled) */
-.rc{background:var(--bone);padding-left:70px;
-  background-image:repeating-linear-gradient(to bottom,transparent 0 30.5px,rgba(10,10,10,.22) 30.5px 32px)}
-.rc::before{content:'';position:absolute;left:42px;top:0;bottom:0;width:4px;background:var(--blue)}
-.rc .stamp{position:absolute;right:26px;top:22px;transform:rotate(7deg);border:3px solid var(--blue);color:var(--blue);
-  font-family:var(--display);font-stretch:75%;font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase;
-  padding:8px 14px;line-height:1;background:var(--bone)}
-.rc .lab{color:var(--blue)}
-.checks{list-style:none;margin-top:14px}
-.checks li{display:flex;align-items:center;gap:14px;height:32px;font-family:var(--body);font-size:15px;font-weight:500;color:var(--muted)}
-.checks b{width:18px;height:18px;border:2.5px solid var(--ink);display:block;flex:none;background:var(--paper)}
-.checks li.done{color:var(--ink);text-decoration:line-through;text-decoration-color:var(--blue);text-decoration-thickness:2px}
-.checks li.done b{background:var(--blue);border-color:var(--blue)}
-
-/* 04 · ROUTE  (paper ground, blue spine) */
-.rd{padding-left:52px}
-.rd .spine{position:absolute;left:0;top:0;bottom:0;width:22px;background:var(--blue)}
-.rd .lab{color:var(--blue)}
-.rd .route{width:100%;height:96px;display:block;margin-top:20px}
-.rd .rfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:6px}
-.rd .km{font-family:var(--display);font-weight:800;font-size:clamp(34px,4vw,54px);letter-spacing:-.045em;line-height:.88;color:var(--blue);text-transform:uppercase}
-.rd .rfoot .lab{color:var(--muted);font-weight:500;text-align:right}
+.s-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.45fr 1fr;gap:26px}
+.p3d{position:relative;overflow:hidden;background:var(--bone);min-height:0}
+.p3d canvas{width:100%;height:100%;display:block;touch-action:none}
+.p3d .hint{position:absolute;left:16px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pmedia{height:100%;min-height:0}
+.ptext{padding:28px;display:flex;flex-direction:column;color:var(--ink);min-height:0}
+.rate{display:flex;gap:6px}
+.rate i{width:22px;height:22px;border:2.5px solid var(--ink);display:block}
+.rate i.on{background:var(--blue);border-color:var(--blue)}
+.rlab{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;color:var(--muted);margin-top:10px;display:block}
+.ptext h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,2.6vw,38px);letter-spacing:-.04em;line-height:.9;margin:22px 0 14px;text-transform:uppercase}
+.ptext p{font-size:15px;line-height:1.65;color:var(--muted)}
+.ptext .meta{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}
 
 /* ── SKILLS / SOFTWARE ── */
 .chips{display:flex;flex-wrap:wrap;gap:14px}
@@ -83,7 +58,6 @@
 .sw{padding:24px}
 .sw h4{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
 .sw span{font-size:13px;color:var(--muted);line-height:1.6}
-/* four grounds rotate so the grid is never cream-on-cream */
 .sw:nth-child(4n+1){background:var(--blue);color:var(--paper)}.sw:nth-child(4n+1) span{color:var(--blue15)}
 .sw:nth-child(4n+3){background:var(--bone)}
 .sw:nth-child(4n){background:var(--ink);color:var(--paper)}.sw:nth-child(4n) span{color:var(--blue40)}
@@ -98,15 +72,20 @@
 .role p{font-size:15px;line-height:1.7;color:var(--muted);max-width:62ch}
 .role .tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 .role.feat{background:var(--blue);color:var(--paper)}
-.role.feat .org{color:var(--paper);font-weight:300}
+.role.feat .org{color:var(--paper)}
 .role.feat .when,.role.feat p{color:var(--blue15)}
 
 @media (max-width:1100px){.tiles{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){
   .ahead{padding:126px 22px 50px;gap:32px}
   .ahead .portrait{width:100%}
-  .four{grid-template-columns:1fr;gap:26px}
-  .rc{padding-left:56px}.rc::before{left:30px}
+  .hob-pin{height:auto;overflow:visible}
+  .track{display:block}
+  .slide{width:auto;height:auto;padding:64px 22px}
+  .s-nav{display:none}
+  .s-grid{grid-template-columns:1fr}
+  .p3d{aspect-ratio:1}
+  .pmedia{aspect-ratio:16/10;height:auto}
   .role .when{width:100%;padding-top:0}
 }
 </style>
@@ -134,64 +113,88 @@
   <div class="portrait slot card">Portrait</div>
 </header>
 
-<section class="sec">
-  <div class="sechead">
-    <h2>OFF THE <span class="lt">clock</span></h2>
-    <span class="count">Four things I am not paid to be good at</span>
-  </div>
+<!-- ══ OFF THE CLOCK ══ -->
+<section class="hob" id="hobbies">
+  <div class="hob-pin">
+    <div class="track" id="hobTrack">
 
-  <div class="four">
+      <article class="slide s1">
+        <div class="s-head">
+          <div><span class="lab">Off the clock</span><h2>Video <span class="lt">games</span></h2></div>
+          <div class="s-nav"><span class="cnt"><b>01</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
+        </div>
+        <div class="s-grid">
+          <div class="p3d card" data-cursor="Spin"><canvas data-model="controller"></canvas><span class="hint">Drag to spin</span></div>
+          <div class="pmedia slot" data-video="">Clip</div>
+          <div class="ptext card">
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <span class="rlab">Replay value</span>
+            <h3>Disco Elysium</h3>
+            <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
+            <span class="meta">Save slot 03. 62 hours in.</span>
+          </div>
+        </div>
+      </article>
 
-    <article class="ic tk card" data-reveal data-cursor="Watch">
-      <div class="head"><span class="lab">Last watched</span><span class="stars" aria-label="four of five stars">★★★★☆</span></div>
-      <h3>Whiplash</h3>
-      <div class="film"><span class="sprock"></span><div class="media slot" data-video="">Clip</div><span class="sprock"></span></div>
-      <p>Third rewatch. The edit is the performance. Every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
-      <div class="tear"></div>
-      <div class="stub"><span class="admit">ADMIT ONE</span><span class="lab">Chazelle, 2014</span><span class="lab">106 min</span></div>
-    </article>
+      <article class="slide s2 dark">
+        <div class="s-head">
+          <div><span class="lab">Off the clock</span><h2>Movies</h2></div>
+          <div class="s-nav"><span class="cnt"><b>02</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
+        </div>
+        <div class="s-grid">
+          <div class="p3d card" data-cursor="Spin"><canvas data-model="clapper"></canvas><span class="hint">Drag to spin</span></div>
+          <div class="pmedia slot" data-video="">Clip</div>
+          <div class="ptext card">
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <span class="rlab">Rewatch value</span>
+            <h3>Whiplash</h3>
+            <p>Third rewatch. The edit is the performance. Every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
+            <span class="meta">Chazelle, 2014. 106 minutes.</span>
+          </div>
+        </div>
+      </article>
 
-    <article class="ic hud card" data-reveal data-cursor="Play">
-      <div class="head"><span class="lab">Currently playing</span><span class="chip fill">Save slot 03</span></div>
-      <h3>Disco Elysium</h3>
-      <div class="media slot" data-video="">Clip</div>
-      <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
-      <div class="bar">
-        <div class="segs"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
-        <span class="pct">62%</span>
-      </div>
-    </article>
+      <article class="slide s3">
+        <div class="s-head">
+          <div><span class="lab">Off the clock</span><h2>Cooking</h2></div>
+          <div class="s-nav"><span class="cnt"><b>03</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
+        </div>
+        <div class="s-grid">
+          <div class="p3d card" data-cursor="Spin"><canvas data-model="pot"></canvas><span class="hint">Drag to spin</span></div>
+          <div class="pmedia slot" data-video="">Clip</div>
+          <div class="ptext card">
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <span class="rlab">Attempts so far</span>
+            <h3>Butter Chicken</h3>
+            <p>Fourth attempt this month. Still chasing the char on the marinade. It is a timing problem, not a recipe problem.</p>
+            <span class="meta">Marinade twelve hours. Char on the flame.</span>
+          </div>
+        </div>
+      </article>
 
-    <article class="ic rc card" data-reveal data-cursor="Taste">
-      <span class="stamp">Attempt 04</span>
-      <span class="lab">On the stove</span>
-      <h3>Butter Chicken</h3>
-      <div class="media slot" data-video="">Clip</div>
-      <ul class="checks">
-        <li class="done"><b></b>Marinade, twelve hours</li>
-        <li class="done"><b></b>Char on the flame</li>
-        <li><b></b>Finish with butter</li>
-        <li><b></b>Feed someone else</li>
-      </ul>
-    </article>
+      <article class="slide s4 dark">
+        <div class="s-head">
+          <div><span class="lab">Off the clock</span><h2>Motor<span class="lt">cycles</span></h2></div>
+          <div class="s-nav"><span class="cnt"><b>04</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
+        </div>
+        <div class="s-grid">
+          <div class="p3d card" data-cursor="Spin"><canvas data-model="helmet"></canvas><span class="hint">Drag to spin</span></div>
+          <div class="pmedia slot" data-video="">Clip</div>
+          <div class="ptext card">
+            <div class="rate"><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="rlab">Destinations reached</span>
+            <h3>The Long Way Home</h3>
+            <p>No route, no reason. The ride ends exactly where it started, which is the whole point of it.</p>
+            <span class="meta">Mostly evenings. No Strava.</span>
+          </div>
+        </div>
+      </article>
 
-    <article class="ic rd card" data-reveal data-cursor="Ride">
-      <span class="spine"></span>
-      <span class="lab">Clearing my head</span>
-      <h3>The Long Way Home</h3>
-      <div class="media slot" data-video="">Clip</div>
-      <svg class="route" viewBox="0 0 540 96" preserveAspectRatio="none" fill="none" aria-hidden="true">
-        <path d="M22 62 C66 18 130 86 200 50 C264 20 316 82 390 46 C448 18 496 62 504 34 C530 20 526 8 468 10 C392 13 392 70 354 74 C270 78 238 24 170 20 C106 16 46 32 22 62"
-              stroke="#002FA7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="22" cy="62" r="10" fill="#002FA7" stroke="#0A0A0A" stroke-width="3"/>
-      </svg>
-      <div class="rfoot"><span class="km">0 km<br>from home</span><span class="lab">Mostly evenings.<br>No route, no reason.</span></div>
-    </article>
-
+    </div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec">
   <div class="sechead"><h2>WHAT I <span class="lt">do</span></h2></div>
   <div class="chips">
     <span class="chip fill">UI design</span><span class="chip">UX research</span><span class="chip">Brand identity</span>
@@ -269,7 +272,29 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="lab.js"></script>
+<script src="hobby3d.js"></script>
+<script>
+/* horizontal pan: vertical scroll drives the track sideways. Pinned at top top, snaps per slide. */
+(function hobbies(){
+  var sec = document.getElementById('hobbies'), track = document.getElementById('hobTrack');
+  var n = track.children.length;
+  if (REDUCED || window.matchMedia('(max-width:900px)').matches) return;
+  var dist = function(){ return track.scrollWidth - window.innerWidth; };
+  var tween = gsap.to(track, { x:function(){ return -dist(); }, ease:'none',
+    scrollTrigger:{ trigger:sec, start:'top top', end:function(){ return '+=' + dist(); }, pin:true, scrub:.8,
+      snap:{ snapTo:1/(n-1), duration:{min:.2,max:.5}, ease:'power2.inOut', inertia:false }, invalidateOnRefresh:true } });
+  var st = tween.scrollTrigger;
+  document.querySelectorAll('.hob [data-dir]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var i = Math.round(st.progress * (n-1)) + parseInt(b.getAttribute('data-dir'),10);
+      i = Math.max(0, Math.min(n-1, i));
+      window.scrollTo({ top: st.start + (st.end - st.start) * i/(n-1), behavior:'smooth' });
+    });
+  });
+})();
+</script>
 </body>
 </html>
