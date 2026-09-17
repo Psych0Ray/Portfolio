@@ -190,6 +190,18 @@ Last updated: 2026-09-17
     - **Verified at 1440x900 and 420x860 on all three pages:** zero `.lt`, no horizontal overflow, no script errors (only the known favicon 404), still no em-dashes, en-dashes or middle dots; the hover underline was confirmed via computed `::after` transform, and the counter reads 02 on slide two.
     - **Still open:** unchanged. Real cover art and clips for the hobby slides; Resume page (nav still points at `#`); nothing in Figma; ScrollTrigger unpinned by SRI; favicon.
 
+30. **First pass of real content on the home page (2026-09-18).** User began replacing placeholder copy. Everything here is **real, user-supplied content**, not invention.
+    - **Hero statement is now "PRODUCT DESIGNER, ALWAYS BUILDING"** (was "DESIGN STUDENT, CURRENTLY BUILDING."). Note this is an **identity change**: the About page still calls the user a design student throughout, and the About and home footers still talk about internships. Flagged to the user, not changed unasked.
+    - **The `.lede` paragraph under the hero statement was deleted** at the user's request ("remove that random body text").
+    - **Scroll cue replaced.** The bone `.slab` and the `clamp(80,12vw,168)` `.bigarrow` are both gone. The user read that pair as "a random square on the right side". In their place, `.scue`: a 54px circular button with a down arrow, bobbing 7px on a 1.9s loop, with a **SCROLL** label beside it, bottom right of the hero. It is a real anchor to `#work`, fills blue on hover, pauses its bob on hover, and honours `prefers-reduced-motion`. 46px on mobile.
+    - **Skills marquee (the first one, under the hero)** now reads: Product design, User-centric design, User testing, Wireframing, Prototyping, Storyboarding, Vibecoding. **The second marquee was not touched** and still holds placeholder lines ("Open to internships", "Summer 2026", "Brand and product", "Say hello"); "Brand and product" now sits oddly against "Product designer".
+    - **Six real projects in `WORK`:** ULS, Relique, Maison ;TJRS, ICCC Surveillance, Canva AI redesign, DriveBuddy.
+      - **Two descriptors came with each project, and the card has two slots for them.** The first descriptor fills the card's **category line** (top left) and the second becomes its **single chip**, so neither is duplicated and nothing is made up. Cards previously carried three chips, so the chip row is lighter now; it still balances against the round arrow.
+      - **Years were not supplied, so every card reads `20XX`.** This is deliberate: putting an invented date on a real project is worse than an obviously empty slot. Replace the `yr` fields in the `WORK` array in lab.html when the user gives them. For the same reason the section count dropped from "Six projects, 2024 to 2026" to just **"Six projects"**, since that range was derived from the placeholder years.
+      - **`Maison&nbsp;;TJRS` uses a non-breaking space** on purpose. With a normal space the name wrapped as "MAISON" / ";TJRS" and the orphaned semicolon read as a typo.
+      - Verified all six thumbnails measure an identical 367px, so the rows still line up (the `min-height:1.8em` fix from item 28 holds with the new names, the longest of which wrap to two lines).
+    - **Still placeholder after this pass:** every work card links to `case.html`, which is still the dummy "Sonder Health" case study, so clicking ULS opens the wrong project; the About page copy, portrait and hobby content; the second marquee; the six card thumbnails and the hobby posters and clips; the Resume page; project years.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
@@ -212,7 +224,7 @@ Last updated: 2026-09-17
 - Custom home icon still to be designed — every iteration has a placeholder icon slot in the nav, layer-named so it is easy to find.
 - User's stated dislikes to respect going forward: **light-weight word emphasis** (use a solid block, see item 29), **JetBrains Mono as a UI face**, **gradients** (audited: 0 gradient fills across iterations 04-06). User's stated likes: Bricolage Grotesque for display, uppercase nav labels (in Geist since item 29; mono was later rejected), the pill nav shape, normal (non-bento) work grids, tall portrait work cards with tag chips, Awwwards-style playful detail.
 - Context: this is a **student** portfolio. Nav is WORK / ABOUT / RESUME with a home icon; copy refers to the user as a design student.
-- Replace all placeholder content (name is set; tagline, About text, Projects, Contact still placeholders).
+- Replace remaining placeholder content. Done in item 30: hero statement, skills marquee, the six project names and descriptors. Still to do: project years, case-study pages per project (all six still point at the dummy Sonder Health page), About copy, the second marquee, contact links, and every image slot.
 - Add a favicon (currently 404s, caught by the Playwright tooling — cosmetic only).
 - Write the actual GSAP animations once a design direction is chosen.
 

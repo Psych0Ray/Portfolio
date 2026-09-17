@@ -11,7 +11,6 @@
 <style>
 /* ── HERO ── */
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.slab{position:absolute;right:-140px;bottom:44px;width:380px;height:220px;background:var(--bone);border:var(--bw) solid var(--ink);transform:rotate(4deg);z-index:0}
 .ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
 .ransom span{display:block;line-height:.74;padding:8px 12px 14px;margin-right:-15px;position:relative}
 .L1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,14.4vw,194px);background:var(--blue);color:var(--paper);transform:rotate(-4deg);z-index:3}
@@ -29,8 +28,15 @@
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
-.hero .lede{position:relative;z-index:4;margin-top:34px;max-width:44ch;font-size:16px;line-height:1.7;color:var(--muted)}
-.bigarrow{position:absolute;right:64px;bottom:66px;font-family:var(--display);font-weight:800;font-size:clamp(80px,12vw,168px);line-height:.7;color:var(--blue);z-index:4}
+/* scroll cue: a labelled button rather than a slab with a giant arrow on it */
+.scue{position:absolute;right:40px;bottom:52px;z-index:4;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
+.scue-t{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:600}
+.scue-b{width:54px;height:54px;border-radius:50%;border:var(--bw) solid var(--ink);background:var(--paper);
+  display:grid;place-items:center;font-size:21px;line-height:1;animation:bob 1.9s ease-in-out infinite;
+  transition:background .15s,color .15s}
+.scue:hover .scue-b{background:var(--blue);color:var(--paper);animation-play-state:paused}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@media (prefers-reduced-motion:reduce){.scue-b{animation:none}}
 
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
@@ -47,7 +53,8 @@
 @media (max-width:900px){
   .hero{padding:118px 22px 40px}
   .grid{grid-template-columns:1fr;gap:22px}
-  .slab,.bigarrow{display:none}
+  .scue{right:22px;bottom:30px;gap:12px}
+  .scue-b{width:46px;height:46px;font-size:18px}
 }
 </style>
 </head>
@@ -66,25 +73,26 @@
 </nav></div>
 
 <header class="hero" id="hero">
-  <div class="slab"></div>
   <div class="ransom" aria-label="Rutujeet">
     <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
   </div>
   <p class="statement">
-    <span class="a">DESIGN STUDENT,</span>
-    <span class="b">currently</span>
-    <span class="c">BUILDING.</span>
+    <span class="a">PRODUCT DESIGNER,</span>
+    <span class="b">ALWAYS</span>
+    <span class="c">BUILDING</span>
   </p>
-  <p class="lede">Interface and product design. I care about the details most people never notice, and I like being in the room while things actually get built.</p>
-  <div class="bigarrow" aria-hidden="true">↓</div>
+  <a class="scue" href="#work" data-cursor="Work">
+    <span class="scue-t">Scroll</span>
+    <span class="scue-b" aria-hidden="true">&darr;</span>
+  </a>
 </header>
 
-<div class="marquee"><div data-words="Service design|E-commerce|Product UI|Wayfinding|Design systems|Motion"></div></div>
+<div class="marquee"><div data-words="Product design|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
 
 <section class="sec" id="work">
   <div class="sechead">
     <h2>SELECTED <span class="hl">WORK</span></h2>
-    <span class="count">Six projects, 2024 to 2026</span>
+    <span class="count">Six projects</span>
   </div>
   <div class="grid" id="grid"></div>
 </section>
@@ -105,12 +113,12 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var WORK = [
-  {name:'Sonder Health', cat:'Care platform',   yr:'2025', tags:['UI design','Research','Figma']},
-  {name:'Atlas Transit', cat:'Wayfinding',      yr:'2025', tags:['Signage','Iconography','Print']},
-  {name:'Form and Fold', cat:'E-commerce',      yr:'2025', tags:['Identity','Packaging','Type']},
-  {name:'Night Shift',   cat:'Motion',          yr:'2024', tags:['Motion','Art direction']},
-  {name:'Paper Route',   cat:'Editorial',       yr:'2024', tags:['Editorial','Layout','Web']},
-  {name:'Halftone',      cat:'Design system',   yr:'2024', tags:['System','Tokens','Docs']}
+  {name:'ULS',               cat:'Service design',          yr:'20XX', tags:['Dashboard']},
+  {name:'Relique',           cat:'Semiotics and semantics', yr:'20XX', tags:['Website design']},
+  {name:'Maison&nbsp;;TJRS',      cat:'Design management',       yr:'20XX', tags:['Concept']},
+  {name:'ICCC Surveillance', cat:'OOUX',                    yr:'20XX', tags:['Dashboard']},
+  {name:'Canva AI redesign', cat:'Redesign',                yr:'20XX', tags:['AI design']},
+  {name:'DriveBuddy',        cat:'UI design',               yr:'20XX', tags:['User testing']}
 ];
 document.getElementById('grid').innerHTML = WORK.map(function(p){
   return '<a class="wc card" data-reveal data-cursor="Read" href="case.html">'
