@@ -6,18 +6,17 @@
 <title>Sonder Health · Rutujeet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
 .chead{padding:150px 40px 64px}
-.back{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
+.back{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
 .chead h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7.4vw,104px);letter-spacing:-.05em;line-height:.86;text-transform:uppercase}
-.chead h1 .lt{font-weight:300;color:var(--blue);text-transform:none}
 .chead .one{margin-top:26px;max-width:52ch;font-size:18px;line-height:1.65;color:var(--muted)}
 .meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border:var(--bw) solid var(--ink)}
 .meta div{padding:22px 24px;border-right:2px solid var(--ink)}
 .meta div:last-child{border-right:0}
-.meta b{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px;font-weight:700}
+.meta b{font-family:var(--label);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px;font-weight:700}
 .meta span{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.35;letter-spacing:-.01em}
 .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 
@@ -29,7 +28,7 @@
 
 .band{background:var(--blue);color:var(--paper);padding:84px 40px;margin-top:44px}
 .band h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.045em;line-height:.9;max-width:20ch;text-transform:uppercase}
-.band h2 .lt{font-weight:300;color:var(--blue15);text-transform:none}
+.band .hl{background:var(--ink)}              /* a blue block would vanish on the blue band */
 .band p{margin-top:26px;max-width:56ch;font-size:16px;line-height:1.75;color:var(--blue15)}
 
 .outcome{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
@@ -38,7 +37,7 @@
 .out span{display:block;margin-top:14px;font-size:15px;line-height:1.6;color:var(--muted)}
 
 .next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:44px;flex-wrap:wrap;text-decoration:none;color:inherit}
-.next .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
+.next .lab{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
 .next h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
 .next .rbtn{width:64px;height:64px;font-size:26px}
 
@@ -69,7 +68,7 @@
 
 <header class="chead">
   <a href="lab.html#work" class="back">&larr; All work</a>
-  <h1>Sonder <span class="lt">health</span></h1>
+  <h1>Sonder <span class="hl">health</span></h1>
   <p class="one">A care platform rebuilt around the twenty seconds a nurse actually has. Shipped as a design system, not a screen.</p>
   <div class="meta">
     <div><b>Role</b><span>UI design, design system, research support</span></div>
@@ -88,7 +87,7 @@
 </div>
 
 <div class="band">
-  <h2>The problem <span class="lt">was never</span> the screen.</h2>
+  <h2>The problem <span class="hl">was never</span> the screen.</h2>
   <p>Nurses were not struggling to read the interface. They were struggling to reach it: three taps deep, on a device held in one hand, in a corridor, mid-handover. Every design decision after this point came from watching that happen.</p>
 </div>
 
@@ -106,7 +105,7 @@
 </div>
 
 <section class="sec">
-  <div class="sechead"><h2>WHERE IT <span class="lt">landed</span></h2></div>
+  <div class="sechead"><h2>WHERE IT <span class="hl">LANDED</span></h2></div>
   <div class="outcome">
     <div class="out card" data-reveal><b>3 &rarr; 1</b><span>Taps to reach the handover view, down from three. <!-- mock --></span></div>
     <div class="out card" data-reveal><b>41</b><span>Components shipped into the shared library. <!-- mock --></span></div>
@@ -122,7 +121,7 @@
 </section>
 
 <footer class="foot" id="contact">
-  <h2>GOT SOMETHING<br>WORTH <span class="lt">building?</span></h2>
+  <h2>GOT SOMETHING<br>WORTH <span class="hl">BUILDING?</span></h2>
   <div class="row">
     <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
     <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>

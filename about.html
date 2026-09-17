@@ -6,34 +6,32 @@
 <title>Rutujeet · About</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HEADER ── */
-.ahead{padding:150px 40px 56px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
+.ahead{padding:150px 40px 20px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
 .ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,6.4vw,84px);letter-spacing:-.045em;line-height:.88}
-.ahead h1 .lt{font-weight:300;color:var(--blue)}
 .ahead p{margin-top:28px;max-width:46ch;font-size:16px;line-height:1.75;color:var(--muted)}
 .ahead .portrait{width:330px;flex:none;aspect-ratio:4/5}
 
 /* ══ OFF THE CLOCK · one slide per hobby, horizontal pan ══ */
-.hob{position:relative;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink)}
-.hob-pin{height:100vh;overflow:hidden}
+.hob{position:relative;border-bottom:var(--bw) solid var(--ink)}
+.hob-pin{height:100vh;overflow:hidden;display:flex;flex-direction:column;background:var(--paper)}
+.hob-head{flex:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:104px 40px 26px}
+.hob-head .sechead{margin-bottom:0}
+.track-wrap{flex:1;min-height:0;overflow:hidden}
 .track{display:flex;height:100%;will-change:transform}
-.slide{flex:none;width:100vw;height:100%;padding:112px 40px 40px;display:flex;flex-direction:column;gap:24px;background:var(--paper)}
+.slide{flex:none;width:100vw;height:100%;padding:30px 40px 34px;display:flex;flex-direction:column;gap:20px;background:var(--paper)}
 .slide.dark{color:var(--paper)}
 .slide.s2{background:var(--blue)}
 .slide.s3{background:var(--bone)}
 .slide.s4{background:var(--ink)}
-.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
-.hobtop{padding:48px 40px 44px}
-.hobtop .sechead{margin-bottom:0}
-.s-head h2{font-family:var(--display);font-weight:800;font-size:clamp(38px,5.8vw,76px);letter-spacing:-.045em;line-height:.86;text-transform:uppercase}
-.s-head h2 .lt{font-weight:300;color:var(--blue);text-transform:none}
-.dark .s-head h2 .lt{color:var(--blue40)}
+/* slide name is the second level under the section title, so it sits well below it in size */
+.s-name{flex:none;font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,42px);letter-spacing:-.04em;line-height:.9;text-transform:uppercase}
 .s-nav{display:flex;align-items:center;gap:12px;flex:none}
-.s-nav .cnt{font-family:var(--mono);font-size:12px;letter-spacing:.16em;margin-right:8px}
+.s-nav .cnt{font-family:var(--label);font-size:13px;letter-spacing:.07em;margin-right:8px}
 .s-nav .cnt b{font-weight:700}
 .s-nav button{cursor:none}
 .s-nav .rbtn:hover{background:var(--blue);color:var(--paper)}
@@ -50,13 +48,13 @@
 .rate{display:flex;gap:6px}
 .rate i{width:22px;height:22px;border:2.5px solid var(--ink);display:block}
 .rate i.on{background:var(--blue);border-color:var(--blue)}
-.rlab{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;color:var(--muted);margin:10px 0 18px;display:block}
+.rlab{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;color:var(--muted);margin:10px 0 18px;display:block}
 .rlab b{color:var(--ink)}
 .ptext p{margin-top:0}
-.kick{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:700;color:var(--blue);display:block}
-.ptext h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.3vw,34px);letter-spacing:-.04em;line-height:.9;margin:12px 0 20px;text-transform:uppercase}
+.kick{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:700;color:var(--blue);display:block}
+.ptext h4{font-family:var(--display);font-weight:800;font-size:clamp(22px,1.9vw,28px);letter-spacing:-.04em;line-height:.9;margin:12px 0 20px;text-transform:uppercase}
 .ptext p{font-size:15px;line-height:1.65;color:var(--muted)}
-.ptext .meta{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.ptext .meta{margin-top:auto;padding-top:18px;font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700}
 
 /* ── SKILLS / SOFTWARE ── */
 .chips{display:flex;flex-wrap:wrap;gap:14px}
@@ -71,31 +69,35 @@
 /* ── EXPERIENCE / EDUCATION ── */
 .roles{display:flex;flex-direction:column;gap:22px}
 .role{padding:32px;display:flex;gap:30px;align-items:flex-start;flex-wrap:wrap}
-.role .when{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);width:180px;flex:none;padding-top:10px}
+.role .when{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);width:180px;flex:none;padding-top:10px}
 .role .rbody{flex:1;min-width:260px;display:grid;grid-template-columns:minmax(200px,290px) 1fr;column-gap:48px;row-gap:4px;align-items:start}
 .role .rbody h3{grid-area:1/1}
 .role .rbody .org{grid-area:2/1}
 .role .rbody p{grid-area:1/2}
 .role .rbody .tags{grid-area:2/2;align-self:start;margin-top:22px}
 .role h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;line-height:.92;text-transform:uppercase}
-.role .org{font-family:var(--display);font-weight:300;font-size:22px;color:var(--blue);margin:6px 0 14px;display:block;letter-spacing:-.02em}
+.role .org{font-family:var(--body);font-weight:600;font-size:17px;color:var(--blue);margin:10px 0 14px;display:block}
 .role p{font-size:15px;line-height:1.7;color:var(--muted);max-width:58ch}
 .role .tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 .role.feat{background:var(--blue);color:var(--paper)}
 .role.feat .org{color:var(--paper)}
 .role.feat .when,.role.feat p{color:var(--blue15)}
 
-@media (max-width:1100px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){
   .ahead{padding:126px 22px 50px;gap:32px}
   .ahead .portrait{width:100%}
   .hob-pin{height:auto;overflow:visible}
+  .hob-head{padding:64px 22px 20px}
+  .track-wrap{overflow:visible}
   .track{display:block}
-  .slide{width:auto;height:auto;padding:92px 22px 64px}
+  .slide{width:auto;height:auto;padding:36px 22px 56px}
   .s-nav{display:none}
   .s-grid{grid-template-columns:1fr;max-height:none}
   .pwrap{aspect-ratio:4/5}
   .pmedia{aspect-ratio:16/10;height:auto}
+  .sw{padding:18px}
+  .sw h4{font-size:22px;overflow-wrap:anywhere}
   .role .when{width:100%;padding-top:0}
   .role .rbody{grid-template-columns:1fr}
   .role .rbody h3,.role .rbody .org,.role .rbody p,.role .rbody .tags{grid-area:auto}
@@ -119,7 +121,7 @@
 
 <header class="ahead">
   <div class="copy">
-    <h1>DESIGN STUDENT,<br><span class="lt">currently</span> BUILDING.</h1>
+    <h1>DESIGN STUDENT,<br>CURRENTLY <span class="hl">BUILDING.</span></h1>
     <p>I am a design student working across brand and product. I care about the details most people never notice, and I like being in the room while things actually get built.</p>
     <p>Right now I take on two or three freelance projects at a time alongside my degree, and I am looking for a design internship for summer 2026.</p>
   </div>
@@ -127,18 +129,16 @@
 </header>
 
 <!-- ══ OFF THE CLOCK ══ -->
-<section class="sec hobtop">
-  <div class="sechead"><h2>WHAT I DO <span class="lt">off the clock</span></h2><span class="count">Four of them</span></div>
-</section>
 <section class="hob" id="hobbies">
   <div class="hob-pin">
-    <div class="track" id="hobTrack">
+    <div class="hob-head">
+      <div class="sechead"><h2>WHAT I DO <span class="hl">OFF THE CLOCK</span></h2></div>
+      <div class="s-nav"><span class="cnt"><b id="hobNow">01</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous hobby">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next hobby">&rarr;</button></div>
+    </div>
+    <div class="track-wrap"><div class="track" id="hobTrack">
 
       <article class="slide s1">
-        <div class="s-head">
-          <div><h2>Video <span class="lt">games</span></h2></div>
-          <div class="s-nav"><span class="cnt"><b>01</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
-        </div>
+        <h3 class="s-name">VIDEO GAMES</h3>
         <div class="s-grid">
           <div class="pwrap">
             <div class="poster" data-img=""><svg viewBox="0 0 160 160" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -155,7 +155,7 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last played</span>
-            <h3>Disco Elysium</h3>
+            <h4>Disco Elysium</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
             <span class="rlab">Replay value <b>4 of 5</b></span>
             <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
@@ -165,10 +165,7 @@
       </article>
 
       <article class="slide s2 dark">
-        <div class="s-head">
-          <div><h2>Movies</h2></div>
-          <div class="s-nav"><span class="cnt"><b>02</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
-        </div>
+        <h3 class="s-name">MOVIES</h3>
         <div class="s-grid">
           <div class="pwrap">
             <div class="poster" data-img=""><svg viewBox="0 0 160 160" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -190,7 +187,7 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last watched</span>
-            <h3>Whiplash</h3>
+            <h4>Whiplash</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
             <span class="rlab">Rewatch value <b>5 of 5</b></span>
             <p>Third rewatch. The edit is the performance. Every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
@@ -200,10 +197,7 @@
       </article>
 
       <article class="slide s3">
-        <div class="s-head">
-          <div><h2>Cooking</h2></div>
-          <div class="s-nav"><span class="cnt"><b>03</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
-        </div>
+        <h3 class="s-name">COOKING</h3>
         <div class="s-grid">
           <div class="pwrap">
             <div class="poster" data-img=""><svg viewBox="0 0 160 160" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -222,7 +216,7 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last cooked</span>
-            <h3>Butter Chicken</h3>
+            <h4>Butter Chicken</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
             <span class="rlab">Attempts so far <b>4</b></span>
             <p>Fourth attempt this month. Still chasing the char on the marinade. It is a timing problem, not a recipe problem.</p>
@@ -232,10 +226,7 @@
       </article>
 
       <article class="slide s4 dark">
-        <div class="s-head">
-          <div><h2>Motor<span class="lt">cycles</span></h2></div>
-          <div class="s-nav"><span class="cnt"><b>04</b> / 04</span><button class="rbtn" data-dir="-1" aria-label="Previous">&larr;</button><button class="rbtn" data-dir="1" aria-label="Next">&rarr;</button></div>
-        </div>
+        <h3 class="s-name">MOTORCYCLES</h3>
         <div class="s-grid">
           <div class="pwrap">
             <div class="poster" data-img=""><svg viewBox="0 0 160 160" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
@@ -251,7 +242,7 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last ride</span>
-            <h3>The Long Way Home</h3>
+            <h4>The Long Way Home</h4>
             <div class="rate"><i></i><i></i><i></i><i></i><i></i></div>
             <span class="rlab">Destinations reached <b>0 of 5</b></span>
             <p>No route, no reason. The ride ends exactly where it started, which is the whole point of it.</p>
@@ -260,12 +251,12 @@
         </div>
       </article>
 
-    </div>
+    </div></div>
   </div>
 </section>
 
 <section class="sec">
-  <div class="sechead"><h2>WHAT I <span class="lt">do</span></h2></div>
+  <div class="sechead"><h2>WHAT I <span class="hl">DO</span></h2></div>
   <div class="chips">
     <span class="chip fill">UI design</span><span class="chip">UX research</span><span class="chip">Brand identity</span>
     <span class="chip">Design systems</span><span class="chip">Prototyping</span><span class="chip">Art direction</span>
@@ -275,7 +266,7 @@
 </section>
 
 <section class="sec" style="padding-top:0">
-  <div class="sechead"><h2>WHAT I <span class="lt">use</span></h2></div>
+  <div class="sechead"><h2>WHAT I <span class="hl">USE</span></h2></div>
   <div class="tiles">
     <div class="sw card" data-reveal><h4>Figma</h4><span>Interface, systems, prototyping</span></div>
     <div class="sw card" data-reveal><h4>After Effects</h4><span>Motion and interface animation</span></div>
@@ -289,7 +280,7 @@
 </section>
 
 <section class="sec" style="padding-top:0">
-  <div class="sechead"><h2>WHERE I HAVE <span class="lt">worked</span></h2></div>
+  <div class="sechead"><h2>WHERE I HAVE <span class="hl">WORKED</span></h2></div>
   <div class="roles">
     <article class="role card feat" data-reveal>
       <div class="when">Jun to Aug 2025</div>
@@ -319,7 +310,7 @@
 </section>
 
 <section class="sec" style="padding-top:0">
-  <div class="sechead"><h2>WHERE I <span class="lt">study</span></h2></div>
+  <div class="sechead"><h2>WHERE I <span class="hl">STUDY</span></h2></div>
   <div class="roles">
     <article class="role card" data-reveal>
       <div class="when">2023 to 2027</div>
@@ -332,7 +323,7 @@
 </section>
 
 <footer class="foot" id="contact">
-  <h2>LOOKING FOR AN INTERN<br>WORTH <span class="lt">keeping?</span></h2>
+  <h2>LOOKING FOR AN INTERN<br>WORTH <span class="hl">KEEPING?</span></h2>
   <div class="row">
     <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
     <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>
@@ -347,13 +338,14 @@
 <script>
 /* horizontal pan: vertical scroll drives the track sideways. Pinned at top top, snaps per slide. */
 (function hobbies(){
-  var sec = document.getElementById('hobbies'), track = document.getElementById('hobTrack');
+  var sec = document.getElementById('hobbies'), track = document.getElementById('hobTrack'), now = document.getElementById('hobNow');
   var n = track.children.length;
   if (REDUCED || window.matchMedia('(max-width:900px)').matches) return;
   var dist = function(){ return track.scrollWidth - window.innerWidth; };
   var tween = gsap.to(track, { x:function(){ return -dist(); }, ease:'none',
     scrollTrigger:{ trigger:sec, start:'top top', end:function(){ return '+=' + dist(); }, pin:true, scrub:.8,
-      snap:{ snapTo:1/(n-1), duration:{min:.2,max:.5}, ease:'power2.inOut', inertia:false }, invalidateOnRefresh:true } });
+      snap:{ snapTo:1/(n-1), duration:{min:.2,max:.5}, ease:'power2.inOut', inertia:false }, invalidateOnRefresh:true,
+      onUpdate:function(self){ now.textContent = '0' + (Math.round(self.progress * (n-1)) + 1); } } });
   var st = tween.scrollTrigger;
   document.querySelectorAll('.hob [data-dir]').forEach(function(b){
     b.addEventListener('click', function(){

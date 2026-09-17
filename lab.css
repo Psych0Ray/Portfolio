@@ -1,7 +1,7 @@
 /* ══ Rutujeet · shared system ════════════════════════════════════
    Type: Bricolage Grotesque (variable: opsz / wdth / wght) for every
-   display and heading role. Weight contrast does the emphasis work,
-   never a second family. Geist for reading. JetBrains Mono for labels.
+   display and heading role. Geist for everything else, reading and labels.
+   Emphasis is a solid block (.hl), never a lighter weight.
    The eight ransom faces are loaded only for the hero name + logo.
    Shape rule: cards and slots are sharp (0). Chips, nav, buttons are pill.
 ═══════════════════════════════════════════════════════════════════ */
@@ -11,7 +11,7 @@
   --muted:#6B655A; --rule:#D8D2C4; --bw:3px;
   --display:'Bricolage Grotesque',system-ui,sans-serif;
   --body:'Geist',system-ui,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --label:'Geist',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-optical-sizing:auto}
@@ -19,14 +19,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);overflow-x
 a{color:inherit}
 @media (hover:hover){ body,a,button{cursor:none} }
 
-.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-weight:500}
+.mono{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-weight:500}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
 
 /* display roles: one family, three weights */
 .h-xl{font-family:var(--display);font-weight:800;letter-spacing:-.045em;line-height:.88}
 .h-lg{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:.92}
 .h-md{font-family:var(--display);font-weight:700;letter-spacing:-.025em;line-height:1}
-.lt{font-weight:300;letter-spacing:-.03em;color:var(--blue)}          /* the emphasis word */
+/* emphasis: set bold and condensed on a solid block, knocked a little off square */
+.hl{display:inline-block;font-weight:800;font-stretch:75%;letter-spacing:0;line-height:.9;background:var(--blue);
+  color:var(--paper);padding:.04em .2em .1em;transform:rotate(-1.5deg);text-transform:uppercase}
 .cond{font-stretch:75%;font-weight:800;letter-spacing:.005em}          /* condensed, for marquee + stamps */
 
 /* ── CURSOR · a sticker dot that grows a label ── */
@@ -34,8 +36,8 @@ a{color:inherit}
 .cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
   box-shadow:3px 3px 0 var(--ink);transform:translate(-50%,-50%)}
 .cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);border-radius:100px;padding:9px 15px;font-family:var(--mono);font-size:10px;
-  font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
+  box-shadow:4px 4px 0 var(--ink);border-radius:100px;padding:9px 15px;font-family:var(--label);font-size:11px;
+  font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
   opacity:0;transform-origin:left top}
 @media (hover:none){.cursor{display:none}}
 
@@ -47,14 +49,14 @@ a{color:inherit}
 .nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:4px;height:66px;padding:9px 9px 9px 22px;
   background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink)}
 .nav .grow{flex:1}
-.nav a.lnk{font-family:var(--mono);text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:500;
+.nav a.lnk{font-family:var(--label);text-transform:uppercase;letter-spacing:.08em;font-size:13px;font-weight:600;
   color:var(--ink);text-decoration:none;padding:12px 18px;border-radius:100px;position:relative}
-.nav a.lnk:hover{background:var(--ink);color:var(--bone)}
-.nav a.lnk.on{font-weight:700}
-.nav a.lnk.on::after{content:'';position:absolute;left:18px;right:18px;bottom:6px;height:2.5px;background:var(--blue)}
-.nav a.lnk.on:hover::after{background:var(--bone)}
-.nav .cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700}
-.nav .cta:hover{background:var(--ink)}
+.nav a.lnk::after{content:'';position:absolute;left:18px;right:18px;bottom:6px;height:2.5px;background:var(--blue);
+  transform:scaleX(0);transform-origin:left center;transition:transform .2s ease}
+.nav a.lnk:hover::after,.nav a.lnk.on::after{transform:scaleX(1)}
+.nav a.lnk.cta::after{content:none}
+.nav a.lnk.cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700}
+.nav a.lnk.cta:hover{background:var(--ink)}
 
 /* ── LOGO · RT/JT hand-set like the name, no box ── */
 .logo{display:flex;align-items:flex-end;text-decoration:none;gap:0;line-height:1;padding:4px 2px}
@@ -84,8 +86,7 @@ a{color:inherit}
 .sec{padding:96px 40px}
 .sechead{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;margin-bottom:52px}
 .sechead h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.4vw,68px);letter-spacing:-.045em;line-height:.88}
-.sechead h2 .lt{font-weight:300;color:var(--blue)}
-.sechead .count{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:500}
+.sechead .count{font-family:var(--label);font-size:13px;letter-spacing:.07em;color:var(--muted);font-weight:500}
 
 /* ── CARD · flat at rest, lifts on hover ── */
 .card{background:var(--paper);border:var(--bw) solid var(--ink);transition:transform .18s ease,box-shadow .18s ease}
@@ -94,24 +95,24 @@ a{color:inherit}
 /* media slot */
 .slot{background-color:var(--bone);border:2.5px solid var(--ink);display:grid;place-items:center;
   background-image:radial-gradient(var(--blue40) 1.7px,transparent 1.8px);background-size:10px 10px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+  font-family:var(--label);font-size:11px;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;
   overflow:hidden;position:relative}
 .slot video,.slot img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* chip · bordered pill, hard shadow */
-.chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 16px;font-size:10px;font-weight:700;
-  font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;display:inline-block;
+.chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 16px;font-size:11px;font-weight:700;
+  font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;display:inline-block;
   background:var(--paper);box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
 .chip.fill{background:var(--blue);color:var(--paper)}
 
 /* round arrow button */
 .rbtn{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper);
-  display:grid;place-items:center;font-family:var(--mono);font-size:18px;flex:none;
+  display:grid;place-items:center;font-family:var(--label);font-size:18px;flex:none;
   transition:background .15s,color .15s}
 .card:hover .rbtn{background:var(--blue);color:var(--paper)}
 
 /* pill button */
-.btn{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+.btn{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   text-decoration:none;padding:17px 28px;border:var(--bw) solid var(--ink);border-radius:100px;display:inline-block;
   background:var(--paper);color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
 .btn:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
@@ -120,9 +121,8 @@ a{color:inherit}
 /* ── FOOTER ── */
 .foot{background:var(--ink);color:var(--paper);padding:84px 40px 60px}
 .foot h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.6vw,72px);letter-spacing:-.045em;line-height:.88}
-.foot h2 .lt{font-weight:300;color:var(--blue40)}
 .foot .row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:54px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue40)}
+  font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue40)}
 .foot .row a{text-decoration:none}
 .foot .row a:hover{color:var(--paper)}
 

@@ -6,7 +6,7 @@
 <title>Rutujeet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500&family=JetBrains+Mono:wght@500;700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HERO ── */
@@ -27,7 +27,7 @@
 .statement{position:relative;z-index:4;margin-top:40px;display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
   font-family:var(--display);font-size:clamp(30px,5.4vw,74px);letter-spacing:-.045em;line-height:.9}
 .statement .a{font-weight:800}
-.statement .b{font-weight:300;color:var(--blue)}
+.statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
 .hero .lede{position:relative;z-index:4;margin-top:34px;max-width:44ch;font-size:16px;line-height:1.7;color:var(--muted)}
 .bigarrow{position:absolute;right:64px;bottom:66px;font-family:var(--display);font-weight:800;font-size:clamp(80px,12vw,168px);line-height:.7;color:var(--blue);z-index:4}
@@ -35,13 +35,13 @@
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .wc{display:flex;flex-direction:column;padding:22px 22px 24px;aspect-ratio:3/4.05;text-decoration:none;color:var(--ink)}
-.wc-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+.wc-top{display:flex;justify-content:space-between;font-family:var(--label);font-size:11px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px}
 .wc-thumb{flex:1;min-height:0}
 .wc-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:22px}
 .wc h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;line-height:.9;max-width:9ch;text-transform:uppercase;min-height:1.8em}
 .wc-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.wc-tags .chip{padding:7px 12px;font-size:9px}
+.wc-tags .chip{padding:7px 12px;font-size:10px}
 
 @media (max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){
@@ -83,7 +83,7 @@
 
 <section class="sec" id="work">
   <div class="sechead">
-    <h2>SELECTED <span class="lt">work</span></h2>
+    <h2>SELECTED <span class="hl">WORK</span></h2>
     <span class="count">Six projects, 2024 to 2026</span>
   </div>
   <div class="grid" id="grid"></div>
@@ -92,7 +92,7 @@
 <div class="marquee ink rev"><div data-words="Open to internships|Summer 2026|Brand and product|Say hello"></div></div>
 
 <footer class="foot" id="contact">
-  <h2>GOT SOMETHING<br>WORTH <span class="lt">building?</span></h2>
+  <h2>GOT SOMETHING<br>WORTH <span class="hl">BUILDING?</span></h2>
   <div class="row">
     <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
     <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>
