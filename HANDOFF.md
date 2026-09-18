@@ -263,6 +263,13 @@ Last updated: 2026-09-19
     - **Next:** the user will send the Figma page holding a short version of each of the six projects; the full project will link out to Behance (a change from the earlier "own on-site case page" direction; case.html is still the dummy Sonder Health page).
     - Figma gotcha: a stroked ellipse with `arcData` draws a pie-wedge outline, not an arc; use a filled ellipse with `innerRadius` = (r - thickness) / r.
 
+39. **IA snippets removed from the ICCC deck's UI slides (2026-09-19).** Figma only, in the ICCC deck `2265:8618`, slides 26 to 32 (`2265:13595`, `13726`, `13766`, `13818`, `13889`, `14066`, `14290`). User asked to remove every information-architecture snippet shown beside the UI screens, then only rearrange and resize what remained: **no content, text or styling changes, nothing added.**
+    - **Removed:** the flat IA snippet images on 26 to 29, the native IA diagrams (shape-with-text boxes and connectors, 70 nodes) on 30 and 31, the IA group on 32, every connector line dropping in from the top edge, and the "← Snippet of IA put for viewing ease" caption on 26.
+    - **Kept:** the lavender "Information Architecture" hyperlinks (they link to the full IA board) and "Prototyped Video Link". On 28 and 32 the IA link moved to the top right, matching its spot on 26 (set to auto width so it right-aligns to the 60px margin).
+    - **Rearranged:** 26: map screenshot x1.5 and callouts x1.3 fill the width. 27: the two device-card screens sit side by side at x1.1 instead of stacked. 28: the whole map composition shifted right by 595px so the map, which had been cropped off the left edge, is fully visible. 29: dashboard screenshot moved up into the top right at x1.25 (with its sidebar strip, image 86). 30: the feature column moved up beside the Alert List screenshot, and the Escalation feature block moved from under its screenshot to beside it. 31: Messages and Tickets content moved up under their labels. 32: all content moved up to the top.
+    - **Slide heights shortened** where the IA had taken its own vertical space: 29 1952 (was 2078), 30 3131 (was 4322), 31 3637 (was 5304), 32 1879 (was 2794). The deck frame is vertical auto-layout with 0 spacing, so the slides below reflowed automatically.
+    - Verified: no IA nodes remain on any of the seven slides and nothing sits outside a slide's bounds.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
