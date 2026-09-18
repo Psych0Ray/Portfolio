@@ -54,7 +54,7 @@
    At rest every skill and every tool is fully legible. Hovering or
    focusing either side lights the ones that go together and fades the
    rest, so the interaction says something rather than just decorating. */
-.kit{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.kit{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .skills{list-style:none}
 .skills button{width:100%;text-align:left;background:none;border:0;position:relative;color:var(--ink);display:block;
   padding:13px 18px;font-family:var(--display);font-weight:800;font-size:clamp(22px,2.7vw,40px);letter-spacing:-.035em;
@@ -65,29 +65,33 @@
 .skills li.on button span{transform:translateX(12px)}
 .skills li.on button{color:var(--paper)}
 .skills li.on button::before{transform:scaleX(1)}
-.tools-h{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.1vw,30px);letter-spacing:-.03em;
-  text-transform:uppercase;margin-bottom:20px}
-.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.tool{border:var(--bw) solid var(--ink);background:var(--bone);color:var(--ink);padding:20px 16px;text-align:left;
-  box-shadow:5px 5px 0 var(--ink);
-  font-family:var(--display);font-weight:800;font-stretch:78%;font-size:clamp(19px,1.9vw,27px);letter-spacing:-.015em;
-  line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere;
-  transition:transform .2s ease,box-shadow .2s ease,background .2s,color .2s,opacity .2s}
-.tool.on{background:var(--blue);color:var(--paper);transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink)}
-@media (hover:hover){
-  .kit.live .skills li:not(.on) button{opacity:.3}
-  .kit.live .tool:not(.on){opacity:.28}
-}
-@media (prefers-reduced-motion:reduce){
-  .skills button::before,.tool{transition:none}
-}
+
+/* the screen: line art that draws itself for whichever skill is active */
+.screen{position:relative;border:var(--bw) solid var(--ink);background:var(--paper);box-shadow:10px 10px 0 var(--ink);
+  aspect-ratio:4/3;overflow:hidden;
+  background-image:radial-gradient(var(--blue15) 1.5px,transparent 1.6px);background-size:14px 14px}
+.stage{position:absolute;inset:30px 30px 56px}
+.art{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .18s}
+.art.on{opacity:1}
+.scr-lab{position:absolute;left:0;bottom:0;background:var(--blue);color:var(--paper);font-family:var(--label);
+  font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:11px 18px}
+
+/* ── SOFTWARE · the horizontal row ── */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.sw{padding:24px;border:var(--bw) solid var(--ink)}
+.sw h4{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
+.sw span{font-size:13px;color:var(--muted);line-height:1.6}
+.sw:nth-child(4n+1){background:var(--blue);color:var(--paper)}.sw:nth-child(4n+1) span{color:var(--blue15)}
+.sw:nth-child(4n+3){background:var(--bone)}
+.sw:nth-child(4n){background:var(--ink);color:var(--paper)}.sw:nth-child(4n) span{color:var(--blue40)}
+@media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.skills button::before{transition:none}}
 
 /* ── QUOTE ── */
-.quote{background:var(--bone);border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
-  padding:92px 40px;display:flex;justify-content:center}
+.quote{padding:40px 40px 104px;display:block}
 .quote .inner{max-width:min(940px,100%)}
 .quote .mark{display:block;font-family:var(--display);font-weight:800;font-size:clamp(84px,11vw,160px);
-  line-height:.55;color:var(--blue)}
+  line-height:.42;color:var(--blue)}
 .quote p{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,64px);letter-spacing:-.04em;
   line-height:1.04;text-transform:uppercase;margin-top:14px}
 
@@ -107,7 +111,10 @@
   .hero{padding:118px 22px 40px}
   .grid{grid-template-columns:1fr;gap:22px}
   .more{flex-direction:column;align-items:flex-start;gap:24px;padding:28px}
-  .kit{grid-template-columns:1fr;gap:44px}
+  .kit{grid-template-columns:1fr;gap:36px}
+  .tiles{gap:16px}
+  .sw{padding:18px}
+  .sw h4{font-size:22px;overflow-wrap:anywhere}
   .quote{padding:64px 22px}
   .scue{right:22px;bottom:30px;gap:12px}
   .scue-b{width:46px;height:46px;font-size:18px}
@@ -143,8 +150,6 @@
   </a>
 </header>
 
-<div class="marquee"><div data-words="Product design|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
-
 <section class="sec" id="work">
   <div class="sechead">
     <h2>SELECTED <span class="hl">WORK</span></h2>
@@ -166,25 +171,112 @@
   <div class="sechead"><h2>WHAT I <span class="hl">DO</span></h2></div>
   <div class="kit" id="kit">
     <ul class="skills">
-      <li data-tools="figma notion"><button type="button"><span>Product design</span></button></li>
-      <li data-tools="figma notion"><button type="button"><span>User-centric design</span></button></li>
-      <li data-tools="figma notion"><button type="button"><span>User testing</span></button></li>
-      <li data-tools="figma"><button type="button"><span>Wireframing</span></button></li>
-      <li data-tools="figma framer"><button type="button"><span>Prototyping</span></button></li>
-      <li data-tools="illustrator aftereffects"><button type="button"><span>Storyboarding</span></button></li>
-      <li data-tools="framer webflow"><button type="button"><span>Vibecoding</span></button></li>
+      <li><button type="button" data-art="product-design"><span>Product design</span></button></li>
+      <li><button type="button" data-art="user-centric-design"><span>User-centric design</span></button></li>
+      <li><button type="button" data-art="user-testing"><span>User testing</span></button></li>
+      <li><button type="button" data-art="wireframing"><span>Wireframing</span></button></li>
+      <li><button type="button" data-art="prototyping"><span>Prototyping</span></button></li>
+      <li><button type="button" data-art="storyboarding"><span>Storyboarding</span></button></li>
+      <li><button type="button" data-art="vibecoding"><span>Vibecoding</span></button></li>
     </ul>
-    <div>
-      <h3 class="tools-h">What I use</h3>
-      <div class="tools">
-        <button type="button" class="tool" data-tool="figma">Figma</button>
-        <button type="button" class="tool" data-tool="framer">Framer</button>
-        <button type="button" class="tool" data-tool="webflow">Webflow</button>
-        <button type="button" class="tool" data-tool="illustrator">Illustrator</button>
-        <button type="button" class="tool" data-tool="aftereffects">After Effects</button>
-        <button type="button" class="tool" data-tool="notion">Notion</button>
+    <div class="screen">
+      <div class="stage">
+        <svg class="art" data-art="product-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="44" y="34" width="228" height="230" rx="10"/>
+          <path d="M44 76h228"/>
+          <circle cx="62" cy="55" r="5"/><circle cx="80" cy="55" r="5"/><circle cx="98" cy="55" r="5"/>
+          <rect x="66" y="96" width="86" height="64" rx="6" stroke="#002FA7"/>
+          <rect x="166" y="96" width="86" height="64" rx="6" stroke="#002FA7"/>
+          <path d="M66 184h188M66 206h140M66 228h96"/>
+          <rect x="246" y="146" width="114" height="98" rx="10" stroke="#002FA7"/>
+          <path d="M266 176h74M266 200h50" stroke="#002FA7"/>
+          <path d="M292 84l42 46-20 4 10 24-13 6-10-25-15 13z"/>
+        </svg>
+        <svg class="art" data-art="user-centric-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <ellipse cx="200" cy="158" rx="152" ry="70" stroke="#002FA7"/>
+          <ellipse cx="200" cy="158" rx="106" ry="112" stroke="#002FA7"/>
+          <circle cx="200" cy="132" r="38"/>
+          <path d="M142 228c9-35 30-52 58-52s49 17 58 52"/>
+          <circle cx="48" cy="158" r="12"/><circle cx="352" cy="158" r="12"/>
+          <circle cx="200" cy="46" r="12"/><circle cx="200" cy="270" r="12"/>
+          <path d="M68 158h46M332 158h-46M200 66v40M200 250v-34" stroke="#002FA7"/>
+        </svg>
+        <svg class="art" data-art="user-testing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="34" y="50" width="198" height="182" rx="10"/>
+          <path d="M34 86h198"/>
+          <path d="M58 116h116M58 142h148M58 168h92" stroke="#002FA7"/>
+          <circle cx="268" cy="146" r="62" stroke="#002FA7"/>
+          <path d="M312 190l46 46" stroke="#002FA7"/>
+          <path d="M238 144l20 22 40-46"/>
+          <path d="M92 258a34 34 0 0 1 48 0"/>
+          <path d="M72 278a62 62 0 0 1 88 0"/>
+        </svg>
+        <svg class="art" data-art="wireframing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="40" y="36" width="320" height="226" rx="8"/>
+          <path d="M40 78h320"/>
+          <rect x="66" y="100" width="132" height="98"/>
+          <path d="M66 100l132 98M198 100L66 198" stroke="#002FA7"/>
+          <path d="M224 106h110M224 134h110M224 162h76"/>
+          <rect x="66" y="216" width="64" height="26" rx="13" stroke="#002FA7"/>
+          <path d="M152 229h182"/>
+          <path d="M132 36v226M268 36v226" stroke="#002FA7"/>
+        </svg>
+        <svg class="art" data-art="prototyping" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="32" y="52" width="106" height="88" rx="8"/>
+          <rect x="262" y="52" width="106" height="88" rx="8"/>
+          <rect x="147" y="174" width="106" height="88" rx="8"/>
+          <path d="M52 76h66M52 96h42"/><path d="M282 76h66M282 96h42"/><path d="M167 198h66M167 218h42"/>
+          <path d="M138 96h116" stroke="#002FA7"/><path d="M242 84l14 12-14 12" stroke="#002FA7"/>
+          <path d="M315 140v54c0 14-11 24-25 24h-37" stroke="#002FA7"/><path d="M265 206l-12 12 12 12" stroke="#002FA7"/>
+          <path d="M147 218H85c-14 0-25-10-25-24v-54" stroke="#002FA7"/><path d="M72 152l-12-12 12-12" stroke="#002FA7"/>
+        </svg>
+        <svg class="art" data-art="storyboarding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="28" y="66" width="344" height="168" rx="6"/>
+          <path d="M28 96h344M28 204h344"/>
+          <rect x="48" y="74" width="18" height="13" rx="2"/><rect x="128" y="74" width="18" height="13" rx="2"/>
+          <rect x="208" y="74" width="18" height="13" rx="2"/><rect x="288" y="74" width="18" height="13" rx="2"/>
+          <rect x="48" y="213" width="18" height="13" rx="2"/><rect x="128" y="213" width="18" height="13" rx="2"/>
+          <rect x="208" y="213" width="18" height="13" rx="2"/><rect x="288" y="213" width="18" height="13" rx="2"/>
+          <rect x="52" y="108" width="88" height="84" stroke="#002FA7"/>
+          <rect x="156" y="108" width="88" height="84" stroke="#002FA7"/>
+          <rect x="260" y="108" width="88" height="84" stroke="#002FA7"/>
+          <path d="M60 174l26-28 20 20 26-24"/><circle cx="118" cy="128" r="11"/>
+          <circle cx="200" cy="138" r="13"/><path d="M186 182c4-16 8-24 14-24s10 8 14 24"/>
+          <path d="M276 150h56M316 134l16 16-16 16"/>
+        </svg>
+        <svg class="art" data-art="vibecoding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="36" y="40" width="328" height="216" rx="10"/>
+          <path d="M36 80h328"/>
+          <circle cx="56" cy="60" r="5"/><circle cx="74" cy="60" r="5"/><circle cx="92" cy="60" r="5"/>
+          <path d="M64 112h112M64 140h74M88 168h96M64 196h58M64 224h88"/>
+          <path d="M266 110l-30 44 30 44" stroke="#002FA7" stroke-width="7"/>
+          <path d="M314 110l30 44-30 44" stroke="#002FA7" stroke-width="7"/>
+          <path d="M300 100l-20 108" stroke="#002FA7" stroke-width="7"/>
+        </svg>
       </div>
+      <span class="scr-lab" id="scrLab">Product design</span>
     </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="sechead"><h2>WHAT I <span class="hl">USE</span></h2></div>
+  <div class="tiles">
+    <div class="sw" data-reveal><h4>Figma</h4><span>Interface, systems, prototyping</span></div>
+    <div class="sw" data-reveal><h4>After Effects</h4><span>Motion and interface animation</span></div>
+    <div class="sw" data-reveal><h4>Illustrator</h4><span>Marks, type drawing, vector</span></div>
+    <div class="sw" data-reveal><h4>Photoshop</h4><span>Retouching and composition</span></div>
+    <div class="sw" data-reveal><h4>Blender</h4><span>3D assets and product renders</span></div>
+    <div class="sw" data-reveal><h4>Framer</h4><span>High-fidelity web prototypes</span></div>
+    <div class="sw" data-reveal><h4>Webflow</h4><span>Production sites and CMS</span></div>
+    <div class="sw" data-reveal><h4>Notion</h4><span>Docs, research, project tracking</span></div>
   </div>
 </section>
 
@@ -233,40 +325,60 @@ document.getElementById('grid').innerHTML = WORK.map(function(p){
 </script>
 <script src="lab.js"></script>
 <script>
-/* what I do  <->  what I use. Hover or focus either side to light the pairs. */
+/* Hovering a skill draws its line art on the screen beside the list.
+   Every shape is stroke only, so each one can be drawn with its own dash offset. */
 (function kit(){
   var kit = document.getElementById('kit');
   if (!kit) return;
-  var skills = [].slice.call(kit.querySelectorAll('.skills li'));
-  var tools  = [].slice.call(kit.querySelectorAll('.tool'));
-  var keysOf = function(li){ return li.getAttribute('data-tools').split(' '); };
+  var rows  = [].slice.call(kit.querySelectorAll('.skills li'));
+  var arts  = [].slice.call(kit.querySelectorAll('.art'));
+  var label = document.getElementById('scrLab');
+  var current = null;
 
-  function clear(){
-    kit.classList.remove('live');
-    skills.forEach(function(s){ s.classList.remove('on'); });
-    tools.forEach(function(t){ t.classList.remove('on'); });
+  arts.forEach(function(svg){
+    svg.shapes = [].slice.call(svg.querySelectorAll('path,rect,circle,ellipse,line,polyline'));
+    svg.shapes.forEach(function(el){
+      el.len = el.getTotalLength ? el.getTotalLength() : 0;
+    });
+  });
+
+  function show(key, name, row){
+    if (key === current) return;
+    current = key;
+    rows.forEach(function(r){ r.classList.toggle('on', r === row); });
+    label.textContent = name;
+    arts.forEach(function(svg){
+      var on = svg.getAttribute('data-art') === key;
+      svg.classList.toggle('on', on);
+      if (!on) return;
+      svg.shapes.forEach(function(el, i){
+        if (!el.len) return;
+        if (REDUCED) { gsap.set(el, { strokeDasharray:'none', strokeDashoffset:0 }); return; }
+        gsap.set(el, { strokeDasharray:el.len, strokeDashoffset:el.len });
+        gsap.to(el, { strokeDashoffset:0, duration:.55, ease:'power2.out', delay:i * .045, overwrite:true });
+      });
+    });
   }
-  function fromSkill(li){
-    clear(); kit.classList.add('live'); li.classList.add('on');
-    var keys = keysOf(li);
-    tools.forEach(function(t){ if (keys.indexOf(t.getAttribute('data-tool')) > -1) t.classList.add('on'); });
-  }
-  function fromTool(btn){
-    clear(); kit.classList.add('live'); btn.classList.add('on');
-    var key = btn.getAttribute('data-tool');
-    skills.forEach(function(li){ if (keysOf(li).indexOf(key) > -1) li.classList.add('on'); });
-  }
-  skills.forEach(function(li){
+
+  rows.forEach(function(li){
     var b = li.querySelector('button');
-    b.addEventListener('mouseenter', function(){ fromSkill(li); });
-    b.addEventListener('focus', function(){ fromSkill(li); });
+    var key = b.getAttribute('data-art'), name = b.textContent.trim();
+    var go = function(){ show(key, name, li); };
+    b.addEventListener('mouseenter', go);
+    b.addEventListener('focus', go);
+    b.addEventListener('click', go);
   });
-  tools.forEach(function(t){
-    t.addEventListener('mouseenter', function(){ fromTool(t); });
-    t.addEventListener('focus', function(){ fromTool(t); });
-  });
-  kit.addEventListener('mouseleave', clear);
-  kit.addEventListener('focusout', function(e){ if (!kit.contains(e.relatedTarget)) clear(); });
+
+  // first skill is drawn once the section is reached, so the screen is never blank
+  var first = rows[0];
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({ trigger:kit, start:'top 80%', once:true, onEnter:function(){
+      show(first.querySelector('button').getAttribute('data-art'),
+           first.querySelector('button').textContent.trim(), first);
+    }});
+  } else {
+    show('product-design', 'Product design', first);
+  }
 })();
 </script>
 <script>
