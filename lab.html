@@ -38,6 +38,59 @@
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 @media (prefers-reduced-motion:reduce){.scue-b{animation:none}}
 
+/* ── MORE WORK · reads as a full width continuation of the grid ── */
+.more{margin-top:30px;display:flex;align-items:center;gap:32px;padding:36px;text-decoration:none;color:var(--ink);
+  background:var(--paper);border:var(--bw) solid var(--ink);
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
+.more:hover{transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink);background:var(--blue);color:var(--paper)}
+.more h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.4vw,46px);letter-spacing:-.04em;line-height:.95;text-transform:uppercase}
+.more p{font-family:var(--label);font-size:13px;margin-top:12px;color:var(--muted)}
+.more:hover p{color:var(--blue15)}
+.more .grow{flex:1}
+.more .rbtn{width:64px;height:64px;font-size:24px;transition:transform .18s ease,background .18s,color .18s}
+.more:hover .rbtn{background:var(--paper);color:var(--ink);transform:translateX(8px)}
+
+/* ── KIT · what I do, cross linked to what I use ──────────────────
+   At rest every skill and every tool is fully legible. Hovering or
+   focusing either side lights the ones that go together and fades the
+   rest, so the interaction says something rather than just decorating. */
+.kit{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.skills{list-style:none}
+.skills button{width:100%;text-align:left;background:none;border:0;position:relative;color:var(--ink);display:block;
+  padding:13px 18px;font-family:var(--display);font-weight:800;font-size:clamp(22px,2.7vw,40px);letter-spacing:-.035em;
+  line-height:1.05;text-transform:uppercase;transition:color .2s ease}
+.skills button::before{content:'';position:absolute;inset:0;background:var(--blue);transform:scaleX(0);
+  transform-origin:left center;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.skills button span{position:relative;display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.skills li.on button span{transform:translateX(12px)}
+.skills li.on button{color:var(--paper)}
+.skills li.on button::before{transform:scaleX(1)}
+.tools-h{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.1vw,30px);letter-spacing:-.03em;
+  text-transform:uppercase;margin-bottom:20px}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool{border:var(--bw) solid var(--ink);background:var(--bone);color:var(--ink);padding:20px 16px;text-align:left;
+  box-shadow:5px 5px 0 var(--ink);
+  font-family:var(--display);font-weight:800;font-stretch:78%;font-size:clamp(19px,1.9vw,27px);letter-spacing:-.015em;
+  line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s,color .2s,opacity .2s}
+.tool.on{background:var(--blue);color:var(--paper);transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink)}
+@media (hover:hover){
+  .kit.live .skills li:not(.on) button{opacity:.3}
+  .kit.live .tool:not(.on){opacity:.28}
+}
+@media (prefers-reduced-motion:reduce){
+  .skills button::before,.tool{transition:none}
+}
+
+/* ── QUOTE ── */
+.quote{background:var(--bone);border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
+  padding:92px 40px;display:flex;justify-content:center}
+.quote .inner{max-width:min(940px,100%)}
+.quote .mark{display:block;font-family:var(--display);font-weight:800;font-size:clamp(84px,11vw,160px);
+  line-height:.55;color:var(--blue)}
+.quote p{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,64px);letter-spacing:-.04em;
+  line-height:1.04;text-transform:uppercase;margin-top:14px}
+
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .wc{display:flex;flex-direction:column;padding:22px 22px 24px;aspect-ratio:3/4.05;text-decoration:none;color:var(--ink)}
@@ -53,6 +106,9 @@
 @media (max-width:900px){
   .hero{padding:118px 22px 40px}
   .grid{grid-template-columns:1fr;gap:22px}
+  .more{flex-direction:column;align-items:flex-start;gap:24px;padding:28px}
+  .kit{grid-template-columns:1fr;gap:44px}
+  .quote{padding:64px 22px}
   .scue{right:22px;bottom:30px;gap:12px}
   .scue-b{width:46px;height:46px;font-size:18px}
 }
@@ -95,14 +151,60 @@
     <span class="count">Six projects</span>
   </div>
   <div class="grid" id="grid"></div>
+  <!-- TODO: real Behance profile URL -->
+  <a class="more" href="#" data-cursor="Behance">
+    <div>
+      <h3>Interested in seeing more?</h3>
+      <p>The rest of the work, including the projects that did not make this page, lives on Behance.</p>
+    </div>
+    <span class="grow"></span>
+    <span class="rbtn" aria-hidden="true">&rarr;</span>
+  </a>
 </section>
+
+<section class="sec" style="padding-top:0">
+  <div class="sechead"><h2>WHAT I <span class="hl">DO</span></h2></div>
+  <div class="kit" id="kit">
+    <ul class="skills">
+      <li data-tools="figma notion"><button type="button"><span>Product design</span></button></li>
+      <li data-tools="figma notion"><button type="button"><span>User-centric design</span></button></li>
+      <li data-tools="figma notion"><button type="button"><span>User testing</span></button></li>
+      <li data-tools="figma"><button type="button"><span>Wireframing</span></button></li>
+      <li data-tools="figma framer"><button type="button"><span>Prototyping</span></button></li>
+      <li data-tools="illustrator aftereffects"><button type="button"><span>Storyboarding</span></button></li>
+      <li data-tools="framer webflow"><button type="button"><span>Vibecoding</span></button></li>
+    </ul>
+    <div>
+      <h3 class="tools-h">What I use</h3>
+      <div class="tools">
+        <button type="button" class="tool" data-tool="figma">Figma</button>
+        <button type="button" class="tool" data-tool="framer">Framer</button>
+        <button type="button" class="tool" data-tool="webflow">Webflow</button>
+        <button type="button" class="tool" data-tool="illustrator">Illustrator</button>
+        <button type="button" class="tool" data-tool="aftereffects">After Effects</button>
+        <button type="button" class="tool" data-tool="notion">Notion</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<blockquote class="quote">
+  <div class="inner">
+    <span class="mark" aria-hidden="true">&ldquo;</span>
+    <p>The details are where the <span class="hl">experience</span> lives.</p>
+  </div>
+</blockquote>
 
 <div class="marquee ink rev"><div data-words="Open to internships|Summer 2026|Brand and product|Say hello"></div></div>
 
 <footer class="foot" id="contact">
   <h2>GOT SOMETHING<br>WORTH <span class="hl">BUILDING?</span></h2>
+  <button type="button" class="mailbtn" id="mail" data-cursor="Copy?"
+          data-mail="rutujeetnayak@gmail.com" aria-label="Copy email address">
+    <span class="addr">rutujeetnayak@gmail.com</span>
+    <span class="stamp" role="status"></span>
+  </button>
   <div class="row">
-    <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
     <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>
     <span>© 2026 Rutujeet</span>
   </div>
@@ -130,6 +232,43 @@ document.getElementById('grid').innerHTML = WORK.map(function(p){
 }).join('');
 </script>
 <script src="lab.js"></script>
+<script>
+/* what I do  <->  what I use. Hover or focus either side to light the pairs. */
+(function kit(){
+  var kit = document.getElementById('kit');
+  if (!kit) return;
+  var skills = [].slice.call(kit.querySelectorAll('.skills li'));
+  var tools  = [].slice.call(kit.querySelectorAll('.tool'));
+  var keysOf = function(li){ return li.getAttribute('data-tools').split(' '); };
+
+  function clear(){
+    kit.classList.remove('live');
+    skills.forEach(function(s){ s.classList.remove('on'); });
+    tools.forEach(function(t){ t.classList.remove('on'); });
+  }
+  function fromSkill(li){
+    clear(); kit.classList.add('live'); li.classList.add('on');
+    var keys = keysOf(li);
+    tools.forEach(function(t){ if (keys.indexOf(t.getAttribute('data-tool')) > -1) t.classList.add('on'); });
+  }
+  function fromTool(btn){
+    clear(); kit.classList.add('live'); btn.classList.add('on');
+    var key = btn.getAttribute('data-tool');
+    skills.forEach(function(li){ if (keysOf(li).indexOf(key) > -1) li.classList.add('on'); });
+  }
+  skills.forEach(function(li){
+    var b = li.querySelector('button');
+    b.addEventListener('mouseenter', function(){ fromSkill(li); });
+    b.addEventListener('focus', function(){ fromSkill(li); });
+  });
+  tools.forEach(function(t){
+    t.addEventListener('mouseenter', function(){ fromTool(t); });
+    t.addEventListener('focus', function(){ fromTool(t); });
+  });
+  kit.addEventListener('mouseleave', clear);
+  kit.addEventListener('focusout', function(e){ if (!kit.contains(e.relatedTarget)) clear(); });
+})();
+</script>
 <script>
 (function ransom(){
   var letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));

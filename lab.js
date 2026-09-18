@@ -21,6 +21,8 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, {passive:true});
   document.documentElement.addEventListener('mouseleave', function(){ shown=false; gsap.to(cur,{opacity:0,duration:.2}); });
 
+  window.setCursorLabel = function(t){ tag.textContent = t; };
+
   document.querySelectorAll('[data-cursor]').forEach(function(el){
     el.addEventListener('mouseenter', function(){
       tag.textContent = el.getAttribute('data-cursor');
@@ -80,6 +82,37 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var i = document.createElement('img');
     i.src = src; i.alt = el.getAttribute('data-alt') || '';
     el.textContent = ''; el.appendChild(i);
+  });
+})();
+
+/* copy the address on click, and say so in the cursor label */
+(function mail(){
+  var b = document.getElementById('mail');
+  if (!b) return;
+  var addr = b.getAttribute('data-mail'), stamp = b.querySelector('.stamp'), timer;
+
+  function done(){
+    b.classList.add('copied');
+    stamp.textContent = 'Copied';
+    if (window.setCursorLabel) window.setCursorLabel('Copied');
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      b.classList.remove('copied');
+      stamp.textContent = '';
+      if (window.setCursorLabel) window.setCursorLabel(b.getAttribute('data-cursor'));
+    }, 1900);
+  }
+  function fallback(){                       // clipboard API needs a secure context
+    var ta = document.createElement('textarea');
+    ta.value = addr; ta.setAttribute('readonly','');
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  b.addEventListener('click', function(){
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(addr).then(done, fallback);
+    else fallback();
   });
 })();
 

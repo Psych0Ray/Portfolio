@@ -10,11 +10,11 @@
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HEADER ── */
-.ahead{padding:150px 40px 20px;display:flex;gap:56px;align-items:flex-end;flex-wrap:wrap}
+.ahead{padding:128px 40px 24px;display:flex;gap:56px;align-items:center;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
-.ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,6.4vw,84px);letter-spacing:-.045em;line-height:.88}
+.ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(56px,10.5vw,148px);letter-spacing:-.05em;line-height:.88}
 .ahead p{margin-top:28px;max-width:46ch;font-size:16px;line-height:1.75;color:var(--muted)}
-.ahead .portrait{width:330px;flex:none;aspect-ratio:4/5}
+.ahead .portrait{width:300px;flex:none;aspect-ratio:4/5}
 
 /* ══ OFF THE CLOCK · one slide per hobby, horizontal pan ══ */
 .hob{position:relative;border-bottom:var(--bw) solid var(--ink)}
@@ -56,16 +56,6 @@
 .ptext p{font-size:15px;line-height:1.65;color:var(--muted)}
 .ptext .meta{margin-top:auto;padding-top:18px;font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700}
 
-/* ── SKILLS / SOFTWARE ── */
-.chips{display:flex;flex-wrap:wrap;gap:14px}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.sw{padding:24px}
-.sw h4{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
-.sw span{font-size:13px;color:var(--muted);line-height:1.6}
-.sw:nth-child(4n+1){background:var(--blue);color:var(--paper)}.sw:nth-child(4n+1) span{color:var(--blue15)}
-.sw:nth-child(4n+3){background:var(--bone)}
-.sw:nth-child(4n){background:var(--ink);color:var(--paper)}.sw:nth-child(4n) span{color:var(--blue40)}
-
 /* ── EXPERIENCE / EDUCATION ── */
 .roles{display:flex;flex-direction:column;gap:22px}
 .role{padding:32px;display:flex;gap:30px;align-items:flex-start;flex-wrap:wrap}
@@ -83,7 +73,6 @@
 .role.feat .org{color:var(--paper)}
 .role.feat .when,.role.feat p{color:var(--blue15)}
 
-@media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){
   .ahead{padding:126px 22px 50px;gap:32px}
   .ahead .portrait{width:100%}
@@ -96,8 +85,6 @@
   .s-grid{grid-template-columns:1fr;max-height:none}
   .pwrap{aspect-ratio:4/5}
   .pmedia{aspect-ratio:16/10;height:auto}
-  .sw{padding:18px}
-  .sw h4{font-size:22px;overflow-wrap:anywhere}
   .role .when{width:100%;padding-top:0}
   .role .rbody{grid-template-columns:1fr}
   .role .rbody h3,.role .rbody .org,.role .rbody p,.role .rbody .tags{grid-area:auto}
@@ -121,9 +108,7 @@
 
 <header class="ahead">
   <div class="copy">
-    <h1>DESIGN STUDENT,<br>CURRENTLY <span class="hl">BUILDING.</span></h1>
-    <p>I am a design student working across brand and product. I care about the details most people never notice, and I like being in the room while things actually get built.</p>
-    <p>Right now I take on two or three freelance projects at a time alongside my degree, and I am looking for a design internship for summer 2026.</p>
+    <h1>HI <span class="hl">THERE</span></h1>
   </div>
   <div class="portrait slot card">Portrait</div>
 </header>
@@ -256,30 +241,6 @@
 </section>
 
 <section class="sec">
-  <div class="sechead"><h2>WHAT I <span class="hl">DO</span></h2></div>
-  <div class="chips">
-    <span class="chip fill">UI design</span><span class="chip">UX research</span><span class="chip">Brand identity</span>
-    <span class="chip">Design systems</span><span class="chip">Prototyping</span><span class="chip">Art direction</span>
-    <span class="chip">Typography</span><span class="chip">Motion design</span><span class="chip">Information architecture</span>
-    <span class="chip">Usability testing</span>
-  </div>
-</section>
-
-<section class="sec" style="padding-top:0">
-  <div class="sechead"><h2>WHAT I <span class="hl">USE</span></h2></div>
-  <div class="tiles">
-    <div class="sw card" data-reveal><h4>Figma</h4><span>Interface, systems, prototyping</span></div>
-    <div class="sw card" data-reveal><h4>After Effects</h4><span>Motion and interface animation</span></div>
-    <div class="sw card" data-reveal><h4>Illustrator</h4><span>Marks, type drawing, vector</span></div>
-    <div class="sw card" data-reveal><h4>Photoshop</h4><span>Retouching and composition</span></div>
-    <div class="sw card" data-reveal><h4>Blender</h4><span>3D assets and product renders</span></div>
-    <div class="sw card" data-reveal><h4>Framer</h4><span>High-fidelity web prototypes</span></div>
-    <div class="sw card" data-reveal><h4>Webflow</h4><span>Production sites and CMS</span></div>
-    <div class="sw card" data-reveal><h4>Notion</h4><span>Docs, research, project tracking</span></div>
-  </div>
-</section>
-
-<section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHERE I HAVE <span class="hl">WORKED</span></h2></div>
   <div class="roles">
     <article class="role card feat" data-reveal>
@@ -324,8 +285,12 @@
 
 <footer class="foot" id="contact">
   <h2>LOOKING FOR AN INTERN<br>WORTH <span class="hl">KEEPING?</span></h2>
+  <button type="button" class="mailbtn" id="mail" data-cursor="Copy?"
+          data-mail="rutujeetnayak@gmail.com" aria-label="Copy email address">
+    <span class="addr">rutujeetnayak@gmail.com</span>
+    <span class="stamp" role="status"></span>
+  </button>
   <div class="row">
-    <a href="mailto:rutujeetnayak@gmail.com">rutujeetnayak@gmail.com</a>
     <span><a href="#">Instagram</a> &nbsp; <a href="#">Behance</a> &nbsp; <a href="#">LinkedIn</a></span>
     <span>© 2026 Rutujeet</span>
   </div>
