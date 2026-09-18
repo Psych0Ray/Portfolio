@@ -252,6 +252,8 @@ Last updated: 2026-09-18
     - **The blue label strip in the WHAT I DO drawing screen (`.scr-lab`) was removed**, along with the JS that updated it. The drawing stage is now inset 30px on all sides instead of leaving 56px at the bottom for the label.
     - Verified at 1440x900 and 420x860: no horizontal overflow, no script errors beyond the favicon 404.
 
+37. **Big card numerals reverted; cards back to their original sizing with 001 to 006 in the small label (2026-09-18).** User rejected item 36's outlined numerals: the 58px top row pushed the thumbnail down, shrank it, and the numeral did not look good. The card is back to its pre-item-36 layout exactly (small label row, 16px gap, same thumbnail size), Anton is no longer loaded, and **the small label at the top left now reads `001` to `006`** in the same small Geist style the category used. **The category stays as the first chip** ahead of the descriptor chip, as item 36 set up. Item 36's hero T fix and the removal of the screen label are unaffected.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).

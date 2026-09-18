@@ -6,7 +6,7 @@
 <title>Rutujeet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
 <style>
 /* ── HERO ── */
@@ -96,13 +96,9 @@
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .wc{display:flex;flex-direction:column;padding:22px 22px 24px;aspect-ratio:3/4.05;text-decoration:none;color:var(--ink)}
-.wc-top{position:relative;height:58px;display:flex;justify-content:flex-end;font-family:var(--label);font-size:11px;letter-spacing:.07em;
+.wc-top{display:flex;justify-content:space-between;font-family:var(--label);font-size:11px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px}
-/* the index numeral sits behind the thumbnail, which cuts off its lower edge */
-.wc-n{position:absolute;left:-6px;top:-14px;font-family:'Anton',sans-serif;font-size:112px;line-height:1;
-  color:transparent;-webkit-text-stroke:2px var(--blue40);pointer-events:none;transition:-webkit-text-stroke-color .18s}
-.card:hover .wc-n{-webkit-text-stroke-color:var(--blue)}
-.wc-thumb{flex:1;min-height:0;z-index:1}
+.wc-thumb{flex:1;min-height:0}
 .wc-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:22px}
 .wc h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;line-height:.9;max-width:9ch;text-transform:uppercase;min-height:1.8em}
 .wc-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
@@ -323,7 +319,7 @@ var WORK = [
 ];
 document.getElementById('grid').innerHTML = WORK.map(function(p, i){
   return '<a class="wc card" data-reveal data-cursor="Read" href="case.html">'
-    + '<div class="wc-top"><span class="wc-n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><span>' + p.yr + '</span></div>'
+    + '<div class="wc-top"><span>' + String(i + 1).padStart(3, '0') + '</span><span>' + p.yr + '</span></div>'
     + '<div class="wc-thumb slot"></div>'
     + '<div class="wc-bot"><div><h3>' + p.name + '</h3>'
     + '<div class="wc-tags">' + [p.cat].concat(p.tags).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join('') + '</div></div>'
