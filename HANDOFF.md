@@ -246,6 +246,12 @@ Last updated: 2026-09-18
 
 35. **The real site is now the Vercel root (2026-09-18).** Vercel serves `index.html` at `/`, which was still the original placeholder page from the pipeline test, so none of the real work was visible on the live site. **`lab.html` was renamed to `index.html`**, and the old placeholder `index.html`, `style.css` and `script.js` were deleted (they are still in git history). Every `lab.html` link (the logo, WORK and "All work" on each page) now points to `index.html`. `lab.css` and `lab.js` keep their names. **Anywhere this handoff says lab.html, read index.html.**
 
+36. **Card numerals back, category moved into the chips, hero T unclipped, screen label removed (2026-09-18).**
+    - **Work cards:** the category line at the top left is gone. The category is now the **first chip**, followed by the existing descriptor chip in the same style (e.g. SERVICE DESIGN, DASHBOARD). The top left now carries the **outlined index numeral** the user remembered from the item 18/19 era grid (`01` to `06`, Anton 112px, transparent fill with a 2px blue40 stroke that turns solid blue on card hover), **tucked behind the thumbnail so the thumbnail cuts off its lower edge**. This reverses item 25's removal of the numeral on taste-skill grounds; the user asked for it back. Anton is loaded on index.html only for this. `.wc-top` is a fixed 58px row holding the numeral and the year (still `20XX`); the thumbnail sits at `z-index:1` over it.
+    - **Hero ransom T (`.L3`, Bebas Neue on ink)** had its top bar touching the top edge of the black block. Gave it `padding-top:.13em`.
+    - **The blue label strip in the WHAT I DO drawing screen (`.scr-lab`) was removed**, along with the JS that updated it. The drawing stage is now inset 30px on all sides instead of leaving 56px at the bottom for the label.
+    - Verified at 1440x900 and 420x860: no horizontal overflow, no script errors beyond the favicon 404.
+
 ## In progress / not yet confirmed
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
