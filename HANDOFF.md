@@ -11,9 +11,9 @@ Last updated: 2026-09-18
 
 ## Files
 
-- [index.html](index.html) — hero section (name + tagline), About, Projects (3 placeholder cards), Contact, footer
-- [style.css](style.css) — minimal dark theme, responsive card grid
-- [script.js](script.js) — one line, sets the footer copyright year
+- [index.html](index.html) — home page (was lab.html until item 35)
+- [about.html](about.html), [case.html](case.html) — About and the dummy case study
+- [lab.css](lab.css), [lab.js](lab.js) — shared styles and scripts
 
 ## Done so far
 
@@ -243,6 +243,8 @@ Last updated: 2026-09-18
     - **Footer heading is `SAY HI` on all three pages**, with HI in the `.hl` block. Replaces "GOT SOMETHING WORTH BUILDING?" (home, case) and "LOOKING FOR AN INTERN WORTH KEEPING?" (About). The user's instruction read "put the quote in footer as Say Hi instead of whatever is in there"; interpreted as replacing the footer heading. **The quote band on home was left where it is**; flag if they meant to move it into the footer.
     - **About intro paragraphs restored verbatim** under HI THERE (the two removed in item 31). Note they still call the user a design student looking for a summer 2026 internship, which conflicts with the home hero's "PRODUCT DESIGNER"; restored as-is on request, copy still needs a real rewrite.
     - Committed and pushed to `main` for the Vercel auto-deploy.
+
+35. **The real site is now the Vercel root (2026-09-18).** Vercel serves `index.html` at `/`, which was still the original placeholder page from the pipeline test, so none of the real work was visible on the live site. **`lab.html` was renamed to `index.html`**, and the old placeholder `index.html`, `style.css` and `script.js` were deleted (they are still in git history). Every `lab.html` link (the logo, WORK and "All work" on each page) now points to `index.html`. `lab.css` and `lab.js` keep their names. **Anywhere this handoff says lab.html, read index.html.**
 
 ## In progress / not yet confirmed
 
