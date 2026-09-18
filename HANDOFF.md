@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-17
+Last updated: 2026-09-18
 
 ## Project
 
@@ -237,6 +237,12 @@ Last updated: 2026-09-17
       - Storyboarding and vibecoding were checked shape by shape and needed no changes: every stroke clears every other.
     - **Lesson for any future line art here:** stroke-only artwork cannot use overlap for depth. Either lay shapes out with real clearance, or give the foreground shape a `fill` in the ground colour so it occludes, and remember the fill must extend past the background stroke's full 5px width, not just to its centre line.
     - **Verified at 1440x900 and 420x860 on all three pages:** no horizontal overflow, no script errors, no em-dashes, en-dashes or middle dots, one marquee on home, three footer links per page.
+
+34. **Footer rules removed, footer heading is now SAY HI, About intro restored, deployed (2026-09-18).**
+    - **Social links in the footer lost their blue40 rules** (the border above each link and below the last). Row padding tightened from 18px to 14px since the rules no longer separate them. The base bar's top rule was kept.
+    - **Footer heading is `SAY HI` on all three pages**, with HI in the `.hl` block. Replaces "GOT SOMETHING WORTH BUILDING?" (home, case) and "LOOKING FOR AN INTERN WORTH KEEPING?" (About). The user's instruction read "put the quote in footer as Say Hi instead of whatever is in there"; interpreted as replacing the footer heading. **The quote band on home was left where it is**; flag if they meant to move it into the footer.
+    - **About intro paragraphs restored verbatim** under HI THERE (the two removed in item 31). Note they still call the user a design student looking for a summer 2026 internship, which conflicts with the home hero's "PRODUCT DESIGNER"; restored as-is on request, copy still needs a real rewrite.
+    - Committed and pushed to `main` for the Vercel auto-deploy.
 
 ## In progress / not yet confirmed
 

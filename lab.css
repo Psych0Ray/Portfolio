@@ -136,10 +136,9 @@ a{color:inherit}
 @media (prefers-reduced-motion:reduce){.mailbtn .stamp{transition:opacity .18s}}
 .foot-links{grid-column:2;grid-row:1/span 2;display:flex;flex-direction:column;min-width:270px}
 .foot-links a{display:flex;align-items:center;justify-content:space-between;gap:28px;text-decoration:none;
-  border-top:2px solid var(--blue40);padding:18px 2px;font-family:var(--display);font-weight:800;font-stretch:80%;
+  padding:14px 2px;font-family:var(--display);font-weight:800;font-stretch:80%;
   font-size:clamp(20px,2.1vw,30px);letter-spacing:-.02em;text-transform:uppercase;
   transition:color .18s ease,padding-left .18s ease}
-.foot-links a:last-child{border-bottom:2px solid var(--blue40)}
 .foot-links a:hover{color:var(--blue40);padding-left:12px}
 .foot-base{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   margin-top:78px;padding-top:22px;border-top:2px solid var(--blue40);
