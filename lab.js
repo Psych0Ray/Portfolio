@@ -85,6 +85,15 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
+/* footer: back to top */
+(function totop(){
+  var b = document.querySelector('.totop');
+  if (!b) return;
+  b.addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior: REDUCED ? 'auto' : 'smooth' });
+  });
+})();
+
 /* copy the address on click, and say so in the cursor label */
 (function mail(){
   var b = document.getElementById('mail');
