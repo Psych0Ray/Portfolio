@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-18
+Last updated: 2026-09-19
 
 ## Project
 
@@ -253,6 +253,13 @@ Last updated: 2026-09-18
     - Verified at 1440x900 and 420x860: no horizontal overflow, no script errors beyond the favicon 404.
 
 37. **Big card numerals reverted; cards back to their original sizing with 001 to 006 in the small label (2026-09-18).** User rejected item 36's outlined numerals: the 58px top row pushed the thumbnail down, shrank it, and the numeral did not look good. The card is back to its pre-item-36 layout exactly (small label row, 16px gap, same thumbnail size), Anton is no longer loaded, and **the small label at the top left now reads `001` to `006`** in the same small Geist style the category used. **The category stays as the first chip** ahead of the descriptor chip, as item 36 set up. Item 36's hero T fix and the removal of the screen label are unaffected.
+
+38. **ICCC intro slide and three grid thumbnails designed in Figma only (2026-09-19).** Nothing in the repo changed. File: `uG8MdK8svbC6sa0wQ5kyIK` (Portfolio), page `Portfolio` (0:1). Everything is in a new section **"Claude · ICCC intro + grid thumbnails" (2272:971)** placed at x=100000, y=-27733, clear of all existing work. The original ICCC cover (2265:8619) was **not modified**; the new intro sits beside it for the user to swap into the deck.
+    - **Where each project lives in that file:** ICCC deck `2265:8618` (purple, Inter), ULS deck `2265:693` (black and yellow, stencil logo, the worker billboard cover `2265:697`), DriveBuddy deck `1:16` (sage/cream pastels, DM Sans, style guide `1:116`), Relique `2266:15159`, Canva AI `2265:15158`, Maison ;TJRS `2034:823`.
+    - **ICCC intro (2272:972, 1920x1080):** navy command-centre ground, a stylised zone map on the right with alert pins, dashed radar rings on a critical pin, and the deck's own camera icon (cloned from 2265:8628, mirrored) casting a view cone onto it. Left: "Integrated Command & Control Centre", ICCC / SURVEILLANCE lockup, the deck's subtitle, the four real stats from the deck (900 hectares, 950+ industries, 1000+ devices, 24/7), and the three team credits with roll numbers on a solid band. Top: LIVE status line and an "OOUX / DASHBOARD REDESIGN" tag.
+    - **Thumbnails, 1200x1200 each, meant to be exported and cropped into the site's `.wc-thumb` slots:** ICCC (2272:973): map, camera and cone, a dashboard-style "Critical / Monitor alerts" card and a bell with a 14 badge, all from the deck's UI. ULS (2272:974): tilted yellow ULS-ID card on black with the worker photo (cropped from the cover image by reusing its imageHash), a QR "scan to check in", "Daily wage worker", SKILLS VERIFIED chip, attendance row, hazard stripe base. DriveBuddy (2272:975): the app home screen rebuilt on a tilted phone, a 78/100 driving-score gauge, the OBD-II sensor with signal arcs, a winding road, in the deck's palette.
+    - **Not yet done:** thumbnails for Relique, Maison ;TJRS and Canva AI; exporting and wiring any thumbnail into the site. The user plans to send the Figma page with a short version of each project, with the full project linking out to Behance (a change from the earlier "own on-site case page" direction; the case page still is the dummy Sonder Health).
+    - Figma gotcha learned: a stroked ellipse with `arcData` draws a pie-wedge outline, not an arc. For gauges and signal arcs use a **filled** ellipse with `innerRadius` set to (r - thickness) / r.
 
 ## In progress / not yet confirmed
 
