@@ -133,3 +133,55 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       clearProps:'transform', scrollTrigger:{ trigger:el, start:'top 88%', once:true } });
   });
 })();
+
+/* iOS only applies :active (the pressed state) when the page listens for touches */
+document.addEventListener('touchstart', function(){}, {passive:true});
+
+/* in-page links glide instead of jumping (the scroll cue, WORK, Get in touch) */
+(function glide(){
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || url.pathname !== location.pathname || url.hash.length < 2) return;
+    var t = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!t) return;
+    e.preventDefault();
+    var y = t.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top:y, behavior: REDUCED ? 'auto' : 'smooth' });
+    if (history.pushState) history.pushState(null, '', url.hash);
+  });
+})();
+
+/* footer entrance: the black slab rises from the bottom edge, then everything on it
+   lands in order: the letters of SAY, the HI block slamming in, the address and its
+   underline, the links sliding in with their arrows, the rule drawing across, the base. */
+(function footIn(){
+  var f = document.querySelector('.foot');
+  if (!f || REDUCED || typeof ScrollTrigger === 'undefined') return;
+  var h = f.querySelector('h2');
+  [].slice.call(h.childNodes).forEach(function(n){
+    if (n.nodeType !== 3 || !n.textContent.trim()) return;
+    var frag = document.createDocumentFragment();
+    n.textContent.split('').forEach(function(ch){
+      var s = document.createElement('span');
+      s.className = 'fch'; s.textContent = ch === ' ' ? '\u00a0' : ch;
+      frag.appendChild(s);
+    });
+    h.replaceChild(frag, n);
+  });
+  var chars = h.querySelectorAll('.fch'), hl = h.querySelector('.hl');
+  var addr = f.querySelector('.mailbtn .addr'), links = f.querySelectorAll('.foot-links a');
+  var icons = f.querySelectorAll('.foot-links .ic'), base = f.querySelector('.foot-base');
+  var tl = gsap.timeline({ scrollTrigger:{ trigger:f, start:'top 88%', once:true } });
+  tl.fromTo(f, { clipPath:'inset(100% 0% 0% 0% round 56px 56px 0px 0px)' },
+               { clipPath:'inset(0% 0% 0% 0% round 0px 0px 0px 0px)', duration:1, ease:'expo.inOut', clearProps:'clipPath' })
+    .from(chars, { yPercent:115, rotation:10, opacity:0, duration:.6, ease:'power4.out', stagger:.05 }, '-=.3')
+    .from(hl, { scale:0, rotation:-28, duration:.75, ease:'back.out(2.2)' }, '-=.35');
+  if (addr) tl.from(addr, { y:26, opacity:0, duration:.55, ease:'power3.out', clearProps:'transform' }, '-=.45')
+              .fromTo(addr, { '--u':0 }, { '--u':1, duration:.6, ease:'power3.inOut' }, '-=.25');
+  tl.from(links, { x:70, opacity:0, duration:.6, ease:'power3.out', stagger:.09, clearProps:'transform' }, '-=.75')
+    .from(icons, { rotation:-135, scale:0, duration:.55, ease:'back.out(2.4)', stagger:.09, clearProps:'transform' }, '-=.45');
+  if (base) tl.fromTo(base, { '--b':0 }, { '--b':1, duration:.8, ease:'power3.inOut' }, '-=.5')
+              .from(base.children, { y:12, opacity:0, duration:.4, ease:'power2.out', stagger:.08 }, '-=.35');
+})();

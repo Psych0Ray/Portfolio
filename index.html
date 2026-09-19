@@ -24,7 +24,7 @@
 .L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--blue);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
 .L8{font-family:'Rubik Mono One',monospace;font-size:clamp(42px,10.6vw,142px);color:var(--ink);border:2px dashed var(--ink);transform:rotate(4deg) translateY(-6px);z-index:2}
 
-.statement{position:relative;z-index:4;margin-top:40px;display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
+.statement{position:relative;z-index:4;margin-top:clamp(44px,4.6vw,66px);display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
   font-family:var(--display);font-size:clamp(30px,5.4vw,74px);letter-spacing:-.045em;line-height:.9}
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
@@ -36,6 +36,8 @@
   display:grid;place-items:center;font-size:21px;line-height:1;animation:bob 1.9s ease-in-out infinite;
   transition:background .15s,color .15s}
 .scue:hover .scue-b{background:var(--blue);color:var(--paper);animation-play-state:paused}
+.scue-b .ic{width:22px;height:22px}
+.scue:active .scue-b{animation:none;transform:scale(.88);transition:transform .05s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 @media (prefers-reduced-motion:reduce){.scue-b{animation:none}}
 
@@ -50,6 +52,7 @@
 .more .grow{flex:1}
 .more .rbtn{width:64px;height:64px;font-size:24px;transition:transform .18s ease,background .18s,color .18s}
 .more:hover .rbtn{background:var(--paper);color:var(--ink);transform:translateX(8px)}
+.more:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink);transition-duration:.06s}
 
 /* ── KIT · what I do, cross linked to what I use ──────────────────
    At rest every skill and every tool is fully legible. Hovering or
@@ -145,11 +148,11 @@
   </p>
   <a class="scue" href="#work" data-cursor="Work">
     <span class="scue-t">Scroll</span>
-    <span class="scue-b" aria-hidden="true">&darr;</span>
+    <span class="scue-b" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v16M5 13l7 7 7-7"/></svg></span>
   </a>
 </header>
 
-<div class="marquee"><div data-words="Product design|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
+<div class="marquee"><div data-words="Product design|Research|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
 
 <section class="sec" id="work">
   <div class="sechead">
@@ -163,7 +166,7 @@
       <p>The rest of the work, including the projects that did not make this page, lives on Behance.</p>
     </div>
     <span class="grow"></span>
-    <span class="rbtn" aria-hidden="true">&rarr;</span>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>
 
@@ -172,6 +175,7 @@
   <div class="kit" id="kit">
     <ul class="skills">
       <li><button type="button" data-art="product-design"><span>Product design</span></button></li>
+      <li><button type="button" data-art="research"><span>Research</span></button></li>
       <li><button type="button" data-art="user-centric-design"><span>User-centric design</span></button></li>
       <li><button type="button" data-art="user-testing"><span>User testing</span></button></li>
       <li><button type="button" data-art="wireframing"><span>Wireframing</span></button></li>
@@ -192,6 +196,21 @@
           <rect x="274" y="94" width="90" height="120" rx="10" stroke="#002FA7"/>
           <path d="M292 122h54M292 146h38M292 170h48" stroke="#002FA7"/>
           <path d="M286 232l40 44-19 4 9 23-12 6-10-23-13 12z"/>
+        </svg>
+        <svg class="art" data-art="research" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+             stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="36" y="40" width="160" height="216" rx="10"/>
+          <path d="M60 78h112M60 102h96M60 126h108M60 150h70M60 174h88M60 198h56M60 222h80"/>
+          <circle cx="182" cy="170" r="54" fill="#F2EFE6" stroke="#002FA7"/>
+          <path d="M152 152h60M152 172h44M152 192h52" stroke="#002FA7"/>
+          <path d="M221 209l40 40" stroke-width="12"/>
+          <path d="M268 40h86a10 10 0 0 1 10 10v30a10 10 0 0 1-10 10h-56l-16 14v-14h-14a10 10 0 0 1-10-10V50a10 10 0 0 1 10-10z"/>
+          <circle cx="290" cy="65" r="3" fill="#0A0A0A"/><circle cx="310" cy="65" r="3" fill="#0A0A0A"/><circle cx="330" cy="65" r="3" fill="#0A0A0A"/>
+          <path d="M290 122h66a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10h-12v12l-14-12h-40a10 10 0 0 1-10-10v-22a10 10 0 0 1 10-10z" stroke="#002FA7"/>
+          <path d="M296 138h52M296 150h34" stroke="#002FA7"/>
+          <rect x="286" y="196" width="34" height="34" rx="3" stroke="#002FA7"/>
+          <rect x="330" y="196" width="34" height="34" rx="3"/>
+          <rect x="308" y="238" width="34" height="34" rx="3" stroke="#002FA7"/>
         </svg>
         <svg class="art" data-art="user-centric-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
              stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -295,12 +314,12 @@
     <span class="stamp" role="status"></span>
   </button>
   <nav class="foot-links">
-    <a href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener">Behance <span aria-hidden="true">&#8599;</span></a>
-    <a href="https://www.linkedin.com/in/rutujeet-nayak-b5a47129b" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+    <a href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener">Behance <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+    <a href="https://www.linkedin.com/in/rutujeet-nayak-b5a47129b" target="_blank" rel="noopener">LinkedIn <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
   </nav>
   <div class="foot-base">
     <span>© 2026 Rutujeet</span>
-    <button type="button" class="totop">Back to top <span aria-hidden="true">&#8593;</span></button>
+    <button type="button" class="totop">Back to top <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5v-16M5 11l7-7 7 7"/></svg></button>
   </div>
 </footer>
 
@@ -321,7 +340,7 @@ document.getElementById('grid').innerHTML = WORK.map(function(p, i){
     + THUMBS.html(p.slug, p.name)
     + '<div class="wc-bot"><div><h3>' + p.name + '</h3>'
     + '<div class="wc-tags">' + [p.cat].concat(p.tags).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join('') + '</div></div>'
-    + '<span class="rbtn" aria-hidden="true">&rarr;</span></div></a>';
+    + '<span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span></div></a>';
 }).join('');
 THUMBS.wire(document.getElementById('grid'));
 </script>
@@ -385,8 +404,14 @@ THUMBS.wire(document.getElementById('grid'));
 (function ransom(){
   var letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));
   if (!letters.length || REDUCED) return;
-  gsap.from(letters,{ yPercent:function(i){ return i % 2 ? -110 : 110; }, rotation:function(i){ return i % 2 ? -16 : 13; },
-    opacity:0, duration:.8, ease:'back.out(1.5)', stagger:{each:.05, from:'random'}, delay:.1 });
+  var words = document.querySelectorAll('.statement .a, .statement .b'), block = document.querySelector('.statement .c');
+  var tl = gsap.timeline({ delay:.1 });
+  tl.from(letters,{ yPercent:function(i){ return i % 2 ? -110 : 110; }, rotation:function(i){ return i % 2 ? -16 : 13; },
+    opacity:0, duration:.8, ease:'back.out(1.5)', stagger:{each:.05, from:'random'} })
+    /* then the line under it: each word rises into place, the BUILDING block slams in last */
+    .from(words,{ y:46, rotation:3, opacity:0, duration:.7, ease:'power4.out', stagger:.12 }, '+=.05')
+    .from(block,{ scale:.2, rotation:-16, opacity:0, duration:.75, ease:'back.out(2.2)' }, '-=.35')
+    .from('.scue',{ y:18, opacity:0, duration:.5, ease:'power2.out', clearProps:'transform' }, '-=.3');
   var hero = document.getElementById('hero');
   var set = letters.map(function(el){ return { x:gsap.quickTo(el,'x',{duration:.7,ease:'power3'}), y:gsap.quickTo(el,'y',{duration:.7,ease:'power3'}) }; });
   hero.addEventListener('mousemove', function(e){

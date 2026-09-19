@@ -118,12 +118,12 @@ FOOT = '''
     <span class="stamp" role="status"></span>
   </button>
   <nav class="foot-links">
-    <a href="{behance}" target="_blank" rel="noopener">Behance <span aria-hidden="true">&#8599;</span></a>
-    <a href="{linkedin}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+    <a href="{behance}" target="_blank" rel="noopener">Behance <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+    <a href="{linkedin}" target="_blank" rel="noopener">LinkedIn <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
   </nav>
   <div class="foot-base">
     <span>© 2026 Rutujeet</span>
-    <button type="button" class="totop">Back to top <span aria-hidden="true">&#8593;</span></button>
+    <button type="button" class="totop">Back to top <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5v-16M5 11l7-7 7 7"/></svg></button>
   </div>
 </footer>
 
@@ -198,11 +198,11 @@ def page(p, nxt):
       <h2>VIEW ON BEHANCE</h2>
       <p>{'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
-    <span class="rbtn" aria-hidden="true">&#8599;</span>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></span>
   </a>
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
     <div><span class="lab">Next project</span><h3>{nxt['short']}</h3></div>
-    <span class="rbtn" aria-hidden="true">&rarr;</span>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>
 '''

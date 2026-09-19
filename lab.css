@@ -31,12 +31,16 @@ a{color:inherit}
   color:var(--paper);padding:.04em .2em .1em;transform:rotate(-1.5deg);text-transform:uppercase}
 .cond{font-stretch:75%;font-weight:800;letter-spacing:.005em}          /* condensed, for marquee + stamps */
 
+/* ── ARROWS · one heavy stroke icon, sized by the font-size around it ── */
+.ic{width:1em;height:1em;display:block;flex:none;fill:none;stroke:currentColor;stroke-width:3;
+  stroke-linecap:square;stroke-linejoin:miter;overflow:visible}
+
 /* ── CURSOR · a sticker dot that grows a label ── */
 .cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
 .cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
-  box-shadow:3px 3px 0 var(--ink);transform:translate(-50%,-50%)}
+  transform:translate(-50%,-50%)}
 .cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);border-radius:100px;padding:9px 15px;font-family:var(--label);font-size:11px;
+  border-radius:100px;padding:9px 15px;font-family:var(--label);font-size:11px;
   font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
   opacity:0;transform-origin:left top}
 @media (hover:none){.cursor{display:none}}
@@ -57,6 +61,10 @@ a{color:inherit}
 .nav a.lnk.cta::after{content:none}
 .nav a.lnk.cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700}
 .nav a.lnk.cta:hover{background:var(--ink)}
+.nav a.lnk{transition:transform .12s ease}
+.nav a.lnk:active{transform:translateY(2px) scale(.96);transition-duration:.05s}
+.logo{transition:transform .12s ease}
+.logo:active{transform:translateY(2px) scale(.96)}
 
 /* ── LOGO · RT/JT hand-set like the name, no box ── */
 .logo{display:flex;align-items:flex-end;text-decoration:none;gap:0;line-height:1;padding:4px 2px}
@@ -91,6 +99,8 @@ a{color:inherit}
 /* ── CARD · flat at rest, lifts on hover ── */
 .card{background:var(--paper);border:var(--bw) solid var(--ink);transition:transform .18s ease,box-shadow .18s ease}
 .card:hover{transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--ink)}
+/* pressed: the lifted card drops flat onto the page while it is held */
+.card:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink);transition-duration:.06s}
 
 /* media slot */
 .slot{background-color:var(--bone);border:2.5px solid var(--ink);display:grid;place-items:center;
@@ -110,29 +120,39 @@ a{color:inherit}
   display:grid;place-items:center;font-family:var(--label);font-size:18px;flex:none;
   transition:background .15s,color .15s}
 .card:hover .rbtn{background:var(--blue);color:var(--paper)}
+button.rbtn{transition:background .15s,color .15s,transform .12s ease}
+button.rbtn:active{transform:scale(.9);transition-duration:.05s}
 
 /* pill button */
 .btn{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   text-decoration:none;padding:17px 28px;border:var(--bw) solid var(--ink);border-radius:100px;display:inline-block;
   background:var(--paper);color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
 .btn:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+.btn:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink);transition-duration:.06s}
 .btn.fill{background:var(--blue);color:var(--paper)}
 
 /* ── FOOTER ── */
-.foot{background:var(--ink);color:var(--paper);padding:92px 40px 30px;
+.foot{background:var(--ink);color:var(--paper);padding:92px 40px 30px;overflow:hidden;
   display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:64px;align-items:start}
 .foot h2{grid-column:1;font-family:var(--display);font-weight:800;font-size:clamp(34px,5.6vw,72px);letter-spacing:-.045em;line-height:.88}
 /* the address is the contact point, so it is set large and copies on click */
 .mailbtn{grid-column:1;justify-self:start;display:inline-flex;align-items:center;gap:18px;margin-top:38px;background:none;border:0;padding:0;
   color:var(--paper);font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1;
   font-size:clamp(21px,3.2vw,44px);text-align:left}
-.mailbtn .addr{border-bottom:3px solid var(--blue);padding-bottom:7px;transition:color .18s,border-color .18s}
-.mailbtn:hover .addr{color:var(--blue40);border-color:var(--blue40)}
+.mailbtn .addr{position:relative;padding-bottom:10px;transition:color .18s,transform .12s ease}
+.mailbtn .addr::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--blue);
+  transform:scaleX(var(--u,1));transform-origin:left center;transition:background .18s}
+.mailbtn:hover .addr{color:var(--blue40)}
+.mailbtn:hover .addr::after{background:var(--blue40)}
+.mailbtn:active .addr{transform:scale(.98);transition-duration:.05s}
 .mailbtn .stamp{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   background:var(--blue);color:var(--paper);border:2.5px solid var(--paper);border-radius:100px;padding:7px 14px;
   transform:rotate(-4deg) scale(.7);opacity:0;white-space:nowrap;
   transition:transform .22s cubic-bezier(.16,1,.3,1),opacity .18s}
 .mailbtn.copied .stamp{transform:rotate(-4deg) scale(1);opacity:1}
+/* on desktop the cursor label already says Copied, so the stamp is only for touch and narrow screens */
+.mailbtn .stamp{display:none}
+@media (max-width:900px),(hover:none){.mailbtn .stamp{display:inline-block}}
 @media (prefers-reduced-motion:reduce){.mailbtn .stamp{transition:opacity .18s}}
 .foot-links{grid-column:2;grid-row:1/span 2;display:flex;flex-direction:column;min-width:270px}
 .foot-links a{display:flex;align-items:center;justify-content:space-between;gap:28px;text-decoration:none;
@@ -140,12 +160,21 @@ a{color:inherit}
   font-size:clamp(20px,2.1vw,30px);letter-spacing:-.02em;text-transform:uppercase;
   transition:color .18s ease,padding-left .18s ease}
 .foot-links a:hover{color:var(--blue40);padding-left:12px}
+.foot-links a:active{color:var(--paper);transition-duration:.05s}
+.foot-links .ic{width:.78em;height:.78em;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.foot-links a:hover .ic{transform:translate(3px,-3px)}
 .foot-base{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
-  margin-top:78px;padding-top:22px;border-top:2px solid var(--blue40);
+  margin-top:78px;padding-top:22px;position:relative;
   font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--blue40)}
+.foot-base::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--blue40);
+  transform:scaleX(var(--b,1));transform-origin:left center}
 .totop{background:none;border:0;padding:0;color:var(--blue40);font:inherit;text-transform:uppercase;
-  letter-spacing:.07em;transition:color .18s}
+  letter-spacing:.07em;transition:color .18s;display:inline-flex;align-items:center;gap:8px}
+.totop .ic{width:1.15em;height:1.15em;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
 .totop:hover{color:var(--paper)}
+.totop:hover .ic{transform:translateY(-3px)}
+.totop:active .ic{transform:translateY(-6px);transition-duration:.08s}
+.foot h2 .fch{display:inline-block}
 
 @media (max-width:900px){
   .sec{padding:60px 22px}
