@@ -286,6 +286,8 @@ Last updated: 2026-09-19
 
 ## In progress / not yet confirmed
 
+- **Project pages from item 40 were REJECTED (2026-09-19) and are being redone.** User feedback: they look like cut-and-paste slide crops (thematic analysis, a dashboard slide with its paragraph, the questionnaire insights text), they are too long, there is no description up front, and the blue problem band and stats cards should go ("dont put that in"). Team names must go; add a **My role** box instead. **New process: build refined snippet frames in Figma first, next to each deck, in that deck's exact style and design language, focused on UI and flashy moments and made to read like thumbnails; only then export them to the site.** Planned snippets: ULS (billboard, worker app phones large, ID card, Hindi foreman console, contractor dashboard large), ICCC (cover, live map dashboard, device card, alert summary), DriveBuddy (hero phones, lesson analysis, booking flow), Relique (hero, homepage desktop and mobile, My Story), Canva AI (hero, redesigned AI panel in the editor), Maison ;TJRS (exhibition, couture pieces). **Blocked:** the Figma MCP connection dropped mid-session; reconnect before continuing. **Needs from the user:** their actual role on each project for the My role box. The item 40 pages are still live until replaced.
+
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 
 ## Next up (not started)
