@@ -308,6 +308,11 @@ Last updated: 2026-09-19
     - `tools/build_work.py` adds the video section automatically if `work/vid/<slug>.mp4` exists; the aria-label comes from each project's `film=` field.
     - Verified in Edge at 1440 and 420 wide: each video is paused on load, playing after being scrolled into view, paused again when scrolled away, no controls, no script errors, no horizontal overflow.
 
+44. **Video hardening after the user reported "video not working" (2026-09-19).** Could not reproduce: on the live site (`https://portfolio-test-delta-red.vercel.app`, the repo's homepage URL) the files serve correctly (video/mp4, byte ranges) and play on scroll in Chrome, Edge, Chromium, Firefox and Opera GX. Hardened against the likely causes anyway:
+    - **WebM VP9 fallback** for each video (`work/vid/<slug>.webm`, CRF 38, 1.3 to 27MB). The `<video>` now has two `<source>`s, MP4 (`avc1.640028`) first, then WebM, so browsers without H.264 (Electron/VS Code previews, some Chromium builds) still play.
+    - **Autoplay-blocked fallback** in `work/work.js`: if `play()` is rejected (iOS Low Power Mode, data saver, per-site autoplay settings), the video starts on the viewer's first tap, click or key press, still with no controls. Tested by forcing `play()` to reject until a click.
+    - **Still unknown which browser/device the user saw the failure on**; ask if it persists after this deploy.
+
 ## In progress / not yet confirmed
 
 
