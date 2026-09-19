@@ -82,11 +82,17 @@
   .hob-hint::before{content:'Hold to pause'}
   .hob-hint{font-size:0}.hob-hint::before{font-size:12px}
   .hob-track{padding-left:22px}
-  .slide{width:84vw;height:auto;margin-right:18px;padding:20px 18px 22px;gap:16px;box-shadow:6px 6px 0 var(--ink)}
-  .s-grid{grid-template-columns:1fr;gap:18px}
-  .pwrap{aspect-ratio:16/11}
-  .pmedia{display:none}
-  .ptext{padding:18px}
+  /* phones: the card itself is vertical. The clip is a tall portrait panel, the illustration
+     sits on it as a small square sticker, and the write-up goes underneath. */
+  .slide{width:84vw;height:auto;margin-right:18px;padding:18px 16px 20px;gap:14px;box-shadow:6px 6px 0 var(--ink)}
+  .s-name{font-size:26px}
+  .s-grid{grid-template-columns:1fr;grid-template-rows:auto auto;gap:14px}
+  .pmedia{grid-area:1/1;display:block;width:100%;height:auto;aspect-ratio:4/5}
+  .pwrap{grid-area:1/1;position:relative;align-self:end;justify-self:start;z-index:2;
+    width:118px;aspect-ratio:1/1;margin:0 0 -36px 10px}
+  .poster{padding:10px;box-shadow:5px 5px 0 var(--ink)}
+  .poster svg{max-height:100%}
+  .ptext{grid-area:2/1;margin-top:28px;padding:18px}
   .role .when{width:100%;padding-top:0}
   .role .rbody{grid-template-columns:1fr}
   .role .rbody h3,.role .rbody .org,.role .rbody p,.role .rbody .tags{grid-area:auto}
