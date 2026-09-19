@@ -51,6 +51,10 @@
 .rate{display:flex;gap:6px}
 .rate i{width:22px;height:22px;border:2.5px solid var(--ink);display:block}
 .rate i.on{background:var(--blue);border-color:var(--blue)}
+.meter{height:18px;border:2.5px solid var(--ink);background:var(--paper);overflow:hidden;display:block}
+.meter i{display:block;height:100%;width:var(--v,0%);background:var(--blue)}
+.stat{display:flex;align-items:baseline;gap:7px;font-family:var(--display);font-weight:800;font-size:clamp(32px,3vw,42px);letter-spacing:-.04em;line-height:.9}
+.stat small{font-family:var(--label);font-size:15px;font-weight:700;letter-spacing:.06em}
 .rlab{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;color:var(--muted);margin:10px 0 18px;display:block}
 .rlab b{color:var(--ink)}
 .ptext p{margin-top:0}
@@ -151,10 +155,10 @@
           <div class="ptext card">
             <span class="kick">Last played</span>
             <h4>Onimusha: Way of the Sword</h4>
-            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
-            <span class="rlab">Replay value <b>4 of 5</b></span>
-            <p>Capcom back in feudal Japan, and a fight system that rewards patience over button mashing. Every duel is a timing puzzle.</p>
-            <span class="meta">Sword drawn. Demons pending.</span>
+            <span class="meter" role="img" aria-label="70 percent complete" style="--v:70%"><i></i></span>
+            <span class="rlab">Completion <b>70%</b></span>
+            <p>It is just amazing when a game that is so beautiful is also so challenging.</p>
+            <span class="meta">Loving it so far!</span>
           </div>
         </div>
       </article>
@@ -183,9 +187,9 @@
           <div class="ptext card">
             <span class="kick">Last watched</span>
             <h4>In the Mood for Love</h4>
-            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-            <span class="rlab">Rewatch value <b>5 of 5</b></span>
-            <p>Wong Kar Wai builds a whole romance out of what is never said. The framing, the repetition and the colour carry everything the characters will not.</p>
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <span class="rlab">Rating <b>4 of 5</b></span>
+            <p>The use of shadows, lighting and colour to portray emotions and a story is a cinematic marvel.</p>
             <span class="meta">Wong Kar Wai, 2000. 98 minutes.</span>
           </div>
         </div>
@@ -212,10 +216,10 @@
           <div class="ptext card">
             <span class="kick">Last cooked</span>
             <h4>Cantonese Egg Fried Rice</h4>
-            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
-            <span class="rlab">Attempts so far <b>4</b></span>
-            <p>Three ingredients and nowhere to hide. Day old rice, eggs and a wok hot enough to keep every grain separate.</p>
-            <span class="meta">Day old rice. Very hot wok.</span>
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <span class="rlab">Rating <b>5 of 5</b></span>
+            <p>It is just three simple ingredients, but technique goes a long way. And day old rice, of course.</p>
+            <span class="meta">Very hot wok.</span>
           </div>
         </div>
       </article>
@@ -238,10 +242,10 @@
           <div class="ptext card">
             <span class="kick">My motorcycle</span>
             <h4>Triumph Speed 400</h4>
-            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-            <span class="rlab">On the clock <b>7,000 km and counting</b></span>
-            <p>No route, no reason. Most rides end exactly where they started, which is the whole point of them.</p>
-            <span class="meta">7,000 km and counting.</span>
+            <span class="stat">7,000 <small>KM</small></span>
+            <span class="rlab">On the clock, <b>and counting</b></span>
+            <p>Apart from getting me to places, it also helps me get my mind off things.</p>
+            <span class="meta">No route, no reason.</span>
           </div>
         </div>
       </article>
