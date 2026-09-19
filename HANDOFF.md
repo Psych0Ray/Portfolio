@@ -322,13 +322,25 @@ Last updated: 2026-09-19
 46. **New Canva AI cover (2026-09-19).** `work/img/canva-ai/01.webp` is now the user's new intro frame **"Canva AI" (`2327:794`)**, 1920x1130 native, exported at 2880x1695 (WebP q90, 68KB). Replaces the old 2880x1620 cover.
     - **Better way to export above native size (use this instead of the clone + `rescale` method in item 41):** `rescale(1.5)` on a clone mis-rendered this frame (the mic button instance lost its circle and the orb's glow changed). Instead, in `use_figma`: `bytes = await node.exportAsync({format:'PNG', constraint:{type:'SCALE', value:1.5}})`, `figma.createImage(bytes)`, put it as an IMAGE fill on a temporary rectangle of the returned size, `get_screenshot` that rectangle at its native size (`contentsOnly:true`), then delete the rectangle. This is Figma's own exporter, so it is pixel-faithful, and no fonts need flattening.
 
+47. **Real home thumbnails with hover animations (2026-09-19).** Source: the user's Figma section **"Thumbnails" (`2330:3758`)**, one inactive and one active frame per project (1192x708 each; all frames are misleadingly named "Canva AI" and carry old deck layers far outside their bounds, so only in-bounds visible children matter).
+    - **Files:** `thumbs.js` (layer data in Figma frame units, builds the markup, runs the ICCC canvas and the hover/touch wiring), `thumbs.css` (all motion), `img/thumbs/*.webp` (20 layers exported at 2x, 604KB total). `index.html` links both and calls `THUMBS.html(slug, name)` per card and `THUMBS.wire(grid)`.
+    - **Card sizing changed:** the thumb is now a fixed 1192:708 box (`.wc-thumb.th`) and the card's `aspect-ratio:4/3.3` was removed, so the card height follows its content and the thumbnail is never cropped.
+    - **Animations (hover on desktop, focus for keyboard, and on touch screens the card in the middle band of the viewport is active):**
+      - **ULS:** the six pieces (four stat cards, two chips) start stacked behind the logo and fly out with a spin and overshoot to their Figma positions, staggered; the logo punches down to 93%; once landed each piece bobs gently.
+      - **Relique:** **re-arranged by me** (the user asked): three artifacts above the wordmark (bracelets top left, relief panel top middle, claw ornament top right) and three below (coin bottom left, dagger bottom middle, head bottom right). They fly out from behind the name while un-blurring, and a warm glow rises behind the wordmark.
+      - **Canva AI:** the frame's two gradients (exported as `canva-bg`) wash in, the orb spins/pops in at top right and floats, the sparkle group pops at bottom left and twinkles, and the cursor glides in from the bottom right and "clicks" the orb.
+      - **ICCC:** a canvas device field (52 columns, dots at 13% ink, ~4.5% accent dots in #583BC0 that twinkle, up to three pulsing alert rings kept away from the edges) ripples out from behind the title; dots near the pointer swell and tint purple. It only animates while active or fading.
+      - **All four:** pointer parallax by depth (`--px/--py` x `--z`, in cqw). Reduced motion: states switch without movement.
+    - **Export technique used (reusable):** in one `use_figma` call, `exportAsync` each layer at SCALE 2, `figma.createImage` each, shelf-pack them as image-filled rectangles in a temporary no-fill frame, `get_screenshot` that frame at native size (transparency is preserved), slice locally with Pillow, delete the frame. The ULS logo was exported on its yellow background and was keyed to black on transparent (alpha = 255 - R).
+    - Verified in Edge at 1440x900 (each card off, mid and on) and 390x844 touch (only the centered card is active, no horizontal overflow, no script errors beyond the old favicon 404).
+
 ## In progress / not yet confirmed
 
 
 - Project pages: see item 41. The Figma snippets section `2298:739` is the source of truth for page images; DriveBuddy and Maison rows there are unused.
 - **Figma gotchas learned here:** Satoshi (ULS) and some Canva/Relique faces are local fonts the plugin cannot load, so text in those fonts can be cloned and moved but **not rescaled or edited**; clone the deck's existing labels instead of writing new ones. Inter and DM Sans load fine. Image fills in these decks are high resolution (ICCC screenshots 3154x1980), so scaling image rectangles is safe.
 - **My role content:** the CV page has real role text for **Canva AI** (user research, prompt testing and review analysis; built the CAPABLE framework; designed the high-fidelity conversational UI) and **Relique** (designed the platform; map-based discovery and narrative flows; high-fidelity prototypes). **ULS, ICCC, DriveBuddy and Maison need the user's input.**
-- **Needs the user:** Behance galleries for ULS and ICCC (their pages link to the profile for now); home grid thumbnails (the user is making them); hobby slides on About; portrait; Resume PDF.
+- **Needs the user:** Behance galleries for ULS and ICCC (their pages link to the profile for now); hobby slides on About; portrait; Resume PDF.
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 

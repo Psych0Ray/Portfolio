@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lab.css">
+<link rel="stylesheet" href="thumbs.css">
 <style>
 /* ── HERO ── */
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
@@ -95,7 +96,7 @@
 
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
-.wc{display:flex;flex-direction:column;padding:22px 22px 24px;aspect-ratio:4/3.3;text-decoration:none;color:var(--ink)}
+.wc{display:flex;flex-direction:column;padding:22px 22px 24px;text-decoration:none;color:var(--ink)}
 .wc-top{display:flex;justify-content:space-between;font-family:var(--label);font-size:11px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px}
 .wc-thumb{flex:1;min-height:0}
@@ -305,6 +306,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="thumbs.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var WORK = [
@@ -316,11 +318,12 @@ var WORK = [
 document.getElementById('grid').innerHTML = WORK.map(function(p, i){
   return '<a class="wc card" data-reveal data-cursor="Read" href="work/' + p.slug + '.html">'
     + '<div class="wc-top"><span>' + String(i + 1).padStart(3, '0') + '</span><span>' + p.yr + '</span></div>'
-    + '<div class="wc-thumb slot"></div>'
+    + THUMBS.html(p.slug, p.name)
     + '<div class="wc-bot"><div><h3>' + p.name + '</h3>'
     + '<div class="wc-tags">' + [p.cat].concat(p.tags).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join('') + '</div></div>'
     + '<span class="rbtn" aria-hidden="true">&rarr;</span></div></a>';
 }).join('');
+THUMBS.wire(document.getElementById('grid'));
 </script>
 <script src="lab.js"></script>
 <script>
