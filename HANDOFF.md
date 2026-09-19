@@ -292,7 +292,18 @@ Last updated: 2026-09-19
     - `tools/build_work.py` was rewritten for the four projects and the new layout; it reads the image list from each `work/img/<slug>/` folder. The prototype links (ICCC video, Canva Figma prototype) are no longer on the pages.
     - Verified at 1440 and 420 wide: no horizontal overflow, all images load; pages are about 5,000 to 5,700px tall at desktop (the rejected versions were over 9,000).
 
+42. **Blue highlight blocks removed from the project pages; prototype videos located on disk (2026-09-19).**
+    - **No `.hl` blue box on project pages any more** (user rejected it, showing the rotated SURVEILLANCE block). Titles are plain ink text (ICCC SURVEILLANCE, CANVA AI REDESIGN), the **My role** detail box is now styled like the other three (no blue fill), and VIEW ON BEHANCE is plain. The `.meta .role` and `.bh .hl` rules were deleted from `work/work.css`. **The shared footer's SAY HI still uses `.hl`** on these pages, to stay consistent with home and About; ask if that should go too. Committed and pushed (6f80f7c).
+    - **Videos found on the machine (nothing copied into the repo yet):**
+      - **ICCC:** `C:\Users\phoenix\Videos\Screen Recordings\Screen Recording 2026-03-19 202604.mp4`, 3:49, 1916x992, 223MB. A full walkthrough of the working coded prototype: live map with device clusters, device card popover, Alerts and Escalation summary, Work Tickets. The prototype's code (a Figma Make export, Vite + React + MUI, "Finalize Design") is in `D:\Submissions\OOUX\CODE`.
+      - **Relique:** `D:\Submissions\Audio Final\Relique Final Video submission.mp4`, 9:36, 1920x1080, 779MB. Full site walkthrough: map, featured artifacts, museum collection, the My Story narrations. The ElevenLabs clips in `D:\Submissions\Audio` and the Clipchamp clips beside the video are its narration audio.
+      - **ULS:** no prototype recording. `D:\Submissions\Service\Video Project 1.mp4` (0:23, 720p, 23MB; a copy is in OneDrive\Videos) is an AI-generated promo ad ("Kaam nahi mila?", ends on the yellow ULS logo, "Naka to Network, Made Easy."). Its source clips (Gen-4 Turbo and PixVerse) are in `C:\Users\phoenix\Downloads`.
+      - **Canva AI:** nothing. `D:\Submissions\Conv Int` holds only PDFs; the deck links to a Figma prototype instead.
+      - Unrelated hits: web design midcourse video (Northman law firm site), Accenture internship `Drobe Video.mp4`, Taloja road interview audio, game and browser assets.
+
 ## In progress / not yet confirmed
+
+- **Prototype videos (item 42):** waiting on the user to decide whether to put the ICCC and Relique walkthroughs (and the ULS ad) on the project pages. Both recordings are far too big to commit as is (223MB, 779MB); they need trimming to a short clip and re-encoding (no ffmpeg on this machine yet), or hosting on YouTube/Vimeo and embedding.
 
 - Project pages: see item 41. The Figma snippets section `2298:739` is the source of truth for page images; DriveBuddy and Maison rows there are unused.
 - **Figma gotchas learned here:** Satoshi (ULS) and some Canva/Relique faces are local fonts the plugin cannot load, so text in those fonts can be cloned and moved but **not rescaled or edited**; clone the deck's existing labels instead of writing new ones. Inter and DM Sans load fine. Image fills in these decks are high resolution (ICCC screenshots 3154x1980), so scaling image rectangles is safe.
