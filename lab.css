@@ -22,7 +22,8 @@ html.lenis,html.lenis body{height:auto}
 .lenis [data-lenis-prevent]{overscroll-behavior:contain}
 .lenis.lenis-smooth iframe{pointer-events:none}
 a{color:inherit}
-@media (hover:hover){ body,a,button{cursor:none} }
+/* the custom cursor is only for a real mouse; phones that claim hover never get it */
+@media (hover:hover) and (pointer:fine){ body,a,button{cursor:none} }
 
 .mono{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-weight:500}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
@@ -41,14 +42,14 @@ a{color:inherit}
   stroke-linecap:square;stroke-linejoin:miter;overflow:visible}
 
 /* ── CURSOR · a sticker dot that grows a label ── */
-.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform;display:none}
+@media (hover:hover) and (pointer:fine){.cursor{display:block}}
 .cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
   transform:translate(-50%,-50%)}
 .cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
   border-radius:100px;padding:9px 15px;font-family:var(--label);font-size:11px;
   font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
   opacity:0;transform-origin:left top}
-@media (hover:none){.cursor{display:none}}
 
 /* ── NAV · inset, raised, its own ground ── */
 .navwrap{position:fixed;left:0;right:0;top:22px;z-index:500;display:flex;justify-content:center;padding:0 24px;
@@ -188,4 +189,58 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   .foot{padding:60px 22px 26px;grid-template-columns:minmax(0,1fr)}
   .foot-links{grid-column:1;grid-row:auto;margin-top:46px;min-width:0}
   .foot-base{margin-top:46px}
+}
+
+/* ══ MOBILE MENU · replaces the nav bar at phone widths (built by lab.js menu()) ══
+   A round burger button; opening it floods the screen from the button: an ink circle first,
+   then the blue panel, then the links rise in one by one. The bars fold into an X. */
+.burger,.mmenu{display:none}
+@media (max-width:900px){
+  .navwrap{display:none}
+  .burger{display:grid;place-items:center;position:fixed;top:16px;right:16px;z-index:620;width:58px;height:58px;
+    border-radius:50%;background:var(--bone);border:var(--bw) solid var(--ink);box-shadow:0 4px 0 var(--ink);
+    padding:0;color:var(--ink);-webkit-tap-highlight-color:transparent;
+    transition:background .3s ease,transform .12s ease,box-shadow .12s ease,border-color .3s ease}
+  .burger:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+  .burger.hid{transform:translateY(-110px)}
+  .burger{transition:background .3s ease,transform .32s cubic-bezier(.4,0,.2,1),box-shadow .12s ease,border-color .3s ease}
+  .burger .bars{position:relative;width:24px;height:18px;display:block}
+  .burger .bars i{position:absolute;left:0;width:24px;height:3px;border-radius:2px;background:currentColor;
+    transition:transform .45s cubic-bezier(.7,-.4,.3,1.4),opacity .2s ease,top .45s cubic-bezier(.7,-.4,.3,1.4)}
+  .burger .bars i:nth-child(1){top:0}
+  .burger .bars i:nth-child(2){top:7.5px}
+  .burger .bars i:nth-child(3){top:15px}
+  .menu-open .burger{background:var(--paper);border-color:var(--ink)}
+  .menu-open .burger .bars i:nth-child(1){top:7.5px;transform:rotate(45deg)}
+  .menu-open .burger .bars i:nth-child(2){opacity:0;transform:scaleX(0)}
+  .menu-open .burger .bars i:nth-child(3){top:7.5px;transform:rotate(-45deg)}
+
+  .mmenu{display:block;position:fixed;inset:0;z-index:610;visibility:hidden;pointer-events:none}
+  .mmenu.open{visibility:visible;pointer-events:auto}
+  .mmenu .mm-ink,.mmenu .mm-panel{position:absolute;inset:0}
+  .mmenu .mm-ink{background:var(--ink)}
+  .mmenu .mm-panel{background:var(--blue);color:var(--paper);display:flex;flex-direction:column;padding:16px 22px 28px;overflow:hidden}
+  .mm-panel::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.22;
+    background-image:radial-gradient(var(--blue40) 1.6px,transparent 1.7px);background-size:14px 14px}
+  .mm-top{position:relative;height:58px;display:flex;align-items:center}
+  .mm-top .logo span{color:var(--paper)}
+  .mm-top .logo .l1,.mm-top .logo .l3{color:var(--bone)}
+  .mm-top .logo .l5{background:var(--paper);color:var(--blue)}
+  .mm-links{position:relative;list-style:none;margin:auto 0;display:flex;flex-direction:column;gap:4px}
+  .mm-links li{overflow:hidden;padding:4px 0}
+  .mm-links a{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:var(--paper);
+    font-family:var(--display);font-weight:800;font-size:clamp(46px,14vw,68px);letter-spacing:-.045em;line-height:.95;text-transform:uppercase}
+  .mm-links a small{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;color:var(--blue40);transform:translateY(-4px)}
+  .mm-links a.cta{display:inline-flex;align-self:flex-start;margin-top:14px;background:var(--paper);color:var(--blue);
+    border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink);padding:14px 24px;
+    font-size:18px;letter-spacing:.02em;gap:10px;align-items:center}
+  .mm-links li:has(.cta){overflow:visible;padding-bottom:10px}
+  .mm-links a.cta:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+  .mm-links a:not(.cta):active{color:var(--bone)}
+  .mm-foot{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;
+    border-top:2px solid var(--blue40);padding-top:18px;font-family:var(--label);font-size:12px;font-weight:700;
+    letter-spacing:.07em;text-transform:uppercase}
+  .mm-foot a{color:var(--paper);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .mm-foot .ic{width:14px;height:14px}
+  .mm-foot .mm-mail{color:var(--blue15);text-transform:none;letter-spacing:0;font-size:14px;font-weight:600}
 }

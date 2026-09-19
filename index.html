@@ -29,6 +29,22 @@
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
+/* phones: the name breaks into two big rows, RUTU / JEET, sized in vw so it always fills the width */
+.ransom .brk{display:none}
+@media (max-width:900px){
+  .hero{min-height:100svh;padding:104px 22px 120px;justify-content:center}
+  .ransom{flex-wrap:wrap;margin-left:-2px;row-gap:10px}
+  .ransom .brk{display:block;flex-basis:100%;height:0}
+  .ransom span{padding:5px 9px 9px;margin-right:-9px}
+  .L1{font-size:25vw}.L2{font-size:26vw}.L3{font-size:30vw}.L4{font-size:19vw}
+  .L5{font-size:31vw}.L6{font-size:35vw}.L7{font-size:24vw}.L8{font-size:20vw}
+  .L2{transform:rotate(3deg) translateY(-8px)}.L4{transform:rotate(5deg) translateY(6px)}
+  .L7{transform:rotate(-3deg) translateY(6px)}
+  .statement{margin-top:40px;font-size:clamp(30px,9.2vw,44px);gap:8px 12px;line-height:.95}
+  .statement .a{flex-basis:100%}
+  .statement .c{padding:2px 12px 6px}
+  .scue{right:22px;bottom:30px}
+}
 /* scroll cue: a labelled button rather than a slab with a giant arrow on it */
 .scue{position:absolute;right:40px;bottom:52px;z-index:4;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
 .scue-t{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:600}
@@ -83,6 +99,23 @@
 @keyframes k-bob{50%{transform:translateY(-7px)}}
 @keyframes k-blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.art .bob,.art .blink{animation:none}}
+/* phones: one skill per card, stacked for swiping; each card plays its illustration as it
+   reaches the middle of the screen (kit() builds these from the desktop list and art) */
+.kit-m{display:none}
+@media (max-width:900px){
+  .kit{display:none}
+  .kit-m{display:flex;flex-direction:column;gap:26px}
+  .km{display:flex;flex-direction:column;
+    background:var(--paper);border:var(--bw) solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+  .km header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;
+    background:var(--blue);color:var(--paper);border-bottom:var(--bw) solid var(--ink)}
+  .km h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,7.6vw,32px);letter-spacing:-.035em;line-height:.95;text-transform:uppercase}
+  .km small{flex:none;font-family:var(--label);font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--blue15)}
+  .km-screen{aspect-ratio:1/1;position:relative;overflow:hidden;
+    background-image:radial-gradient(var(--blue15) 1.5px,transparent 1.6px);background-size:14px 14px}
+  .km-screen .art{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);opacity:1}
+}
+@media (max-width:900px) and (hover:none){.km{scroll-snap-align:center}}
 
 /* ── SOFTWARE · the horizontal row ── */
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
@@ -153,7 +186,7 @@
 
 <header class="hero" id="hero">
   <div class="ransom" aria-label="Rutujeet">
-    <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
+    <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><i class="brk" aria-hidden="true"></i><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
   </div>
   <p class="statement">
     <span class="a">PRODUCT DESIGNER,</span>
@@ -186,6 +219,10 @@
 
 <section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHAT I <span class="hl">DO</span></h2></div>
+  <!-- shared halftone for the illustrations, the same dot disc the hobby posters use -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+    <pattern id="kdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.1" fill="#91A2CD"/></pattern>
+  </defs></svg>
   <div class="kit" id="kit">
     <ul class="skills">
       <li><button type="button" data-art="product-design"><span>Product design</span></button></li>
@@ -199,10 +236,6 @@
     </ul>
     <div class="screen">
       <div class="stage">
-        <!-- shared halftone for the illustrations, the same dot disc the hobby posters use -->
-        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-          <pattern id="kdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.1" fill="#91A2CD"/></pattern>
-        </defs></svg>
         <!-- Each illustration: filled shapes, ink outline, blue / bone / paper, halftone disc behind.
              Every top-level <g> is one piece; kit() pops them in one after another. -->
         <svg class="art" data-art="product-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
@@ -432,6 +465,7 @@
       </div>
     </div>
   </div>
+  <div class="kit-m" id="kitM"></div>
 </section>
 
 <section class="sec" style="padding-top:0">
@@ -440,11 +474,14 @@
     <div class="sw" data-reveal><h4>Figma</h4><span>Interfaces, dashboards, prototypes</span></div>
     <div class="sw" data-reveal><h4>FigJam</h4><span>Research synthesis, OOUX and service maps</span></div>
     <div class="sw" data-reveal><h4>Framer</h4><span>Interactive web prototypes</span></div>
-    <div class="sw" data-reveal><h4>Illustrator</h4><span>Vector, marks and diagrams</span></div>
-    <div class="sw" data-reveal><h4>Photoshop</h4><span>Image editing and mockups</span></div>
-    <div class="sw" data-reveal><h4>Boords</h4><span>Storyboards and animatics</span></div>
+    <div class="sw" data-reveal><h4>Figma Make</h4><span>Coded prototypes from designs</span></div>
     <div class="sw" data-reveal><h4>Google Forms</h4><span>Surveys and usability questionnaires</span></div>
-    <div class="sw" data-reveal><h4>ChatGPT and Gemini</h4><span>Research support and vibecoding</span></div>
+    <div class="sw" data-reveal><h4>Canva</h4><span>Quick visuals and presentations</span></div>
+    <div class="sw" data-reveal><h4>Claude</h4><span>Research, synthesis and writing</span></div>
+    <div class="sw" data-reveal><h4>Claude Code</h4><span>Building and shipping sites, including this one</span></div>
+    <div class="sw" data-reveal><h4>ChatGPT</h4><span>Research support and ideation</span></div>
+    <div class="sw" data-reveal><h4>Gemini</h4><span>Research support and ideation</span></div>
+    <div class="sw" data-reveal><h4>Antigravity</h4><span>Vibecoding prototypes</span></div>
   </div>
 </section>
 
@@ -509,6 +546,46 @@ THUMBS.wire(document.getElementById('grid'));
     svg.parts = [].slice.call(svg.children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
   });
 
+  function pop(svg){
+    if (REDUCED) return;
+    gsap.fromTo(svg.parts[0], { scale:.4, opacity:0, transformOrigin:'50% 50%' },
+      { scale:1, opacity:1, duration:.6, ease:'power3.out', overwrite:true });
+    gsap.fromTo(svg.parts.slice(1),
+      { scale:0, opacity:0, rotation:function(i){ return i % 2 ? 14 : -14; }, y:14, transformOrigin:'50% 50%' },
+      { scale:1, opacity:1, rotation:0, y:0, duration:.55, ease:'back.out(1.9)', stagger:.075, delay:.08, overwrite:true });
+  }
+  function unpop(svg){
+    if (REDUCED) return;
+    gsap.killTweensOf(svg.parts);
+    gsap.set(svg.parts, { scale:0, opacity:0, transformOrigin:'50% 50%' });
+  }
+
+  /* phones: one card per skill, built from the list and the art, played on arrival */
+  var km = document.getElementById('kitM');
+  if (km) {
+    var cards = rows.map(function(li, i){
+      var b = li.querySelector('button'), key = b.getAttribute('data-art');
+      var art = kit.querySelector('.art[data-art="' + key + '"]');
+      var card = document.createElement('article');
+      card.className = 'km';
+      card.innerHTML = '<header><h3>' + b.textContent.trim() + '</h3><small>0' + (i + 1) + ' / 0' + rows.length + '</small></header><div class="km-screen"></div>';
+      var svg = art.cloneNode(true);
+      svg.classList.add('on');
+      svg.setAttribute('viewBox', '24 16 352 272');   /* crop the empty margin so the art reads bigger on a phone */
+      svg.parts = [].slice.call(svg.children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
+      card.querySelector('.km-screen').appendChild(svg);
+      km.appendChild(card);
+      card._svg = svg; unpop(svg);
+      return card;
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting) pop(e.target._svg); else unpop(e.target._svg); });
+      }, { rootMargin:'-35% 0px -35% 0px' });
+      cards.forEach(function(c){ io.observe(c); });
+    } else cards.forEach(function(c){ pop(c._svg); });
+  }
+
   function show(key, name, row){
     if (key === current) return;
     current = key;
@@ -517,12 +594,7 @@ THUMBS.wire(document.getElementById('grid'));
       var on = svg.getAttribute('data-art') === key;
       svg.classList.toggle('on', on);
       if (!on) return;
-      if (REDUCED) return;
-      gsap.fromTo(svg.parts[0], { scale:.4, opacity:0, transformOrigin:'50% 50%' },
-        { scale:1, opacity:1, duration:.6, ease:'power3.out', overwrite:true });
-      gsap.fromTo(svg.parts.slice(1),
-        { scale:0, opacity:0, rotation:function(i){ return i % 2 ? 14 : -14; }, y:14, transformOrigin:'50% 50%' },
-        { scale:1, opacity:1, rotation:0, y:0, duration:.55, ease:'back.out(1.9)', stagger:.075, delay:.08, overwrite:true });
+      pop(svg);
     });
   }
 

@@ -28,7 +28,7 @@ function glideTo(target){
    on anything with data-cursor="…".                                 */
 (function cursor(){
   var cur = document.getElementById('cursor');
-  if (!cur || !window.matchMedia('(hover:hover)').matches) return;
+  if (!cur || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
   var dot = cur.querySelector('.dot'), tag = cur.querySelector('.tag');
   gsap.set(dot,{xPercent:-50,yPercent:-50});
   gsap.set(tag,{scale:.6,rotation:-4,opacity:0});
@@ -36,9 +36,14 @@ function glideTo(target){
   var cy = gsap.quickTo(cur,'y',{duration:.12,ease:'power3'});
   var shown = false;
 
-  window.addEventListener('mousemove', function(e){
+  /* pointer events, so a tap on a touch laptop never drags the cursor to the tap point */
+  window.addEventListener('pointermove', function(e){
+    if (e.pointerType !== 'mouse') return;
     cx(e.clientX); cy(e.clientY);
     if (!shown){ shown = true; gsap.to(cur,{opacity:1,duration:.2}); }
+  }, {passive:true});
+  window.addEventListener('pointerdown', function(e){
+    if (e.pointerType !== 'mouse' && shown){ shown = false; gsap.to(cur,{opacity:0,duration:.1}); }
   }, {passive:true});
   document.documentElement.addEventListener('mouseleave', function(){ shown=false; gsap.to(cur,{opacity:0,duration:.2}); });
 
@@ -69,8 +74,9 @@ function glideTo(target){
   window.addEventListener('scroll', function(){
     var y = window.scrollY, d = y - last;
     if (Math.abs(d) < 6) return;            // ignore jitter, so a nudge up is enough
-    if (d > 0 && y > 150) wrap.classList.add('hid');
-    else if (d < 0) wrap.classList.remove('hid');
+    var burger = document.querySelector('.burger');      /* phones: the menu button follows the same rule */
+    if (d > 0 && y > 150) { wrap.classList.add('hid'); if (burger && !document.documentElement.classList.contains('menu-open')) burger.classList.add('hid'); }
+    else if (d < 0) { wrap.classList.remove('hid'); if (burger) burger.classList.remove('hid'); }
     last = y;
   }, {passive:true});
 })();
@@ -204,4 +210,94 @@ document.addEventListener('touchstart', function(){}, {passive:true});
     .from(icons, { rotation:-135, scale:0, duration:.55, ease:'back.out(2.4)', stagger:.09, clearProps:'transform' }, '-=.45');
   if (base) tl.fromTo(base, { '--b':0 }, { '--b':1, duration:.8, ease:'power3.inOut' }, '-=.5')
               .from(base.children, { y:12, opacity:0, duration:.4, ease:'power2.out', stagger:.08 }, '-=.35');
+})();
+
+/* ── MOBILE MENU · built from the page's own nav and footer links, so every page gets it ──
+   Opening: an ink circle then the blue panel grow out of the burger, the links rise in with a
+   stagger, the footer strip fades up. Closing plays it back quickly in reverse. Scroll is
+   locked while it is open; Escape and any link close it.                                  */
+(function menu(){
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var links = [].slice.call(nav.querySelectorAll('a.lnk'));
+  var logo = nav.querySelector('.logo');
+  var foot = [].slice.call(document.querySelectorAll('.foot-links a'));
+  var mail = document.getElementById('mail');
+  var NE = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>';
+  var RA = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg>';
+
+  var btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'burger';
+  btn.setAttribute('aria-label', 'Open menu'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', 'mmenu');
+  btn.innerHTML = '<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>';
+
+  var m = document.createElement('div');
+  m.className = 'mmenu'; m.id = 'mmenu';
+  m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true'); m.setAttribute('aria-label', 'Menu');
+  var n = 0;
+  var items = links.map(function(a){
+    var cta = a.classList.contains('cta'), label = a.textContent.trim();
+    if (!cta) n++;
+    return '<li><a href="' + a.getAttribute('href') + '"' + (cta ? ' class="cta"' : '') + '>'
+      + (cta ? label + ' ' + RA : '<small>0' + n + '</small>' + label) + '</a></li>';
+  }).join('');
+  var socials = foot.map(function(a){
+    return '<a href="' + a.href + '" target="_blank" rel="noopener">' + a.textContent.trim() + ' ' + NE + '</a>';
+  }).join('');
+  m.innerHTML = '<div class="mm-ink"></div><div class="mm-panel">'
+    + '<div class="mm-top">' + (logo ? logo.outerHTML : '') + '</div>'
+    + '<ul class="mm-links">' + items + '</ul>'
+    + '<div class="mm-foot">'
+    + (mail ? '<a class="mm-mail" href="mailto:' + mail.getAttribute('data-mail') + '">' + mail.getAttribute('data-mail') + '</a>' : '')
+    + '<span style="display:flex;gap:16px">' + socials + '</span>'
+    + '</div></div>';
+  document.body.appendChild(m);
+  document.body.appendChild(btn);
+
+  var ink = m.querySelector('.mm-ink'), panel = m.querySelector('.mm-panel');
+  var rows = m.querySelectorAll('.mm-links a'), top = m.querySelector('.mm-top'), bottom = m.querySelector('.mm-foot');
+  var open = false, tl = null;
+
+  function origin(){
+    var r = btn.getBoundingClientRect();
+    return Math.round(r.left + r.width / 2) + 'px ' + Math.round(r.top + r.height / 2) + 'px';
+  }
+  function lock(on){
+    document.documentElement.style.overflow = on ? 'hidden' : '';
+    if (window.LENIS) { if (on) LENIS.stop(); else LENIS.start(); }
+  }
+  function show(){
+    if (open) return; open = true;
+    m.classList.add('open'); document.documentElement.classList.add('menu-open');
+    btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu');
+    lock(true);
+    if (tl) tl.kill();
+    if (REDUCED || typeof gsap === 'undefined') { if (rows[0]) rows[0].focus(); return; }
+    var o = origin();
+    tl = gsap.timeline();
+    tl.fromTo(ink, { clipPath:'circle(0px at ' + o + ')' }, { clipPath:'circle(150% at ' + o + ')', duration:.6, ease:'power3.inOut' })
+      .fromTo(panel, { clipPath:'circle(0px at ' + o + ')' }, { clipPath:'circle(150% at ' + o + ')', duration:.7, ease:'power3.inOut' }, .08)
+      .fromTo(top, { opacity:0, y:-12 }, { opacity:1, y:0, duration:.4, ease:'power2.out' }, .42)
+      .fromTo(rows, { yPercent:115, rotation:6, opacity:0 }, { yPercent:0, rotation:0, opacity:1, duration:.65, ease:'power4.out', stagger:.07 }, .38)
+      .fromTo(bottom, { opacity:0, y:16 }, { opacity:1, y:0, duration:.45, ease:'power2.out' }, .7)
+      .add(function(){ if (rows[0]) rows[0].focus({ preventScroll:true }); });
+  }
+  function hide(){
+    if (!open) return; open = false;
+    document.documentElement.classList.remove('menu-open');
+    btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu');
+    lock(false);
+    if (tl) tl.kill();
+    if (REDUCED || typeof gsap === 'undefined') { m.classList.remove('open'); return; }
+    var o = origin();
+    tl = gsap.timeline({ onComplete:function(){ m.classList.remove('open'); } });
+    tl.to(rows, { yPercent:-110, opacity:0, duration:.28, ease:'power2.in', stagger:.035 })
+      .to([top, bottom], { opacity:0, duration:.2 }, 0)
+      .to(panel, { clipPath:'circle(0px at ' + o + ')', duration:.5, ease:'power3.inOut' }, .16)
+      .to(ink, { clipPath:'circle(0px at ' + o + ')', duration:.5, ease:'power3.inOut' }, .24);
+  }
+  btn.addEventListener('click', function(){ if (open) hide(); else show(); });
+  m.addEventListener('click', function(e){ if (e.target.closest('a')) hide(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && open) { hide(); btn.focus(); } });
+  window.addEventListener('resize', function(){ if (open && window.innerWidth > 900) hide(); });
 })();
