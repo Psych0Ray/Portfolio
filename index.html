@@ -30,13 +30,16 @@
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
-/* phones: the same single row as desktop, scaled down (the clamp minimums would otherwise
-   blow it past the screen, so each letter drops to its vw size, trimmed to fit) */
+/* phones: the lockup is laid out at its full desktop size and then scaled as one block
+   (fitName() in the script sets --k). Shrinking the type alone does not work: each letter's
+   nudge, like translateY(-16px), is in pixels and would stay huge next to small letters. */
+.ransom-fit{position:relative;z-index:4}
 @media (max-width:900px){
-  .hero{min-height:100svh;padding:104px 12px 120px;justify-content:center}
-  .ransom{margin-left:-1px}
-  .L1{font-size:12.4vw}.L2{font-size:13.2vw}.L3{font-size:14.8vw}.L4{font-size:9.6vw}
-  .L5{font-size:12.7vw}.L6{font-size:13.9vw}.L7{font-size:10vw}.L8{font-size:9.1vw}
+  .hero{min-height:100svh;padding:104px 16px 120px;justify-content:center}
+  .ransom-fit{overflow:hidden}
+  .ransom{width:max-content;margin-left:0;transform-origin:left top;transform:scale(var(--k,1))}
+  .L1{font-size:194px}.L2{font-size:208px}.L3{font-size:234px}.L4{font-size:150px}
+  .L5{font-size:200px}.L6{font-size:220px}.L7{font-size:156px}.L8{font-size:142px}
   .statement{margin-top:26px;font-size:clamp(23px,7vw,34px);gap:6px 10px;line-height:.98}
   .statement .a{flex-basis:100%}
   .statement .c{padding:2px 12px 6px}
@@ -182,8 +185,10 @@
 </nav></div>
 
 <header class="hero" id="hero">
-  <div class="ransom" aria-label="Rutujeet">
-    <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
+  <div class="ransom-fit" id="nameFit">
+    <div class="ransom" aria-label="Rutujeet">
+      <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
+    </div>
   </div>
   <p class="statement">
     <span class="a">PRODUCT DESIGNER,</span>
@@ -617,6 +622,32 @@ THUMBS.wire(document.getElementById('grid'));
 })();
 </script>
 <script>
+/* the name is one fixed-size block on phones, scaled to whatever width the screen has */
+(function fitName(){
+  var fit = document.getElementById('nameFit');
+  if (!fit) return;
+  var name = fit.querySelector('.ransom');
+  var spans = [].slice.call(name.querySelectorAll('span'));
+  function run(){
+    if (!window.matchMedia('(max-width:900px)').matches) {
+      name.style.removeProperty('--k'); fit.style.height = ''; return;
+    }
+    /* measure the lockup's real visual box: drop the intro tween's inline transforms for a
+       moment so only the letters' own tilts count, then put them straight back */
+    var saved = spans.map(function(el){ return el.style.transform; });
+    spans.forEach(function(el){ el.style.transform = ''; });
+    name.style.setProperty('--k', 1);
+    var r = name.getBoundingClientRect(), w = r.width, h = r.height;
+    spans.forEach(function(el, i){ el.style.transform = saved[i]; });
+    var k = fit.clientWidth / w;
+    name.style.setProperty('--k', k);
+    fit.style.height = Math.ceil(h * k) + 'px';
+  }
+  run();
+  window.addEventListener('resize', run);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+})();
+
 (function ransom(){
   var letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));
   if (!letters.length || REDUCED) return;
