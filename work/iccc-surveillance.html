@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICCC Surveillance · Rutujeet</title>
+<meta name="description" content="A redesign of the command centre dashboard that monitors Taloja MIDC, rebuilt around how alerts are actually verified, escalated and resolved.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../lab.css">
+<link rel="stylesheet" href="work.css">
+</head>
+<body>
+
+<svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+<div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
+
+<div class="navwrap"><nav class="nav">
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <span class="grow"></span>
+  <a href="../index.html#work" class="lnk on">Work</a>
+  <a href="../about.html" class="lnk">About</a>
+  <a href="#" class="lnk">Resume</a>
+  <a href="#contact" class="lnk cta">Get in touch</a>
+</nav></div>
+
+<header class="chead">
+  <a href="../index.html#work" class="back">&larr; All work</a>
+  <span class="kicker">Object-oriented UX</span>
+  <h1>ICCC <span class="hl">SURVEILLANCE</span></h1>
+  <p class="one">A redesign of the command centre dashboard that monitors Taloja MIDC, rebuilt around how alerts are actually verified, escalated and resolved.</p>
+  <div class="meta"><div><b>Course</b><span>Object-oriented UX</span></div><div><b>Team</b><span>Harsh Mane, Namandeep, Rutujeet Nayak</span></div><div><b>Methods</b><span>Field observation, interviews, OOUX, task modelling</span></div><div><b>Year</b><span>2026</span></div></div>
+  <div class="ctas">
+    <a href="https://www.behance.net/rutujeetnayak" class="btn fill" target="_blank" rel="noopener" data-cursor="Behance">More work on Behance &#8599;</a>
+    <a href="https://drive.google.com/drive/folders/1__KTXMdre0WThFkfeRdC77Gieae--57s" class="btn" target="_blank" rel="noopener">Watch the prototype &#8599;</a>
+  </div>
+</header>
+
+<div class="cover"><div class="frame"><img src="img/iccc-surveillance/01.jpg" width="1600" height="912" alt="ICCC Surveillance cover slide" loading="eager" fetchpriority="high" decoding="async"></div></div>
+
+<section class="band">
+  <h2>THE ALERTS WORK. THE <span class="hl">RESPONSE</span> DOES NOT.</h2>
+  <p>The ICCC watches 310 cameras, 349 street lights and over 1,000 smart poles across 950+ industries. In the command centre we watched operators verify every alert by hand, memorise device IDs, and dispatch field teams over WhatsApp and phone calls with no record of what happened next.</p>
+</section>
+
+<section class="sec nums">
+  <div class="outcome">
+    <div class="out card" data-reveal><b>3-7 min</b><span>Spent verifying a single alert by hand</span></div>
+    <div class="out card" data-reveal><b>6 of 6</b><span>Operators coordinating field work only through WhatsApp and calls</span></div>
+    <div class="out card" data-reveal><b>93.8%</b><span>Less cognitive load after regrouping the object model</span></div>
+  </div>
+</section>
+
+<section class="shots">
+  <figure class="shot" data-reveal>
+    <figcaption><h3>Six findings from the command centre</h3><p>Field observation and interviews with six operators at the ICCC in Navi Mumbai, down to what slows a response.</p></figcaption>
+    <div class="frame"><img src="img/iccc-surveillance/02.jpg" width="1600" height="1083" alt="Six research findings from the ICCC command centre" loading="lazy" decoding="async"></div>
+  </figure>
+  <figure class="shot" data-reveal>
+    <figcaption><h3>From 140 objects to 14</h3><p>We grouped a sparse object-action map into a dense one and measured it: the new model carries 6.2% of the original information load.</p></figcaption>
+    <div class="frame"><img src="img/iccc-surveillance/03.jpg" width="1600" height="1814" alt="Dense object-action matrix and the cognitive load calculation" loading="lazy" decoding="async"></div>
+  </figure>
+  <figure class="shot" data-reveal>
+    <figcaption><h3>A live map, always on</h3><p>Operators no longer cross-reference IP lists. Every alert has a place on the map, and critical ones stay visible.</p></figcaption>
+    <div class="frame"><img src="img/iccc-surveillance/04.jpg" width="1600" height="800" alt="Live map dashboard with device clusters and filters" loading="lazy" decoding="async"></div>
+  </figure>
+  <figure class="shot" data-reveal>
+    <figcaption><h3>Every device, one click deep</h3><p>Status, severity, event log and affected industries in one card, with acknowledge or ignore right there.</p></figcaption>
+    <div class="frame"><img src="img/iccc-surveillance/05.jpg" width="1600" height="875" alt="Device cards with status, event logs and one-click acknowledge" loading="lazy" decoding="async"></div>
+  </figure>
+  <figure class="shot" data-reveal>
+    <figcaption><h3>The summary that stays pinned</h3><p>Active, faulty and critical counts stay on screen across tabs, with trend analysis to catch devices that keep failing.</p></figcaption>
+    <div class="frame"><img src="img/iccc-surveillance/06.jpg" width="1600" height="1117" alt="Alert summary with pinned counts, trend analysis and multi-page layout" loading="lazy" decoding="async"></div>
+  </figure>
+</section>
+
+<section class="sec">
+  <a class="bh" href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>
+    <div>
+      <h2>THAT WAS THE <span class="hl">TRAILER</span></h2>
+      <p>The full case study is on its way to Behance. The rest of the work is already there.</p>
+    </div>
+    <span class="rbtn" aria-hidden="true">&#8599;</span>
+  </a>
+  <a class="next card" href="canva-ai.html" data-reveal data-cursor="Next">
+    <div><span class="lab">Next project</span><h3>Canva AI redesign</h3></div>
+    <span class="rbtn" aria-hidden="true">&rarr;</span>
+  </a>
+</section>
+
+<footer class="foot" id="contact">
+  <h2>SAY <span class="hl">HI</span></h2>
+  <button type="button" class="mailbtn" id="mail" data-cursor="Copy?"
+          data-mail="rutujeetnayak@gmail.com" aria-label="Copy email address">
+    <span class="addr">rutujeetnayak@gmail.com</span>
+    <span class="stamp" role="status"></span>
+  </button>
+  <nav class="foot-links">
+    <a href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener">Behance <span aria-hidden="true">&#8599;</span></a>
+    <a href="https://www.linkedin.com/in/rutujeet-nayak-b5a47129b" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+  </nav>
+  <div class="foot-base">
+    <span>© 2026 Rutujeet</span>
+    <button type="button" class="totop">Back to top <span aria-hidden="true">&#8593;</span></button>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js" integrity="sha512-oJ8QbaQThQoJZ7oEv+29jfPM6CcP+zUxh3PKJs1vyOhx0UraUrE7PQgeItu3dOuCJyrzWpoYMsVjkkPEBzbUqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>gsap.registerPlugin(ScrollTrigger);</script>
+<script src="../lab.js"></script>
+</body>
+</html>

@@ -156,8 +156,7 @@
     <span class="count">Six projects</span>
   </div>
   <div class="grid" id="grid"></div>
-  <!-- TODO: real Behance profile URL -->
-  <a class="more" href="#" data-cursor="Behance">
+  <a class="more" href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener" data-cursor="Behance">
     <div>
       <h3>Interested in seeing more?</h3>
       <p>The rest of the work, including the projects that did not make this page, lives on Behance.</p>
@@ -269,14 +268,14 @@
 <section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHAT I <span class="hl">USE</span></h2></div>
   <div class="tiles">
-    <div class="sw" data-reveal><h4>Figma</h4><span>Interface, systems, prototyping</span></div>
-    <div class="sw" data-reveal><h4>After Effects</h4><span>Motion and interface animation</span></div>
-    <div class="sw" data-reveal><h4>Illustrator</h4><span>Marks, type drawing, vector</span></div>
-    <div class="sw" data-reveal><h4>Photoshop</h4><span>Retouching and composition</span></div>
-    <div class="sw" data-reveal><h4>Blender</h4><span>3D assets and product renders</span></div>
-    <div class="sw" data-reveal><h4>Framer</h4><span>High-fidelity web prototypes</span></div>
-    <div class="sw" data-reveal><h4>Webflow</h4><span>Production sites and CMS</span></div>
-    <div class="sw" data-reveal><h4>Notion</h4><span>Docs, research, project tracking</span></div>
+    <div class="sw" data-reveal><h4>Figma</h4><span>Interfaces, dashboards, prototypes</span></div>
+    <div class="sw" data-reveal><h4>FigJam</h4><span>Research synthesis, OOUX and service maps</span></div>
+    <div class="sw" data-reveal><h4>Framer</h4><span>Interactive web prototypes</span></div>
+    <div class="sw" data-reveal><h4>Illustrator</h4><span>Vector, marks and diagrams</span></div>
+    <div class="sw" data-reveal><h4>Photoshop</h4><span>Image editing and mockups</span></div>
+    <div class="sw" data-reveal><h4>Boords</h4><span>Storyboards and animatics</span></div>
+    <div class="sw" data-reveal><h4>Google Forms</h4><span>Surveys and usability questionnaires</span></div>
+    <div class="sw" data-reveal><h4>ChatGPT and Gemini</h4><span>Research support and vibecoding</span></div>
   </div>
 </section>
 
@@ -295,9 +294,8 @@
     <span class="stamp" role="status"></span>
   </button>
   <nav class="foot-links">
-    <a href="#">Instagram <span aria-hidden="true">&#8599;</span></a>
-    <a href="#">Behance <span aria-hidden="true">&#8599;</span></a>
-    <a href="#">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+    <a href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener">Behance <span aria-hidden="true">&#8599;</span></a>
+    <a href="https://www.linkedin.com/in/rutujeet-nayak-b5a47129b" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
   </nav>
   <div class="foot-base">
     <span>© 2026 Rutujeet</span>
@@ -310,15 +308,15 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var WORK = [
-  {name:'ULS',               cat:'Service design',          yr:'20XX', tags:['Dashboard']},
-  {name:'Relique',           cat:'Semiotics and semantics', yr:'20XX', tags:['Website design']},
-  {name:'Maison&nbsp;;TJRS',      cat:'Design management',       yr:'20XX', tags:['Concept']},
-  {name:'ICCC Surveillance', cat:'OOUX',                    yr:'20XX', tags:['Dashboard']},
-  {name:'Canva AI redesign', cat:'Redesign',                yr:'20XX', tags:['AI design']},
-  {name:'DriveBuddy',        cat:'UI design',               yr:'20XX', tags:['User testing']}
+  {name:'ULS',               slug:'uls',               cat:'Service design',          yr:'2026', tags:['Dashboard']},
+  {name:'Relique',           slug:'relique',           cat:'Semiotics and semantics', yr:'2025', tags:['Website design']},
+  {name:'Maison&nbsp;;TJRS', slug:'maison-tjrs',       cat:'Design management',       yr:'2025', tags:['Concept']},
+  {name:'ICCC Surveillance', slug:'iccc-surveillance', cat:'OOUX',                    yr:'2026', tags:['Dashboard']},
+  {name:'Canva AI redesign', slug:'canva-ai',          cat:'Redesign',                yr:'2025', tags:['AI design']},
+  {name:'DriveBuddy',        slug:'drivebuddy',        cat:'UI design',               yr:'2024', tags:['User testing']}
 ];
 document.getElementById('grid').innerHTML = WORK.map(function(p, i){
-  return '<a class="wc card" data-reveal data-cursor="Read" href="case.html">'
+  return '<a class="wc card" data-reveal data-cursor="Read" href="work/' + p.slug + '.html">'
     + '<div class="wc-top"><span>' + String(i + 1).padStart(3, '0') + '</span><span>' + p.yr + '</span></div>'
     + '<div class="wc-thumb slot"></div>'
     + '<div class="wc-bot"><div><h3>' + p.name + '</h3>'

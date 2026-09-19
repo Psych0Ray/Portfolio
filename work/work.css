@@ -1,0 +1,68 @@
+/* Project pages: a short trailer of each case study that hands off to Behance.
+   The slides are shown exactly as they were designed; the site only frames them. */
+
+.chead{padding:150px 40px 56px}
+.back{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);text-decoration:none;display:inline-block;margin-bottom:30px}
+.kicker{display:block;font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.chead h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7.4vw,104px);letter-spacing:-.05em;line-height:.86;text-transform:uppercase}
+.chead .one{margin-top:26px;max-width:56ch;font-size:18px;line-height:1.65;color:var(--muted)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border:var(--bw) solid var(--ink)}
+.meta div{padding:22px 24px;border-right:2px solid var(--ink)}
+.meta div:last-child{border-right:0}
+.meta b{font-family:var(--label);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px;font-weight:700}
+.meta span{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.35;letter-spacing:-.01em}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{text-decoration:none;display:inline-block}
+
+/* the work itself: plain ink frame, no rotation, no crop */
+.frame{border:var(--bw) solid var(--ink);background:var(--paper);line-height:0}
+.frame img{width:100%;height:auto;display:block}
+.cover{padding:0 40px}
+
+.band{background:var(--blue);color:var(--paper);padding:84px 40px;margin-top:64px}
+.band h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.045em;line-height:.9;max-width:22ch;text-transform:uppercase}
+.band .hl{background:var(--ink)}              /* a blue block would vanish on the blue band */
+.band p{margin-top:26px;max-width:60ch;font-size:17px;line-height:1.75;color:var(--blue15)}
+
+.nums{padding-bottom:40px}
+.outcome{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.out{padding:32px}
+.out b{font-family:var(--display);font-weight:800;font-stretch:75%;font-size:clamp(36px,4.2vw,54px);color:var(--blue);display:block;line-height:1;letter-spacing:0}
+.out span{display:block;margin-top:14px;font-size:15px;line-height:1.6;color:var(--muted)}
+
+.shots{padding:24px 40px 0;display:flex;flex-direction:column;gap:88px}
+.shot figcaption{margin-bottom:26px;max-width:62ch}
+.shot h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em;line-height:.95;text-transform:uppercase}
+.shot p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--muted)}
+
+/* the hand-off: same bar language as the Behance link under the home grid */
+.bh{display:flex;align-items:center;gap:32px;padding:40px 44px;background:var(--ink);color:var(--paper);text-decoration:none;
+  border:var(--bw) solid var(--ink);transition:background .18s ease}
+.bh:hover{background:var(--blue)}
+.bh h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.045em;line-height:.9}
+.bh .hl{background:var(--blue)}
+.bh:hover .hl{background:var(--ink)}
+.bh p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--blue15)}
+.bh .rbtn{margin-left:auto;width:72px;height:72px;font-size:28px;background:var(--paper);color:var(--ink);transition:transform .18s ease}
+.bh:hover .rbtn{transform:translate(4px,-4px)}
+
+.next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:40px 44px;flex-wrap:wrap;text-decoration:none;color:inherit;margin-top:28px}
+.next .lab{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
+.next h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
+.next .rbtn{width:64px;height:64px;font-size:26px}
+
+@media (max-width:900px){
+  .chead{padding:118px 22px 40px}
+  .cover,.shots{padding-left:22px;padding-right:22px}
+  .shots{gap:60px}
+  .band{padding:60px 22px;margin-top:44px}
+  .outcome{grid-template-columns:1fr;gap:18px}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta div{border-bottom:2px solid var(--ink)}
+  .meta div:nth-child(even){border-right:0}
+  .meta div:nth-last-child(-n+2){border-bottom:0}
+  .bh{flex-direction:column;align-items:flex-start;padding:30px 26px;gap:22px}
+  .bh .rbtn{margin-left:0;width:56px;height:56px;font-size:22px}
+  .next{padding:28px 26px}
+}
+@media (prefers-reduced-motion:reduce){.bh,.bh .rbtn{transition:none}}
