@@ -1,6 +1,27 @@
 /* ══ Rutujeet · shared behaviour ═════════════════════════════════ */
 var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ── SMOOTH SCROLL · Lenis eases the wheel and trackpad everywhere. Touch keeps its native
+   scrolling (Lenis leaves it alone by default). Driven by GSAP's ticker so ScrollTrigger stays
+   in sync. Off under reduced motion. LENIS is null when it is off; callers fall back.   */
+var LENIS = null;
+(function smooth(){
+  if (REDUCED || typeof Lenis === 'undefined') return;
+  LENIS = new Lenis({ lerp:.1, wheelMultiplier:1 });
+  if (typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') LENIS.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ LENIS.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    (function raf(t){ LENIS.raf(t); requestAnimationFrame(raf); })(0);
+  }
+})();
+function glideTo(target){
+  if (LENIS) LENIS.scrollTo(target, { duration:1.2, easing:function(x){ return 1 - Math.pow(1 - x, 4); } });
+  else window.scrollTo({ top: typeof target === 'number' ? target : target.getBoundingClientRect().top + window.scrollY,
+                         behavior: REDUCED ? 'auto' : 'smooth' });
+}
+
 /* ── CURSOR ─────────────────────────────────────────────────────
    Transform-only. Nothing tweens width/height/margin, which is what
    made the last one jitter. The dot follows; a sticker label pops in
@@ -90,7 +111,7 @@ var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var b = document.querySelector('.totop');
   if (!b) return;
   b.addEventListener('click', function(){
-    window.scrollTo({ top:0, behavior: REDUCED ? 'auto' : 'smooth' });
+    glideTo(0);
   });
 })();
 
@@ -147,8 +168,7 @@ document.addEventListener('touchstart', function(){}, {passive:true});
     var t = document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!t) return;
     e.preventDefault();
-    var y = t.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top:y, behavior: REDUCED ? 'auto' : 'smooth' });
+    glideTo(t);
     if (history.pushState) history.pushState(null, '', url.hash);
   });
 })();

@@ -16,6 +16,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-optical-sizing:auto}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);overflow-x:hidden}
+/* Lenis smooth scrolling (lab.js smooth()); rules from lenis.css */
+html.lenis,html.lenis body{height:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-smooth iframe{pointer-events:none}
 a{color:inherit}
 @media (hover:hover){ body,a,button{cursor:none} }
 

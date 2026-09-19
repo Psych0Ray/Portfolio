@@ -3,7 +3,7 @@
    Each layer is .el (placed in %, carries the pointer parallax) > i (the entrance) > img
    (the idle motion once it has landed). Motion lengths are in cqw, i.e. % of card width.  */
 
-.wc-thumb.th{flex:none;position:relative;aspect-ratio:1192/708;overflow:hidden;container-type:inline-size;
+.wc-thumb.th{flex:none;position:relative;aspect-ratio:1192/708;overflow:hidden;container-type:size;
   background:var(--thbg);border:2.5px solid var(--ink);isolation:isolate}
 .th .el{position:absolute;display:block;z-index:2;
   transform:translate(calc(var(--px,0) * var(--z,0) * -1cqw),calc(var(--py,0) * var(--z,0) * -1cqw));
@@ -54,4 +54,19 @@
 
 @media (prefers-reduced-motion:reduce){
   .th .el,.th .el i,.th .el img,.th .glow{transition-duration:.001s !important;transition-delay:0s !important;animation:none !important}
+}
+
+/* ── Phones: reel cards. Each project card fills most of the screen and snaps to centre as you
+   scroll, with the next one peeking below, still inactive; the centred card plays its animation
+   (thumbs.js activates the card in the middle band of the viewport on touch screens). The
+   thumbnail grows to fill the card; pieces are centre-anchored, so they spread out, not crop. */
+@media (max-width:900px){
+  .wc-thumb.th{aspect-ratio:auto;flex:1 1 auto;min-height:0}
+  .th .wash{height:100%}
+  .th .wash i,.th .wash img{height:100%}
+  .th .wash img{object-fit:cover}
+  /* a phone card is narrow, so pieces sized by width read small in the tall frame: scale them up */
+  .th .pop,.th .orb,.th .cur,.th .spark{scale:1.55}
+  .th .logo{scale:1.28}
+  .th-iccc-surveillance .logo{scale:1.12}
 }

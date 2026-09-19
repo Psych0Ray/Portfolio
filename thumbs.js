@@ -37,8 +37,11 @@ var THUMBS = (function () {
 
   function pct(v, of) { return (v / of * 100).toFixed(3) + '%'; }
   function cq(v) { return (v / FW * 100).toFixed(3) + 'cqw'; }
+  function cqh(v) { return (v / FH * 100).toFixed(3) + 'cqh'; }
+  /* anchored by the piece's centre: identical to the Figma layout at 1192:708, and when the
+     frame is taller (the phone reel cards) the pieces spread out instead of being cropped */
   function box(x, y, w, h) {
-    return 'left:' + pct(x, FW) + ';top:' + pct(y, FH) + ';width:' + pct(w, FW) + ';';
+    return 'left:' + pct(x, FW) + ';top:' + pct(y + h / 2, FH) + ';margin-top:-' + (h / FW * 50).toFixed(3) + 'cqw;width:' + pct(w, FW) + ';';
   }
   function img(file, alt) {
     return '<img src="img/thumbs/' + file + '.webp" alt="' + (alt || '') + '" draggable="false" decoding="async" loading="lazy">';
@@ -46,7 +49,7 @@ var THUMBS = (function () {
   function piece(p) {
     var cx = p[1] + p[3] / 2, cy = p[2] + p[4] / 2;
     return '<span class="el pop" style="' + box(p[1], p[2], p[3], p[4])
-      + '--tx:' + cq(CX - cx) + ';--ty:' + cq(CY - cy) + ';--spin:' + p[5] + 'deg;--dl:' + p[6] + 's;--z:' + p[7] + '">'
+      + '--tx:' + cq(CX - cx) + ';--ty:' + cqh(CY - cy) + ';--spin:' + p[5] + 'deg;--dl:' + p[6] + 's;--z:' + p[7] + '">'
       + '<i>' + img(p[0]) + '</i></span>';
   }
 
@@ -80,7 +83,7 @@ var THUMBS = (function () {
       var r = th.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       dots = []; rings = [];
-      var cols = 52, gap = W / cols, rows = Math.ceil(H / gap) + 1, i = 0;
+      var cols = Math.max(26, Math.min(52, Math.round(W / 12))), gap = W / cols, rows = Math.ceil(H / gap) + 1, i = 0;
       var ox = (W - (cols - 1) * gap) / 2, oy = (H - (rows - 1) * gap) / 2;
       var maxD = Math.hypot(W / 2, H / 2);
       for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++, i++) {
