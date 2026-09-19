@@ -301,9 +301,15 @@ Last updated: 2026-09-19
       - **Canva AI:** nothing. `D:\Submissions\Conv Int` holds only PDFs; the deck links to a Figma prototype instead.
       - Unrelated hits: web design midcourse video (Northman law firm site), Accenture internship `Drobe Video.mp4`, Taloja road interview audio, game and browser assets.
 
+43. **A prototype video on every project page, playing on scroll (2026-09-19).** Each page now has a video straight after the description, before the other snippets, in the same ink frame. It is **muted, looping, with no controls**; `work/work.js` plays it when at least 35% of it is on screen and pauses it when scrolled away. Under `prefers-reduced-motion` it does not autoplay and shows native controls instead. `preload="none"`, so nothing downloads until the viewer scrolls to it.
+    - **Sources:** ICCC and Relique are the recordings listed in item 42. **Canva AI** is a new recording the user made this session, `C:\Users\phoenix\Videos\Screen Recordings\Canva AI Recording.mp4` (1:04). **ULS** is the teaser ad (the user knows it is a teaser, not a prototype, and wanted it anyway).
+    - **Files:** `work/vid/<slug>.mp4` plus a `<slug>.webp` poster frame (Relique's is taken at 8s to skip the "Recording has started" popup). Full length, no audio, H.264 High, max 1600px wide, 30fps, faststart. Sizes: Canva 1MB, ULS 2.5MB, ICCC 6.5MB, Relique 23MB (9:36).
+    - **ffmpeg** now comes from the pip package `imageio-ffmpeg` (`python -c "import imageio_ffmpeg as f;print(f.get_ffmpeg_exe())"` prints its path). Encode command: `-an -vf "scale='min(1600,iw)':-2:flags=lanczos,fps=30" -c:v libx264 -preset slow -crf 28 -pix_fmt yuv420p -profile:v high -movflags +faststart` (ULS used CRF 26).
+    - `tools/build_work.py` adds the video section automatically if `work/vid/<slug>.mp4` exists; the aria-label comes from each project's `film=` field.
+    - Verified in Edge at 1440 and 420 wide: each video is paused on load, playing after being scrolled into view, paused again when scrolled away, no controls, no script errors, no horizontal overflow.
+
 ## In progress / not yet confirmed
 
-- **Prototype videos (item 42):** waiting on the user to decide whether to put the ICCC and Relique walkthroughs (and the ULS ad) on the project pages. Both recordings are far too big to commit as is (223MB, 779MB); they need trimming to a short clip and re-encoding (no ffmpeg on this machine yet), or hosting on YouTube/Vimeo and embedding.
 
 - Project pages: see item 41. The Figma snippets section `2298:739` is the source of truth for page images; DriveBuddy and Maison rows there are unused.
 - **Figma gotchas learned here:** Satoshi (ULS) and some Canva/Relique faces are local fonts the plugin cannot load, so text in those fonts can be cloned and moved but **not rescaled or edited**; clone the deck's existing labels instead of writing new ones. Inter and DM Sans load fine. Image fills in these decks are high resolution (ICCC screenshots 3154x1980), so scaling image rectangles is safe.

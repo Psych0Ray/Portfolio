@@ -1,6 +1,6 @@
 /* Project pages: a trailer of each case study that hands off to Behance.
    No blue highlight blocks on these pages, by request.
-   Order: title, detail boxes, cover, description, the other snippets, Behance, next project.
+   Order: title, detail boxes, cover, description, the prototype video, the other snippets, Behance, next project.
    The snippets keep each deck's own design; the site only frames them. */
 
 .chead{padding:128px 40px 40px}
@@ -18,6 +18,9 @@
 
 .about{padding:56px 40px 64px}
 .about p{max-width:62ch;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--ink)}
+
+.film{padding:0 40px 40px}
+.film video{width:100%;height:auto;display:block;background:var(--ink)}
 
 .shots{padding:0 40px;display:flex;flex-direction:column;gap:40px}
 
@@ -38,7 +41,8 @@
 
 @media (max-width:900px){
   .chead{padding:110px 22px 30px}
-  .cover,.shots{padding-left:22px;padding-right:22px}
+  .cover,.shots,.film{padding-left:22px;padding-right:22px}
+  .film{padding-bottom:24px}
   .shots{gap:24px}
   .about{padding:36px 22px 44px}
   .meta{grid-template-columns:1fr 1fr}

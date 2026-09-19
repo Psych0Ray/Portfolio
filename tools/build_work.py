@@ -4,7 +4,7 @@ Run from the repo root:  python tools/build_work.py   (needs Pillow)
 Edit the copy here, not in the generated HTML, or the next build will overwrite it.
 
 Each page is a trailer, not a case study: title, detail boxes, cover, a short
-description, the remaining snippets, then the hand-off to Behance.
+description, the prototype video, the remaining snippets, then the hand-off to Behance.
 The snippets are the frames in the Figma section "Claude · Project trailer snippets"
 (file uG8MdK8svbC6sa0wQ5kyIK, node 2298:739), exported at 2880px wide to
 work/img/<slug>/NN.webp. 01 is always the cover. Keep every deck's own style.
@@ -19,7 +19,7 @@ LINKEDIN = 'https://www.linkedin.com/in/rutujeet-nayak-b5a47129b'
 
 PROJECTS = [
   dict(
-    slug='uls', title='ULS', short='ULS',
+    slug='uls', film='ULS teaser film', title='ULS', short='ULS',
     meta=[('Course', 'Service design'),
           ('My role', 'Research &amp; Analysis, Design Direction, Models and Blueprints'),
           ('Methods', 'Field interviews, systems mapping, service blueprint'),
@@ -35,7 +35,7 @@ PROJECTS = [
           'Foreman console screens designed in Hindi first',
           'Contractor dashboard for selecting workers by skill, reliability and wage']),
   dict(
-    slug='relique', title='RELIQUE', short='Relique',
+    slug='relique', film='Walkthrough of the Relique website prototype', title='RELIQUE', short='Relique',
     meta=[('Course', 'Semiotics and semantics'),
           ('My role', 'Design Direction, Research, Image and Story Generation'),
           ('Tools', 'Figma, FigJam'),
@@ -49,7 +49,7 @@ PROJECTS = [
           'My Story view, where an artifact narrates its own history',
           'Printed museum tickets and the Relique card']),
   dict(
-    slug='iccc-surveillance', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
+    slug='iccc-surveillance', film='Walkthrough of the working ICCC dashboard prototype', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
           ('My role', 'High Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
           ('Methods', 'Field observation, interviews, task modelling'),
@@ -65,7 +65,7 @@ PROJECTS = [
           'Device cards with status, event logs and one-click acknowledge',
           'Alert summary dashboard with pinned counts across domains']),
   dict(
-    slug='canva-ai', title='CANVA AI REDESIGN', short='Canva AI redesign',
+    slug='canva-ai', film='Walkthrough of the redesigned Canva AI prototype', title='CANVA AI REDESIGN', short='Canva AI redesign',
     meta=[('Type', 'UI/UX, conversational AI'),
           ('My role', 'Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design'),
           ('Methods', 'Prompt testing, review analysis'),
@@ -131,6 +131,7 @@ FOOT = '''
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="../lab.js"></script>
+<script src="work.js"></script>
 </body>
 </html>
 '''.format(behance=BEHANCE, linkedin=LINKEDIN)
@@ -146,6 +147,19 @@ def img(slug, name, alt, eager=False):
     load = 'eager" fetchpriority="high' if eager else 'lazy'
     return (f'<img src="img/{slug}/{name}.webp" width="{w}" height="{h}" '
             f'alt="{html.escape(alt)}" loading="{load}" decoding="async">')
+
+
+def film(p):
+    """The prototype recording: muted, looping, no controls; work.js plays it while it is on screen.
+    Encoded to work/vid/<slug>.mp4 (H.264, 1600px, no audio) with a poster frame beside it."""
+    slug = p['slug']
+    if not os.path.exists(os.path.join(ROOT, 'work', 'vid', slug + '.mp4')):
+        return ''
+    w, h = Image.open(os.path.join(ROOT, 'work', 'vid', slug + '.webp')).size
+    return (f'<section class="film"><div class="frame" data-reveal>'
+            f'<video src="vid/{slug}.mp4" poster="vid/{slug}.webp" width="{w}" height="{h}" '
+            f'muted loop playsinline preload="none" aria-label="{html.escape(p["film"])}"></video>'
+            f'</div></section>\n')
 
 
 def page(p, nxt):
@@ -168,6 +182,7 @@ def page(p, nxt):
   <p>{p['about']}</p>
 </section>
 
+{film(p)}
 <section class="shots">{rest}
 </section>
 
