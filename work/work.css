@@ -19,8 +19,23 @@
 .about{padding:56px 40px 64px}
 .about p{max-width:62ch;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--ink)}
 
+/* the prototype video. Static by default: one box, sized so the whole video always fits the
+   viewport height on any device (--ar is the video's own width/height, set inline).
+   work.js adds .pin: the stage sticks for the section's scroll length while the box zooms to
+   fill the screen, holds, and zooms back out. object-fit:contain letterboxes on ink, never crops. */
 .film{padding:0 40px 40px}
-.film video{width:100%;height:auto;display:block;background:var(--ink)}
+.film-stage{display:flex;justify-content:center;align-items:center}
+.film-box{position:relative;width:min(100%,calc((100svh - 160px) * var(--ar)));aspect-ratio:var(--ar);
+  background:var(--ink);border:var(--bw) solid var(--ink);overflow:hidden}
+.film-box video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:var(--ink)}
+.film.pin{height:380svh;padding:0}
+.film.pin .film-stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.film.pin .film-box{aspect-ratio:auto;will-change:width,height}
+
+/* while the video is full screen: nav and grain step out of the way */
+.film-on .navwrap{transform:translateY(-160%)}
+.grain{transition:opacity .3s ease}
+.film-on .grain{opacity:0}
 
 .shots{padding:0 40px;display:flex;flex-direction:column;gap:40px}
 
@@ -43,6 +58,7 @@
   .chead{padding:110px 22px 30px}
   .cover,.shots,.film{padding-left:22px;padding-right:22px}
   .film{padding-bottom:24px}
+  .film.pin{padding:0}
   .shots{gap:24px}
   .about{padding:36px 22px 44px}
   .meta{grid-template-columns:1fr 1fr}

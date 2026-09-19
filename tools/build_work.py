@@ -150,20 +150,22 @@ def img(slug, name, alt, eager=False):
 
 
 def film(p):
-    """The prototype recording: muted, looping, no controls; work.js plays it while it is on screen.
+    """The prototype recording. Muted, looping, no controls. work.js pins it on scroll, zooms it
+    to fill the screen, plays it while it is full screen, then zooms it back out.
+    Without JS (or under reduced motion) it is a plain box sized to fit the viewport height.
     Encoded to work/vid/<slug>.mp4 (H.264, 1600px, no audio), plus a VP9 .webm for browsers
     without H.264, and a .webp poster frame."""
     slug = p['slug']
     if not os.path.exists(os.path.join(ROOT, 'work', 'vid', slug + '.mp4')):
         return ''
     w, h = Image.open(os.path.join(ROOT, 'work', 'vid', slug + '.webp')).size
-    return (f'<section class="film"><div class="frame" data-reveal>'
+    return (f'<section class="film"><div class="film-stage"><div class="film-box" style="--ar:{w}/{h}">'
             f'<video poster="vid/{slug}.webp" width="{w}" height="{h}" '
             f'muted loop playsinline preload="none" aria-label="{html.escape(p["film"])}">'
             f'<source src="vid/{slug}.mp4" type=\'video/mp4; codecs="avc1.640028"\'>'
             f'<source src="vid/{slug}.webm" type=\'video/webm; codecs="vp9"\'>'
             f'</video>'
-            f'</div></section>\n')
+            f'</div></div></section>\n')
 
 
 def page(p, nxt):
