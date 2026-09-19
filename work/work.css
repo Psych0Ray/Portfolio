@@ -1,4 +1,5 @@
 /* Project pages: a trailer of each case study that hands off to Behance.
+   No blue highlight blocks on these pages, by request.
    Order: title, detail boxes, cover, description, the other snippets, Behance, next project.
    The snippets keep each deck's own design; the site only frames them. */
 
@@ -9,8 +10,6 @@
 .meta div:last-child{border-right:0}
 .meta b{font-family:var(--label);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px;font-weight:700}
 .meta span{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.35;letter-spacing:-.01em}
-.meta .role{background:var(--blue);color:var(--paper)}
-.meta .role b{color:var(--blue15)}
 
 /* the work itself: plain ink frame, shown whole, never cropped */
 .frame{border:var(--bw) solid var(--ink);background:var(--paper);line-height:0}
@@ -28,8 +27,6 @@
   border:var(--bw) solid var(--ink);transition:background .18s ease}
 .bh:hover{background:var(--blue)}
 .bh h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.045em;line-height:.9}
-.bh .hl{background:var(--blue)}
-.bh:hover .hl{background:var(--ink)}
 .bh p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--blue15)}
 .bh .rbtn{margin-left:auto;width:72px;height:72px;font-size:28px;background:var(--paper);color:var(--ink);transition:transform .18s ease}
 .bh:hover .rbtn{transform:translate(4px,-4px)}

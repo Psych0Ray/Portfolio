@@ -49,7 +49,7 @@ PROJECTS = [
           'My Story view, where an artifact narrates its own history',
           'Printed museum tickets and the Relique card']),
   dict(
-    slug='iccc-surveillance', title='ICCC <span class="hl">SURVEILLANCE</span>', short='ICCC Surveillance',
+    slug='iccc-surveillance', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
           ('My role', 'High Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
           ('Methods', 'Field observation, interviews, task modelling'),
@@ -65,7 +65,7 @@ PROJECTS = [
           'Device cards with status, event logs and one-click acknowledge',
           'Alert summary dashboard with pinned counts across domains']),
   dict(
-    slug='canva-ai', title='CANVA AI <span class="hl">REDESIGN</span>', short='Canva AI redesign',
+    slug='canva-ai', title='CANVA AI REDESIGN', short='Canva AI redesign',
     meta=[('Type', 'UI/UX, conversational AI'),
           ('My role', 'Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design'),
           ('Methods', 'Prompt testing, review analysis'),
@@ -153,7 +153,7 @@ def page(p, nxt):
     alts = p['alts'] + [''] * len(names)
     on_profile = p['behance'] is None
     link = p['behance'] or BEHANCE
-    meta = ''.join(f'<div{" class=\"role\"" if k == "My role" else ""}><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
+    meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
     rest = ''.join(f'\n  <div class="frame" data-reveal>{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
     out = HEAD.format(title=p['short'], desc=html.escape(p['about'][:155]))
     out += f'''
@@ -174,7 +174,7 @@ def page(p, nxt):
 <section class="sec end">
   <a class="bh" href="{link}" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>
     <div>
-      <h2>VIEW ON <span class="hl">BEHANCE</span></h2>
+      <h2>VIEW ON BEHANCE</h2>
       <p>{'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
     <span class="rbtn" aria-hidden="true">&#8599;</span>
