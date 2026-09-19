@@ -319,6 +319,9 @@ Last updated: 2026-09-19
     - **Relique video re-cut** from the original (`D:\Submissions\Audio Final\Relique Final Video submission.mp4`), 9:36 down to **9:05**. Removed: 0 to 8s ("Recording has started" popup and the Figma prototype toolbar), 27.25 to 29.75 (toolbar), 60.5 to 61.25 (toolbar flash), 277 to 285.25 (the second recording's popup and the green NVIDIA flash), 564.5 to the end (toolbar). The NVIDIA record and mic icons in the top-left corner, present throughout on pure black, are painted over with a black box (`drawbox=x=0:y=0:w=80:h=110`). A frame-by-frame detector (top band, corner, popup region at 4fps) finds zero overlay frames in the new cut. The poster is now its first frame.
     - Verified in Edge at 1366x768, 1440x900 and 390x844 on the ICCC and Relique pages: the box reaches exactly the viewport, plays only in the full state, the nav is hidden while zoomed, no horizontal overflow, no script errors.
 
+46. **New Canva AI cover (2026-09-19).** `work/img/canva-ai/01.webp` is now the user's new intro frame **"Canva AI" (`2327:794`)**, 1920x1130 native, exported at 2880x1695 (WebP q90, 68KB). Replaces the old 2880x1620 cover.
+    - **Better way to export above native size (use this instead of the clone + `rescale` method in item 41):** `rescale(1.5)` on a clone mis-rendered this frame (the mic button instance lost its circle and the orb's glow changed). Instead, in `use_figma`: `bytes = await node.exportAsync({format:'PNG', constraint:{type:'SCALE', value:1.5}})`, `figma.createImage(bytes)`, put it as an IMAGE fill on a temporary rectangle of the returned size, `get_screenshot` that rectangle at its native size (`contentsOnly:true`), then delete the rectangle. This is Figma's own exporter, so it is pixel-faithful, and no fonts need flattening.
+
 ## In progress / not yet confirmed
 
 
