@@ -121,6 +121,25 @@ function glideTo(target){
   });
 })();
 
+/* the CV is not written yet: the button says so instead of 404ing.
+   To ship it, point the link at the file and drop data-soon. */
+(function soon(){
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('[data-soon]');
+    if (!a) return;
+    e.preventDefault();
+    if (a._busy) return;
+    var text = null;
+    [].slice.call(a.childNodes).forEach(function(n){ if (!text && n.nodeType === 3 && n.textContent.trim()) text = n; });
+    if (!text) return;
+    a._busy = true;
+    var was = text.textContent, keep = a.getAttribute('data-cursor');
+    text.textContent = 'Coming soon ';
+    if (window.setCursorLabel) window.setCursorLabel('Soon');
+    setTimeout(function(){ text.textContent = was; a._busy = false; if (window.setCursorLabel) window.setCursorLabel(keep); }, 1600);
+  });
+})();
+
 /* copy the address on click, and say so in the cursor label */
 (function mail(){
   var b = document.getElementById('mail');
@@ -238,8 +257,8 @@ document.addEventListener('touchstart', function(){}, {passive:true});
   var items = links.map(function(a){
     var cta = a.classList.contains('cta'), label = a.textContent.trim();
     if (!cta) n++;
-    return '<li><a href="' + a.getAttribute('href') + '"' + (cta ? ' class="cta"' : '') + '>'
-      + (cta ? label + ' ' + RA : '<small>0' + n + '</small>' + label) + '</a></li>';
+    return '<li><a href="' + a.getAttribute('href') + '"' + (cta ? ' class="cta"' : '') + (a.hasAttribute('data-soon') ? ' data-soon' : '') + '>'
+      + (cta ? label + ' ' + (a.hasAttribute('data-soon') ? a.querySelector('svg').outerHTML : RA) : '<small>0' + n + '</small>' + label) + '</a></li>';
   }).join('');
   var socials = foot.map(function(a){
     return '<a href="' + a.href + '" target="_blank" rel="noopener">' + a.textContent.trim() + ' ' + NE + '</a>';

@@ -65,7 +65,9 @@ a{color:inherit}
   transform:scaleX(0);transform-origin:left center;transition:transform .2s ease}
 .nav a.lnk:hover::after,.nav a.lnk.on::after{transform:scaleX(1)}
 .nav a.lnk.cta::after{content:none}
-.nav a.lnk.cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700}
+.nav a.lnk.cta{background:var(--blue);color:var(--paper);padding:14px 22px;border:2.5px solid var(--ink);font-weight:700;
+  display:inline-flex;align-items:center;gap:9px}
+.nav a.lnk.cta .ic{width:15px;height:15px}
 .nav a.lnk.cta:hover{background:var(--ink)}
 .nav a.lnk{transition:transform .12s ease}
 .nav a.lnk:active{transform:translateY(2px) scale(.96);transition-duration:.05s}

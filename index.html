@@ -13,7 +13,8 @@
 /* ── HERO ── */
 .hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
-.ransom span{display:block;line-height:.74;padding:8px 12px 14px;margin-right:-15px;position:relative}
+/* padding and overlap in em, so the row keeps its proportions at every screen size */
+.ransom span{display:block;line-height:.74;padding:.042em .062em .072em;margin-right:-.077em;position:relative}
 .L1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,14.4vw,194px);background:var(--blue);color:var(--paper);transform:rotate(-4deg);z-index:3}
 .L2{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:clamp(60px,15.4vw,208px);color:var(--blue);transform:rotate(3deg) translateY(-16px);z-index:5}
 .L3{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,17.2vw,234px);background:var(--ink);color:var(--paper);transform:rotate(-1.5deg);z-index:2;padding-top:.13em}
@@ -29,18 +30,14 @@
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
-/* phones: the name breaks into two big rows, RUTU / JEET, sized in vw so it always fills the width */
-.ransom .brk{display:none}
+/* phones: the same single row as desktop, scaled down (the clamp minimums would otherwise
+   blow it past the screen, so each letter drops to its vw size, trimmed to fit) */
 @media (max-width:900px){
-  .hero{min-height:100svh;padding:104px 22px 120px;justify-content:center}
-  .ransom{flex-wrap:wrap;margin-left:-2px;row-gap:10px}
-  .ransom .brk{display:block;flex-basis:100%;height:0}
-  .ransom span{padding:5px 9px 9px;margin-right:-9px}
-  .L1{font-size:25vw}.L2{font-size:26vw}.L3{font-size:30vw}.L4{font-size:19vw}
-  .L5{font-size:31vw}.L6{font-size:35vw}.L7{font-size:24vw}.L8{font-size:20vw}
-  .L2{transform:rotate(3deg) translateY(-8px)}.L4{transform:rotate(5deg) translateY(6px)}
-  .L7{transform:rotate(-3deg) translateY(6px)}
-  .statement{margin-top:40px;font-size:clamp(30px,9.2vw,44px);gap:8px 12px;line-height:.95}
+  .hero{min-height:100svh;padding:104px 12px 120px;justify-content:center}
+  .ransom{margin-left:-1px}
+  .L1{font-size:12.4vw}.L2{font-size:13.2vw}.L3{font-size:14.8vw}.L4{font-size:9.6vw}
+  .L5{font-size:12.7vw}.L6{font-size:13.9vw}.L7{font-size:10vw}.L8{font-size:9.1vw}
+  .statement{margin-top:26px;font-size:clamp(23px,7vw,34px);gap:6px 10px;line-height:.98}
   .statement .a{flex-basis:100%}
   .statement .c{padding:2px 12px 6px}
   .scue{right:22px;bottom:30px}
@@ -180,13 +177,13 @@
   <span class="grow"></span>
   <a href="#work" class="lnk">Work</a>
   <a href="about.html" class="lnk">About</a>
-  <a href="#" class="lnk">Resume</a>
-  <a href="#contact" class="lnk cta">Get in touch</a>
+  <a href="#contact" class="lnk">Contact</a>
+  <a href="#" class="lnk cta" data-soon data-cursor="Soon">Download CV <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11M6.5 9.5 12 15l5.5-5.5M4 20h16"/></svg></a>
 </nav></div>
 
 <header class="hero" id="hero">
   <div class="ransom" aria-label="Rutujeet">
-    <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><i class="brk" aria-hidden="true"></i><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
+    <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
   </div>
   <p class="statement">
     <span class="a">PRODUCT DESIGNER,</span>
