@@ -26,9 +26,10 @@
 .hob-rail{overflow:hidden;padding:8px 0 22px;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%);
           mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
-.hob-track{display:flex;width:max-content;padding-left:40px;animation:hob-roll var(--dur,90s) linear infinite}
-.hob-rail:hover .hob-track,.hob-rail:active .hob-track{animation-play-state:paused}
-@keyframes hob-roll{to{transform:translateX(-50%)}}
+.hob-rail{touch-action:pan-y}
+.hob-track{display:flex;width:max-content;padding-left:40px;will-change:transform}
+.hob-rail.dragging{cursor:grabbing}
+.hob-rail.dragging .slide{user-select:none}
 .slide{flex:none;width:clamp(640px,62vw,920px);height:clamp(430px,58vh,520px);margin-right:30px;padding:26px 28px 30px;
   display:flex;flex-direction:column;gap:20px;background:var(--paper);border:var(--bw) solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
 .slide.dark{color:var(--paper)}
@@ -129,7 +130,7 @@
     <div class="sechead"><h2>WHAT I DO <span class="hl">OFF THE CLOCK</span></h2></div>
     <span class="hob-hint">Hover to pause</span>
   </div>
-  <div class="hob-rail"><div class="hob-track" id="hobTrack">
+  <div class="hob-rail" id="hobRail" data-cursor="Drag"><div class="hob-track" id="hobTrack">
 
       <article class="slide s1">
         <h3 class="s-name">VIDEO GAMES</h3>
@@ -149,11 +150,11 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last played</span>
-            <h4>Disco Elysium</h4>
+            <h4>Onimusha: Way of the Sword</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
             <span class="rlab">Replay value <b>4 of 5</b></span>
-            <p>A game that made its interface the main character. I keep stealing from how it paces information.</p>
-            <span class="meta">Save slot 03. 62 hours in.</span>
+            <p>Capcom back in feudal Japan, and a fight system that rewards patience over button mashing. Every duel is a timing puzzle.</p>
+            <span class="meta">Sword drawn. Demons pending.</span>
           </div>
         </div>
       </article>
@@ -181,11 +182,11 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last watched</span>
-            <h4>Whiplash</h4>
+            <h4>In the Mood for Love</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
             <span class="rlab">Rewatch value <b>5 of 5</b></span>
-            <p>Third rewatch. The edit is the performance. Every cut lands on a beat, and the tension is built entirely in the cutting room.</p>
-            <span class="meta">Chazelle, 2014. 106 minutes.</span>
+            <p>Wong Kar Wai builds a whole romance out of what is never said. The framing, the repetition and the colour carry everything the characters will not.</p>
+            <span class="meta">Wong Kar Wai, 2000. 98 minutes.</span>
           </div>
         </div>
       </article>
@@ -210,11 +211,11 @@
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
             <span class="kick">Last cooked</span>
-            <h4>Butter Chicken</h4>
+            <h4>Cantonese Egg Fried Rice</h4>
             <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
             <span class="rlab">Attempts so far <b>4</b></span>
-            <p>Fourth attempt this month. Still chasing the char on the marinade. It is a timing problem, not a recipe problem.</p>
-            <span class="meta">Marinade twelve hours. Char on the flame.</span>
+            <p>Three ingredients and nowhere to hide. Day old rice, eggs and a wok hot enough to keep every grain separate.</p>
+            <span class="meta">Day old rice. Very hot wok.</span>
           </div>
         </div>
       </article>
@@ -235,12 +236,12 @@
           </div>
           <div class="pmedia slot" data-video="">Clip</div>
           <div class="ptext card">
-            <span class="kick">Last ride</span>
-            <h4>The Long Way Home</h4>
-            <div class="rate"><i></i><i></i><i></i><i></i><i></i></div>
-            <span class="rlab">Destinations reached <b>0 of 5</b></span>
-            <p>No route, no reason. The ride ends exactly where it started, which is the whole point of it.</p>
-            <span class="meta">Mostly evenings. No Strava.</span>
+            <span class="kick">My motorcycle</span>
+            <h4>Triumph Speed 400</h4>
+            <div class="rate"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <span class="rlab">On the clock <b>7,000 km and counting</b></span>
+            <p>No route, no reason. Most rides end exactly where they started, which is the whole point of them.</p>
+            <span class="meta">7,000 km and counting.</span>
           </div>
         </div>
       </article>
@@ -306,23 +307,72 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="lab.js"></script>
 <script>
-/* hobby rail: clone the four cards once so translateX(-50%) loops seamlessly, and pace it by
-   distance so it moves at the same speed on any screen. Reduced motion: no loop, swipe or scroll it. */
+/* hobby rail: the four cards are cloned once so the loop is seamless, then moved by script
+   instead of a CSS animation, which lets it be dragged. It drifts on its own, pauses while
+   hovered or held, and carries the throw's momentum before picking the drift back up.
+   Reduced motion: no drift, just a normal scrollable row. */
 (function hobbies(){
-  var track = document.getElementById('hobTrack');
-  if (!track) return;
-  if (REDUCED) { track.style.animation = 'none'; track.parentNode.style.overflowX = 'auto'; return; }
+  var track = document.getElementById('hobTrack'), rail = document.getElementById('hobRail');
+  if (!track || !rail) return;
+  if (REDUCED) { rail.style.overflowX = 'auto'; return; }
   [].slice.call(track.children).forEach(function(card){
     var c = card.cloneNode(true);
     c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', '');
     track.appendChild(c);
   });
-  function pace(){
-    var speed = window.matchMedia('(max-width:900px)').matches ? 34 : 48;   /* px per second */
-    track.style.setProperty('--dur', (track.scrollWidth / 2 / speed).toFixed(1) + 's');
+
+  var half = 0, x = 0, drift = 48, paused = false, last = 0;
+  var dragging = false, decided = false, id = null, sx = 0, sy = 0, sax = 0, vx = 0, lastMove = 0;
+
+  function measure(){
+    half = track.scrollWidth / 2;
+    drift = window.matchMedia('(max-width:900px)').matches ? 34 : 48;   /* px per second */
   }
-  pace();
-  window.addEventListener('resize', pace);
+  function place(){
+    if (half) { x = x % half; if (x > 0) x -= half; }
+    track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+  }
+  function frame(t){
+    var dt = last ? Math.min((t - last) / 1000, .05) : 0; last = t;
+    if (dragging) { /* the pointer sets x */ }
+    else if (Math.abs(vx) > 20) { x += vx * dt; vx *= Math.pow(.0016, dt); }   /* throw, decaying */
+    else if (!paused) x -= drift * dt;
+    place();
+    requestAnimationFrame(frame);
+  }
+  measure(); place(); requestAnimationFrame(frame);
+  window.addEventListener('resize', function(){ measure(); place(); });
+
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    rail.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') paused = true; });
+    rail.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') paused = false; });
+  }
+  rail.addEventListener('pointerdown', function(e){
+    if (e.button) return;
+    dragging = true; decided = e.pointerType === 'mouse'; id = e.pointerId;
+    sx = e.clientX; sy = e.clientY; sax = x; vx = 0; lastMove = e.timeStamp;
+    if (decided) { rail.setPointerCapture(id); rail.classList.add('dragging'); }
+  });
+  rail.addEventListener('pointermove', function(e){
+    if (!dragging || e.pointerId !== id) return;
+    var dx = e.clientX - sx;
+    if (!decided) {                       /* on touch, only take over once it is clearly sideways */
+      if (Math.abs(dx) < 8 && Math.abs(e.clientY - sy) < 8) return;
+      if (Math.abs(dx) < Math.abs(e.clientY - sy)) { dragging = false; return; }
+      decided = true; rail.setPointerCapture(id); rail.classList.add('dragging');
+    }
+    var dt = Math.max(e.timeStamp - lastMove, 1);
+    vx = (sax + dx - x) / dt * 1000; lastMove = e.timeStamp;
+    x = sax + dx; place();
+  });
+  function end(e){
+    if (!dragging || (id !== null && e.pointerId !== id)) return;
+    dragging = false; decided = false; id = null;
+    rail.classList.remove('dragging');
+    vx = Math.max(-2600, Math.min(2600, vx));
+  }
+  rail.addEventListener('pointerup', end);
+  rail.addEventListener('pointercancel', end);
 })();
 </script>
 </body>
