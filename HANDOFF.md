@@ -495,6 +495,19 @@ Last updated: 2026-09-20
     - **I cannot upload to Behance.** There is no Behance connector or credential in this environment, and publishing to the user's public profile would need their explicit go-ahead anyway. Export from Figma and upload by hand.
 
 
+60. **Cog Ergo and Service exported into per-strip folders (2026-09-20).** Files only; no repo change.
+    - `D:\Submissions\Behance New\Cog Ergo\` — **12 files, `01.png`-`12.png`, all 2880px wide, 13.8MB total.**
+    - `D:\Submissions\Behance New\Service Design\` — **27 files, `01.png`-`27.png`, all 2898px wide, 25.1MB total.**
+    - Matches the naming of the user's own `OOUX/` folder so all three upload in order. Exported by calling `download_assets` on each slice id and curling the returned URL — the URLs are short-lived, so fetch each batch immediately after requesting it. Seven parallel requests per batch worked fine.
+    - **THE BUG WORTH REMEMBERING: `figma.group(slices, frame)` on an auto-layout frame appends the group as a new layout child instead of leaving it where you positioned it.** The Service frame `2265:693` is `layoutMode: "VERTICAL"`, so the slice group was stacked *after* the two content groups at y=109,821 — exactly one frame-height below the artwork — and all 27 slices exported as flat empty background. Cog Ergo's frame is `layoutMode: "NONE"`, which is why the identical code worked there and hid the problem.
+      **Fix: park slices on the PAGE, never inside an auto-layout frame** — `page.appendChild(sl)` then set `x`/`y`, and `figma.group(slices, page)`. Slices export by position, so they do not need to be children of what they cover.
+      It also means **the Service frame was temporarily mutated** (a third layout child). It was removed and the frame verified back to its two original groups at the right positions.
+    - **Always open one exported strip before exporting the rest.** A ~100KB file where its neighbours are ~1MB is the tell that a slice is over empty canvas.
+    - Position slices from **`absoluteRenderBounds`, not `absoluteBoundingBox`** — Service's bounding box is 1921 wide but it renders 1932 wide, and some leaf nodes sit outside the frame entirely (x 13,296 to 17,291) because `clipsContent` is false. Render bounds give what is actually drawn.
+    - Cuts snapped to real whitespace where one fell within 700px: **19 of Service's 26 cuts**. Verified the 13/14 seam lands in blank space between a diagram and the "Competitive analysis" heading, so it is invisible when Behance stacks them. Strip heights sum to 206,335 against an expected 206,331 — a 4px rounding spread across 27 slices, overlap rather than gaps, so nothing is lost.
+    - The original oversized single PNGs (`OOUX.png`, `Cog Ergo.png`, `Service Design.png`) are still in that folder and should not be uploaded.
+
+
 ## In progress / not yet confirmed
 
 
