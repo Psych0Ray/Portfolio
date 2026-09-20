@@ -218,11 +218,57 @@ def story(p):
     return f'<section class="story" data-reveal>{cells}\n</section>\n'
 
 
+def full_shots(slug):
+    """Images for the on-site case study, work/full/<slug>/NN.jpg, in order."""
+    folder = os.path.join(ROOT, 'work', 'full', slug)
+    if not os.path.isdir(folder):
+        return []
+    return sorted(f for f in os.listdir(folder) if f.endswith('.jpg'))
+
+
+def full_page(p):
+    """The whole deck on one page. Every image is stacked flush against the next with no
+    gap at all, inside a single ink frame, so it reads as one continuous scroll. Only the
+    first image loads eagerly; the rest arrive as you reach them. Every image carries its
+    real width and height so nothing reflows while they load."""
+    names = full_shots(p['slug'])
+    imgs = ''
+    for i, n in enumerate(names):
+        w, h = Image.open(os.path.join(ROOT, 'work', 'full', p['slug'], n)).size
+        load = 'eager" fetchpriority="high' if i == 0 else 'lazy'
+        imgs += (f'\n  <img src="full/{p["slug"]}/{n}" width="{w}" height="{h}" '
+                 f'alt="" loading="{load}" decoding="async">')
+    out = HEAD.format(title=p['short'] + ' · Full case study',
+                      desc=html.escape(p['about'][:155]))
+    out += f'''
+<header class="fhead">
+  <a class="fback" href="{p['slug']}.html" data-cursor="Back">
+    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg>
+    Back to {p['short']}
+  </a>
+  <h1>{p['title']}</h1>
+  <p>The full case study, every slide, start to finish.</p>
+</header>
+
+<section class="full">{imgs}
+</section>
+
+<section class="sec end">
+  <a class="next card" href="{p['slug']}.html" data-reveal data-cursor="Back">
+    <div><span class="lab">Back to</span><h3>{p['short']}</h3></div>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg></span>
+  </a>
+</section>
+'''
+    return out + FOOT
+
+
 def page(p, nxt):
     names = shots(p['slug'])
     alts = p['alts'] + [''] * len(names)
+    has_full = bool(full_shots(p['slug']))
     on_profile = p['behance'] is None
-    link = p['behance'] or BEHANCE
+    link = (p['slug'] + '-full.html') if has_full else (p['behance'] or BEHANCE)
     meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
     rest = ''.join(f'\n  <div class="frame" data-reveal>{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
     out = HEAD.format(title=p['short'], desc=html.escape(p['about'][:155]))
@@ -243,10 +289,10 @@ def page(p, nxt):
 </section>
 
 <section class="sec end">
-  <a class="bh" href="{link}" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>
+  <a class="bh" href="{link}"{' target="_blank" rel="noopener"' if not has_full else ''} data-cursor="{'Read' if has_full else 'Behance'}" data-reveal>
     <div>
-      <h2>VIEW ON BEHANCE</h2>
-      <p>{'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
+      <h2>{'VIEW FULL PROJECT' if has_full else 'VIEW ON BEHANCE'}</h2>
+      <p>{'Every slide of the case study, on one page.' if has_full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></span>
   </a>
@@ -265,3 +311,8 @@ if __name__ == '__main__':
         with open(dest, 'w', encoding='utf-8', newline='\n') as f:
             f.write(page(p, PROJECTS[(i + 1) % len(PROJECTS)]))
         print('wrote', os.path.relpath(dest, ROOT))
+        if full_shots(p['slug']):
+            d2 = os.path.join(ROOT, 'work', p['slug'] + '-full.html')
+            with open(d2, 'w', encoding='utf-8', newline='\n') as f2:
+                f2.write(full_page(p))
+            print('wrote', os.path.relpath(d2, ROOT), len(full_shots(p['slug'])), 'images')

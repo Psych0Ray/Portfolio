@@ -57,6 +57,27 @@
 
 .shots{padding:0 40px;display:flex;flex-direction:column;gap:40px}
 
+/* ── FULL CASE STUDY · the whole deck on one page ──────────────────────────
+   The images butt straight up against each other with no gap, so a deck that
+   was one continuous design reads as one continuous scroll again. display:block
+   is what kills the inline whitespace between them; a stray margin here would
+   show as a hairline seam. One ink frame wraps the lot. */
+.fhead{padding:128px 40px 30px}
+.fback{display:inline-flex;align-items:center;gap:9px;font-family:var(--label);font-size:12px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--blue);text-decoration:none}
+.fback .ic{width:15px;height:15px;stroke-width:3.4}
+.fback:hover{text-decoration:underline;text-underline-offset:3px}
+.fhead h1{margin-top:20px;font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,96px);
+  letter-spacing:-.05em;line-height:.88;text-transform:uppercase}
+.fhead p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--muted)}
+.full{width:min(1200px,100% - 80px);margin:0 auto;border:var(--bw) solid var(--ink);
+  background:var(--bone);font-size:0}
+.full img{display:block;width:100%;height:auto;margin:0;padding:0;border:0}
+@media (max-width:900px){
+  .fhead{padding:110px 22px 24px}
+  .full{width:min(1200px,100% - 44px)}
+}
+
 /* the hand-off: same bar language as the Behance link under the home grid */
 .end{padding-top:72px}
 .bh{display:flex;align-items:center;gap:32px;padding:40px 44px;background:var(--ink);color:var(--paper);text-decoration:none;
