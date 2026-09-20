@@ -589,6 +589,13 @@ Last updated: 2026-09-21
     - **Testing note:** `--autoplay-policy=user-gesture-required` does **not** block these clips, because Chrome always allows **muted** autoplay. To exercise the path, stub `HTMLMediaElement.prototype.play` in an init script to reject with a named error until a gesture fires. Also, Playwright's normal `page.click()` times out on a hobby-rail overlay - the rail never stops moving, so the element is never "stable"; call `.click()` in `page.evaluate` instead.
     - Regression across five pages, with and without `prefers-reduced-motion`: no console errors, no blank images, no stray overlays.
 
+69. **Shorter exit from the film, and a wording change in WHERE I STUDY (2026-09-21).** [work/work.js](work/work.js), [work/work.css](work/work.css), [about.html](about.html).
+    - **"Studio projects across service design..." is now "End-to-end projects across...".** The user wrote "End-to-End Projects"; it is set as **"End-to-end projects"** because it opens a prose sentence and the rest of the page is sentence case. Flip it if they want the capitals.
+    - **Getting out of the pinned video took half a viewport of scrolling and felt like wading, per the user. `OUT` is halved, 0.5 -> 0.25 units.** `IN` was left alone at 0.7 because they said the arrival was fine - it was briefly changed to 0.65 and put back.
+    - **THE INVARIANT THAT IS EASY TO BREAK:** one timeline unit is one viewport of scrolling, and that only holds because `.film.pin`'s height is `TOTAL * 100svh` plus the `100svh` the stage sticks for. `TOTAL` is now 2.55, so the height went **380svh -> 355svh**. Change one without the other and every phase stretches or squashes. Both files now carry a comment saying so.
+    - **All four project pages share `work.js` and `work.css`** - `build_work.py` only writes `work/*.html` - so this was one edit, not four. Confirmed on all four: span is 2.55 viewports on each, no console errors.
+    - **Measuring this needs care.** `scrub: 0.5` means the tween trails the scroll by half a second, so a scripted `scrollTo` followed by a short wait reads the box as still full width and looks like the zoom never finishes. With a 1200ms settle it lands exactly on the framed target (1244px at a 1440x900 viewport). Give scrub time before believing any measurement of it.
+
 
 ## In progress / not yet confirmed
 

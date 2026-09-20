@@ -40,8 +40,17 @@
     return;
   }
 
-  /* timeline, in units: zoom in 0.7, hold full screen 1.6, zoom out 0.5 */
-  var IN = 0.7, HOLD = 1.6, OUT = 0.5, TOTAL = IN + HOLD + OUT;
+  /* Timeline in units: zoom in, hold full screen, zoom out.
+
+     One unit is one viewport of scrolling, and that is not a coincidence: .film.pin is
+     TOTAL * 100svh of height plus the 100svh the stage sticks for. Change a number here and
+     change .film.pin's height in work.css to match, or the phases stretch or squash.
+     Right now 0.7 + 1.6 + 0.25 = 2.55, so the section is 355svh.
+
+     OUT is deliberately the shortest: getting out of the video was half a viewport of
+     scrolling and felt like wading. It is a quarter of one now. IN stays long enough to
+     read as an arrival. */
+  var IN = 0.7, HOLD = 1.6, OUT = 0.25, TOTAL = IN + HOLD + OUT;
   var PLAY_FROM = (IN * 0.8) / TOTAL;          // starts once the box is nearly full screen
   var PLAY_TO = (IN + HOLD + OUT * 0.6) / TOTAL;
   var active = 0;
