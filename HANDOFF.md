@@ -537,6 +537,8 @@ Last updated: 2026-09-20
       - **Caveat the user should confirm:** the only Canva deck on disk is the **mid-course** one. If the Behance gallery was built from a later version, that page is showing older work.
     - **End-bar hierarchy on the trailer pages is now three tiers:** `.bh` **VIEW FULL PROJECT** (ink, internal, forward arrow — not the diagonal external one), then `.bhalt` **ALSO ON BEHANCE** (bordered, paper, opens in a new tab), then the **NEXT PROJECT** card. `.bhalt` is new in `work/work.css`.
     - **The full pages carry two cards: Back to <project> and Next project, and both point at trailer pages, never at another full page** — the user was explicit that next should land on the trailer. `full_page(p, nxt)` takes the next project for this.
+    - **ULS shows no Behance link at all.** A `hide_behance=True` key on its entry in `PROJECTS` suppresses the `.bhalt` line, because that gallery is a dead end for anyone who is not signed in as the owner. The other three keep theirs. Set the same key on any project whose gallery goes down.
+    - Home page bar under the grid now reads **"Look at the rest of my work, all on Behance."** (was a longer line about projects that did not make the page).
     - **Adding a case study to any future project is just:** drop jpgs into `work/full/<slug>/` and rerun the builder. It switches the bar, generates `<slug>-full.html`, and wires the cards automatically.
 
 

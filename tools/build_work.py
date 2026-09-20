@@ -38,6 +38,9 @@ PROJECTS = [
        'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service — an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
     ],
     behance='https://www.behance.net/gallery/255996487/ULS-Service-Design',
+    # Behance flagged this one as spam; the gallery is a dead end for anyone but the owner,
+    # so no secondary link to it from the page.
+    hide_behance=True,
     alts=['ULS billboard reading Designed for Real Work, Not Office Work',
           'The new ULS service blueprint from pre-job to project end',
           'ULS analytics dashboard: hiring, wage trends, attendance and site performance',
@@ -275,7 +278,7 @@ def page(p, nxt):
     link = (p['slug'] + '-full.html') if has_full else (p['behance'] or BEHANCE)
     # When the case study lives on the site, Behance drops to a secondary line under it.
     alt = ''
-    if has_full:
+    if has_full and not p.get('hide_behance'):
         alt = ('\n  <a class="bhalt" href="%s" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>'
                '\n    <span>%s</span>'
                '\n    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>'
