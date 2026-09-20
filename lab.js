@@ -113,30 +113,39 @@ function glideTo(target){
   });
 })();
 
-/* the clips cost a few MB between them, so nothing is fetched until its section is near the
-   viewport, and everything pauses again once it leaves. The observer watches the *section*
-   rather than each video because the hobby rail clones its cards after this file runs; looking
-   the videos up at intersection time catches the clones too. */
+/* the clips cost a few MB between them, so nothing is fetched until it is near the viewport,
+   and it pauses again the moment it leaves.
+
+   Each video is watched on its own, NOT its section. Watching the section meant that every
+   clip on the About page played the whole time the section was on screen: six of them, when
+   the hobby rail only ever shows two or three at once, because the rail clones its cards for
+   the seamless loop. Six concurrent decodes halved the page to 30fps. IntersectionObserver
+   clips against ancestors, so a card that has slid out of the rail's overflow reports as off
+   screen and stops on its own.
+
+   The clones do not exist yet when this runs, so WATCH_CLIPS() re-scans; hobbies() calls it
+   straight after cloning. It is safe to call any time a clip is added. */
+window.WATCH_CLIPS = function(){};
 (function lazyclips(){
-  var first = document.querySelector('video[data-src]');
-  if (!first) return;
-  function wake(root, on){
-    [].forEach.call(root.querySelectorAll('video[data-src]'), function(v){
-      if (!on) { v.pause(); return; }
-      if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
-      var p = v.play(); if (p && p.catch) p.catch(function(){});
-    });
+  if (!document.querySelector('video[data-src]')) return;
+  function wake(v, on){
+    if (!on) { v.pause(); return; }
+    if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+    var p = v.play(); if (p && p.catch) p.catch(function(){});
   }
-  if (!('IntersectionObserver' in window)) { wake(document, true); return; }
-  var seen = [];
-  [].forEach.call(document.querySelectorAll('video[data-src]'), function(v){
-    var s = v.closest('section') || v.parentNode;
-    if (seen.indexOf(s) < 0) seen.push(s);
-  });
+  var all = function(){ return [].slice.call(document.querySelectorAll('video[data-src]')); };
+  if (!('IntersectionObserver' in window)) {
+    window.WATCH_CLIPS = function(){ all().forEach(function(v){ wake(v, true); }); };
+    window.WATCH_CLIPS();
+    return;
+  }
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ wake(e.target, e.isIntersecting); });
-  }, { rootMargin: '300px 0px' });
-  seen.forEach(function(s){ io.observe(s); });
+  }, { rootMargin: '200px' });
+  window.WATCH_CLIPS = function(){
+    all().forEach(function(v){ if (!v._watched) { v._watched = true; io.observe(v); } });
+  };
+  window.WATCH_CLIPS();
 })();
 
 /* footer: back to top */

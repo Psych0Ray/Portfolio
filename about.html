@@ -324,6 +324,39 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="lab.js"></script>
 <script>
+/* the page introduces itself. The greeting rises, the blue block slams in after it, the
+   paragraphs come up one at a time and the portrait wipes up beside them. Every section
+   heading below does the same thing, smaller, as it arrives. Deliberately the same
+   vocabulary as the footer in lab.js (power4.out to land, back.out for the .hl block) so
+   the page reads as one piece rather than a set of separate effects.
+
+   Transform is left alone on .card elements and cleared where it is used, because
+   .card:hover is a translate and a tween that finished on a transform would win over it.  */
+(function aboutIn(){
+  if (REDUCED || typeof gsap === 'undefined') return;
+
+  var head = document.querySelector('.ahead');
+  if (head) {
+    var h1 = head.querySelector('h1'), hl = h1 && h1.querySelector('.hl');
+    var paras = head.querySelectorAll('.copy p'), art = head.querySelector('.portrait');
+    var tl = gsap.timeline({ delay:.12 });
+    tl.from(h1, { y:44, opacity:0, duration:.7, ease:'power4.out' });
+    if (hl) tl.from(hl, { scale:0, rotation:-22, duration:.7, ease:'back.out(2.2)', clearProps:'transform' }, '-=.38');
+    tl.from(paras, { y:22, opacity:0, duration:.55, ease:'power3.out', stagger:.085 }, '-=.42');
+    /* a wipe, not a transform: .portrait is a .card and owns its transform for the hover lift */
+    if (art) tl.fromTo(art, { clipPath:'inset(100% 0% 0% 0%)' },
+                            { clipPath:'inset(0% 0% 0% 0%)', duration:.9, ease:'expo.out', clearProps:'clipPath' }, '-=.95');
+  }
+
+  if (typeof ScrollTrigger === 'undefined') return;
+  gsap.utils.toArray('.sechead h2').forEach(function(h){
+    var mark = h.querySelector('.hl');
+    var t = gsap.timeline({ scrollTrigger:{ trigger:h, start:'top 88%', once:true } });
+    t.from(h, { y:26, opacity:0, duration:.6, ease:'power4.out' });
+    if (mark) t.from(mark, { scale:0, rotation:-16, duration:.6, ease:'back.out(2.1)', clearProps:'transform' }, '-=.32');
+  });
+})();
+
 /* hobby rail: the four cards are cloned once so the loop is seamless, then moved by script
    instead of a CSS animation, which lets it be dragged. It drifts on its own, pauses while
    hovered or held, and carries the throw's momentum before picking the drift back up.
@@ -337,6 +370,9 @@
     c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', '');
     track.appendChild(c);
   });
+  /* the clones carry their own <video>; each one has to be watched separately or they all
+     play at once and the page drops to 30fps. See lazyclips() in lab.js. */
+  window.WATCH_CLIPS();
 
   var half = 0, x = 0, drift = 48, paused = false, last = 0;
   var dragging = false, decided = false, id = null, sx = 0, sy = 0, sax = 0, vx = 0, lastMove = 0;
