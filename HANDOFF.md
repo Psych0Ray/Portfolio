@@ -481,6 +481,16 @@ Last updated: 2026-09-20
     - The Accenture bullets now read: led the design of an AI fashion shopping assistant aimed at reducing wasteful buys; designed and prototyped **40+ UI screens** in Figma around trust, context and user control; mapped the agent's recommendation flow across occasion, fit, budget, weather and wardrobe; built the concept on seven user themes, from fit anxiety to distrust of AI styling. The 40+ figure is the user's own.
 
 
+59. **Why the Behance uploads came out as a thin column, and the fix (2026-09-20).** Not a repo change — Figma and workflow only.
+    - **Cause: the user was exporting each whole deck as ONE image.** Measured from their PDFs: OOUX **1921 x 59,862**, Service **1932 x 141,541**, Cog Ergo **1920 x 61,184** — that is 115 to 272 megapixels, and as PNG far past Behance's **50MB hard reject**. Behance downscales it to something it can store, which drops the width far below 1400px, and **Behance displays any image narrower than 1400px at its native size with padding added left and right**. That padding is the "thin, not filling the width" the user saw. PNG was not the cause, though it makes the files much larger than needed — Behance recommends JPEG and under 10MB.
+    - **Behance's numbers:** 1400px wide in Project View, up to 2800px in the Lightbox, so **export at 2800px wide** for retina. No height limit, so tall scroll-format slides are fine.
+    - **The fix is one image per slide, never the deck as a strip.**
+    - **Automatic slicing of the existing exports does not work — do not try again.** Row-variance gap detection at low resolution found 129 false bands in OOUX (flat areas inside slides) and **exactly 1** in Service, because its slides butt up with no gap at all. There is no reliable seam to cut on.
+    - **OOUX is ready to go.** The deck lives at `2265:8618` on page `0:1` as a VERTICAL auto-layout of **35 individual slide frames**. Each now carries an export preset of **PNG, constraint `{type:"WIDTH", value:2800}`**, and they were renamed with a **01-35 prefix** so they export in reading order. The user selects them and hits Export. Note **slide 20 is 1920x8273**, which becomes 2800x12065 — legal on Behance but a heavy file.
+    - **Service is not slide-organised.** `2265:693` is two pasted GROUPs (1921x73842 and 1932x63712), not frames, so there is nothing to bulk-export. It needs the slides separating first, or a different source.
+    - **Cog Ergo is not in this Figma file** — no matching frame on any page. Source PDF is `D:\Submissions\Cog Ergo\Cognitive Ergonomics - Jury PPT.pdf`.
+
+
 ## In progress / not yet confirmed
 
 
