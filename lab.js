@@ -108,44 +108,96 @@ function glideTo(target){
     var src = el.getAttribute('data-img');
     if (!src) return;
     var i = document.createElement('img');
-    i.src = src; i.alt = el.getAttribute('data-alt') || '';
+    i.decoding = 'async';
+    i.alt = el.getAttribute('data-alt') || '';
+    /* Only a slot already on screen is fetched now; the rest wait for watchMedia() below.
+
+       Do NOT use loading="lazy" here. The hobby rail's slots sit far off to the right and are
+       brought across by a transform, never by scrolling, and native lazy loading does not
+       react to a transform: the poster stayed blank for good. IntersectionObserver does take
+       transforms and ancestor clipping into account, which is why the clips already use it,
+       so images go through the same observer. The box is reserved by .slot's aspect-ratio,
+       so waiting shifts nothing. */
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      i.setAttribute('fetchpriority', 'high');
+      i.src = src;
+    } else {
+      i.setAttribute('data-src', src);
+    }
     el.textContent = ''; el.appendChild(i); el.classList.add('filled');
   });
 })();
 
-/* the clips cost a few MB between them, so nothing is fetched until it is near the viewport,
-   and it pauses again the moment it leaves.
+/* Media that is not on screen yet costs nothing: clips are not fetched and do not play,
+   off-screen images are not fetched at all.
 
-   Each video is watched on its own, NOT its section. Watching the section meant that every
-   clip on the About page played the whole time the section was on screen: six of them, when
-   the hobby rail only ever shows two or three at once, because the rail clones its cards for
-   the seamless loop. Six concurrent decodes halved the page to 30fps. IntersectionObserver
-   clips against ancestors, so a card that has slid out of the rail's overflow reports as off
-   screen and stops on its own.
+   CLIPS are watched one by one. Watching their section meant every clip on the About page
+   played the whole time the section was visible: six of them, when the hobby rail only ever
+   shows two or three, because the rail clones its cards for the seamless loop. An observer
+   accounts for transforms and ancestor clipping, so a card that has slid out of the rail
+   reports as off screen and pauses itself.
 
-   The clones do not exist yet when this runs, so WATCH_CLIPS() re-scans; hobbies() calls it
-   straight after cloning. It is safe to call any time a clip is added. */
-window.WATCH_CLIPS = function(){};
-(function lazyclips(){
-  if (!document.querySelector('video[data-src]')) return;
-  function wake(v, on){
+   IMAGES are watched by SECTION instead, and this is the part that is easy to get wrong.
+   rootMargin expands the viewport, but it does NOT expand an ancestor's overflow clip, so an
+   image parked off to the right inside the rail reads as off screen however large the margin
+   is, and would only start loading as it slid into view - arriving blank. The section is not
+   clipped, so it gives real warning. An image costs nothing once it has loaded, so section
+   granularity is the right trade for images and the wrong one for clips.
+
+   Clones do not exist when this runs, so WATCH_MEDIA() re-scans; hobbies() calls it right
+   after cloning. It is safe to call whenever a slot is added. */
+window.WATCH_MEDIA = function(){};
+(function lazymedia(){
+  var all = function(sel){ return [].slice.call(document.querySelectorAll(sel)); };
+  function loadImg(i){
+    if (i.getAttribute('src')) return;
+    /* low priority: a deferred image is by definition not what the viewer is looking at, so
+       it must not compete with the fold for bandwidth even when its section is close enough
+       that the fetch starts straight away. */
+    i.setAttribute('fetchpriority', 'low');
+    i.setAttribute('src', i.getAttribute('data-src'));
+  }
+  function wakeVid(v, on){
     if (!on) { v.pause(); return; }
     if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
     var p = v.play(); if (p && p.catch) p.catch(function(){});
   }
-  var all = function(){ return [].slice.call(document.querySelectorAll('video[data-src]')); };
+  if (!all('video[data-src],img[data-src]').length) return;
+
   if (!('IntersectionObserver' in window)) {
-    window.WATCH_CLIPS = function(){ all().forEach(function(v){ wake(v, true); }); };
-    window.WATCH_CLIPS();
+    window.WATCH_MEDIA = function(){
+      all('img[data-src]').forEach(loadImg);
+      all('video[data-src]').forEach(function(v){ wakeVid(v, true); });
+    };
+    window.WATCH_MEDIA();
     return;
   }
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ wake(e.target, e.isIntersecting); });
+
+  var ioImg = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      /* everything in this section at once, which also catches clones added later */
+      [].forEach.call(e.target.querySelectorAll('img[data-src]'), loadImg);
+      ioImg.unobserve(e.target);
+    });
+  }, { rootMargin: '400px 0px' });
+
+  var ioVid = new IntersectionObserver(function(es){
+    es.forEach(function(e){ wakeVid(e.target, e.isIntersecting); });
   }, { rootMargin: '200px' });
-  window.WATCH_CLIPS = function(){
-    all().forEach(function(v){ if (!v._watched) { v._watched = true; io.observe(v); } });
+
+  window.WATCH_MEDIA = function(){
+    all('img[data-src]').forEach(function(i){
+      var root = i.closest('section') || i.parentNode;
+      if (root._imgWatched) return;
+      root._imgWatched = true; ioImg.observe(root);
+    });
+    all('video[data-src]').forEach(function(v){
+      if (v._watched) return;
+      v._watched = true; ioVid.observe(v);
+    });
   };
-  window.WATCH_CLIPS();
+  window.WATCH_MEDIA();
 })();
 
 /* footer: back to top */

@@ -370,9 +370,9 @@
     c.setAttribute('aria-hidden', 'true'); c.setAttribute('inert', '');
     track.appendChild(c);
   });
-  /* the clones carry their own <video>; each one has to be watched separately or they all
-     play at once and the page drops to 30fps. See lazyclips() in lab.js. */
-  window.WATCH_CLIPS();
+  /* the clones carry their own <video> and <img>; each one has to be watched separately, or
+     every clip plays at once and the cloned posters never load. See lazymedia() in lab.js. */
+  window.WATCH_MEDIA();
 
   var half = 0, x = 0, drift = 48, paused = false, last = 0;
   var dragging = false, decided = false, id = null, sx = 0, sy = 0, sax = 0, vx = 0, lastMove = 0;
