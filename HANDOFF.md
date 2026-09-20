@@ -477,6 +477,8 @@ Last updated: 2026-09-20
     - **Accenture was added by cloning that title/body pair**, appending to the same group and positioning the second job at `accBody.y + accBody.height + 10`.
     - **Bullets are deliberately written to fit one line each** (roughly 95 characters at 511px and 10pt). That is what makes it fit: the page has **38px spare** at the bottom. Hotel Raviraj went from five bullets to three for the same reason. If a bullet wraps, something below will fall off the page.
     - Accenture is written **"Accenture, Bangalore"** per the user, and the internship project is still described without being named (NDA, item 56).
+    - **STANDING RULE for resume bullets, from the user's own examples.** They supplied reference bullets ("Spearheaded the UX design of an agentic AI nutrition app with 3 autonomous user flows…", "Delivered 40+ UI screens using Figma, aligned to behavioral design principles…") and said: *"dont put bs like primary research whatnot"*. So: **lead with a strong verb, name the thing built, carry a number where there is one, and end on the purpose or principle.** No research-process vocabulary — no "conducted primary research", no "affinity-mapped the transcripts", no "semi-structured interviews". Research belongs on the resume only as the *conclusion* it produced.
+    - The Accenture bullets now read: led the design of an AI fashion shopping assistant aimed at reducing wasteful buys; designed and prototyped **40+ UI screens** in Figma around trust, context and user control; mapped the agent's recommendation flow across occasion, fit, budget, weather and wardrobe; built the concept on seven user themes, from fit anxiety to distrust of AI styling. The 40+ figure is the user's own.
 
 
 ## In progress / not yet confirmed
