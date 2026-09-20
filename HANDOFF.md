@@ -390,6 +390,10 @@ Last updated: 2026-09-19
 
 ## Next up (not started)
 
+- **START HERE NEXT SESSION (asked for on 2026-09-20, for 2026-09-21):**
+  1. **Add animations.** The user did not say where; ask which pages or sections they mean (the project pages and the About page are the least animated so far).
+  2. **Replace one ULS screen.** One of the four ULS images in `work/img/uls/` needs swapping; ask which one and what replaces it. They come from the Figma section "Claude · Project trailer snippets" (`2298:739`); re-read that section before exporting, and use the exportAsync + image-fill-rectangle method in item 46, not a rescaled clone.
+
 - **Resume page was started this session and parked.** Nav on all three pages still points `RESUME` at `#`. The plan when it resumes: `resume.html` on the shared system, header with a Download PDF CTA, a four-cell fact strip reusing the `.meta` pattern from case.html, EXPERIENCE as cards with a solid colour year spine (distinct from the About `.role` pattern), EDUCATION and RECOGNITION on a bone band to break the section-head rhythm, a blue download band, then the shared footer, plus a `@media print` block. The PDF file itself does not exist yet.
 
 - **Project Detail page BUILT** (2026-09-06) with dummy content, at x=4640 in the Iteration 06 section. Structure: back link, intro (project name, one-liner, ROLE / TIMELINE / TEAM / TOOLS meta strip, Download Case Study + View Live Site CTAs), full-width hero slot, "The Problem" two-column band, then case-study slides in a varied rhythm (full-width / two-up / red pull-quote band / full-width / two-up), "Where it landed" outcome trio, next-project card, contact CTA, footer. All slide slots are bordered image placeholders — swap in exported PDF pages. Clipping audit on this page returns 0.
