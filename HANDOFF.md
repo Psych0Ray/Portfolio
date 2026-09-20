@@ -441,6 +441,15 @@ Last updated: 2026-09-20
     - **Caching gotcha while testing:** `playwright-cli goto` on the same URL serves from cache and will not pick up an edited inline `<style>` block. Append a changing query string (`?v=2`) or the fix looks like it did nothing — this cost a wrong diagnosis on the j before the computed `z-index` was checked directly.
 
 
+55. **The clip "leak", View Resume, and the tool list (2026-09-20).**
+    - **The light bars around the clips were two separate faults, and the user was right about the cause.** First, `.slot` has `background-color:var(--bone)` and the video sits inside a 2.5px border at **fractional** width (measured 300.83 x 406.91 against a 296.83 x 402.91 video). While the rail translates by subpixels, a hairline of that bone ground kept appearing and disappearing along the edge — read as jitter on the left of the card. `media()` in `lab.js` now adds a `filled` class to any slot it fills, and `.slot.filled{background-color:var(--ink)}` in `lab.css` makes that hairline black instead of cream. Bone stays the empty-slot state.
+    - Second, **the blurred bands themselves were the "leak"**. Item 53 filled the space above and below the 16:9 footage with a blurred, darkened copy of the frame; on bright frames those bands glow and the seam against the footage is a hard horizontal line, which reads as the card bleeding through. **Both clips are re-encoded with plain black bands** (`pad=576:720:(ow-iw)/2:(oh-ih)/2:color=black` in place of the `split`/`gblur`/`overlay` chain). It is simpler, it is what letterboxing is supposed to look like, and it is smaller: Onimusha 1.97MB → 1.68MB, mood 480KB → 373KB.
+    - **Checked the shipped Onimusha clip frame by frame for the editor's watermark: it is not there.** A bright VFX frame around 25s has coloured artefacts in it that can read as letters at thumbnail size, which is probably what prompted the question. The cut at 31.70s is correct.
+    - **Download CV → View Resume**, in `index.html`, `about.html` and the `HEAD` template in `tools/build_work.py` (rerun the builder after touching that). The download-arrow icon was swapped for the arrow-out-of-box, since nothing downloads now. It is still `href="#"` with `data-soon` — **there is still no resume page or PDF**; this only changes the label and the promise it makes.
+    - **WHAT I USE, per the user:** FigJam is now "Research synthesis, diagrams and charts"; ChatGPT "Research support, ideation, image and video generation"; Gemini narrowed to "Image generation"; **Runway added** — "High quality video generation". That makes 12 tiles, which fills the four-column grid exactly.
+    - Verified at 1440x900 and 390x844: black letterboxing on both clips with no light edge, rice photo and ride clip still filling their slots, rail clone error 0.000px, no console messages.
+
+
 ## In progress / not yet confirmed
 
 

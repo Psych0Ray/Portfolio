@@ -102,14 +102,14 @@ function glideTo(target){
     v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
     v.setAttribute('playsinline',''); v.setAttribute('muted','');
     v.setAttribute('data-src', src);          /* lazyclips() below turns this into a real src */
-    el.textContent = ''; el.appendChild(v);
+    el.textContent = ''; el.appendChild(v); el.classList.add('filled');
   });
   document.querySelectorAll('[data-img]').forEach(function(el){
     var src = el.getAttribute('data-img');
     if (!src) return;
     var i = document.createElement('img');
     i.src = src; i.alt = el.getAttribute('data-alt') || '';
-    el.textContent = ''; el.appendChild(i);
+    el.textContent = ''; el.appendChild(i); el.classList.add('filled');
   });
 })();
 
