@@ -19,7 +19,7 @@
 .L2{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:clamp(60px,15.4vw,208px);color:var(--blue);transform:rotate(3deg) translateY(-16px);z-index:5}
 .L3{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,17.2vw,234px);background:var(--ink);color:var(--paper);transform:rotate(-1.5deg);z-index:2;padding-top:.13em}
 .L4{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(44px,11.2vw,150px);background:var(--bone);color:var(--ink);border:var(--bw) solid var(--ink);transform:rotate(5deg) translateY(10px);z-index:6}
-.L5{font-family:'Abril Fatface',serif;font-size:clamp(58px,14.8vw,200px);color:var(--ink);transform:rotate(-6deg) translateY(-8px);z-index:4}
+.L5{font-family:'Abril Fatface',serif;font-size:clamp(58px,14.8vw,200px);color:var(--ink);transform:rotate(-6deg) translateY(-8px);z-index:7}
 .L6{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-stretch:75%;font-size:clamp(64px,16.2vw,220px);color:var(--ink);transform:rotate(2deg);z-index:3;
   background-image:radial-gradient(var(--blue) 1.6px,transparent 1.7px);background-size:8px 8px}
 .L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--blue);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
@@ -135,12 +135,9 @@
 
 /* ── SOFTWARE · the horizontal row ── */
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
-.sw{padding:24px;border:var(--bw) solid var(--ink)}
+.sw{padding:24px;border:var(--bw) solid var(--ink);background:var(--ink);color:var(--paper)}
 .sw h4{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
-.sw span{font-size:13px;color:var(--muted);line-height:1.6}
-.sw:nth-child(4n+1){background:var(--blue);color:var(--paper)}.sw:nth-child(4n+1) span{color:var(--blue15)}
-.sw:nth-child(4n+3){background:var(--bone)}
-.sw:nth-child(4n){background:var(--ink);color:var(--paper)}.sw:nth-child(4n) span{color:var(--blue40)}
+.sw span{font-size:13px;color:var(--blue40);line-height:1.6}
 @media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.skills button::before{transition:none}}
 

@@ -433,6 +433,14 @@ Last updated: 2026-09-20
     - Verified at 1440x900 and 390x844: all four illustrations intact, all four slots filled, no console messages.
 
 
+54. **Four fixes from the user looking at the live site (2026-09-20).**
+    - **WHAT I USE tiles are all ink now.** They cycled blue / paper / bone / ink on `nth-child(4n...)`, which was built for a four-column grid. Under 1100px the grid drops to two columns, so the four-step cycle no longer lines up with the rows and the colours land in a different place on every row — the user's words were that it "looks fucked on mobile". One rule now: ink ground, paper type, `--blue40` for the description line. The nth-child rules are gone.
+    - **About intro: 17px → 19px, measure 80ch → 74ch, plus `text-wrap:pretty`.** The user was seeing orphans (a line ending in one stranded word). Size alone does not fix that — `text-wrap:pretty` is the property that does, by letting the browser pull a word back from the last line. Both desktop and 390px now end every paragraph on two or more words.
+    - **The j's tail in the hero was not being clipped, it was being covered.** `.L4` (the bone U tile) is opaque, has a 3px border and sat at `z-index:6`; the j `.L5` was at `z-index:4`, and its descender curls down and to the *left*, straight under that tile, so the hook was sliced off at the tile's edge. `.L5` is now `z-index:7`. **Why it showed up on a big screen:** every letter's nudge (`translateY(-16px)`, `translateY(-8px)`, and so on) is in **pixels, not em**, so as the type grows toward its `clamp` maximum those offsets shrink in proportion, the j settles lower against its neighbours, and more of the tail ends up behind the U. The same wart is why phones scale the whole lockup instead of the type (item in the `--k` / `fitName()` note above).
+    - **The hobby rail snapped ~20px sideways on every lap.** `measure()` set `half = track.scrollWidth / 2`, but `.hob-track` has its own `padding-left` (40px desktop, 22px phone) and `scrollWidth` includes it once, so halving charged **half the padding to each cycle**. Measured: real cycle 3691.19px against 3711px used, a 19.81px jump per lap on desktop and 11.12px on a phone — which is what the user was seeing as jitter on the right-hand side. `measure()` now sums the first four cards' widths and margin-rights directly. Verified the first clone sits exactly one cycle right of the original, **error 0.000px**, at both 1440 and 390.
+    - **Caching gotcha while testing:** `playwright-cli goto` on the same URL serves from cache and will not pick up an edited inline `<style>` block. Append a changing query string (`?v=2`) or the fix looks like it did nothing — this cost a wrong diagnosis on the j before the computed `z-index` was checked directly.
+
+
 ## In progress / not yet confirmed
 
 

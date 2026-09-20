@@ -13,7 +13,7 @@
 .ahead{padding:128px 40px 24px;display:flex;gap:56px;align-items:center;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
 .ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(56px,10.5vw,148px);letter-spacing:-.05em;line-height:.88}
-.ahead p{margin-top:24px;max-width:80ch;font-size:17px;line-height:1.8;color:var(--muted)}
+.ahead p{margin-top:24px;max-width:74ch;font-size:19px;line-height:1.75;color:var(--muted);text-wrap:pretty}
 .ahead .portrait{width:320px;flex:none;aspect-ratio:4/5}
 
 /* ══ OFF THE CLOCK · four hobby cards on a rail that loops sideways on its own ══
@@ -331,7 +331,15 @@
   var dragging = false, decided = false, id = null, sx = 0, sy = 0, sax = 0, vx = 0, lastMove = 0;
 
   function measure(){
-    half = track.scrollWidth / 2;
+    /* the loop length is the first four cards plus their margins, measured directly.
+       scrollWidth/2 is wrong: it also carries half of the track's own padding-left, which
+       is not part of a cycle, so the rail snapped ~20px sideways on every lap. */
+    var kids = track.children, n = kids.length / 2;
+    half = 0;
+    for (var i = 0; i < n; i++) {
+      half += kids[i].getBoundingClientRect().width +
+              (parseFloat(getComputedStyle(kids[i]).marginRight) || 0);
+    }
     drift = window.matchMedia('(max-width:900px)').matches ? 34 : 48;   /* px per second */
   }
   function place(){
