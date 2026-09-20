@@ -450,13 +450,23 @@ Last updated: 2026-09-20
     - Verified at 1440x900 and 390x844: black letterboxing on both clips with no light edge, rice photo and ride clip still filling their slots, rail clone error 0.000px, no console messages.
 
 
+56. **Portrait in, and the resume rebuilt as a Google Doc (2026-09-20).**
+    - **Portrait slot filled.** `C:\Portfolio Stuff\self image` (a 2252x2252 WebP, no extension) is the user drumming at a college event — which happens to line up with the "Drummer at college events" line on the resume. Cropped to the slot's 4:5, saved as `img/hobby/portrait.webp` (900x1125, 163KB), wired with `data-img` on `.portrait` in `about.html`. The `filled` class from item 55 turns its ground ink too.
+    - **The resume is now a Google Doc, not a PDF.** `https://docs.google.com/document/d/1HkwtrNKbZ0oH1Lz3wCdVeUgE4pDX1X21MzFTqvfICXU/preview` — the `/preview` form renders read-only with no Docs chrome and nothing to download, which is what the user wanted. Created with the Google Drive connector's `create_file`, passing the resume as **`text/html` in `textContent`**; Drive converts it to a native Doc and keeps headings, bold, italics, bullets and links. Confirmed by reading it back. **The connector cannot set "anyone with the link"** — `share_file` only takes a specific address — so the user has to flip link sharing themselves in Drive.
+    - **`View Resume` now points at it** in `index.html`, `about.html` and the `HEAD` template in `tools/build_work.py`, with `target="_blank" rel="noopener"`, and `data-soon` removed (that was the placeholder handler in `lab.js`). **The phone menu rebuilds nav links from scratch and was dropping `target`/`rel`**, so the doc would have opened in the same tab there; the builder now carries them across, and takes the CTA's own icon rather than only using it for `data-soon` links.
+    - **Accenture, confirmed from the signed NDA** (`D:\Submissions\avande\NDA Signed Rutujeet Nayak.pdf`): **Accenture Solutions Private Ltd.**, made in Pune, internship **from 25 May 2026 for two months**. Note the folder is named `avande` and holds Avanade material from an earlier application — the employer on the NDA is Accenture. Title is **User Experience Analyst Intern**, given by the user; the NDA only says "INTERN".
+    - **The internship project is described but deliberately not named.** The deck (`D:\Submissions\Internship Accenture\Presentation`) is **DROBE**, an AI shopping agent answering "should I buy this?" from occasion, body type, budget and weather against the user's existing wardrobe; research was 5 semi-structured interviews and a survey across an 18-28 group in Pune and Delhi, with 17 themes consolidated to 7. **The user was asked and chose to describe the work without naming DROBE**, because the NDA covers it. Keep it that way unless they say their manager cleared it.
+    - **Tools list on the resume was refreshed** to match the site's current WHAT I USE rather than the Feb 2026 PDF, which still listed Boords, Photoshop and Illustrator. Flagged to the user.
+    - Source PDFs for the old resume: `D:\Submissions\CV\Rutujeet Nayak resume.pdf` (Feb 2026, the good one) and `A4 - 1.pdf` (an earlier draft with duplicated blocks).
+
+
 ## In progress / not yet confirmed
 
 
 - Project pages: see item 41. The Figma snippets section `2298:739` is the source of truth for page images; DriveBuddy and Maison rows there are unused.
 - **Figma gotchas learned here:** Satoshi (ULS) and some Canva/Relique faces are local fonts the plugin cannot load, so text in those fonts can be cloned and moved but **not rescaled or edited**; clone the deck's existing labels instead of writing new ones. Inter and DM Sans load fine. Image fills in these decks are high resolution (ICCC screenshots 3154x1980), so scaling image rectangles is safe.
 - **My role content:** the CV page has real role text for **Canva AI** (user research, prompt testing and review analysis; built the CAPABLE framework; designed the high-fidelity conversational UI) and **Relique** (designed the platform; map-based discovery and narrative flows; high-fidelity prototypes). **ULS, ICCC, DriveBuddy and Maison need the user's input.**
-- **Needs the user:** Behance galleries for ULS and ICCC (their pages link to the profile for now); portrait; **the CV PDF for the Download CV button (item 53), and which of the three Figma CVs it should be**.
+- **Needs the user:** Behance galleries for ULS and ICCC (their pages link to the profile for now); portrait; ~~the CV PDF~~ — **done**, the resume is a Google Doc now (item 56); it still needs link sharing switched on by the user.
 
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 

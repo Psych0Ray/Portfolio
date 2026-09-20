@@ -284,8 +284,11 @@ document.addEventListener('touchstart', function(){}, {passive:true});
   var items = links.map(function(a){
     var cta = a.classList.contains('cta'), label = a.textContent.trim();
     if (!cta) n++;
-    return '<li><a href="' + a.getAttribute('href') + '"' + (cta ? ' class="cta"' : '') + (a.hasAttribute('data-soon') ? ' data-soon' : '') + '>'
-      + (cta ? label + ' ' + (a.hasAttribute('data-soon') ? a.querySelector('svg').outerHTML : RA) : '<small>0' + n + '</small>' + label) + '</a></li>';
+    /* carry target/rel across, or the resume would open in the same tab from the phone menu */
+    var ext = a.getAttribute('target') ? ' target="' + a.getAttribute('target') + '" rel="noopener"' : '';
+    var icon = a.querySelector('svg');
+    return '<li><a href="' + a.getAttribute('href') + '"' + (cta ? ' class="cta"' : '') + ext + (a.hasAttribute('data-soon') ? ' data-soon' : '') + '>'
+      + (cta ? label + ' ' + (icon ? icon.outerHTML : RA) : '<small>0' + n + '</small>' + label) + '</a></li>';
   }).join('');
   var socials = foot.map(function(a){
     return '<a href="' + a.href + '" target="_blank" rel="noopener">' + a.textContent.trim() + ' ' + NE + '</a>';
