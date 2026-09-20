@@ -469,6 +469,16 @@ Last updated: 2026-09-20
     - **Content is deliberately shorter**, per the user. Bullets cut to three or four per role, education compressed to one line each, tools trimmed. **Accenture is written plainly as "Accenture, Bangalore"** at the user's instruction — not the legal name from the NDA, and note they say Bangalore while the NDA was executed in Pune.
 
 
+58. **Resume rebuilt in Figma on the original template (2026-09-20).** The user rejected the Google Doc approach outright — *"no no no make it in figam only using this style"* — so the resume now lives on the canvas. **New frame `2356:2` "A4 - Resume 2026"**, on page **`cv` (2049:631)**, sitting immediately right of the original at x=7, y=-82.
+    - **Built by cloning the old CV frame `2073:962` and editing the clone**, which is why it matches exactly. Do the same for any future revision rather than rebuilding from primitives.
+    - **Template facts worth keeping:** the face is **Figtree** (Regular / Medium / SemiBold / Bold), the heading blue is **#356c9f**, body is 10pt and the two-column blurbs are 9pt. The page is A4 at 595x842.
+    - **The structure is smarter than it looks.** `Frame 3` inside the frame is a **VERTICAL auto-layout** holding thirteen children — section groups alternating with `LINE` dividers — so growing a section reflows everything below it automatically. Section contents are absolutely positioned groups, so within a section you set `x`/`y` by hand.
+    - **Each experience entry is three nodes:** a blue section heading, a Bold title carrying the dates in parentheses, and one body text node. That body node holds **both** the org line and the bullets, styled by range: characters `0..firstNewline` are **Figtree Bold, listOptions NONE, indentation 0** (with six leading spaces for the indent), and everything after is **Figtree Regular, listOptions UNORDERED, indentation 1**. Set `characters` first, then re-apply both ranges, or the bullets lose their list formatting.
+    - **Accenture was added by cloning that title/body pair**, appending to the same group and positioning the second job at `accBody.y + accBody.height + 10`.
+    - **Bullets are deliberately written to fit one line each** (roughly 95 characters at 511px and 10pt). That is what makes it fit: the page has **38px spare** at the bottom. Hotel Raviraj went from five bullets to three for the same reason. If a bullet wraps, something below will fall off the page.
+    - Accenture is written **"Accenture, Bangalore"** per the user, and the internship project is still described without being named (NDA, item 56).
+
+
 ## In progress / not yet confirmed
 
 
