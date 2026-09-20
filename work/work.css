@@ -19,6 +19,24 @@
 .about{padding:56px 40px 64px}
 .about p{max-width:62ch;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--ink)}
 
+/* ── THE BRIEF / THE AIM / THE OUTCOME ──────────────────────────────
+   One ink-bordered strip of three panels sharing their borders, the same
+   language as the .meta strip at the top but given room to be read. The
+   outcome is inverted — ink ground, paper type — so the payoff lands last
+   and hardest. Read straight off each project's own deck. */
+.story{margin:0 40px 64px;display:grid;grid-template-columns:repeat(3,1fr);
+  border:var(--bw) solid var(--ink);background:var(--paper)}
+.story .sc{padding:34px 34px 38px;border-right:2px solid var(--ink);display:flex;flex-direction:column}
+.story .sc:last-child{border-right:0}
+.story .sc h3{font-family:var(--display);font-weight:800;font-size:clamp(21px,2.1vw,30px);
+  letter-spacing:-.035em;line-height:.95;text-transform:uppercase;color:var(--blue)}
+.story .sc h3::after{content:"";display:block;width:44px;height:var(--bw);background:currentColor;margin:18px 0 20px}
+.story .sc p{font-size:16px;line-height:1.7;color:var(--ink)}
+/* the outcome */
+.story .sc:last-child{background:var(--ink)}
+.story .sc:last-child h3{color:var(--blue40)}
+.story .sc:last-child p{color:var(--blue15)}
+
 /* the prototype video. Static by default: one box, sized so the whole video always fits the
    viewport height on any device (--ar is the video's own width/height, set inline).
    work.js adds .pin: the stage sticks for the section's scroll length while the box zooms to
@@ -63,6 +81,10 @@
   .film.pin{padding:0}
   .shots{gap:24px}
   .about{padding:36px 22px 44px}
+  .story{margin:0 22px 44px;grid-template-columns:1fr}
+  .story .sc{padding:26px 24px 30px;border-right:0;border-bottom:2px solid var(--ink)}
+  .story .sc:last-child{border-bottom:0}
+  .story .sc h3::after{margin:14px 0 16px}
   .meta{grid-template-columns:1fr 1fr}
   .meta div{border-bottom:2px solid var(--ink)}
   .meta div:nth-child(even){border-right:0}

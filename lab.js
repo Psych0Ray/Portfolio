@@ -99,8 +99,9 @@ function glideTo(target){
     var src = el.getAttribute('data-video');
     if (!src) return;
     var v = document.createElement('video');
-    v.src = src; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
-    v.setAttribute('playsinline','');
+    v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+    v.setAttribute('playsinline',''); v.setAttribute('muted','');
+    v.setAttribute('data-src', src);          /* lazyclips() below turns this into a real src */
     el.textContent = ''; el.appendChild(v);
   });
   document.querySelectorAll('[data-img]').forEach(function(el){
@@ -110,6 +111,32 @@ function glideTo(target){
     i.src = src; i.alt = el.getAttribute('data-alt') || '';
     el.textContent = ''; el.appendChild(i);
   });
+})();
+
+/* the clips cost a few MB between them, so nothing is fetched until its section is near the
+   viewport, and everything pauses again once it leaves. The observer watches the *section*
+   rather than each video because the hobby rail clones its cards after this file runs; looking
+   the videos up at intersection time catches the clones too. */
+(function lazyclips(){
+  var first = document.querySelector('video[data-src]');
+  if (!first) return;
+  function wake(root, on){
+    [].forEach.call(root.querySelectorAll('video[data-src]'), function(v){
+      if (!on) { v.pause(); return; }
+      if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      var p = v.play(); if (p && p.catch) p.catch(function(){});
+    });
+  }
+  if (!('IntersectionObserver' in window)) { wake(document, true); return; }
+  var seen = [];
+  [].forEach.call(document.querySelectorAll('video[data-src]'), function(v){
+    var s = v.closest('section') || v.parentNode;
+    if (seen.indexOf(s) < 0) seen.push(s);
+  });
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ wake(e.target, e.isIntersecting); });
+  }, { rootMargin: '300px 0px' });
+  seen.forEach(function(s){ io.observe(s); });
 })();
 
 /* footer: back to top */

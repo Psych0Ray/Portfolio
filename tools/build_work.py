@@ -29,25 +29,19 @@ PROJECTS = [
           'Urban Labour System, is a coordinator-led service built from field research at nakas in Pune: a '
           'QR-linked worker ID, demand-based allocation, and tools for workers, foremen and contractors that '
           'record every wage and attendance mark.',
+    story=[
+      ('The brief',
+       'A four-week service design project. We started at the nakas in Pune, where daily wage workers wait each morning for someone to hire them. Contractors pick by looks and by who they recognise. Pay is agreed out loud and handed over in cash. Nothing gets written down anywhere.'),
+      ('The aim',
+       'We wanted to give this system a record, without forcing anyone to work differently. Three things had to change. A worker should be able to prove what they can do, even to a contractor who has never met them. They should know if there is work before making the trip to the naka. And the wage agreed in the morning should be the wage that gets paid.'),
+      ('The outcome',
+       'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service — an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
+    ],
     behance=None,
     alts=['ULS billboard reading Designed for Real Work, Not Office Work',
           'The new ULS service blueprint from pre-job to project end',
-          'Foreman console screens designed in Hindi first',
+          'ULS analytics dashboard: hiring, wage trends, attendance and site performance',
           'Contractor dashboard for selecting workers by skill, reliability and wage']),
-  dict(
-    slug='relique', film='Walkthrough of the Relique website prototype', title='RELIQUE', short='Relique',
-    meta=[('Course', 'Semiotics and semantics'),
-          ('My role', 'Design Direction, Research, Image and Story Generation'),
-          ('Tools', 'Figma, FigJam'),
-          ('Year', '2025')],
-    about='Relique is a museum website where artifacts tell their own stories, in the first person. Rooted in '
-          'semiotics and semantics, it turns static collections into something you can wander: find a museum on '
-          'the map, open its collection, and let an object\'s My Story play out in sound and image.',
-    behance='https://www.behance.net/gallery/241042181/Storytelling-Museum-Website',
-    alts=['Relique title over a dark still life painting',
-          'Relique home page on desktop and mobile',
-          'My Story view, where an artifact narrates its own history',
-          'Printed museum tickets and the Relique card']),
   dict(
     slug='iccc-surveillance', film='Walkthrough of the working ICCC dashboard prototype', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
@@ -57,8 +51,17 @@ PROJECTS = [
     about='The Integrated Command and Control Centre in Taloja MIDC watches 310 cameras, 349 street lights and '
           'over 1,000 smart poles across 950+ industries. In the command centre we saw operators verify every '
           'alert by hand and dispatch field teams over WhatsApp. Using object-oriented UX we cut the system\'s '
-          'object model to 6.2% of its original cognitive load, then redesigned the dashboard around how alerts '
+          'object model from 408 bits of information to 109, a 73.4% drop in cognitive load, then '
+          'redesigned the dashboard around how alerts '
           'are actually verified, escalated and resolved.',
+    story=[
+      ('The brief',
+       'The command centre at Taloja MIDC watches one industrial estate: 310 cameras, 349 street lights and over a thousand smart poles, spread across 900 hectares and 950 factories. It all lands on one dashboard, and someone is watching it every hour of the day. Our job was to redesign that dashboard using object-oriented UX.'),
+      ('The aim',
+       'Before touching the interface, we wanted to know what the operators actually do. We spent a day in the command centre and interviewed six of the people who work there. Every alert turned out to be checked by hand. Field teams were sent out over WhatsApp. Records were typed into a shared sheet at the end of a shift. The real problem was not how the dashboard looked.'),
+      ('The outcome',
+       'Regrouping the system’s objects and actions cut what an operator has to hold in their head from 408 bits of information down to 109, a drop of 73.4%. The new dashboard is built on that. Alerts cluster on a live map. A device card opens in one click and can be acknowledged from there. Alerts can be cleared in bulk, repeat failures get flagged, and a tickets section replaces the WhatsApp thread.'),
+    ],
     behance=None,
     alts=['ICCC Surveillance cover',
           'Live map dashboard with device clusters and filters',
@@ -74,11 +77,41 @@ PROJECTS = [
           'a bank of 50 real-world prompts, built the CAPABLE framework to pin down where it misread intent, and '
           'redesigned the assistant to stay inside the file, ask before it changes anything, and review a design '
           'the way a consultant would.',
+    story=[
+      ('The brief',
+       '180 million people use Canva every month, and most of them are not designers. Its AI assistant has to understand people who cannot say what they want in design words. They can tell the poster looks wrong, but not why. We were asked to test that assistant and then redesign it.'),
+      ('The aim',
+       'Saying the AI felt bad to use was not much help to anyone. We wanted to point at the exact moments it stopped understanding. So we read what people were complaining about on G2 and Reddit, wrote 50 prompts of the kind a real Canva user would type, ran every one of them, and noted what came back.'),
+      ('The outcome',
+       'The failures fell into seven patterns, so we made them into a framework called CAPABLE and redesigned the assistant one pattern at a time. It now works inside the file you already have open instead of starting a new one. It asks before it changes anything. When you tell it a design feels flat, it treats that as a problem to diagnose rather than an order to follow. And it can handle a request with two parts in one go.'),
+    ],
     behance='https://www.behance.net/gallery/241041049/Redesign-of-Canvas-AI-Model',
     alts=['Canva AI project cover',
           'The CAPABLE framework: seven lenses for judging a design AI',
           'Redesigned Canva AI acting as a design consultant on a poster',
           'Redesigned Canva AI handling a compound command in the editor']),
+  dict(
+    slug='relique', film='Walkthrough of the Relique website prototype', title='RELIQUE', short='Relique',
+    meta=[('Course', 'Semiotics and semantics'),
+          ('My role', 'Design Direction, Research, Image and Story Generation'),
+          ('Tools', 'Figma, FigJam'),
+          ('Year', '2025')],
+    about='Relique is a museum website where artifacts tell their own stories, in the first person. Rooted in '
+          'semiotics and semantics, it turns static collections into something you can wander: find a museum on '
+          'the map, open its collection, and let an object\'s My Story play out in sound and image.',
+    story=[
+      ('The brief',
+       'A four-week brief for our semantics and semiotics course: make something where the meaning comes from the design itself, from its shapes and symbols and context, rather than from text explaining it. We chose museums. A museum holds objects with enormous stories behind them, then puts them in a glass case with a name and a date.'),
+      ('The aim',
+       'We wanted the object to tell you its story, instead of a label summarising it for you. That meant building a site you wander through rather than search, and leaving enough unsaid for the visitor to work out on their own.'),
+      ('The outcome',
+       'Relique starts on a map. Pick a museum, open its collection, then hover over an object to unlock My Story, where the artifact narrates its own history in its own voice, in sound and images. The symbols do the explaining: a triangle means a story begins here, + and − show what opens and closes, ‹ and › move you through a life. One artifact’s story leads into another’s.'),
+    ],
+    behance='https://www.behance.net/gallery/241042181/Storytelling-Museum-Website',
+    alts=['Relique title over a dark still life painting',
+          'Relique home page on desktop and mobile',
+          'My Story view, where an artifact narrates its own history',
+          'Printed museum tickets and the Relique card']),
 ]
 
 HEAD = '''<!DOCTYPE html>
@@ -169,6 +202,19 @@ def film(p):
             f'</div></div></section>\n')
 
 
+def story(p):
+    """The brief, the aim and the outcome, read off the project's own deck.
+    One ink-bordered strip of three panels; the outcome is inverted so the payoff lands
+    hardest. Skipped entirely for a project that has no story= yet."""
+    rows = p.get('story')
+    if not rows:
+        return ''
+    cells = ''.join(
+        f'\n  <div class="sc"><h3>{html.escape(k)}</h3><p>{v}</p></div>'
+        for k, v in rows)
+    return f'<section class="story" data-reveal>{cells}\n</section>\n'
+
+
 def page(p, nxt):
     names = shots(p['slug'])
     alts = p['alts'] + [''] * len(names)
@@ -189,7 +235,7 @@ def page(p, nxt):
   <p>{p['about']}</p>
 </section>
 
-{film(p)}
+{story(p)}{film(p)}
 <section class="shots">{rest}
 </section>
 
