@@ -36,9 +36,12 @@
 .ransom-fit{position:relative;z-index:4}
 @media (max-width:900px){
   .hero{min-height:100svh;padding:104px 16px 120px;justify-content:center}
-  .ransom-fit{overflow:hidden}
-  .ransom{width:max-content;margin-left:0;transform-origin:left top;
-    transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k,1))}
+  /* not clipped here: the j's tail paints below its own box, and the hero already clips.
+     The --k and height below are a first-paint guess so the full size name never flashes;
+     fitName() replaces them with measured values as soon as it runs. */
+  .ransom-fit{overflow:visible;height:calc((100vw - 38px) * 196 / 882 + 20px)}
+  .ransom{width:max-content;margin-left:0;transform-origin:left top;--k:.98;
+    transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
   .L1{font-size:194px}.L2{font-size:208px}.L3{font-size:234px}.L4{font-size:150px}
   .L5{font-size:200px}.L6{font-size:220px}.L7{font-size:156px}.L8{font-size:142px}
   .statement{margin-top:26px;font-size:clamp(23px,7vw,34px);gap:6px 10px;line-height:.98}
@@ -46,6 +49,18 @@
   .statement .c{padding:2px 12px 6px}
   .scue{right:22px;bottom:30px}
 }
+@media (max-width:820px){.ransom{--k:0.887}}
+@media (max-width:740px){.ransom{--k:0.796}}
+@media (max-width:660px){.ransom{--k:0.705}}
+@media (max-width:600px){.ransom{--k:0.637}}
+@media (max-width:540px){.ransom{--k:0.569}}
+@media (max-width:480px){.ransom{--k:0.501}}
+@media (max-width:430px){.ransom{--k:0.444}}
+@media (max-width:400px){.ransom{--k:0.410}}
+@media (max-width:380px){.ransom{--k:0.388}}
+@media (max-width:360px){.ransom{--k:0.365}}
+@media (max-width:340px){.ransom{--k:0.342}}
+@media (max-width:320px){.ransom{--k:0.320}}
 /* scroll cue: a labelled button rather than a slab with a giant arrow on it */
 .scue{position:absolute;right:40px;bottom:52px;z-index:4;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
 .scue-t{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:600}
@@ -647,12 +662,12 @@ THUMBS.wire(document.getElementById('grid'));
       L = Math.min(L, r.left); T = Math.min(T, r.top); Rt = Math.max(Rt, r.right); B = Math.max(B, r.bottom);
     });
     spans.forEach(function(el, i){ el.style.transform = saved[i]; });
-    var pad = 3, w = Rt - L, h = B - T;
+    var pad = 3, w = Rt - L, h = B - T, tail = h * .12;   /* room for the j's tail, which paints below its box */
     var k = (fit.clientWidth - pad * 2) / w;
     name.style.setProperty('--k', k);
     name.style.setProperty('--tx', (pad - (L - base.left) * k).toFixed(2) + 'px');
     name.style.setProperty('--ty', (pad - (T - base.top) * k).toFixed(2) + 'px');
-    fit.style.height = Math.ceil(h * k + pad * 2) + 'px';
+    fit.style.height = Math.ceil(h * k + pad * 2 + tail * k) + 'px';
   }
   run();
   window.addEventListener('resize', run);
