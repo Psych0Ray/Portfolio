@@ -226,7 +226,7 @@ def full_shots(slug):
     return sorted(f for f in os.listdir(folder) if f.endswith('.jpg'))
 
 
-def full_page(p):
+def full_page(p, nxt):
     """The whole deck on one page. Every image is stacked flush against the next with no
     gap at all, inside a single ink frame, so it reads as one continuous scroll. Only the
     first image loads eagerly; the rest arrive as you reach them. Every image carries its
@@ -258,6 +258,10 @@ def full_page(p):
     <div><span class="lab">Back to</span><h3>{p['short']}</h3></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg></span>
   </a>
+  <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
+    <div><span class="lab">Next project</span><h3>{nxt['short']}</h3></div>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
+  </a>
 </section>
 '''
     return out + FOOT
@@ -269,6 +273,14 @@ def page(p, nxt):
     has_full = bool(full_shots(p['slug']))
     on_profile = p['behance'] is None
     link = (p['slug'] + '-full.html') if has_full else (p['behance'] or BEHANCE)
+    # When the case study lives on the site, Behance drops to a secondary line under it.
+    alt = ''
+    if has_full:
+        alt = ('\n  <a class="bhalt" href="%s" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>'
+               '\n    <span>%s</span>'
+               '\n    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>'
+               '\n  </a>' % (p['behance'] or BEHANCE,
+                             'Also on Behance' if not on_profile else 'More work on Behance'))
     meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
     rest = ''.join(f'\n  <div class="frame" data-reveal>{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
     out = HEAD.format(title=p['short'], desc=html.escape(p['about'][:155]))
@@ -294,8 +306,8 @@ def page(p, nxt):
       <h2>{'VIEW FULL PROJECT' if has_full else 'VIEW ON BEHANCE'}</h2>
       <p>{'Every slide of the case study, on one page.' if has_full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
-    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></span>
-  </a>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if has_full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
+  </a>{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
     <div><span class="lab">Next project</span><h3>{nxt['short']}</h3></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
@@ -314,5 +326,5 @@ if __name__ == '__main__':
         if full_shots(p['slug']):
             d2 = os.path.join(ROOT, 'work', p['slug'] + '-full.html')
             with open(d2, 'w', encoding='utf-8', newline='\n') as f2:
-                f2.write(full_page(p))
+                f2.write(full_page(p, PROJECTS[(i + 1) % len(PROJECTS)]))
             print('wrote', os.path.relpath(d2, ROOT), len(full_shots(p['slug'])), 'images')

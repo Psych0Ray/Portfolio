@@ -528,6 +528,18 @@ Last updated: 2026-09-20
     - **Still open:** Canva AI and Relique bars still point at Behance. Those galleries are older and were not flagged, but if Behance ever blocks them the same treatment applies — their long-form images are not exported yet.
 
 
+63. **All four projects now have an on-site case study; Behance kept as a secondary link (2026-09-21).** The user liked the ULS page enough to want it everywhere — *"behance fucks quality"* — but asked to keep the Behance links too.
+    - **`work/full/<slug>/` for all four**, total **38MB**: uls 28 images (21MB), iccc-surveillance 35 (9.4MB), relique 6 (4.4MB), canva-ai 4 (2.7MB). All 2000px wide, progressive JPEG q88. Verified in the browser: **0 gaps** between adjacent images on every page, at 1440 and 390 wide.
+    - **Where each set came from:**
+      - ULS — the sliced strips in `D:\Submissions\Behance New\Service Design\` (item 60).
+      - ICCC — the 35 slide PNGs in `D:\Submissions\Behance New\OOUX\`, exported earlier at 3840 wide.
+      - **Canva AI and Relique were rendered straight from their course PDFs**, because neither deck is in the Figma file (checked every page). `pymupdf` renders a single tall page in bands with `get_pixmap(matrix=Matrix(s,s), clip=Rect(0,y0,w,y1))`, which keeps memory flat and needs no Figma at all. Canva: `Conv Int\Conversational User Interfaces Canva Re-design Mid-Course.pdf`, 1920x20,728 → 4 strips. Relique: `Semiotics (1)\Semantics & Semiotics Final PPT.pdf`, 1920x27,140 → 6 strips. **This is the cheapest route for any deck that exists as a tall PDF.**
+      - **Caveat the user should confirm:** the only Canva deck on disk is the **mid-course** one. If the Behance gallery was built from a later version, that page is showing older work.
+    - **End-bar hierarchy on the trailer pages is now three tiers:** `.bh` **VIEW FULL PROJECT** (ink, internal, forward arrow — not the diagonal external one), then `.bhalt` **ALSO ON BEHANCE** (bordered, paper, opens in a new tab), then the **NEXT PROJECT** card. `.bhalt` is new in `work/work.css`.
+    - **The full pages carry two cards: Back to <project> and Next project, and both point at trailer pages, never at another full page** — the user was explicit that next should land on the trailer. `full_page(p, nxt)` takes the next project for this.
+    - **Adding a case study to any future project is just:** drop jpgs into `work/full/<slug>/` and rerun the builder. It switches the bar, generates `<slug>-full.html`, and wires the cards automatically.
+
+
 ## In progress / not yet confirmed
 
 
