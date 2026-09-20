@@ -19,20 +19,16 @@
   });
   if (reduced) return;
 
-  var blocked = [];
+  /* A refused clip gets a play button over it, so a blocked autoplay never reads as a broken
+     box. autoplay() in lab.js owns the button and the retry-on-first-gesture; this only has
+     to say which clip is waiting and which has stopped waiting. */
   function play(v) {
     v._want = true;
     var p = v.play();
-    if (p && p.catch) p.catch(function () { if (blocked.indexOf(v) < 0) blocked.push(v); });
+    if (p && p.catch) p.catch(function (err) { window.CLIP_BLOCKED(v, err); });
+    else window.CLIP_OK(v);
   }
-  function stop(v) { v._want = false; v.pause(); }
-  function onGesture() {
-    var list = blocked; blocked = [];
-    list.forEach(function (v) { if (v._want) play(v); });
-  }
-  ['pointerdown', 'touchstart', 'keydown'].forEach(function (t) {
-    document.addEventListener(t, onGesture, { passive: true });
-  });
+  function stop(v) { v._want = false; v.pause(); window.CLIP_OK(v); }
 
   /* no GSAP: leave the static box and just play it while on screen */
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {

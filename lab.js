@@ -128,6 +128,76 @@ function glideTo(target){
   });
 })();
 
+/* ── AUTOPLAY REFUSED ────────────────────────────────────────────────────────
+   Browsers block autoplay in more cases than people expect: iOS Low Power Mode, a data
+   saver, Chrome's per-site media setting, some in-app browsers. A muted loop that is
+   refused just sits there as a still frame, and the viewer has no way of knowing that
+   anything was meant to be moving. It reads as a broken image.
+
+   Any clip whose play() is rejected by the autoplay POLICY gets a play button over it that
+   says so. Tapping it plays that clip, and because one gesture releases the policy for the
+   whole page, every other held clip starts at the same time and its button goes away.
+
+   Deliberately NOT a "go and change your browser setting" prompt. The steps differ by
+   browser, version and platform, most people will not follow them, and a tap fixes it here
+   and now. The label names the cause, so anyone who does want to change the setting knows
+   what they are looking for.
+
+   CLIP_BLOCKED(v, err) to flag one, CLIP_OK(v) to take the button away again (a clip that
+   has scrolled out of view is no longer waiting on anything).                            */
+window.CLIP_BLOCKED = function(){};
+window.CLIP_OK = function(){};
+(function autoplay(){
+  var held = [];
+  var PLAY = '<span class="nb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></span>'
+           + '<span class="nt">Autoplay is off<br>in your browser &mdash; tap to play</span>';
+
+  function box(v){ return v.parentNode; }
+  function show(v){
+    var p = box(v);
+    if (!p || p.querySelector('.noauto')) return;
+    /* the hobby rail's clones are inert duplicates: a button in there cannot be clicked, and
+       the real card carries one anyway. Releasing clears both. */
+    if (v.closest('[inert],[aria-hidden="true"]')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'noauto'; b.innerHTML = PLAY;
+    b.setAttribute('aria-label', 'Autoplay is blocked by your browser. Play this clip.');
+    /* the rail reads pointerdown to start a drag, so the press must stop here */
+    b.addEventListener('pointerdown', function(e){ e.stopPropagation(); });
+    b.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); release(); });
+    p.appendChild(b);
+  }
+  function hide(v){
+    var p = box(v), b = p && p.querySelector('.noauto');
+    if (b) b.parentNode.removeChild(b);
+  }
+  function release(){
+    held.slice().forEach(function(v){
+      var pr = v.play();
+      if (pr && pr.then) pr.then(function(){ window.CLIP_OK(v); }, function(){});
+      else window.CLIP_OK(v);
+    });
+  }
+
+  window.CLIP_BLOCKED = function(v, err){
+    /* only the autoplay policy. A decode or network failure is a different problem and a
+       play button would not fix it. */
+    if (err && err.name && err.name !== 'NotAllowedError') return;
+    if (held.indexOf(v) < 0) held.push(v);
+    show(v);
+  };
+  window.CLIP_OK = function(v){
+    var i = held.indexOf(v);
+    if (i >= 0) held.splice(i, 1);
+    hide(v);
+  };
+
+  /* any gesture anywhere lifts the policy, so retry everything that is still waiting */
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function(t){
+    document.addEventListener(t, function(){ if (held.length) release(); }, { passive: true });
+  });
+})();
+
 /* Media that is not on screen yet costs nothing: clips are not fetched and do not play,
    off-screen images are not fetched at all.
 
@@ -158,9 +228,10 @@ window.WATCH_MEDIA = function(){};
     i.setAttribute('src', i.getAttribute('data-src'));
   }
   function wakeVid(v, on){
-    if (!on) { v.pause(); return; }
+    if (!on) { v.pause(); window.CLIP_OK(v); return; }   /* gone from view, nothing to wait for */
     if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
-    var p = v.play(); if (p && p.catch) p.catch(function(){});
+    var p = v.play();
+    if (p && p.catch) p.catch(function(err){ window.CLIP_BLOCKED(v, err); });
   }
   if (!all('video[data-src],img[data-src]').length) return;
 

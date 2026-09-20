@@ -579,6 +579,16 @@ Last updated: 2026-09-21
     - Verified across all five page types: **no console errors and no blank images anywhere**, before or after a full scroll.
     - **NEW AND IMPORTANT: `work/vid/relique.mp4` is 22 MB**, and `relique.webm` is 26 MB. A visitor who scrolls to the video on the Relique page pulls **23.8 MB**. That is 27.5s at 1600x900, about 6.4 Mbps, which is a wildly high bitrate for a screen recording of a prototype; 1-2 Mbps should look identical and land near 5 MB. `iccc-surveillance` is 6.4 MB, `uls` 2.5 MB, `canva-ai` 1.1 MB. **ffmpeg is not installed on this machine**, so this could not be done here. It is now the single worst asset on the site.
 
+68. **Blocked autoplay is now detected and surfaced (2026-09-21).** [lab.js](lab.js), [lab.css](lab.css), [work/work.js](work/work.js).
+    - **The problem the user raised:** a browser that refuses autoplay leaves a muted loop sitting as a still frame, and the viewer has no idea anything was meant to move. It reads as a broken image. Causes are commoner than people think: iOS Low Power Mode, data savers, Chrome's per-site media setting, in-app browsers.
+    - **The user asked for a prompt telling the viewer to turn autoplay off in their settings. It was built as a tap-to-play button instead, and they were told why:** the steps differ by browser, version and platform, most people will not follow them, and a tap fixes it immediately. **The label still names the cause** - "Autoplay is off in your browser - tap to play" - so anyone who does want to change the setting knows what to look for. Revisit if they push back.
+    - **`autoplay()` in lab.js owns it**, with a two-call contract used by both the hobby clips and the project-page films: `window.CLIP_BLOCKED(v, err)` flags a clip, `window.CLIP_OK(v)` takes the button away. work.js's old private `blocked[]` array and `onGesture` handler are gone; it just calls the two.
+    - **Only `NotAllowedError` gets a button.** A decode or network failure is a different problem that a play button would not fix, and it is filtered out. Verified both ways.
+    - **One tap releases everything**, because a single gesture lifts the policy for the whole page: clicking one button starts every held clip and removes every button. Confirmed - one click took About from 2 overlays / 0 playing to 0 overlays / 2 playing.
+    - **No button inside the hobby rail's clones.** They are `inert` and `aria-hidden`, so a button in one could not be clicked; the real card carries it and the release clears both.
+    - **Testing note:** `--autoplay-policy=user-gesture-required` does **not** block these clips, because Chrome always allows **muted** autoplay. To exercise the path, stub `HTMLMediaElement.prototype.play` in an init script to reject with a named error until a gesture fires. Also, Playwright's normal `page.click()` times out on a hobby-rail overlay - the rail never stops moving, so the element is never "stable"; call `.click()` in `page.evaluate` instead.
+    - Regression across five pages, with and without `prefers-reduced-motion`: no console errors, no blank images, no stray overlays.
+
 
 ## In progress / not yet confirmed
 

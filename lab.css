@@ -121,6 +121,24 @@ a{color:inherit}
    along the edges of the clips as they slid past. Black behind black letterboxing hides it. */
 .slot.filled{background-color:var(--ink)}
 
+/* ── A CLIP THE BROWSER REFUSED TO AUTOPLAY ──────────────────────────────
+   Sits over the still frame so it never looks like a broken box: the same round button
+   language as the scroll cue, and a line naming the cause. Built by autoplay() in lab.js
+   and only ever added to a clip whose play() was actually rejected. */
+.noauto{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:14px;padding:16px;border:0;cursor:pointer;color:var(--paper);
+  background:rgba(10,10,10,.55);-webkit-tap-highlight-color:transparent}
+.noauto .nb{width:56px;height:56px;border-radius:50%;background:var(--paper);color:var(--ink);
+  border:var(--bw) solid var(--ink);box-shadow:0 4px 0 var(--ink);display:grid;place-items:center;
+  transition:transform .12s ease,box-shadow .12s ease}
+.noauto .nb svg{width:20px;height:20px;fill:currentColor;margin-left:3px}
+.noauto .nt{font-family:var(--label);font-size:11px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;text-align:center;line-height:1.55;text-wrap:balance}
+.noauto:hover .nb{background:var(--blue);color:var(--paper)}
+.noauto:active .nb{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+/* a small slot (the hobby rail on a phone) only has room for the button */
+@media (max-width:900px){.noauto{gap:10px}.noauto .nb{width:48px;height:48px}.noauto .nt{font-size:10px}}
+
 /* chip · bordered pill, hard shadow */
 .chip{border:2.5px solid var(--ink);border-radius:100px;padding:9px 16px;font-size:11px;font-weight:700;
   font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;display:inline-block;
