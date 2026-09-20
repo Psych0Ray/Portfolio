@@ -508,6 +508,15 @@ Last updated: 2026-09-20
     - **I cannot upload to Behance** — no connector or credentials in this environment.
 
 
+61. **Behance links live, real resume PDF, favicon and tab titles (2026-09-21).**
+    - **Both remaining Behance galleries are connected.** ULS → `https://www.behance.net/gallery/255996487/ULS-Service-Design` and ICCC → `https://www.behance.net/gallery/255993261/ICCC-Surveillance-Object-Oriented-UX`. **All four project pages now link to a real gallery**, so none fall back to the profile and every one gets the "full case study" copy instead of the "on its way" line. ULS was briefly missing from the profile because Behance flagged the first upload as spam; the user re-uploaded it under a new id.
+    - **The resume is a hosted PDF now, not the Google Doc.** `Rutujeet-Nayak-Resume.pdf` (1.0MB) sits at the repo root, copied from `D:\Submissions\CV\Rutujeet Nayak resume.pdf`. **`View Resume` points straight at it with `target="_blank"`**, and the server sends `application/pdf`, so browsers open it inline in a new tab with nothing to download. The Google Doc (item 57) is now orphaned but still in the user's Drive.
+    - **Careful with that source file:** it keeps the same name and path as the Feb 2026 version but the user overwrites it in place. An earlier check in this session read the old copy and wrongly concluded it had no Accenture on it. **Re-read the file before judging its contents**; the current one has Accenture, Bangalore, the 40+ screens line, Runway and Claude, and the headline is now "Product and User Experience Designer".
+    - **Favicon made from the logo's R** — Playfair Display italic 900 in Klein blue on paper, the `.l1` span of the `.logo`. Rendered by loading it in the browser at 512px and screenshotting, so it matches the site exactly rather than being redrawn; then auto-cropped to the glyph with 17% padding and resized. Files at the repo root: `favicon.ico` (16/32/48), `favicon-32x32.png`, `apple-touch-icon.png`. **This also clears the favicon 404** that had been in the console since the beginning.
+    - **Tab titles:** `Rutujeet’s Portfolio` on the home page, `About · Rutujeet’s Portfolio`, and `<Project> · Rutujeet’s Portfolio` on the four project pages (the `HEAD` template in `tools/build_work.py`). Icon links are in all three templates, with `../` on the work pages.
+    - Verified: titles and icons resolve on home, About and a project page; the PDF returns 200 as `application/pdf`; the ULS Behance bar carries the new gallery URL; no console errors beyond the Edge lazy-image notice.
+
+
 ## In progress / not yet confirmed
 
 
@@ -543,7 +552,6 @@ Last updated: 2026-09-20
 - User's stated dislikes to respect going forward: **light-weight word emphasis** (use a solid block, see item 29), **JetBrains Mono as a UI face**, **gradients** (audited: 0 gradient fills across iterations 04-06). User's stated likes: Bricolage Grotesque for display, uppercase nav labels (in Geist since item 29; mono was later rejected), the pill nav shape, normal (non-bento) work grids, tall portrait work cards with tag chips, Awwwards-style playful detail.
 - Context: this is a **student** portfolio. Nav is WORK / ABOUT / RESUME with a home icon; copy refers to the user as a design student.
 - Replace remaining placeholder content. Done in item 30: hero statement, skills marquee, the six project names and descriptors. Still to do: project years, case-study pages per project (all six still point at the dummy Sonder Health page), About copy, the second marquee, contact links, and every image slot.
-- Add a favicon (currently 404s, caught by the Playwright tooling — cosmetic only).
 - Write the actual GSAP animations once a design direction is chosen.
 
 ## Notes for future sessions

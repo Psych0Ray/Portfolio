@@ -37,7 +37,7 @@ PROJECTS = [
       ('The outcome',
        'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service — an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
     ],
-    behance=None,
+    behance='https://www.behance.net/gallery/255996487/ULS-Service-Design',
     alts=['ULS billboard reading Designed for Real Work, Not Office Work',
           'The new ULS service blueprint from pre-job to project end',
           'ULS analytics dashboard: hiring, wage trends, attendance and site performance',
@@ -62,7 +62,7 @@ PROJECTS = [
       ('The outcome',
        'Regrouping the system’s objects and actions cut what an operator has to hold in their head from 408 bits of information down to 109, a drop of 73.4%. The new dashboard is built on that. Alerts cluster on a live map. A device card opens in one click and can be acknowledged from there. Alerts can be cleared in bulk, repeat failures get flagged, and a tickets section replaces the WhatsApp thread.'),
     ],
-    behance=None,
+    behance='https://www.behance.net/gallery/255993261/ICCC-Surveillance-Object-Oriented-UX',
     alts=['ICCC Surveillance cover',
           'Live map dashboard with device clusters and filters',
           'Device cards with status, event logs and one-click acknowledge',
@@ -119,8 +119,11 @@ HEAD = '''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title} · Rutujeet</title>
+<title>{title} · Rutujeet’s Portfolio</title>
 <meta name="description" content="{desc}">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
@@ -138,7 +141,7 @@ HEAD = '''<!DOCTYPE html>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
   <a href="#contact" class="lnk">Contact</a>
-  <a href="https://docs.google.com/document/d/1Bvh4Iw7bT4mco2NjIT4WOCOqMTBDOSotYpt4Qmps8Sw/preview" class="lnk cta" target="_blank" rel="noopener" data-cursor="Resume">View Resume <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
+  <a href="../Rutujeet-Nayak-Resume.pdf" class="lnk cta" target="_blank" rel="noopener" data-cursor="Resume">View Resume <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a>
 </nav></div>
 '''
 
