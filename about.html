@@ -120,6 +120,29 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
   .role .rbody h3,.role .rbody .org,.role .rbody p,.role .rbody .tags{grid-area:auto}
   .role .rbody p{margin-top:14px}
 }
+/* Phones on their side. The portrait card above is 84vw wide with a 4:5 clip, which on a
+   340px-tall landscape screen made each card 630 x 1116, over three screens tall, with the
+   clip blown up past the screen. Sized from the screen's height instead: the clip on the
+   left at 4:5, the poster as a sticker on its corner, the write-up beside it. Every size is
+   derived from --ch (the clip's height) so nothing depends on a percentage height resolving. */
+@media (orientation:landscape) and (max-height:520px){
+  .hob-head{padding:40px 22px 16px}
+  .hob-track{padding-left:22px}
+  .slide{--ch:calc(100svh - 126px);width:auto;height:auto;margin-right:18px;padding:12px 14px 14px;gap:10px;
+    box-shadow:6px 6px 0 var(--ink)}
+  .s-name{font-size:20px}
+  .s-grid{grid-template-columns:calc(var(--ch) * .8) 280px;grid-template-rows:var(--ch);gap:14px}
+  .pmedia{grid-area:1/1;width:calc(var(--ch) * .8);height:var(--ch);aspect-ratio:auto}
+  .pwrap{grid-area:1/1;position:relative;align-self:end;justify-self:start;z-index:2;
+    width:calc(var(--ch) * .34);aspect-ratio:1/1;margin:0 0 10px 10px}
+  .poster{padding:8px;box-shadow:4px 4px 0 var(--ink)}
+  .ptext{grid-area:1/2;margin-top:0;padding:12px 14px}
+  .ptext h4{font-size:18px;margin:6px 0 10px}
+  .ptext p{font-size:12.5px;line-height:1.45}
+  .rlab{margin:6px 0 8px}
+  .stat{font-size:28px}
+  .ptext .meta{padding-top:8px;font-size:11px}
+}
 </style>
 </head>
 <body>

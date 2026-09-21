@@ -24,18 +24,17 @@ PROJECTS = [
           ('My role', 'Research &amp; Analysis, Design Direction, Models and Blueprints'),
           ('Methods', 'Field interviews, systems mapping, service blueprint'),
           ('Year', '2026')],
-    about='Every morning, daily wage workers gather at urban nakas and contractors pick them by appearance, '
-          'familiarity or build. Skills cannot be proved and wages are paid in cash with no record. ULS, the '
-          'Urban Labour System, is a coordinator-led service built from field research at nakas in Pune: a '
-          'QR-linked worker ID, demand-based allocation, and tools for workers, foremen and contractors that '
-          'record every wage and attendance mark.',
+    about='ULS, the Urban Labour System, brings a record to informal naka hiring. Built from field research '
+          'at nakas in Pune, it gives every daily wage worker a QR-linked ID, matches them to work through a '
+          'naka coordinator based on real demand, and logs every wage and attendance mark for workers, '
+          'foremen and contractors alike.',
     story=[
       ('The brief',
        'A four-week service design project. We started at the nakas in Pune, where daily wage workers wait each morning for someone to hire them. Contractors pick by looks and by who they recognise. Pay is agreed out loud and handed over in cash. Nothing gets written down anywhere.'),
       ('The aim',
        'We wanted to give this system a record, without forcing anyone to work differently. Three things had to change. A worker should be able to prove what they can do, even to a contractor who has never met them. They should know if there is work before making the trip to the naka. And the wage agreed in the morning should be the wage that gets paid.'),
       ('The outcome',
-       'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service — an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
+       'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service: an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
     ],
     behance='https://www.behance.net/gallery/255996487/ULS-Service-Design',
     # Behance flagged this one as spam; the gallery is a dead end for anyone but the owner,
@@ -48,20 +47,18 @@ PROJECTS = [
   dict(
     slug='iccc-surveillance', film='Walkthrough of the working ICCC dashboard prototype', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
-          ('My role', 'High Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
+          ('My role', 'High-Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
           ('Methods', 'Field observation, interviews, task modelling'),
           ('Year', '2026')],
-    about='The Integrated Command and Control Centre in Taloja MIDC watches 310 cameras, 349 street lights and '
-          'over 1,000 smart poles across 950+ industries. In the command centre we saw operators verify every '
-          'alert by hand and dispatch field teams over WhatsApp. Using object-oriented UX we cut the system\'s '
-          'object model from 408 bits of information to 109, a 73.4% drop in cognitive load, then '
-          'redesigned the dashboard around how alerts '
-          'are actually verified, escalated and resolved.',
+    about='A redesign of the monitoring dashboard at the Integrated Command and Control Centre in Taloja MIDC, '
+          'where a single screen watches an entire industrial estate. Using object-oriented UX, we rebuilt it '
+          'around how operators actually verify, escalate and resolve alerts, and cut what they have to keep '
+          'in their head by 73.4%.',
     story=[
       ('The brief',
        'The command centre at Taloja MIDC watches one industrial estate: 310 cameras, 349 street lights and over a thousand smart poles, spread across 900 hectares and 950 factories. It all lands on one dashboard, and someone is watching it every hour of the day. Our job was to redesign that dashboard using object-oriented UX.'),
       ('The aim',
-       'Before touching the interface, we wanted to know what the operators actually do. We spent a day in the command centre and interviewed six of the people who work there. Every alert turned out to be checked by hand. Field teams were sent out over WhatsApp. Records were typed into a shared sheet at the end of a shift. The real problem was not how the dashboard looked.'),
+       'We wanted the dashboard to fit the operator’s real job, not just to look better. A day in the command centre and interviews with six operators showed us what that job is: checking alerts, sending out field teams and keeping records. All three were happening off the dashboard, by hand, over WhatsApp and in a shared sheet at the end of each shift. The aim was to bring them into one place, and to cut how much an operator has to keep in their head.'),
       ('The outcome',
        'Regrouping the system’s objects and actions cut what an operator has to hold in their head from 408 bits of information down to 109, a drop of 73.4%. The new dashboard is built on that. Alerts cluster on a live map. A device card opens in one click and can be acknowledged from there. Alerts can be cleared in bulk, repeat failures get flagged, and a tickets section replaces the WhatsApp thread.'),
     ],
@@ -76,15 +73,15 @@ PROJECTS = [
           ('My role', 'Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design'),
           ('Methods', 'Prompt testing, review analysis'),
           ('Year', '2025')],
-    about='Canva\'s AI assistant serves 180 million monthly users, most of them non-designers. We tested it with '
-          'a bank of 50 real-world prompts, built the CAPABLE framework to pin down where it misread intent, and '
-          'redesigned the assistant to stay inside the file, ask before it changes anything, and review a design '
-          'the way a consultant would.',
+    about='A redesign of Canva’s AI assistant for the people who lean on it most: non-designers who can tell '
+          'a design looks wrong but not why. We tested it with 50 real-world prompts, named where it misread '
+          'intent with the CAPABLE framework, and redesigned it to stay inside the file, ask before it changes '
+          'anything, and review a design the way a consultant would.',
     story=[
       ('The brief',
        '180 million people use Canva every month, and most of them are not designers. Its AI assistant has to understand people who cannot say what they want in design words. They can tell the poster looks wrong, but not why. We were asked to test that assistant and then redesign it.'),
       ('The aim',
-       'Saying the AI felt bad to use was not much help to anyone. We wanted to point at the exact moments it stopped understanding. So we read what people were complaining about on G2 and Reddit, wrote 50 prompts of the kind a real Canva user would type, ran every one of them, and noted what came back.'),
+       'We wanted to find the exact moments the assistant stops understanding a non-designer, and design for those, rather than for a vague sense that it felt bad to use. So we read what people complained about on G2 and Reddit, wrote 50 prompts the way a real Canva user would type them, and ran every one to see where it broke.'),
       ('The outcome',
        'The failures fell into seven patterns, so we made them into a framework called CAPABLE and redesigned the assistant one pattern at a time. It now works inside the file you already have open instead of starting a new one. It asks before it changes anything. When you tell it a design feels flat, it treats that as a problem to diagnose rather than an order to follow. And it can handle a request with two parts in one go.'),
     ],
@@ -99,9 +96,8 @@ PROJECTS = [
           ('My role', 'Design Direction, Research, Image and Story Generation'),
           ('Tools', 'Figma, FigJam'),
           ('Year', '2025')],
-    about='Relique is a museum website where artifacts tell their own stories, in the first person. Rooted in '
-          'semiotics and semantics, it turns static collections into something you can wander: find a museum on '
-          'the map, open its collection, and let an object\'s My Story play out in sound and image.',
+    about='Relique is a museum website where artifacts tell their own stories, in the first person, and the '
+          'design itself does the explaining that a label in a glass case usually does.',
     story=[
       ('The brief',
        'A four-week brief for our semantics and semiotics course: make something where the meaning comes from the design itself, from its shapes and symbols and context, rather than from text explaining it. We chose museums. A museum holds objects with enormous stories behind them, then puts them in a glass case with a name and a date.'),
@@ -177,6 +173,13 @@ FOOT = '''
 '''.format(behance=BEHANCE, linkedin=LINKEDIN)
 
 
+def summary(text, limit=155):
+    """The meta description: the lead paragraph, cut at a word boundary rather than mid-word."""
+    if len(text) <= limit:
+        return text
+    return text[:limit - 1].rsplit(' ', 1)[0].rstrip(',;:') + '\u2026'
+
+
 def shots(slug):
     folder = os.path.join(ROOT, 'work', 'img', slug)
     return sorted(f[:-5] for f in os.listdir(folder) if f.endswith('.webp'))
@@ -242,7 +245,7 @@ def full_page(p, nxt):
         imgs += (f'\n  <img src="full/{p["slug"]}/{n}" width="{w}" height="{h}" '
                  f'alt="" loading="{load}" decoding="async">')
     out = HEAD.format(title=p['short'] + ' · Full case study',
-                      desc=html.escape(p['about'][:155]))
+                      desc=html.escape(summary(p['about'])))
     out += f'''
 <header class="fhead">
   <a class="fback" href="{p['slug']}.html" data-cursor="Back">
@@ -286,7 +289,7 @@ def page(p, nxt):
                              'Also on Behance' if not on_profile else 'More work on Behance'))
     meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
     rest = ''.join(f'\n  <div class="frame" data-reveal>{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
-    out = HEAD.format(title=p['short'], desc=html.escape(p['about'][:155]))
+    out = HEAD.format(title=p['short'], desc=html.escape(summary(p['about'])))
     out += f'''
 <header class="chead">
   <h1>{p['title']}</h1>
