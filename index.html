@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <script>
 /* The opening plays once per browser session, on the home page, and never under reduced
    motion. Decided here, before the first paint, so the page underneath never flashes.
@@ -33,68 +33,71 @@
 <link rel="stylesheet" href="lab.css">
 <link rel="stylesheet" href="thumbs.css">
 <style>
-/* ── HERO ── */
-.hero{position:relative;min-height:100vh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
-/* padding and overlap in em, so the row keeps its proportions at every screen size */
-.ransom span{display:block;line-height:.74;padding:.042em .062em .072em;margin-right:-.077em;position:relative}
-.L1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,14.4vw,194px);background:var(--blue);color:var(--paper);transform:rotate(-4deg);z-index:3}
-.L2{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:clamp(60px,15.4vw,208px);color:var(--blue);transform:rotate(3deg) translateY(-16px);z-index:5}
-.L3{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,17.2vw,234px);background:var(--ink);color:var(--paper);transform:rotate(-1.5deg);z-index:2;padding-top:.13em}
-.L4{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(44px,11.2vw,150px);background:var(--bone);color:var(--ink);border:var(--bw) solid var(--ink);transform:rotate(5deg) translateY(10px);z-index:6}
-.L5{font-family:'Abril Fatface',serif;font-size:clamp(58px,14.8vw,200px);color:var(--ink);transform:rotate(-6deg) translateY(-8px);z-index:7}
-.L6{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-stretch:75%;font-size:clamp(64px,16.2vw,220px);color:var(--ink);transform:rotate(2deg);z-index:3;
-  background-image:radial-gradient(var(--blue) 1.6px,transparent 1.7px);background-size:8px 8px}
-.L7{font-family:'Courier Prime',monospace;font-weight:700;font-size:clamp(46px,11.6vw,156px);background:var(--blue);color:var(--paper);transform:rotate(-3deg) translateY(12px);z-index:5}
-.L8{font-family:'Rubik Mono One',monospace;font-size:clamp(42px,10.6vw,142px);color:var(--ink);border:2px dashed var(--ink);transform:rotate(4deg) translateY(-6px);z-index:2}
+/* ── HERO ───────────────────────────────────────────────────────────────────────
+   The name and one line on the left. On the right, the work itself: each project's own
+   footage in one ink frame, wiping from one to the next, with the four names beneath it
+   as the controls. It replaced a ransom-note name that left a laptop screen mostly empty
+   and shrank to a thin band of small letters on a phone. */
+.hero{position:relative;min-height:calc(100svh - 93px);padding:124px 40px 56px;display:grid;   /* 93px: the skills ticker, so it closes the first screen instead of a band of empty paper */
 
-.statement{position:relative;z-index:4;margin-top:clamp(44px,4.6vw,66px);display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
-  font-family:var(--display);font-size:clamp(30px,5.4vw,74px);letter-spacing:-.045em;line-height:.9}
-.statement .a{font-weight:800}
-.statement .b{font-weight:800;text-transform:uppercase}
-.statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
-/* phones: the lockup is laid out at its full desktop size and then scaled as one block
-   (fitName() in the script sets --k). Shrinking the type alone does not work: each letter's
-   nudge, like translateY(-16px), is in pixels and would stay huge next to small letters. */
-.ransom-fit{position:relative;z-index:4}
+  grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(36px,4.4vw,80px);align-items:center;overflow:hidden}
+.h-name{font-family:var(--display);font-weight:800;font-stretch:75%;text-transform:uppercase;color:var(--ink);
+  font-size:clamp(84px,10.4vw,186px);line-height:.8;letter-spacing:-.012em}
+/* each line is the mask its letters rise through on the way in */
+.h-name .ln{display:block;overflow:hidden;padding:.04em 0 .05em;margin:-.04em 0 -.05em}
+.h-name .ch{display:inline-block}
+.statement{margin-top:clamp(22px,2.2vw,34px);display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;
+  font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,40px);letter-spacing:-.04em;line-height:.95;
+  text-transform:uppercase}
+.statement .a{flex-basis:100%}
+.statement .c{font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 14px 6px;
+  transform:rotate(-1.5deg);display:inline-block}
+.h-cta{margin-top:clamp(28px,3vw,46px);display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border-radius:100px;
+  background:var(--blue);color:var(--paper);border:2.5px solid var(--ink);box-shadow:0 5px 0 var(--ink);text-decoration:none;
+  font-family:var(--label);font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  transition:background .15s ease,transform .12s ease,box-shadow .12s ease}
+.h-cta .ic{width:15px;height:15px}
+.h-cta:hover{background:var(--ink)}
+.h-cta:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+
+.reel{min-width:0}
+.reel-frame{position:relative;display:block;aspect-ratio:16/9;background:var(--paper);border:var(--bw) solid var(--ink);   /* paper, not ink: while the picture opens, an ink fill fading in read as a grey slab */
+
+  box-shadow:10px 10px 0 var(--ink)}
+.reel-view{position:absolute;inset:0;overflow:hidden}
+.reel-slide{position:absolute;inset:0;overflow:hidden}
+.reel-slide:not(:first-child){clip-path:inset(0 0 0 100%)}
+.reel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.reel-tabs{display:flex;gap:clamp(18px,2.4vw,40px);margin-top:28px}
+.reel-tabs button{position:relative;background:none;border:0;padding:0 0 12px;color:var(--muted);cursor:pointer;
+  font-family:var(--display);font-weight:800;font-stretch:75%;font-size:clamp(17px,1.5vw,24px);line-height:1;
+  text-transform:uppercase;transition:color .2s ease}
+.reel-tabs button:hover,.reel-tabs button[aria-selected="true"]{color:var(--ink)}
+.reel-tabs button i{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--blue);
+  transform:scaleX(0);transform-origin:left center}
+/* with nothing cycling (reduced motion) the current name keeps a full bar; otherwise the bar is the timer
+   and must start empty, or it shows full through the entrance and then snaps to nothing */
+@media (prefers-reduced-motion:reduce){.reel-tabs button[aria-selected="true"] i{transform:scaleX(1)}}
+
 @media (max-width:900px){
-  .hero{min-height:100svh;padding:104px 16px 120px;justify-content:center}
-  /* not clipped here: the j's tail paints below its own box, and the hero already clips.
-     The --k and height below are a first-paint guess so the full size name never flashes;
-     fitName() replaces them with measured values as soon as it runs. */
-  .ransom-fit{overflow:visible;height:calc((100vw - 38px) * 196 / 882 + 20px)}
-  .ransom{width:max-content;margin-left:0;transform-origin:left top;--k:.98;
-    transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
-  .L1{font-size:194px}.L2{font-size:208px}.L3{font-size:234px}.L4{font-size:150px}
-  .L5{font-size:200px}.L6{font-size:220px}.L7{font-size:156px}.L8{font-size:142px}
-  .statement{margin-top:26px;font-size:clamp(23px,7vw,34px);gap:6px 10px;line-height:.98}
-  .statement .a{flex-basis:100%}
-  .statement .c{padding:2px 12px 6px}
-  .scue{right:22px;bottom:30px}
+  .hero{grid-template-columns:minmax(0,1fr);align-content:center;gap:30px;padding:98px 22px 40px}
+  .h-name{font-size:clamp(60px,21vw,150px)}
+  .statement{font-size:clamp(20px,6vw,30px);gap:6px 10px;margin-top:18px}
+  .h-cta{padding:13px 20px;font-size:12px;margin-top:24px}
+  .reel-frame{box-shadow:6px 6px 0 var(--ink)}
+  .reel-tabs{margin-top:18px;gap:20px;overflow-x:auto;scrollbar-width:none}
+  .reel-tabs::-webkit-scrollbar{display:none}
+  .reel-tabs button{flex:none;font-size:17px}
 }
-@media (max-width:820px){.ransom{--k:0.887}}
-@media (max-width:740px){.ransom{--k:0.796}}
-@media (max-width:660px){.ransom{--k:0.705}}
-@media (max-width:600px){.ransom{--k:0.637}}
-@media (max-width:540px){.ransom{--k:0.569}}
-@media (max-width:480px){.ransom{--k:0.501}}
-@media (max-width:430px){.ransom{--k:0.444}}
-@media (max-width:400px){.ransom{--k:0.410}}
-@media (max-width:380px){.ransom{--k:0.388}}
-@media (max-width:360px){.ransom{--k:0.365}}
-@media (max-width:340px){.ransom{--k:0.342}}
-@media (max-width:320px){.ransom{--k:0.320}}
-/* scroll cue: a labelled button rather than a slab with a giant arrow on it */
-.scue{position:absolute;right:40px;bottom:52px;z-index:4;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
-.scue-t{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:600}
-.scue-b{width:54px;height:54px;border-radius:50%;border:var(--bw) solid var(--ink);background:var(--paper);
-  display:grid;place-items:center;font-size:21px;line-height:1;animation:bob 1.9s ease-in-out infinite;
-  transition:background .15s,color .15s}
-.scue:hover .scue-b{background:var(--blue);color:var(--paper);animation-play-state:paused}
-.scue-b .ic{width:22px;height:22px}
-.scue:active .scue-b{animation:none;transform:scale(.88);transition:transform .05s}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
-@media (prefers-reduced-motion:reduce){.scue-b{animation:none}}
+/* a phone on its side: back to two columns, the name sized from the screen's height */
+@media (orientation:landscape) and (max-height:520px){
+  .hero{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:26px;min-height:0;padding:86px 22px 34px;align-content:center}
+  .h-name{font-size:min(12vw,26svh)}
+  .statement{font-size:17px;margin-top:12px}
+  .h-cta{margin-top:16px;padding:11px 18px}
+  .reel-tabs{margin-top:12px}
+  .reel-tabs button{font-size:15px;padding-bottom:9px}
+}
 
 /* ── MORE WORK · reads as a full width continuation of the grid ── */
 .more{margin-top:30px;display:flex;align-items:center;gap:32px;padding:36px;text-decoration:none;color:var(--ink);
@@ -190,7 +193,6 @@
   .wc{scroll-snap-align:center;scroll-snap-stop:always}
 }
 @media (max-width:900px){
-  .hero{padding:118px 22px 40px}
   .grid{grid-template-columns:1fr;gap:16px}
   /* reel cards: a screen-tall card per project, next one peeking below */
   .wc{height:calc(100svh - 140px);min-height:520px;max-height:760px;padding:18px 18px 20px}
@@ -201,8 +203,6 @@
   .sw{padding:18px}
   .sw h4{font-size:22px;overflow-wrap:anywhere}
   .quote{padding:64px 22px}
-  .scue{right:22px;bottom:30px;gap:12px}
-  .scue-b{width:46px;height:46px;font-size:18px}
 }
 /* ══ OPENING ═════════════════════════════════════════════════════════════════════
    First visit per session, home only (the head script decides). A flat cobalt field and
@@ -257,20 +257,27 @@ html.intro-on .intro{display:block}
 </nav></div>
 
 <header class="hero" id="hero">
-  <div class="ransom-fit" id="nameFit">
-    <div class="ransom" aria-label="Rutujeet">
-      <span class="L1">R</span><span class="L2">u</span><span class="L3">T</span><span class="L4">U</span><span class="L5">j</span><span class="L6">E</span><span class="L7">e</span><span class="L8">T</span>
+  <div class="h-copy">
+    <h1 class="h-name" aria-label="Rutujeet Nayak"><span class="ln" aria-hidden="true">Rutujeet</span><span class="ln" aria-hidden="true">Nayak</span></h1>
+    <p class="statement"><span class="a">Product designer,</span> <span class="b">always</span> <span class="c">building</span></p>
+    <a class="h-cta" href="#work" data-cursor="Work">See the work <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v16M5 13l7 7 7-7"/></svg></a>
+  </div>
+  <div class="reel" aria-roledescription="carousel" aria-label="Selected projects">
+    <a class="reel-frame" href="work/uls.html" data-cursor="Read" aria-label="ULS, open the project">
+      <span class="reel-view">
+        <span class="reel-slide" data-href="work/uls.html" data-label="ULS"><img src="work/vid/uls.webp" width="1280" height="720" alt="Still from the ULS teaser film: workers crowd round a contractor at a labour naka" style="object-position:center" fetchpriority="high" decoding="async"></span>
+        <span class="reel-slide" data-href="work/iccc-surveillance.html" data-label="ICCC"><img src="work/vid/iccc-surveillance.webp" width="1600" height="828" alt="The redesigned ICCC dashboard, with device alerts clustered on a live map of the estate" style="object-position:center" loading="lazy" decoding="async"></span>
+        <span class="reel-slide" data-href="work/canva-ai.html" data-label="Canva AI"><img src="work/vid/canva-ai.webp" width="1600" height="774" alt="The redesigned Canva AI assistant open beside a poster in the Canva editor" style="object-position:right center" loading="lazy" decoding="async"></span>
+        <span class="reel-slide" data-href="work/relique.html" data-label="Relique"><img src="work/vid/relique.webp" width="1600" height="900" alt="The Relique website, a row of featured artifacts on a dark museum page" style="object-position:center" loading="lazy" decoding="async"></span>
+      </span>
+    </a>
+    <div class="reel-tabs" role="tablist" aria-label="Projects">
+      <button type="button" role="tab" aria-selected="true" tabindex="0" data-i="0">ULS<i aria-hidden="true"></i></button>
+      <button type="button" role="tab" aria-selected="false" tabindex="-1" data-i="1">ICCC<i aria-hidden="true"></i></button>
+      <button type="button" role="tab" aria-selected="false" tabindex="-1" data-i="2">Canva AI<i aria-hidden="true"></i></button>
+      <button type="button" role="tab" aria-selected="false" tabindex="-1" data-i="3">Relique<i aria-hidden="true"></i></button>
     </div>
   </div>
-  <p class="statement">
-    <span class="a">PRODUCT DESIGNER,</span>
-    <span class="b">ALWAYS</span>
-    <span class="c">BUILDING</span>
-  </p>
-  <a class="scue" href="#work" data-cursor="Work">
-    <span class="scue-t">Scroll</span>
-    <span class="scue-b" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v16M5 13l7 7 7-7"/></svg></span>
-  </a>
 </header>
 
 <div class="marquee"><div data-words="Product design|Research|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
@@ -695,62 +702,79 @@ THUMBS.wire(document.getElementById('grid'));
 })();
 </script>
 <script>
-/* the name is one fixed-size block on phones, scaled to whatever width the screen has */
-(function fitName(){
-  var fit = document.getElementById('nameFit');
-  if (!fit) return;
-  var name = fit.querySelector('.ransom');
-  var spans = [].slice.call(name.querySelectorAll('span'));
-  function run(){
-    if (!window.matchMedia('(max-width:900px)').matches) {
-      name.style.removeProperty('--k'); fit.style.height = ''; return;
-    }
-    /* measure the lockup's real visual box: drop the intro tween's inline transforms for a
-       moment so only the letters' own tilts count, then put them straight back */
-    var saved = spans.map(function(el){ return el.style.transform; });
-    spans.forEach(function(el){ el.style.transform = ''; });
-    name.style.setProperty('--k', 1);
-    name.style.setProperty('--tx', '0px'); name.style.setProperty('--ty', '0px');
-    /* the union of the eight letters, not the row's own box: the tilted ones and the dashed T
-       stick out past it, and anything outside would be clipped */
-    var base = name.getBoundingClientRect(), L = Infinity, T = Infinity, Rt = -Infinity, B = -Infinity;
-    spans.forEach(function(el){
-      var r = el.getBoundingClientRect();
-      L = Math.min(L, r.left); T = Math.min(T, r.top); Rt = Math.max(Rt, r.right); B = Math.max(B, r.bottom);
-    });
-    spans.forEach(function(el, i){ el.style.transform = saved[i]; });
-    var pad = 3, w = Rt - L, h = B - T, tail = h * .12;   /* room for the j's tail, which paints below its box */
-    var k = (fit.clientWidth - pad * 2) / w;
-    name.style.setProperty('--k', k);
-    name.style.setProperty('--tx', (pad - (L - base.left) * k).toFixed(2) + 'px');
-    name.style.setProperty('--ty', (pad - (T - base.top) * k).toFixed(2) + 'px');
-    fit.style.height = Math.ceil(h * k + pad * 2 + tail * k) + 'px';
-  }
-  run();
-  window.addEventListener('resize', run);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
-})();
+/* THE HERO. On the way in, the name comes up letter by letter through its lines, the line
+   under it rises with the blue block landing last, and the frame opens. Then the reel runs:
+   each project's footage wipes over the last, and its name's bar fills for as long as it is
+   on screen. It pauses while pointed at, while scrolled out of view and while the tab is
+   hidden; a name jumps straight to its project (arrow keys too). Under reduced motion nothing
+   moves on its own and the names simply switch the picture. On a first visit it waits for the
+   opening to hand over (intro:done). */
+(function hero(){
+  var root = document.getElementById('hero');
+  if (!root) return;
+  var name = root.querySelector('.h-name'), frame = root.querySelector('.reel-frame'), view = root.querySelector('.reel-view');
+  var slides = [].slice.call(root.querySelectorAll('.reel-slide'));
+  var tabs = [].slice.call(root.querySelectorAll('.reel-tabs button'));
+  var bars = tabs.map(function(t){ return t.querySelector('i'); });
+  var cur = 0, DUR = 4.6, run = null, hovered = false, inView = true;
+  var still = REDUCED || typeof gsap === 'undefined';
 
-(function ransom(){
-  var letters = Array.prototype.slice.call(document.querySelectorAll('.ransom span'));
-  if (!letters.length || REDUCED) return;
-  var words = document.querySelectorAll('.statement .a, .statement .b'), block = document.querySelector('.statement .c');
-  /* on a first visit the opening (intro() below) covers the page, so this waits for its cue */
-  var intro = document.documentElement.classList.contains('intro-on');
-  var tl = gsap.timeline({ delay: intro ? 0 : .1, paused: intro });
-  tl.from(letters,{ yPercent:function(i){ return i % 2 ? -110 : 110; }, rotation:function(i){ return i % 2 ? -16 : 13; },
-    opacity:0, duration:.8, ease:'back.out(1.5)', stagger:{each:.05, from:'random'} })
-    /* then the line under it: each word rises into place, the BUILDING block slams in last */
-    .from(words,{ y:46, rotation:3, opacity:0, duration:.7, ease:'power4.out', stagger:.12 }, '+=.05')
-    .from(block,{ scale:.2, rotation:-16, opacity:0, duration:.75, ease:'back.out(2.2)' }, '-=.35')
-    .from('.scue',{ y:18, opacity:0, duration:.5, ease:'power2.out', clearProps:'transform' }, '-=.3');
-  var hero = document.getElementById('hero');
-  var set = letters.map(function(el){ return { x:gsap.quickTo(el,'x',{duration:.7,ease:'power3'}), y:gsap.quickTo(el,'y',{duration:.7,ease:'power3'}) }; });
-  hero.addEventListener('mousemove', function(e){
-    var r = hero.getBoundingClientRect(), dx = (e.clientX - r.left)/r.width - .5, dy = (e.clientY - r.top)/r.height - .5;
-    set.forEach(function(s,i){ var d = (i % 3 + 1) * 5; s.x(dx * d * (i % 2 ? -1 : 1)); s.y(dy * d * .6); });
+  [].forEach.call(name.querySelectorAll('.ln'), function(ln){
+    ln.innerHTML = ln.textContent.split('').map(function(c){ return '<span class="ch">' + c + '</span>'; }).join('');
   });
-  hero.addEventListener('mouseleave', function(){ set.forEach(function(s){ s.x(0); s.y(0); }); });
+
+  function select(n){
+    tabs.forEach(function(t, i){ t.setAttribute('aria-selected', i === n ? 'true' : 'false'); t.tabIndex = i === n ? 0 : -1; });
+    frame.href = slides[n].getAttribute('data-href');
+    frame.setAttribute('aria-label', slides[n].getAttribute('data-label') + ', open the project');
+  }
+  function show(n){
+    if (n === cur) return;
+    var prev = slides[cur], next = slides[n];
+    cur = n; select(n);
+    slides.forEach(function(s){ s.style.zIndex = s === next ? 2 : s === prev ? 1 : 0; });
+    if (still) { slides.forEach(function(s){ s.style.clipPath = s === next ? 'none' : 'inset(0 0 0 100%)'; }); return; }
+    gsap.fromTo(next, { clipPath:'inset(0% 0% 0% 100%)' }, { clipPath:'inset(0% 0% 0% 0%)', duration:1, ease:'expo.inOut', overwrite:true });
+    gsap.fromTo(next.querySelector('img'), { scale:1.14, xPercent:5 }, { scale:1, xPercent:0, duration:1.5, ease:'expo.out', overwrite:true });
+  }
+  /* the bar under the current name is the timer: when it is full, the next project comes in */
+  function tick(){
+    if (still) return;
+    if (run) run.kill();
+    gsap.set(bars, { scaleX:0 });
+    run = gsap.to(bars[cur], { scaleX:1, duration:DUR, ease:'none', onComplete:function(){ show((cur + 1) % slides.length); tick(); } });
+    sync();
+  }
+  function sync(){ if (run) run.paused(hovered || !inView || document.hidden); }
+
+  tabs.forEach(function(t, i){ t.addEventListener('click', function(){ show(i); tick(); }); });
+  root.querySelector('.reel-tabs').addEventListener('keydown', function(e){
+    var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    var n = (cur + d + tabs.length) % tabs.length;
+    show(n); tick(); tabs[n].focus();
+  });
+  var reel = root.querySelector('.reel');
+  reel.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') { hovered = true; sync(); } });
+  reel.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') { hovered = false; sync(); } });
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){ inView = es[0].isIntersecting; sync(); }, { threshold:.25 }).observe(reel);
+  }
+  if (still) return;
+
+  var intro = document.documentElement.classList.contains('intro-on');
+  var tl = gsap.timeline({ delay: intro ? 0 : .12, paused: intro, onComplete: tick });
+  tl.from(name.querySelectorAll('.ch'), { yPercent:115, duration:1.05, ease:'expo.out', stagger:.028 })
+    .from(root.querySelectorAll('.statement .a, .statement .b'), { y:40, opacity:0, duration:.7, ease:'power4.out', stagger:.1 }, '-=.72')
+    .from(root.querySelector('.statement .c'), { scale:.2, rotation:-16, opacity:0, duration:.7, ease:'back.out(2.2)' }, '-=.42')
+    .from(root.querySelector('.h-cta'), { y:18, opacity:0, duration:.5, ease:'power2.out', clearProps:'transform,opacity' }, '-=.45')
+    /* the frame rises in; the picture inside opens from the bottom, so the ink shadow is never clipped */
+    .from(frame, { y:44, opacity:0, duration:.9, ease:'power3.out', clearProps:'transform,opacity' }, .12)
+    .fromTo(view, { clipPath:'inset(100% 0% 0% 0%)' }, { clipPath:'inset(0% 0% 0% 0%)', duration:1.1, ease:'expo.inOut', clearProps:'clipPath' }, .3)
+    .from(slides[0].querySelector('img'), { scale:1.2, duration:1.7, ease:'expo.out' }, .35)
+    .from(tabs, { y:14, opacity:0, duration:.5, ease:'power2.out', stagger:.06, clearProps:'transform,opacity' }, .75);
   if (intro) document.addEventListener('intro:done', function(){ tl.play(); }, { once:true });
 })();
 
