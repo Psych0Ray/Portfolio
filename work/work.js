@@ -56,7 +56,32 @@
   var PLAY_TO = (IN + HOLD + OUT * 0.6) / TOTAL;
   var active = 0;
 
-  sections.forEach(function (sec) {
+  /* A phone on its side is only ~340px tall, and every phase above is measured in screen
+     heights, so the whole zoom-in, hold and zoom-out played out in ~460px of scrolling -
+     less than one flick - and the video leapt to full screen and straight back out. On
+     those screens it is a plain box sized to the screen instead, playing while it is in
+     view: nothing to get stuck in, nothing to escape. gsap.matchMedia swaps the two live,
+     so rotating the phone mid-page switches cleanly in both directions (everything created
+     inside a branch is reverted when its query stops matching). */
+  var FLAT = '(orientation: landscape) and (max-height: 520px)';
+  gsap.matchMedia().add({ flat: FLAT, zoom: 'not all and ' + FLAT }, function (ctx) {
+    if (ctx.conditions.flat) return flat();
+    sections.forEach(zoom);
+    return function () {
+      sections.forEach(function (sec) { sec.classList.remove('pin'); stop(sec.querySelector('video')); });
+      active = 0; document.body.classList.remove('film-on');
+    };
+  });
+
+  function flat() {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) play(e.target); else stop(e.target); });
+    }, { threshold: 0.35 });
+    sections.forEach(function (sec) { io.observe(sec.querySelector('video')); });
+    return function () { io.disconnect(); sections.forEach(function (sec) { stop(sec.querySelector('video')); }); };
+  }
+
+  function zoom(sec) {
     var stage = sec.querySelector('.film-stage');
     var box = sec.querySelector('.film-box');
     var v = sec.querySelector('video');
@@ -96,5 +121,5 @@
         { width: function () { return stage.clientWidth; }, height: function () { return stage.clientHeight; }, borderWidth: 0, duration: IN })
       .to({}, { duration: HOLD })
       .to(box, { width: function () { return framed().w; }, height: function () { return framed().h; }, borderWidth: 3, duration: OUT });
-  });
+  }
 })();

@@ -162,9 +162,12 @@ window.CLIP_OK = function(){};
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'noauto'; b.innerHTML = PLAY;
     b.setAttribute('aria-label', 'Autoplay is blocked by your browser. Play this clip.');
-    /* the rail reads pointerdown to start a drag, so the press must stop here */
-    b.addEventListener('pointerdown', function(e){ e.stopPropagation(); });
-    b.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); release(); });
+    /* Presses are NOT stopped here. They used to be, so a mouse press would not start a drag
+       on the hobby rail - but that also swallowed every swipe that began on a clip, and on a
+       phone the clip is most of the card: the rail stopped following the finger whenever
+       autoplay was blocked. Nothing needs the stop: the page-wide listeners below already
+       release every held clip on any press, tap or key. */
+    b.addEventListener('click', function(e){ e.preventDefault(); release(); });
     p.appendChild(b);
   }
   function hide(v){
@@ -192,8 +195,11 @@ window.CLIP_OK = function(){};
     hide(v);
   };
 
-  /* any gesture anywhere lifts the policy, so retry everything that is still waiting */
-  ['pointerdown', 'touchstart', 'keydown'].forEach(function(t){
+  /* any gesture anywhere lifts the policy, so retry everything that is still waiting.
+     On touch screens a press does not count as a user gesture until the finger lifts, so
+     pointerup, touchend and click are listened for too; pointerdown alone only works for
+     a mouse. */
+  ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'].forEach(function(t){
     document.addEventListener(t, function(){ if (held.length) release(); }, { passive: true });
   });
 })();

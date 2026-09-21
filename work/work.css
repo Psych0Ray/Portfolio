@@ -125,3 +125,8 @@
   .next{padding:28px 26px}
 }
 @media (prefers-reduced-motion:reduce){.bh,.bh .rbtn{transition:none}}
+/* a phone on its side gets no pin (see work.js): the box simply fits the screen's height */
+@media (orientation:landscape) and (max-height:520px){
+  .film{padding:0 22px 28px}
+  .film-box{width:min(100%,calc((100svh - 44px) * var(--ar)))}
+}
