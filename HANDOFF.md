@@ -8,6 +8,7 @@ Last updated: 2026-09-21
 
 - Repo: https://github.com/Psych0Ray/portfolio-test (branch `main`)
 - Hosting: Vercel, connected to the GitHub repo, auto-deploys on push to `main`
+- **Live at https://www.rutujeetnayak.me/** (the user connected the domain on 2026-09-21, after being advised to pick `rutujeetnayak.me` over `rutujeetfolio.me`). `rutujeetfolio.vercel.app` now answers with a **308 redirect** to it, so a deploy check must `curl -L` or hit the new domain - a plain `curl` of the old URL only ever sees the redirect.
 
 ## Files
 
