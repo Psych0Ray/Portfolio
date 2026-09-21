@@ -814,7 +814,8 @@ THUMBS.wire(document.getElementById('grid'));
      - a quick pass of the mouse brushes the scraps it goes through along with it
      - a scrap can be picked up (it lifts off the desk and floats over the others) and
        thrown, and skates until the desk's friction stops it (mouse only)
-     - a click on the paper drops another scrap there
+     - a click on the paper drops another scrap there, and until the first one has been dropped
+       the cursor's own label says so over the empty paper (see hint())
    Desktop only: a screen over 900px wide with a real mouse. Phones never get it (nor download
    it), and a window resized across that line clears the desk or lays it out again.
    The physics loads while the name comes in. The number of scraps is capped (the oldest
@@ -865,7 +866,7 @@ THUMBS.wire(document.getElementById('grid'));
   desk.addEventListener('change', function(e){
     on = e.matches;
     clearTimeout(flip);
-    if (!on) { clear(); return; }
+    if (!on) { hint(false); clear(); return; }
     if (!started) { physics(); ready(); return; }
     flip = setTimeout(function(){ if (!on) return; build(); lay(); }, 220);
   });
@@ -1064,6 +1065,28 @@ THUMBS.wire(document.getElementById('grid'));
 
   function local(e){ var r = hero.getBoundingClientRect(); return { x:e.clientX - r.left, y:e.clientY - r.top }; }
   function grow(on){ if (dot) gsap.to(dot, { scale:on ? 1.9 : 1, duration:.2, overwrite:true }); }
+
+  /* the one prompt. Over the empty paper, once the scraps have landed, the cursor's sticker label
+     (lab.js) says a click drops another letter. It goes for good, for this browser session, once
+     one has been dropped, or once it has been on show for 8 seconds in all, and it never shows
+     over a scrap, the nav or a link, while one is held, or with the hero scrolled away */
+  var HINT = 'Click for more letters', hinting = false, shownAt = 0, shownFor = 0, onBit = false, taught = false;
+  try { taught = sessionStorage.getItem('dropTaught') === '1'; } catch (err) {}
+  function remember(){ taught = true; try { sessionStorage.setItem('dropTaught', '1'); } catch (err) {} }
+  function hint(show){
+    if (!window.cursorLabel) return;
+    var now = performance.now();
+    if (hinting && shownFor + now - shownAt > 8000) remember();
+    show = show && on && !taught && !held;
+    if (show === hinting) return;
+    hinting = show;
+    if (show) { shownAt = now; window.cursorLabel(HINT); }
+    else { shownFor += now - shownAt; window.cursorLabel(null, HINT, onBit ? 1.9 : 1); }
+  }
+  function settled(){   /* every scrap down on the desk */
+    for (var i = 0; i < pieces.length; i++) if (pieces[i].lift > 0) return false;
+    return pieces.length > 0;
+  }
   /* let go: it drops back onto the desk still moving, so a flick throws it */
   function drop(){
     if (!drag) return;
@@ -1077,7 +1100,7 @@ THUMBS.wire(document.getElementById('grid'));
 
   function wire(){
     var io = 'IntersectionObserver' in window && new IntersectionObserver(function(es){
-      inView = es[0].isIntersecting; acc = 0; if (!inView) drop(); });
+      inView = es[0].isIntersecting; acc = 0; if (!inView) { drop(); hint(false); } });
     if (io) io.observe(hero);
 
     window.addEventListener('pointermove', function(e){
@@ -1087,7 +1110,8 @@ THUMBS.wire(document.getElementById('grid'));
       if (last) { var dt = Math.max(now - last.t, 8); vx = (q.x - last.x) / dt; vy = (q.y - last.y) / dt; }
       last = { x:q.x, y:q.y, t:now };
       if (drag) { drag.pointA.x = q.x; drag.pointA.y = q.y; return; }
-      if (!inView || q.x < 0 || q.y < 0 || q.x > W || q.y > H) return;
+      if (!inView || q.x < 0 || q.y < 0 || q.x > W || q.y > H) { hint(false); return; }
+      hint(settled() && !(e.target.closest && e.target.closest('.navwrap, .bit, a, button')));
       if (vx * vx + vy * vy > .06) sweep(q.x, q.y, vx, vy);   /* faster than .25px a millisecond */
     }, { passive:true });
 
@@ -1099,6 +1123,7 @@ THUMBS.wire(document.getElementById('grid'));
       e.preventDefault();
       var q = local(e), b = p.body;
       held = p;
+      hint(false);
       b.collisionFilter.mask = 0;
       drag = M.Constraint.create({ pointA:{ x:q.x, y:q.y }, bodyB:b, pointB:{ x:q.x - b.position.x, y:q.y - b.position.y },
         length:0, stiffness:.2, damping:.1 });
@@ -1109,8 +1134,10 @@ THUMBS.wire(document.getElementById('grid'));
     window.addEventListener('pointerup', drop);
     window.addEventListener('pointercancel', drop);
     window.addEventListener('blur', drop);
-    layer.addEventListener('pointerover', function(e){ if (e.target.closest('.bit')) grow(true); });
-    layer.addEventListener('pointerout', function(e){ if (e.target.closest('.bit') && !held) grow(false); });
+    layer.addEventListener('pointerover', function(e){ if (e.target.closest('.bit')) { onBit = true; grow(true); } });
+    layer.addEventListener('pointerout', function(e){ if (e.target.closest('.bit')) { onBit = false; if (!held) grow(false); } });
+    /* a wheel scroll can carry the hero away without the mouse moving; the next move decides again */
+    window.addEventListener('wheel', function(){ hint(false); }, { passive:true });
 
     /* a click on the paper drops the next scrap there */
     hero.addEventListener('click', function(e){
@@ -1118,6 +1145,8 @@ THUMBS.wire(document.getElementById('grid'));
       if (!on || e.target.closest('.bit, a, button') || performance.now() - thrown < 350) return;
       var q = local(e);
       spawn(q.x, q.y);
+      remember();   /* learnt: the prompt goes */
+      hint(false);
     });
 
     var rt;

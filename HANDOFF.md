@@ -694,6 +694,14 @@ Last updated: 2026-09-21
     - **Verified** (Playwright): iPhone SE, Galaxy S9+, iPhone 12 Mini, iPhone 13, iPhone 15 Pro Max, Pixel 7, Galaxy S24; landscape iPhone SE / Galaxy S9+ / iPhone 13 / iPhone 15 Pro Max / Pixel 5 / Pixel 7 / 926x428 / 932x430; iPad Mini both ways; desktop 1440x900 and 1280x720. On every phone: line on the first screen, name clear of the nav, no horizontal overflow, no errors.
 
 
+80. **A prompt for the loose letters: "Click for more letters" on the cursor (2026-09-21).** [index.html](index.html), [lab.js](lab.js).
+    - **Asked for:** tell visitors they can click to drop more letters, and make sure the prompt goes away.
+    - **Where it lives:** in the custom cursor's own sticker label (the bone pill that says "Read", "Resume" and so on), not as text on the page - no new element, and the taste rules against hero micro-labels still hold. lab.js gained `window.cursorLabel(text)` to show it and `cursorLabel(null, text, dotScale)` to hide it **only if that text is still the label showing**, so it never takes down a label a link has just put up; the `[data-cursor]` handlers now share the same `tagIn()` / `tagOut()` (behaviour unchanged, checked on About and a project page).
+    - **When (`hint()` in `looseLetters()`):** over the empty paper, once every scrap has landed; hidden over a scrap, the nav or a link, while a scrap is held, on a wheel scroll (the next mouse move decides again) and with the hero out of view. **It goes for good** - `sessionStorage.dropTaught`, so once per browser session like the opener - after the first dropped letter, **or after 8 seconds on show in total** if the visitor never clicks. Desktop only, since the whole effect is.
+    - **Verified:** none while the scraps drop, shows on the paper, hides on a scrap, the nav's "Resume" label still wins over the nav, returns on the paper, one click drops a letter and removes it (also after a reload in the same tab), a visitor who never clicks sees it ~8s then never again. No errors.
+    - **Trap hit while building it:** `looseLetters()` already had a `landed` variable (the name's entrance is done), and a new `function landed()` was silently overwritten by it - "landed is not a function" on every mouse move. The helper is `settled()`.
+
+
 ## In progress / not yet confirmed
 
 - **Item 79's phone layout needs the user's eye on a real phone** (only emulated so far), especially iOS Safari with its toolbars and a landscape Pro Max.
