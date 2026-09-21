@@ -45,12 +45,13 @@
      One unit is one viewport of scrolling, and that is not a coincidence: .film.pin is
      TOTAL * 100svh of height plus the 100svh the stage sticks for. Change a number here and
      change .film.pin's height in work.css to match, or the phases stretch or squash.
-     Right now 0.7 + 1.6 + 0.25 = 2.55, so the section is 355svh.
+     Right now 0.7 + 0.4 + 0.25 = 1.35, so the section is 235svh.
 
-     OUT is deliberately the shortest: getting out of the video was half a viewport of
-     scrolling and felt like wading. It is a quarter of one now. IN stays long enough to
-     read as an arrival. */
-  var IN = 0.7, HOLD = 1.6, OUT = 0.25, TOTAL = IN + HOLD + OUT;
+     HOLD is what the viewer feels as "stuck": after the video fills the screen it stays
+     pinned for HOLD viewports before the zoom-out can even begin. At 1.6 that was two or
+     three flicks of the wheel, and halving OUT alone did not fix it. 0.4 is about one flick.
+     OUT stays a quarter viewport; IN stays long enough to read as an arrival. */
+  var IN = 0.7, HOLD = 0.4, OUT = 0.25, TOTAL = IN + HOLD + OUT;
   var PLAY_FROM = (IN * 0.8) / TOTAL;          // starts once the box is nearly full screen
   var PLAY_TO = (IN + HOLD + OUT * 0.6) / TOTAL;
   var active = 0;

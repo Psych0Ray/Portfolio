@@ -628,6 +628,12 @@ Last updated: 2026-09-21
     - **Measured**, time each element first becomes visible: 1440x900 - HI THERE 0.43s, paragraphs 1.0-1.3s, Off the clock heading 1.5s, cards 2.0s. 1280x720 and phones - header first; Off the clock is below the fold and waits for the scroll. Reduced motion - everything visible at first paint. No errors; `pre` never left on.
     - **Home opener, checked because the user specified it:** reload in the same tab skips it and plays the normal hero letter entrance; a new tab plays it again. That was already the behaviour (it is `sessionStorage`, per tab). Verified locally **and on the live site** `rutujeetfolio.vercel.app`; nothing changed.
 
+73. **Trailer-page videos: the hold is cut, not just the exit (2026-09-21).** [work/work.js](work/work.js), [work/work.css](work/work.css) - shared by all four trailer pages.
+    - **The user still had to flick the wheel 2-3 times before the video even began to leave.** Item 69 had only halved `OUT`; the real culprit was **`HOLD`**, the stretch after the video fills the screen and before the zoom-out can start. It was 1.6 viewports (1,440px on a 900px-tall screen).
+    - **`HOLD` 1.6 -> 0.4.** `IN` stays 0.7 (the arrival is liked), `OUT` stays 0.25. `TOTAL` 2.55 -> 1.35, so **`.film.pin` height 355svh -> 235svh** - the invariant from item 69 still holds, and both files say so.
+    - **Measured on all four pages** (1440x900, 20px steps, 650ms settle per step for the 0.5s scrub): from full screen to visibly shrinking is now **480-520px (0.53-0.58 screens)**, about one flick. The video still plays while pinned; no errors.
+    - The video is 27-31s long and no longer gets a long pinned stretch to be watched in. That is the trade the user chose; if they want a way to watch it through, a play-on-click fullscreen is the better answer than lengthening the pin again.
+
 
 ## In progress / not yet confirmed
 

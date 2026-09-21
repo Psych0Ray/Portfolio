@@ -46,8 +46,8 @@
 .film-box{position:relative;width:min(100%,calc((100svh - 160px) * var(--ar)));aspect-ratio:var(--ar);
   background:#000;border:var(--bw) solid var(--ink);overflow:hidden}
 .film-box video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
-/* TOTAL * 100svh from work.js (2.55) plus the 100svh the stage sticks for. Keep in step. */
-.film.pin{height:355svh;padding:0}
+/* TOTAL * 100svh from work.js (1.35) plus the 100svh the stage sticks for. Keep in step. */
+.film.pin{height:235svh;padding:0}
 .film.pin .film-stage{position:sticky;top:0;height:100svh;overflow:hidden}
 .film.pin .film-box{aspect-ratio:auto;will-change:width,height}
 
