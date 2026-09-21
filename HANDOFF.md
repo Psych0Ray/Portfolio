@@ -596,6 +596,21 @@ Last updated: 2026-09-21
     - **All four project pages share `work.js` and `work.css`** - `build_work.py` only writes `work/*.html` - so this was one edit, not four. Confirmed on all four: span is 2.55 viewports on each, no console errors.
     - **Measuring this needs care.** `scrub: 0.5` means the tween trails the scroll by half a second, so a scripted `scrollTo` followed by a short wait reads the box as still full width and looks like the zoom never finishes. With a 1200ms settle it lands exactly on the framed target (1244px at a 1440x900 viewport). Give scrub time before believing any measurement of it.
 
+70. **Resume is two pages now, with a Certifications page (2026-09-21).** `Rutujeet-Nayak-Resume.pdf` replaced in place; no link changes needed.
+    - **The user allowed two pages**, so page 1 was left completely untouched. Its re-export came out at 1,022,595 bytes against the old file's 1,022,684, which confirmed the live page 1 and the Figma frame were the same thing before anything changed.
+    - **Page 2 is Figma frame `2400:2` "A4 - Resume 2026 · page 2"**, on page `cv` (2049:631), placed 40px right of page 1 (`2356:2`) at (668, -1064). It was made by **cloning page 1** so the fonts, margins and colours are identical, then: the contact row (`Frame 2`) removed, `Frame 3` stripped to the Education section only and moved up to y=65 to close the gap the contact row left, and that section rewritten as **Certifications**. The list is the Education section's own vertical auto-layout (`Certification list`, `2400:32`, 16px gaps), so a fifth cert is one cloned text node.
+    - **Each entry is three lines in one text node:** Figtree **Bold** title with the date in brackets (same form as the Experience titles), the issuer in Regular, then `Credential ID: <id>` with the ID set in the template's own link style - Figtree Regular 10, underlined, `#356c9f`, with `setRangeHyperlink` to the verification URL.
+    - **The four certifications, read from their verification pages** (LinkedIn itself returns 429 to any automated fetch and cannot be read):
+      - AI Fluency: Framework & Foundations - Anthropic, Claude Academy - 30 Aug 2026 - `2623b94ef68a30dde646cf12da9d7b9c`
+      - Claude 101 - Anthropic Education (Skilljar) - 30 Aug 2026 - `gbbr9vn65ok3`
+      - Introduction to Claude Cowork - Anthropic, Claude Academy - 30 Aug 2026 - `d399aef281cfae471fe9ab8e82ddcefb`
+      - Complete Figma Megacourse: UI/UX Design Beginner to Expert - Udemy, Skillademia Academy, 41.5 hours - **3 May 2024** - `UC-e171528e-2de0-47d8-b236-a7d13fdbfa78`. Udemy's text says `05/03/2024`, which is ambiguous; the certificate image itself says "May 3, 2024".
+    - **Reading those pages:** the two `academy.claude.com/verify/...` pages are client-rendered, so WebFetch only gets a shell - render them in Playwright. Udemy returns 403 to WebFetch but loads fine in Playwright. Skilljar works with WebFetch.
+    - **HOW TO EXPORT THE RESUME FROM NOW ON (it had only ever been exported by hand before):** `download_assets` with `defaultFormat: "pdf"` on each page frame gives Figma's own vector PDF - real, selectable text (which ATS parsers need) and **hyperlinks preserved**. Download both, then merge locally with `pymupdf` (`insert_pdf` each, `save(garbage=3, deflate=True)`). Do **not** build it from PNG renders; the text would stop being text.
+    - **Verified before replacing:** two A4 pages, 3 links on page 1 and all 4 credential links on page 2, page 2 text extracts cleanly, and the rendered PDF matches the Figma frame. All three `View Resume` links - `index.html`, `about.html`, and the work pages via `build_work.py` - serve the new 1,211,931-byte file as `application/pdf`.
+    - **Not done:** the copy in `D:\Submissions\CV\` still holds the old one-page resume. Only the site's copy was replaced.
+    - Page 2 is mostly empty below the certifications. That is normal for a continuation page, but moving Achievements or Languages across would balance the two - ask before doing it.
+
 
 ## In progress / not yet confirmed
 
