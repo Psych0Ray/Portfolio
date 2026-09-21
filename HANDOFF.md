@@ -706,6 +706,14 @@ Last updated: 2026-09-21
     - **The name stands out "a bit":** `<strong class="me">`, ink instead of the paragraphs' muted grey, Geist 600, and `nowrap` so it never splits across lines. 700 was rendered too and read like a heading dropped into the sentence; the blue `.hl` block is the headings' emphasis and would shout in body text.
     - **Open for the user:** the page now greets twice - HI THERE, then "Hi, I am...". The user asked for exactly this wording, so it shipped as asked; offered to change the heading if they want.
 
+82. **The opening is shorter: page back at ~3.5s instead of ~5.3s (2026-09-21).** [index.html](index.html) only (`intro()` and one `<link>`).
+    - **Asked for:** "too long, make it shorter while keeping it smooth".
+    - **The count, 2.8s -> 1.6s, on a new pace curve (`pace()`).** As a speed profile: a smoothstep up over the first 12%, flat to 55%, then `(1-t)^2` down to a stop, normalised by its area `A = .64`. Speed is continuous at both joins (1.562 either side), it never runs backwards, and it still settles: the last three numbers take 0.35s, 99 to 100 0.25s. **Why not just shorten the old curve:** `1-(1-p)^4(1+4p)` peaks at 2.1x its average speed, so at 1.6s the ones reel would have hit ~2.2 cells a frame; the flat middle keeps the peak at 1.56x - measured 1.63-1.76 cells a frame against 1.26 before.
+    - **Dead time cut:** the hold on 100 waits for `load` for at most 0.5s (was 1.5s) and then 120ms (was 300ms) - the hero has its own entrance, so there is no reason to hold for the last images. Fonts wait at most 450ms (was 650ms). The digits rise in over .75s (was .95s).
+    - **Exit tightened, same choreography:** digits drop .5s, blue strips from .26s and ink strips from .36s, each .75s with .045s stagger (were .34/.46, .9s, .055s); the hero is cued at .72s (was .9s) - still just past halfway through the peel. Exit is ~1.34s (was ~1.64s).
+    - **Measured** (4 warm runs, 1440x900): counter on screen **3.10-3.15s** (was 4.90-4.93s), opening gone at **3.47-3.54s** (was 5.34-5.36s). Frame log of the reels: counting took 1616ms over 97 frames, longest frame 19ms, the only backward steps are the 10 seamless ones-reel wraps, and it lands on exactly 100.
+    - **Cold first visit:** one measured run sat on a plain blue screen for **3.2s** before the counter appeared, waiting for GSAP from cdnjs on a cold connection. Added `<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>` to the head so the connection opens as the page starts. If that blue wait is still felt on real devices, the next step is making the counter not depend on GSAP (plain rAF), so it can start before the library arrives.
+
 
 ## In progress / not yet confirmed
 

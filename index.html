@@ -9,6 +9,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <script>
 /* The opening plays once per browser session, on the home page, and never under reduced
@@ -1222,7 +1223,7 @@ THUMBS.wire(document.getElementById('grid'));
 
   var fonts = Promise.race([
     document.fonts && document.fonts.load ? document.fonts.load('800 1em "Bricolage Grotesque"') : Promise.resolve(),
-    wait(650)
+    wait(450)
   ]).catch(function(){});
   var loaded = new Promise(function(r){
     if (document.readyState === 'complete') r(); else window.addEventListener('load', r, { once:true });
@@ -1230,29 +1231,38 @@ THUMBS.wire(document.getElementById('grid'));
 
   function exit(){
     var tl = gsap.timeline({ onComplete:release });
-    tl.to(wins, { yPercent:-105, duration:.62, ease:'power3.in', stagger:.05 }, 0)
-      .to(count.querySelector('.in-pct'), { opacity:0, duration:.3, ease:'power1.in' }, 0)
-      .to(box.querySelectorAll('.in-blue i'), { yPercent:-100, duration:.9, ease:'expo.inOut', stagger:.055 }, .34)
-      .to(box.querySelectorAll('.in-ink i'),  { yPercent:-100, duration:.9, ease:'expo.inOut', stagger:.055 }, .46)
-      .add(cue, .9);
+    tl.to(wins, { yPercent:-105, duration:.5, ease:'power3.in', stagger:.04 }, 0)
+      .to(count.querySelector('.in-pct'), { opacity:0, duration:.25, ease:'power1.in' }, 0)
+      .to(box.querySelectorAll('.in-blue i'), { yPercent:-100, duration:.75, ease:'expo.inOut', stagger:.045 }, .26)
+      .to(box.querySelectorAll('.in-ink i'),  { yPercent:-100, duration:.75, ease:'expo.inOut', stagger:.045 }, .36)
+      .add(cue, .72);
   }
 
   fonts.then(function(){
     count.classList.add('on');
-    gsap.from(wins, { yPercent:105, duration:.95, ease:'expo.out', stagger:.07 });
-    gsap.from(count.querySelector('.in-pct'), { opacity:0, duration:.6, delay:.35, ease:'power1.out' });
-    /* f(p) = 1 - (1-p)^4 (1+4p): starts at rest, so 00 eases into motion, and has a long
-       quartic tail, so the count settles into 100 instead of arriving at it (99 to 100 alone
-       takes about half a second). Its slope is 20p(1-p)^3, zero at both ends, so there is no
-       kink anywhere to read as a stutter. sine.inOut was tried and 97-100 flew by in 180ms. */
-    var settle = function(p){ var q = 1 - p; return 1 - q * q * q * q * (1 + 4 * p); };
+    gsap.from(wins, { yPercent:105, duration:.75, ease:'expo.out', stagger:.06 });
+    gsap.from(count.querySelector('.in-pct'), { opacity:0, duration:.5, delay:.25, ease:'power1.out' });
+    /* The pace of the count, as its speed: it gets up to speed over the first 12% (a smoothstep),
+       runs at one speed to 55%, then slows as (1-t)^2 to a stop, so it settles into 100 (the last
+       three numbers take about 0.4s). The speed never jumps, so nothing stutters; and because it
+       is flat in the middle, its peak is only 1.56x the average. The first version's curve,
+       1 - (1-p)^4 (1+4p), peaked at 2.1x, so at this length the reels would have spun a third
+       faster than they do now; this way the whole count takes 1.6s instead of 2.8s. */
+    var A = .12 / 2 + (.55 - .12) + (1 - .55) / 3;
+    var pace = function(p){
+      if (p < .12) { var x = p / .12; return .12 * (x * x * x - x * x * x * x / 2) / A; }
+      if (p < .55) return (.06 + p - .12) / A;
+      var q = 1 - (p - .55) / .45;
+      return (.49 + .45 * (1 - q * q * q) / 3) / A;
+    };
     return new Promise(function(r){
-      gsap.to(cnt, { v:100, duration:2.8, delay:.2, ease:settle, onUpdate:paint, onComplete:r });
+      gsap.to(cnt, { v:100, duration:1.6, delay:.1, ease:pace, onUpdate:paint, onComplete:r });
     });
   })
-  /* rest on 100 until the page itself has loaded, never more than 1.5s more */
-  .then(function(){ return Promise.race([loaded, wait(1500)]); })
-  .then(function(){ return wait(300); })
+  /* rest on 100 until the page itself has loaded, never more than half a second more: the hero
+     brings itself in, so there is no need to hold for every last image */
+  .then(function(){ return Promise.race([loaded, wait(500)]); })
+  .then(function(){ return wait(120); })
   .then(exit)
   .catch(release);
 })();
