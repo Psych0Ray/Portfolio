@@ -10,8 +10,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<script>
+/* The header and Off the clock animate in. Without this they paint first, then blink out
+   into their start state when the scripts at the end of the body arrive, and the cards,
+   painted but not yet animated, land before the greeting does. So they are held back
+   from the first paint until aboutIn() takes them over; handed back after 4s regardless,
+   in case the scripts never run. Never under reduced motion. */
+(function(){
+  try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) { return; }
+  var r = document.documentElement;
+  r.classList.add('pre');
+  setTimeout(function(){ r.classList.remove('pre'); }, 4000);
+})();
+</script>
 <link rel="stylesheet" href="lab.css">
 <style>
+html.pre .ahead,html.pre .hob{visibility:hidden}
 /* ── HEADER ── */
 .ahead{padding:128px 40px 24px;display:flex;gap:56px;align-items:center;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:320px}
@@ -333,13 +347,14 @@
    Transform is left alone on .card elements and cleared where it is used, because
    .card:hover is a translate and a tween that finished on a transform would win over it.  */
 (function aboutIn(){
-  if (REDUCED || typeof gsap === 'undefined') return;
+  var root = document.documentElement;
+  if (REDUCED || typeof gsap === 'undefined') { root.classList.remove('pre'); return; }
 
-  var head = document.querySelector('.ahead');
+  var head = document.querySelector('.ahead'), tl = null;
   if (head) {
     var h1 = head.querySelector('h1'), hl = h1 && h1.querySelector('.hl');
     var paras = head.querySelectorAll('.copy p'), art = head.querySelector('.portrait');
-    var tl = gsap.timeline({ delay:.12 });
+    tl = gsap.timeline({ delay:.12 });
     tl.from(h1, { y:44, opacity:0, duration:.7, ease:'power4.out' });
     if (hl) tl.from(hl, { scale:0, rotation:-22, duration:.7, ease:'back.out(2.2)', clearProps:'transform' }, '-=.38');
     tl.from(paras, { y:22, opacity:0, duration:.55, ease:'power3.out', stagger:.085 }, '-=.42');
@@ -348,8 +363,30 @@
                             { clipPath:'inset(0% 0% 0% 0%)', duration:.9, ease:'expo.out', clearProps:'clipPath' }, '-=.95');
   }
 
+  /* Off the clock sits right under the header on a laptop. On its own ScrollTrigger it fired
+     at load and landed while the greeting was still coming in, so the cards appeared first.
+     When it is on screen at load it now joins the end of the header's timeline; further
+     down (phones), it waits for the scroll like every other section. The rail wrapper is
+     animated, never the track, which hobbies() moves every frame. */
+  var hob = document.querySelector('.hob'), hobHead = null;
+  if (hob) {
+    hobHead = hob.querySelector('.sechead h2');
+    var hobMark = hobHead && hobHead.querySelector('.hl'), hint = hob.querySelector('.hob-hint'), rail = hob.querySelector('.hob-rail');
+    var onScreen = tl && hob.getBoundingClientRect().top < window.innerHeight * .92;
+    var ht = gsap.timeline(onScreen || typeof ScrollTrigger === 'undefined' ? {} :
+      { scrollTrigger:{ trigger:hob, start:'top 88%', once:true } });
+    if (hobHead) ht.from(hobHead, { y:26, opacity:0, duration:.6, ease:'power4.out' });
+    if (hobMark) ht.from(hobMark, { scale:0, rotation:-16, duration:.6, ease:'back.out(2.1)', clearProps:'transform' }, '-=.32');
+    if (hint) ht.from(hint, { opacity:0, duration:.5, ease:'power1.out' }, '-=.4');
+    if (rail) ht.from(rail, { y:56, opacity:0, duration:1, ease:'expo.out', clearProps:'transform,opacity' }, '-=.55');
+    if (onScreen) tl.add(ht, '-=.3');
+  }
+  /* every start state is set above, so the first-paint hold can go */
+  root.classList.remove('pre');
+
   if (typeof ScrollTrigger === 'undefined') return;
   gsap.utils.toArray('.sechead h2').forEach(function(h){
+    if (h === hobHead) return;            /* already sequenced above */
     var mark = h.querySelector('.hl');
     var t = gsap.timeline({ scrollTrigger:{ trigger:h, start:'top 88%', once:true } });
     t.from(h, { y:26, opacity:0, duration:.6, ease:'power4.out' });

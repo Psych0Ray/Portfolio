@@ -620,6 +620,13 @@ Last updated: 2026-09-21
     - **Timing, fast connection:** hero starts ~2.9s, page handed back ~3.65s. The first version ran ~4.9s and was trimmed.
     - **Testing notes.** A normal reload will not replay it (session flag) - use a new tab or incognito. Screenshots slow headless Chromium enough to distort timing, so time it from an event log. Freezing GSAP's clock (`globalTimeline.timeScale(0.0001)`) to pose the counter **hangs the run** - render the counter statically instead (a scratch HTML page with the same CSS and font).
 
+72. **About: the header now always arrives before Off the clock; the home opener's reload behaviour confirmed (2026-09-21).** [about.html](about.html).
+    - **The bug the user saw:** on load, WHAT I DO OFF THE CLOCK and its cards appeared before HI THERE and the paragraphs. Two causes. (1) The hobby heading had its own ScrollTrigger at `top 88%`, which on a laptop is already satisfied at load, so it fired immediately; the cards had no entrance at all. (2) The page paints before the end-of-body scripts run, so on a first visit the header was painted, then blinked into its GSAP start state and animated, while the cards just sat there.
+    - **Fix, in `aboutIn()`:** Off the clock (heading, its blue block, the hint, then the rail wrapper `.hob-rail` - never `#hobTrack`, which `hobbies()` moves every frame) is built as its own timeline. **If the section is on screen at load it is appended to the end of the header's timeline** (`'-=.3'`); otherwise it gets a `top 88%` ScrollTrigger like every other section. The generic `.sechead h2` loop skips that heading.
+    - **First-paint hold:** a `<head>` script adds `html.pre` (not under reduced motion), and `html.pre .ahead, html.pre .hob{visibility:hidden}` keeps both out of the first paint. `aboutIn()` removes it once every start state is set - and on its early-exit path - and the head script removes it after 4s regardless, in case the scripts never arrive.
+    - **Measured**, time each element first becomes visible: 1440x900 - HI THERE 0.43s, paragraphs 1.0-1.3s, Off the clock heading 1.5s, cards 2.0s. 1280x720 and phones - header first; Off the clock is below the fold and waits for the scroll. Reduced motion - everything visible at first paint. No errors; `pre` never left on.
+    - **Home opener, checked because the user specified it:** reload in the same tab skips it and plays the normal hero letter entrance; a new tab plays it again. That was already the behaviour (it is `sessionStorage`, per tab). Verified locally **and on the live site** `rutujeetfolio.vercel.app`; nothing changed.
+
 
 ## In progress / not yet confirmed
 
