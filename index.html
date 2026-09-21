@@ -757,10 +757,8 @@ THUMBS.wire(document.getElementById('grid'));
 /* ══ OPENING ══════════════════════════════════════════════════════════════════════
    Only runs when the head script set .intro-on. One cobalt field, one number:
      1  the counter's digits rise into their windows once the display face has loaded
-     2  it rolls up in eased steps, each digit always turning upward (the tens and ones
-        reels hold 0-9 twice, and a reel past its first ten is shifted back by exactly ten
-        cells, which looks identical because the reel repeats)
-     3  it only reaches 100 once the page has loaded, capped so a slow image never holds it
+     2  one continuous eased count, 0 to 100, turns the reels like an odometer (see paint())
+     3  it rests on 100 until the page has loaded, capped so a slow image never holds it
      4  the digits drop out, then the field peels up in strips, blue then ink, and the hero
         plays its own entrance as the last strips clear
    A click or key speeds it all up. Never traps the page: a cap, a catch, and the head
@@ -807,22 +805,20 @@ THUMBS.wire(document.getElementById('grid'));
     el.innerHTML = cells.map(function(d){ return '<b>' + d + '</b>'; }).join('');
     return { el:el, n:cells.length };
   });
-  function roll(reel, digit, dur){
-    gsap.killTweensOf(reel.el);
-    var at = -gsap.getProperty(reel.el, 'yPercent') * reel.n / 100;   /* current cell, may be fractional */
-    var to = digit;
-    if (reel.n === 20) {
-      if (at >= 10) { at -= 10; gsap.set(reel.el, { yPercent:-100 * at / reel.n }); }
-      if (to < at - .001) to += 10;                                    /* always turn upward */
-    }
-    if (Math.abs(to - at) < .001) return;
-    gsap.to(reel.el, { yPercent:-100 * to / reel.n, duration:dur, ease:'expo.out' });
+  /* One continuous count drives every reel, every frame, like a real odometer. The ones
+     reel turns all the time; the tens only move while the ones pass from 9 to 0 (the carry),
+     and the hundreds only while the last step 99 to 100 happens, each exactly in step with
+     the reel to its right, like gears. A single tween, never interrupted, so it cannot
+     stutter the way the old stepped rolls did (each step killed the previous roll mid-flight). */
+  var setters = reels.map(function(r){ return gsap.quickSetter(r.el, 'yPercent'); });
+  var cnt = { v:0 };
+  function paint(){
+    var v = cnt.v, ones = v % 10, carry = ones > 9 ? ones - 9 : 0;
+    setters[0](-100 * (v > 99 ? v - 99 : 0) / reels[0].n);
+    setters[1](-100 * (Math.floor(v / 10) + carry) / reels[1].n);
+    setters[2](-100 * ones / reels[2].n);
   }
-  function show(v, dur){
-    roll(reels[0], v >= 100 ? 1 : 0, dur);
-    roll(reels[1], Math.floor(v / 10) % 10, dur);
-    roll(reels[2], v % 10, dur);
-  }
+  paint();
 
   var fonts = Promise.race([
     document.fonts && document.fonts.load ? document.fonts.load('800 1em "Bricolage Grotesque"') : Promise.resolve(),
@@ -845,14 +841,18 @@ THUMBS.wire(document.getElementById('grid'));
     count.classList.add('on');
     gsap.from(wins, { yPercent:105, duration:.95, ease:'expo.out', stagger:.07 });
     gsap.from(count.querySelector('.in-pct'), { opacity:0, duration:.6, delay:.35, ease:'power1.out' });
-    var chain = wait(260);
-    [18, 46, 73, 91].forEach(function(v){
-      chain = chain.then(function(){ show(v, .8); return wait(230); });
+    /* f(p) = 1 - (1-p)^4 (1+4p): starts at rest, so 00 eases into motion, and has a long
+       quartic tail, so the count settles into 100 instead of arriving at it (99 to 100 alone
+       takes about half a second). Its slope is 20p(1-p)^3, zero at both ends, so there is no
+       kink anywhere to read as a stutter. sine.inOut was tried and 97-100 flew by in 180ms. */
+    var settle = function(p){ var q = 1 - p; return 1 - q * q * q * q * (1 + 4 * p); };
+    return new Promise(function(r){
+      gsap.to(cnt, { v:100, duration:2.8, delay:.2, ease:settle, onUpdate:paint, onComplete:r });
     });
-    return chain;
   })
-  .then(function(){ return Promise.race([loaded, wait(2200)]); })
-  .then(function(){ show(100, .8); return wait(420); })
+  /* rest on 100 until the page itself has loaded, never more than 1.5s more */
+  .then(function(){ return Promise.race([loaded, wait(1500)]); })
+  .then(function(){ return wait(300); })
   .then(exit)
   .catch(release);
 })();
