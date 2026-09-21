@@ -701,6 +701,11 @@ Last updated: 2026-09-21
     - **Verified:** none while the scraps drop, shows on the paper, hides on a scrap, the nav's "Resume" label still wins over the nav, returns on the paper, one click drops a letter and removes it (also after a reload in the same tab), a visitor who never clicks sees it ~8s then never again. No errors.
     - **Trap hit while building it:** `looseLetters()` already had a `landed` variable (the name's entrance is done), and a new `function landed()` was silently overwritten by it - "landed is not a function" on every mouse move. The helper is `settled()`.
 
+81. **About: the opening line introduces the name (2026-09-21).** [about.html](about.html) only.
+    - The first paragraph under HI THERE was "I am a designer from Pune, currently studying at MIT Institute of Design, Pune." It is now **"Hi, I am Rutujeet Nayak, a designer from Pune, currently studying at MIT Institute of Design, Pune."** - the rest of the paragraph unchanged, as asked.
+    - **The name stands out "a bit":** `<strong class="me">`, ink instead of the paragraphs' muted grey, Geist 600, and `nowrap` so it never splits across lines. 700 was rendered too and read like a heading dropped into the sentence; the blue `.hl` block is the headings' emphasis and would shout in body text.
+    - **Open for the user:** the page now greets twice - HI THERE, then "Hi, I am...". The user asked for exactly this wording, so it shipped as asked; offered to change the heading if they want.
+
 
 ## In progress / not yet confirmed
 

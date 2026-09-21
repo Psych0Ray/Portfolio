@@ -31,6 +31,9 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 .ahead .copy{flex:1;min-width:320px}
 .ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(56px,10.5vw,148px);letter-spacing:-.05em;line-height:.88}
 .ahead p{margin-top:24px;max-width:74ch;font-size:19px;line-height:1.75;color:var(--muted);text-wrap:pretty}
+/* the name in the opening line: in ink and heavier than the grey around it, enough to find at a glance
+   (the blue block is for headings; in body text it would shout) */
+.ahead p .me{color:var(--ink);font-weight:600;white-space:nowrap}
 .ahead .portrait{width:320px;flex:none;aspect-ratio:4/5}
 
 /* ══ OFF THE CLOCK · four hobby cards on a rail that loops sideways on its own ══
@@ -162,7 +165,7 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 <header class="ahead">
   <div class="copy">
     <h1>HI <span class="hl">THERE</span></h1>
-    <p>I am a designer from Pune, currently studying at MIT Institute of Design, Pune.</p>
+    <p>Hi, I am <strong class="me">Rutujeet Nayak</strong>, a designer from Pune, currently studying at MIT Institute of Design, Pune.</p>
     <p>I have always been fascinated by people. Our habits, contradictions, instincts, and the strange things that make us who we are.</p>
     <p>I approach design through that curiosity. I like observing before assuming, questioning before solving, and looking for the human story behind a problem. The interface is only what we see; what interests me is everything underneath it, the motivations, emotions, behaviours, and moments that shape how we experience the world.</p>
     <p>For me, design is less about having all the answers and more about being curious enough to keep asking better questions.</p>
