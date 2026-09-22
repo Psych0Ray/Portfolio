@@ -1,9 +1,6 @@
 /* ══ Rutujeet · shared system ════════════════════════════════════
-   Type: Archivo Black for every heading (it has one weight, so rules
-   using it set font-weight:400, never 800, or the browser fakes a bolder
-   one). Bricolage Grotesque, condensed, only where type is squeezed: the
-   blue .hl blocks, the ticker, stamps and tiles. Geist for everything
-   else, reading and labels.
+   Type: Bricolage Grotesque (variable: opsz / wdth / wght) for every
+   display and heading role. Geist for everything else, reading and labels.
    Emphasis is a solid block (.hl), never a lighter weight.
    The eight ransom faces are loaded only for the hero name + logo.
    Shape rule: cards and slots are sharp (0). Chips, nav, buttons are pill.
@@ -13,7 +10,6 @@
   --blue:#002FA7; --blue70:#4969BA; --blue40:#91A2CD; --blue15:#CED2DD;
   --muted:#6B655A; --rule:#D8D2C4; --bw:3px;
   --display:'Bricolage Grotesque',system-ui,sans-serif;
-  --heavy:'Archivo Black','Bricolage Grotesque',system-ui,sans-serif;
   --body:'Geist',system-ui,sans-serif;
   --label:'Geist',system-ui,sans-serif;
 }
@@ -33,13 +29,13 @@ a{color:inherit}
 .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.08;mix-blend-mode:multiply;z-index:9998}
 
 /* display roles: one family, three weights */
-.h-xl{font-family:var(--heavy);font-weight:400;letter-spacing:-.03em;line-height:.88}
-.h-lg{font-family:var(--heavy);font-weight:400;letter-spacing:-.03em;line-height:.92}
-.h-md{font-family:var(--heavy);font-weight:400;letter-spacing:-.02em;line-height:1}
+.h-xl{font-family:var(--display);font-weight:800;letter-spacing:-.045em;line-height:.88}
+.h-lg{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:.92}
+.h-md{font-family:var(--display);font-weight:700;letter-spacing:-.025em;line-height:1}
 /* emphasis: set bold and condensed on a solid block, knocked a little off square */
-.hl{display:inline-block;font-family:var(--display);font-weight:800;font-stretch:75%;letter-spacing:0;line-height:.9;background:var(--blue);
+.hl{display:inline-block;font-weight:800;font-stretch:75%;letter-spacing:0;line-height:.9;background:var(--blue);
   color:var(--paper);padding:.04em .2em .1em;transform:rotate(-1.5deg);text-transform:uppercase}
-.cond{font-family:var(--display);font-stretch:75%;font-weight:800;letter-spacing:.005em}          /* condensed, for marquee + stamps */
+.cond{font-stretch:75%;font-weight:800;letter-spacing:.005em}          /* condensed, for marquee + stamps */
 
 /* ── ARROWS · one heavy stroke icon, sized by the font-size around it ── */
 .ic{width:1em;height:1em;display:block;flex:none;fill:none;stroke:currentColor;stroke-width:3;
@@ -105,7 +101,7 @@ a{color:inherit}
 /* ── SECTION FURNITURE ── */
 .sec{padding:96px 40px}
 .sechead{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;margin-bottom:52px}
-.sechead h2{font-family:var(--heavy);font-weight:400;font-size:clamp(34px,5.4vw,68px);letter-spacing:-.03em;line-height:.88}
+.sechead h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.4vw,68px);letter-spacing:-.045em;line-height:.88}
 .sechead .count{font-family:var(--label);font-size:13px;letter-spacing:.07em;color:var(--muted);font-weight:500}
 
 /* ── CARD · flat at rest, lifts on hover ── */
@@ -168,10 +164,10 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
 /* ── FOOTER ── */
 .foot{background:var(--ink);color:var(--paper);padding:92px 40px 30px;overflow:hidden;
   display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:64px;align-items:start}
-.foot h2{grid-column:1;font-family:var(--heavy);font-weight:400;font-size:clamp(34px,5.6vw,72px);letter-spacing:-.03em;line-height:.88}
+.foot h2{grid-column:1;font-family:var(--display);font-weight:800;font-size:clamp(34px,5.6vw,72px);letter-spacing:-.045em;line-height:.88}
 /* the address is the contact point, so it is set large and copies on click */
 .mailbtn{grid-column:1;justify-self:start;display:inline-flex;align-items:center;gap:18px;margin-top:38px;background:none;border:0;padding:0;
-  color:var(--paper);font-family:var(--heavy);font-weight:400;letter-spacing:-.02em;line-height:1;
+  color:var(--paper);font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1;
   font-size:clamp(21px,3.2vw,44px);text-align:left}
 .mailbtn .addr{position:relative;padding-bottom:10px;transition:color .18s,transform .12s ease}
 .mailbtn .addr::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--blue);
@@ -215,9 +211,6 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   .nav{padding-left:16px}
   .nav a.lnk:not(.cta){display:none}
   .foot{padding:60px 22px 26px;grid-template-columns:minmax(0,1fr)}
-  /* the address is 13.6x its size wide, with an 18px gap and the Copied stamp beside it: shrink it
-     below 375px so it never runs off a small phone (17px at 320px) */
-  .mailbtn{font-size:min(clamp(21px,3.2vw,44px),(100vw - 89px) / 13.6)}
   .foot-links{grid-column:1;grid-row:auto;margin-top:46px;min-width:0}
   .foot-base{margin-top:46px}
 }
@@ -260,7 +253,7 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   .mm-links{position:relative;list-style:none;margin:auto 0;display:flex;flex-direction:column;gap:4px}
   .mm-links li{overflow:hidden;padding:4px 0}
   .mm-links a{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:var(--paper);
-    font-family:var(--heavy);font-weight:400;font-size:clamp(46px,14vw,68px);letter-spacing:-.03em;line-height:.95;text-transform:uppercase}
+    font-family:var(--display);font-weight:800;font-size:clamp(46px,14vw,68px);letter-spacing:-.045em;line-height:.95;text-transform:uppercase}
   .mm-links a small{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.07em;color:var(--blue40);transform:translateY(-4px)}
   .mm-links a.cta{display:inline-flex;align-self:flex-start;margin-top:14px;background:var(--paper);color:var(--blue);
     border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink);padding:14px 24px;

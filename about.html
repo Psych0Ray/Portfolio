@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <script>
 /* The header and Off the clock animate in. Without this they paint first, then blink out
    into their start state when the scripts at the end of the body arrive, and the cards,
@@ -29,7 +29,7 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 /* ── HEADER ── */
 .ahead{padding:128px 40px 24px;display:flex;gap:56px;align-items:center;flex-wrap:wrap}
 .ahead .copy{flex:1;min-width:min(320px,100%)}
-.ahead h1{font-family:var(--heavy);font-weight:400;font-size:clamp(56px,10.5vw,148px);letter-spacing:-.03em;line-height:.88}
+.ahead h1{font-family:var(--display);font-weight:800;font-size:clamp(56px,10.5vw,148px);letter-spacing:-.05em;line-height:.88}
 .ahead p{margin-top:24px;max-width:74ch;font-size:19px;line-height:1.75;color:var(--muted);text-wrap:pretty}
 /* the name in the opening line: in ink and heavier than the grey around it, enough to find at a glance
    (the blue block is for headings; in body text it would shout) */
@@ -57,7 +57,7 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 .slide.s3{background:var(--bone)}
 .slide.s4{background:var(--ink);border-color:var(--ink)}
 /* slide name is the second level under the section title, so it sits well below it in size */
-.s-name{flex:none;font-family:var(--heavy);font-weight:400;font-size:clamp(22px,2.2vw,33px);letter-spacing:-.03em;line-height:.9;text-transform:uppercase}
+.s-name{flex:none;font-family:var(--display);font-weight:800;font-size:clamp(24px,2.4vw,36px);letter-spacing:-.04em;line-height:.9;text-transform:uppercase}
 
 .s-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.3fr 1.1fr;gap:22px}
 .pwrap{position:relative;min-height:0;display:flex}
@@ -73,13 +73,13 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 .rate i.on{background:var(--blue);border-color:var(--blue)}
 .meter{height:18px;border:2.5px solid var(--ink);background:var(--paper);overflow:hidden;display:block}
 .meter i{display:block;height:100%;width:var(--v,0%);background:var(--blue)}
-.stat{display:flex;align-items:baseline;gap:7px;font-family:var(--heavy);font-weight:400;font-size:clamp(30px,2.8vw,40px);letter-spacing:-.03em;line-height:.9}
+.stat{display:flex;align-items:baseline;gap:7px;font-family:var(--display);font-weight:800;font-size:clamp(32px,3vw,42px);letter-spacing:-.04em;line-height:.9}
 .stat small{font-family:var(--label);font-size:15px;font-weight:700;letter-spacing:.06em}
 .rlab{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:11px;font-weight:700;color:var(--muted);margin:10px 0 18px;display:block}
 .rlab b{color:var(--ink)}
 .ptext p{margin-top:0}
 .kick{font-family:var(--label);text-transform:uppercase;letter-spacing:.07em;font-size:12px;font-weight:700;color:var(--blue);display:block}
-.ptext h4{font-family:var(--heavy);font-weight:400;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.02em;line-height:.95;margin:12px 0 20px;text-transform:uppercase}
+.ptext h4{font-family:var(--display);font-weight:800;font-size:clamp(22px,1.9vw,28px);letter-spacing:-.04em;line-height:.9;margin:12px 0 20px;text-transform:uppercase}
 .ptext p{font-size:14px;line-height:1.6;color:var(--muted)}
 .ptext .meta{margin-top:auto;padding-top:18px;font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700}
 
@@ -92,7 +92,7 @@ html.pre .ahead,html.pre .hob{visibility:hidden}
 .role .rbody .org{grid-area:2/1}
 .role .rbody p{grid-area:1/2}
 .role .rbody .tags{grid-area:2/2;align-self:start;margin-top:22px}
-.role h3{font-family:var(--heavy);font-weight:400;font-size:clamp(22px,2.3vw,33px);letter-spacing:-.03em;line-height:.95;text-transform:uppercase}
+.role h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;line-height:.92;text-transform:uppercase}
 .role .org{font-family:var(--body);font-weight:600;font-size:17px;color:var(--blue);margin:10px 0 14px;display:block}
 .role p{font-size:15px;line-height:1.7;color:var(--muted);max-width:58ch}
 .role .tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
