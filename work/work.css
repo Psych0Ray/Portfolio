@@ -4,7 +4,7 @@
    The snippets keep each deck's own design; the site only frames them. */
 
 .chead{padding:128px 40px 40px}
-.chead h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7.4vw,104px);letter-spacing:-.05em;line-height:.86;text-transform:uppercase}
+.chead h1{font-family:var(--heavy);font-weight:400;font-size:clamp(42px,7.4vw,104px);letter-spacing:-.03em;line-height:.88;text-transform:uppercase}
 .meta{display:grid;grid-template-columns:1fr 1.7fr 1.4fr .6fr;margin-top:36px;border:var(--bw) solid var(--ink)}
 .meta div{padding:22px 24px;border-right:2px solid var(--ink)}
 .meta div:last-child{border-right:0}
@@ -28,8 +28,8 @@
   border:var(--bw) solid var(--ink);background:var(--paper)}
 .story .sc{padding:34px 34px 38px;border-right:2px solid var(--ink);display:flex;flex-direction:column}
 .story .sc:last-child{border-right:0}
-.story .sc h3{font-family:var(--display);font-weight:800;font-size:clamp(21px,2.1vw,30px);
-  letter-spacing:-.035em;line-height:.95;text-transform:uppercase;color:var(--blue)}
+.story .sc h3{font-family:var(--heavy);font-weight:400;font-size:clamp(21px,2.1vw,30px);
+  letter-spacing:-.02em;line-height:.95;text-transform:uppercase;color:var(--blue)}
 .story .sc h3::after{content:"";display:block;width:44px;height:var(--bw);background:currentColor;margin:18px 0 20px}
 .story .sc p{font-size:16px;line-height:1.7;color:var(--ink)}
 /* the outcome */
@@ -68,8 +68,8 @@
   letter-spacing:.07em;text-transform:uppercase;color:var(--blue);text-decoration:none}
 .fback .ic{width:15px;height:15px;stroke-width:3.4}
 .fback:hover{text-decoration:underline;text-underline-offset:3px}
-.fhead h1{margin-top:20px;font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,96px);
-  letter-spacing:-.05em;line-height:.88;text-transform:uppercase}
+.fhead h1{margin-top:20px;font-family:var(--heavy);font-weight:400;font-size:clamp(40px,7vw,96px);
+  letter-spacing:-.03em;line-height:.88;text-transform:uppercase}
 .fhead p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--muted)}
 .full{width:min(1200px,100% - 80px);margin:0 auto;border:var(--bw) solid var(--ink);
   background:var(--bone);font-size:0}
@@ -84,7 +84,7 @@
 .bh{display:flex;align-items:center;gap:32px;padding:40px 44px;background:var(--ink);color:var(--paper);text-decoration:none;
   border:var(--bw) solid var(--ink);transition:background .18s ease}
 .bh:hover{background:var(--blue)}
-.bh h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.045em;line-height:.9}
+.bh h2{font-family:var(--heavy);font-weight:400;font-size:clamp(28px,4.2vw,56px);letter-spacing:-.03em;line-height:.9}
 .bh p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--blue15)}
 .bh .rbtn{margin-left:auto;width:72px;height:72px;font-size:28px;background:var(--paper);color:var(--ink);transition:transform .18s ease}
 .bh:hover .rbtn{transform:translate(4px,-4px)}
@@ -102,7 +102,7 @@
 
 .next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:40px 44px;flex-wrap:wrap;text-decoration:none;color:inherit;margin-top:28px}
 .next .lab{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
-.next h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
+.next h3{font-family:var(--heavy);font-weight:400;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.03em;line-height:.9;text-transform:uppercase}
 .next .rbtn{width:64px;height:64px;font-size:26px}
 
 @media (max-width:900px){
@@ -116,8 +116,12 @@
   .story .sc{padding:26px 24px 30px;border-right:0;border-bottom:2px solid var(--ink)}
   .story .sc:last-child{border-bottom:0}
   .story .sc h3::after{margin:14px 0 16px}
-  .meta{grid-template-columns:1fr 1fr}
-  .meta div{border-bottom:2px solid var(--ink)}
+  .meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}   /* minmax: a long word never widens the page */
+  /* SURVEILLANCE, the longest word in any title, is 8.4x its size wide in Archivo Black: the titles
+     shrink until it fits the column (33px at 320px, their usual size from about 400px up) */
+  .chead h1{font-size:min(42px,(100vw - 44px) / 8.4)}
+  .fhead h1{font-size:min(40px,(100vw - 44px) / 8.4)}
+  .meta div{border-bottom:2px solid var(--ink);padding:18px}
   .meta div:nth-child(even){border-right:0}
   .meta div:nth-last-child(-n+2){border-bottom:0}
   .bh{flex-direction:column;align-items:flex-start;padding:30px 26px;gap:22px}
@@ -129,4 +133,9 @@
 @media (orientation:landscape) and (max-height:520px){
   .film{padding:0 22px 28px}
   .film-box{width:min(100%,calc((100svh - 44px) * var(--ar)))}
+}
+/* the smallest phones: two detail boxes side by side leave ~100px for words like "Calculations," */
+@media (max-width:380px){
+  .meta div{padding:16px 14px}
+  .meta span{font-size:15px}
 }
