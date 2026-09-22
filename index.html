@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Archivo+Black&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <script>
 /* The opening plays once per browser session, on the home page, and never under reduced
    motion. Decided here, before the first paint, so the page underneath never flashes.
@@ -121,7 +121,7 @@
 .meet{display:flex;align-items:center;gap:22px;margin-top:16px;padding:16px 42px 16px 36px;text-decoration:none;color:var(--ink);
   transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
 .meet img{width:56px;height:56px;flex:none;border-radius:50%;border:2.5px solid var(--ink);object-fit:cover;
-  transform:rotate(-6deg);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+  transform:rotate(-6deg);transition:transform .35s cubic-bezier(.16,1,.3,1)}
 .meet b{flex:1;min-width:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;
   line-height:1;text-transform:uppercase;white-space:nowrap}
 .meet .rbtn{width:52px;height:52px;font-size:20px}
@@ -200,7 +200,7 @@
 /* ── SOFTWARE · the horizontal row ── */
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
 .sw{padding:24px;border:var(--bw) solid var(--ink);background:var(--ink);color:var(--paper)}
-.sw h4{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
+.sw h3{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
 .sw span{font-size:13px;color:var(--blue40);line-height:1.6}
 @media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.skills button::before{transition:none}}
@@ -223,7 +223,7 @@
 .wc h3{font-family:var(--display);font-weight:800;font-size:clamp(20px,1.9vw,28px);letter-spacing:-.04em;line-height:.95;
   text-transform:uppercase;text-wrap:balance;margin-bottom:16px}   /* the section headings' face, at card size */
 .wc-tags{display:flex;gap:8px 10px;flex-wrap:wrap}
-.wc-tags .chip{padding:7px 12px;font-size:10px;box-shadow:none}
+.wc-tags .chip{padding:8px 13px;font-size:12px;box-shadow:none}
 
 @media (max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}}
 /* touch phones snap each reel card to the centre; proximity, so the rest of the page scrolls freely */
@@ -241,7 +241,7 @@
   .kit{grid-template-columns:1fr;gap:36px}
   .tiles{gap:16px}
   .sw{padding:18px}
-  .sw h4{font-size:22px;overflow-wrap:anywhere}
+  .sw h3{font-size:22px;overflow-wrap:anywhere}
   .quote{padding:64px 22px}
 }
 /* a phone on its side: the name in one row along the top, stopping short of the menu button, and
@@ -357,7 +357,7 @@ html.intro-on .intro{display:block}
   <div class="sechead"><h2>WHAT I <span class="hl">BRING</span></h2></div>
   <!-- shared halftone for the illustrations, the same dot disc the hobby posters use -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-    <pattern id="kdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.1" fill="#91A2CD"/></pattern>
+    <pattern id="kdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.1" fill="#8EA2D6"/></pattern>
   </defs></svg>
   <div class="kit" id="kit">
     <ul class="skills">
@@ -378,14 +378,14 @@ html.intro-on .intro{display:block}
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
-            <rect x="52" y="46" width="232" height="178" rx="14" fill="#F2EFE6"/>
+            <rect x="52" y="46" width="232" height="178" rx="14" fill="#EDEFF6"/>
             <path d="M52 86V60a14 14 0 0 1 14-14h204a14 14 0 0 1 14 14v26z" fill="#002FA7"/>
-            <circle cx="74" cy="66" r="5" fill="#F2EFE6" stroke="none"/><circle cx="92" cy="66" r="5" fill="#F2EFE6" stroke="none"/><circle cx="110" cy="66" r="5" fill="#F2EFE6" stroke="none"/>
+            <circle cx="74" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="92" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="110" cy="66" r="5" fill="#EDEFF6" stroke="none"/>
           </g>
           <g>
-            <rect x="72" y="104" width="100" height="76" rx="8" fill="#E8DCC8"/>
+            <rect x="72" y="104" width="100" height="76" rx="8" fill="#D8DEEF"/>
             <path d="M80 172l26-32 18 20 12-12 28 24z" fill="#002FA7" stroke-width="5"/>
-            <circle cx="150" cy="124" r="8" fill="#F2EFE6" stroke-width="5"/>
+            <circle cx="150" cy="124" r="8" fill="#EDEFF6" stroke-width="5"/>
           </g>
           <g>
             <path d="M190 112h72M190 132h52M190 152h64M72 204h96"/>
@@ -393,43 +393,43 @@ html.intro-on .intro{display:block}
           </g>
           <g><g class="bob">
             <g transform="rotate(7 314 170)">
-              <rect x="262" y="104" width="104" height="132" rx="12" fill="#E8DCC8"/>
+              <rect x="262" y="104" width="104" height="132" rx="12" fill="#D8DEEF"/>
               <circle cx="290" cy="134" r="12" fill="#002FA7"/>
               <path d="M314 128h36M314 142h24M280 170h68M280 188h52"/>
-              <rect x="280" y="206" width="42" height="20" rx="10" fill="#F2EFE6" stroke-width="5"/>
+              <rect x="280" y="206" width="42" height="20" rx="10" fill="#EDEFF6" stroke-width="5"/>
               <circle cx="311" cy="216" r="6" fill="#002FA7" stroke="none"/>
             </g>
           </g></g>
-          <g><path d="M222 178v62l15-14 12 27 14-6-12-27 21-2z" fill="#0A0A0A" stroke="#F2EFE6" stroke-width="4"/></g>
+          <g><path d="M222 178v62l15-14 12 27 14-6-12-27 21-2z" fill="#0A0A0A" stroke="#EDEFF6" stroke-width="4"/></g>
         </svg>
 
         <svg class="art" data-art="research" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
-            <rect x="46" y="42" width="172" height="218" rx="12" fill="#F2EFE6"/>
-            <path d="M68 130h116" stroke="#91A2CD" stroke-width="18" stroke-linecap="butt"/>
+            <rect x="46" y="42" width="172" height="218" rx="12" fill="#EDEFF6"/>
+            <path d="M68 130h116" stroke="#8EA2D6" stroke-width="18" stroke-linecap="butt"/>
             <path d="M70 82h116M70 106h96M70 130h108M70 154h72M70 178h92M70 202h58M70 226h84"/>
           </g>
           <g><g class="bob">
             <path d="M228 208l42 42" stroke-width="20"/>
             <path d="M228 208l42 42" stroke="#002FA7" stroke-width="8"/>
             <circle cx="190" cy="170" r="56" fill="#002FA7"/>
-            <circle cx="190" cy="170" r="40" fill="#F2EFE6" stroke-width="5"/>
+            <circle cx="190" cy="170" r="40" fill="#EDEFF6" stroke-width="5"/>
             <path d="M170 160h40M170 180h26" stroke-width="7"/>
-            <path d="M166 146a28 28 0 0 1 16-10" stroke="#91A2CD" stroke-width="6"/>
+            <path d="M166 146a28 28 0 0 1 16-10" stroke="#8EA2D6" stroke-width="6"/>
           </g></g>
           <g>
             <path d="M272 42h86a12 12 0 0 1 12 12v34a12 12 0 0 1-12 12h-52l-18 16v-16h-16a12 12 0 0 1-12-12V54a12 12 0 0 1 12-12z" fill="#002FA7"/>
-            <circle cx="294" cy="71" r="5" fill="#F2EFE6" stroke="none"/><circle cx="315" cy="71" r="5" fill="#F2EFE6" stroke="none"/><circle cx="336" cy="71" r="5" fill="#F2EFE6" stroke="none"/>
+            <circle cx="294" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="315" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="336" cy="71" r="5" fill="#EDEFF6" stroke="none"/>
           </g>
           <g>
-            <path d="M284 130h72a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12h-14v14l-16-14h-42a12 12 0 0 1-12-12v-26a12 12 0 0 1 12-12z" fill="#E8DCC8"/>
+            <path d="M284 130h72a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12h-14v14l-16-14h-42a12 12 0 0 1-12-12v-26a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
             <path d="M290 148h52M290 162h32" stroke-width="5"/>
           </g>
           <g>
             <rect x="300" y="212" width="40" height="40" rx="3" fill="#002FA7" transform="rotate(-8 320 232)"/>
-            <rect x="346" y="218" width="40" height="40" rx="3" fill="#E8DCC8" transform="rotate(7 366 238)"/>
+            <rect x="346" y="218" width="40" height="40" rx="3" fill="#D8DEEF" transform="rotate(7 366 238)"/>
           </g>
         </svg>
 
@@ -439,45 +439,45 @@ html.intro-on .intro{display:block}
           <g><ellipse cx="200" cy="160" rx="160" ry="88" stroke="#002FA7" stroke-width="6" stroke-dasharray="1 16"/></g>
           <g>
             <path d="M128 264c0-46 30-74 72-74s72 28 72 74z" fill="#002FA7"/>
-            <circle cx="200" cy="130" r="42" fill="#E8DCC8"/>
+            <circle cx="200" cy="130" r="42" fill="#D8DEEF"/>
             <circle cx="185" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/><circle cx="215" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/>
             <path d="M186 146q14 11 28 0" stroke-width="5"/>
           </g>
-          <g><circle cx="40" cy="160" r="27" fill="#E8DCC8"/><path d="M40 174l-13-13a8.5 8.5 0 0 1 13-11 8.5 8.5 0 0 1 13 11z" fill="#002FA7" stroke-width="4"/></g>
-          <g><circle cx="97" cy="92" r="27" fill="#F2EFE6"/><path d="M97 76l5 10 11 1.5-8 7.5 2 11-10-5.5-10 5.5 2-11-8-7.5 11-1.5z" fill="#002FA7" stroke-width="4"/></g>
-          <g><circle cx="303" cy="92" r="27" fill="#E8DCC8"/><path d="M290 92l9 9 17-17" stroke="#002FA7" stroke-width="7"/></g>
-          <g><circle cx="360" cy="160" r="27" fill="#002FA7"/><path d="M348 150h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-12l-8 7v-7h-4a4 4 0 0 1-4-4v-12a4 4 0 0 1 4-4z" fill="#F2EFE6" stroke-width="4"/></g>
+          <g><circle cx="40" cy="160" r="27" fill="#D8DEEF"/><path d="M40 174l-13-13a8.5 8.5 0 0 1 13-11 8.5 8.5 0 0 1 13 11z" fill="#002FA7" stroke-width="4"/></g>
+          <g><circle cx="97" cy="92" r="27" fill="#EDEFF6"/><path d="M97 76l5 10 11 1.5-8 7.5 2 11-10-5.5-10 5.5 2-11-8-7.5 11-1.5z" fill="#002FA7" stroke-width="4"/></g>
+          <g><circle cx="303" cy="92" r="27" fill="#D8DEEF"/><path d="M290 92l9 9 17-17" stroke="#002FA7" stroke-width="7"/></g>
+          <g><circle cx="360" cy="160" r="27" fill="#002FA7"/><path d="M348 150h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-12l-8 7v-7h-4a4 4 0 0 1-4-4v-12a4 4 0 0 1 4-4z" fill="#EDEFF6" stroke-width="4"/></g>
         </svg>
 
         <svg class="art" data-art="user-testing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
-            <circle cx="72" cy="194" r="42" fill="#F2EFE6"/>
+            <circle cx="72" cy="194" r="42" fill="#EDEFF6"/>
             <rect x="63" y="140" width="18" height="12" rx="3" fill="#0A0A0A" stroke-width="4"/>
             <path d="M72 162a32 32 0 0 1 30 22" stroke="#002FA7" stroke-width="9" stroke-linecap="butt"/>
             <path d="M72 194v-22M72 194l14 10"/>
           </g>
           <g>
             <rect x="130" y="30" width="122" height="240" rx="22" fill="#0A0A0A"/>
-            <path d="M180 42h22" stroke="#F2EFE6" stroke-width="4"/>
-            <rect x="142" y="54" width="98" height="196" rx="8" fill="#F2EFE6" stroke="none"/>
-            <rect x="152" y="66" width="78" height="14" rx="7" fill="#91A2CD" stroke="none"/>
-            <rect x="152" y="92" width="78" height="52" rx="6" fill="#E8DCC8" stroke-width="4"/>
+            <path d="M180 42h22" stroke="#EDEFF6" stroke-width="4"/>
+            <rect x="142" y="54" width="98" height="196" rx="8" fill="#EDEFF6" stroke="none"/>
+            <rect x="152" y="66" width="78" height="14" rx="7" fill="#8EA2D6" stroke="none"/>
+            <rect x="152" y="92" width="78" height="52" rx="6" fill="#D8DEEF" stroke-width="4"/>
             <path d="M154 160h60M154 176h42" stroke-width="5"/>
             <rect x="152" y="206" width="78" height="26" rx="13" fill="#002FA7" stroke-width="4"/>
           </g>
           <g>
             <circle cx="191" cy="219" r="34" stroke="#002FA7" stroke-width="5" opacity=".55"/>
             <circle cx="191" cy="219" r="22" stroke="#002FA7" stroke-width="5"/>
-            <circle cx="191" cy="219" r="8" fill="#F2EFE6" stroke-width="4"/>
+            <circle cx="191" cy="219" r="8" fill="#EDEFF6" stroke-width="4"/>
           </g>
           <g><g class="bob">
-            <rect x="274" y="68" width="100" height="156" rx="10" fill="#E8DCC8"/>
+            <rect x="274" y="68" width="100" height="156" rx="10" fill="#D8DEEF"/>
             <rect x="302" y="56" width="44" height="22" rx="6" fill="#002FA7"/>
-            <rect x="288" y="98" width="20" height="20" rx="3" fill="#F2EFE6" stroke-width="4"/><path d="M292 108l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
-            <rect x="288" y="134" width="20" height="20" rx="3" fill="#F2EFE6" stroke-width="4"/><path d="M292 144l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
-            <rect x="288" y="170" width="20" height="20" rx="3" fill="#F2EFE6" stroke-width="4"/>
+            <rect x="288" y="98" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 108l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
+            <rect x="288" y="134" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 144l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
+            <rect x="288" y="170" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/>
             <path d="M318 108h40M318 144h32M318 180h36" stroke-width="5"/>
           </g></g>
         </svg>
@@ -486,11 +486,11 @@ html.intro-on .intro{display:block}
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
-            <rect x="40" y="32" width="270" height="236" rx="12" fill="#F2EFE6"/>
-            <rect x="60" y="50" width="230" height="22" rx="6" fill="#E8DCC8" stroke-width="5"/>
+            <rect x="40" y="32" width="270" height="236" rx="12" fill="#EDEFF6"/>
+            <rect x="60" y="50" width="230" height="22" rx="6" fill="#D8DEEF" stroke-width="5"/>
           </g>
           <g>
-            <rect x="60" y="88" width="132" height="88" rx="6" fill="#E8DCC8" stroke-width="5"/>
+            <rect x="60" y="88" width="132" height="88" rx="6" fill="#D8DEEF" stroke-width="5"/>
             <path d="M70 96l112 72M182 96L70 168" stroke-width="4"/>
           </g>
           <g>
@@ -499,17 +499,17 @@ html.intro-on .intro{display:block}
           </g>
           <g>
             <rect x="60" y="192" width="68" height="56" rx="6" fill="#002FA7" stroke-width="5"/>
-            <rect x="140" y="192" width="68" height="56" rx="6" fill="#E8DCC8" stroke-width="5"/>
-            <rect x="220" y="192" width="68" height="56" rx="6" fill="#E8DCC8" stroke-width="5"/>
-            <circle cx="174" cy="220" r="10" fill="#F2EFE6" stroke-width="4"/>
-            <circle cx="254" cy="220" r="10" fill="#F2EFE6" stroke-width="4"/>
+            <rect x="140" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
+            <rect x="220" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
+            <circle cx="174" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
+            <circle cx="254" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
           </g>
           <g><g class="bob">
             <g transform="rotate(35 330 150)">
-              <rect x="314" y="62" width="32" height="22" rx="7" fill="#91A2CD"/>
-              <rect x="314" y="82" width="32" height="14" fill="#E8DCC8" stroke-width="5"/>
+              <rect x="314" y="62" width="32" height="22" rx="7" fill="#8EA2D6"/>
+              <rect x="314" y="82" width="32" height="14" fill="#D8DEEF" stroke-width="5"/>
               <rect x="314" y="94" width="32" height="118" fill="#002FA7"/>
-              <path d="M314 212h32l-16 34z" fill="#E8DCC8"/>
+              <path d="M314 212h32l-16 34z" fill="#D8DEEF"/>
               <path d="M324 234l6 12 6-12z" fill="#0A0A0A" stroke-width="4"/>
             </g>
           </g></g>
@@ -519,23 +519,23 @@ html.intro-on .intro{display:block}
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
-            <rect x="32" y="70" width="94" height="164" rx="14" fill="#F2EFE6"/>
-            <rect x="46" y="90" width="66" height="44" rx="6" fill="#E8DCC8" stroke-width="4"/>
+            <rect x="32" y="70" width="94" height="164" rx="14" fill="#EDEFF6"/>
+            <rect x="46" y="90" width="66" height="44" rx="6" fill="#D8DEEF" stroke-width="4"/>
             <path d="M48 150h52M48 166h38" stroke-width="5"/>
             <rect x="46" y="198" width="66" height="20" rx="10" fill="#002FA7" stroke-width="4"/>
           </g>
           <g><path d="M130 152h18M140 142l10 10-10 10" stroke-width="6"/></g>
           <g><g class="bob">
             <rect x="154" y="48" width="94" height="186" rx="14" fill="#002FA7"/>
-            <rect x="168" y="70" width="66" height="66" rx="8" fill="#F2EFE6" stroke-width="4"/>
+            <rect x="168" y="70" width="66" height="66" rx="8" fill="#EDEFF6" stroke-width="4"/>
             <path d="M180 116l14-16 10 10 8-8 12 14" stroke="#002FA7" stroke-width="5"/>
-            <path d="M170 156h56M170 172h40" stroke="#F2EFE6" stroke-width="5"/>
-            <rect x="168" y="198" width="66" height="20" rx="10" fill="#E8DCC8" stroke-width="4"/>
+            <path d="M170 156h56M170 172h40" stroke="#EDEFF6" stroke-width="5"/>
+            <rect x="168" y="198" width="66" height="20" rx="10" fill="#D8DEEF" stroke-width="4"/>
           </g></g>
           <g><path d="M252 152h18M262 142l10 10-10 10" stroke-width="6"/></g>
           <g>
-            <rect x="274" y="70" width="94" height="164" rx="14" fill="#E8DCC8"/>
-            <circle cx="321" cy="120" r="24" fill="#F2EFE6" stroke-width="5"/>
+            <rect x="274" y="70" width="94" height="164" rx="14" fill="#D8DEEF"/>
+            <circle cx="321" cy="120" r="24" fill="#EDEFF6" stroke-width="5"/>
             <path d="M310 120l8 8 14-15" stroke="#002FA7" stroke-width="6"/>
             <path d="M292 168h58M300 184h42" stroke-width="5"/>
           </g>
@@ -545,31 +545,31 @@ html.intro-on .intro{display:block}
         <svg class="art" data-art="storyboarding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
              stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g><rect x="28" y="48" width="344" height="184" rx="12" fill="#E8DCC8"/></g>
+          <g><rect x="28" y="48" width="344" height="184" rx="12" fill="#D8DEEF"/></g>
           <g>
-            <rect x="46" y="68" width="98" height="92" rx="6" fill="#F2EFE6" stroke-width="5"/>
+            <rect x="46" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
             <circle cx="95" cy="98" r="13" fill="#002FA7" stroke-width="4"/>
             <path d="M95 111v22M80 122h30M95 133l-10 16M95 133l10 16" stroke-width="5"/>
           </g>
           <g>
-            <rect x="152" y="68" width="98" height="92" rx="6" fill="#F2EFE6" stroke-width="5"/>
+            <rect x="152" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
             <rect x="186" y="82" width="32" height="62" rx="6" fill="#0A0A0A" stroke-width="4"/>
             <rect x="191" y="90" width="22" height="42" rx="2" fill="#002FA7" stroke="none"/>
             <path d="M172 98l-8-4M170 114h-9M172 130l-8 4" stroke="#002FA7" stroke-width="4"/>
           </g>
           <g>
-            <rect x="258" y="68" width="98" height="92" rx="6" fill="#F2EFE6" stroke-width="5"/>
+            <rect x="258" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
             <circle cx="307" cy="114" r="28" fill="#002FA7" stroke-width="5"/>
-            <circle cx="297" cy="108" r="4" fill="#F2EFE6" stroke="none"/><circle cx="317" cy="108" r="4" fill="#F2EFE6" stroke="none"/>
-            <path d="M295 122q12 11 24 0" stroke="#F2EFE6" stroke-width="5"/>
+            <circle cx="297" cy="108" r="4" fill="#EDEFF6" stroke="none"/><circle cx="317" cy="108" r="4" fill="#EDEFF6" stroke="none"/>
+            <path d="M295 122q12 11 24 0" stroke="#EDEFF6" stroke-width="5"/>
           </g>
           <g><path d="M50 184h66M156 184h58M262 184h70M50 206h40M156 206h34M262 206h46" stroke-width="5"/></g>
           <g><g class="bob">
             <g transform="rotate(-8 332 252)">
               <rect x="292" y="238" width="82" height="50" rx="4" fill="#0A0A0A"/>
-              <path d="M292 220h82v16h-82z" fill="#F2EFE6"/>
+              <path d="M292 220h82v16h-82z" fill="#EDEFF6"/>
               <path d="M306 220l-8 16M326 220l-8 16M346 220l-8 16M366 220l-8 16" stroke="#002FA7" stroke-width="5"/>
-              <path d="M304 258h40M304 272h26" stroke="#F2EFE6" stroke-width="4"/>
+              <path d="M304 258h40M304 272h26" stroke="#EDEFF6" stroke-width="4"/>
             </g>
           </g></g>
         </svg>
@@ -579,24 +579,24 @@ html.intro-on .intro{display:block}
           <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
           <g>
             <rect x="36" y="46" width="252" height="196" rx="14" fill="#0A0A0A"/>
-            <circle cx="60" cy="68" r="5.5" fill="#F2EFE6" stroke="none"/><circle cx="78" cy="68" r="5.5" fill="#E8DCC8" stroke="none"/><circle cx="96" cy="68" r="5.5" fill="#91A2CD" stroke="none"/>
+            <circle cx="60" cy="68" r="5.5" fill="#EDEFF6" stroke="none"/><circle cx="78" cy="68" r="5.5" fill="#D8DEEF" stroke="none"/><circle cx="96" cy="68" r="5.5" fill="#8EA2D6" stroke="none"/>
           </g>
           <g stroke-width="8">
-            <path d="M62 102h36" stroke="#91A2CD"/><path d="M110 102h60" stroke="#F2EFE6"/>
-            <path d="M80 126h70" stroke="#E8DCC8"/><path d="M162 126h42" stroke="#91A2CD"/>
-            <path d="M80 150h34" stroke="#F2EFE6"/><path d="M126 150h84" stroke="#4969BA"/>
-            <path d="M98 174h58" stroke="#E8DCC8"/><path d="M62 198h26" stroke="#91A2CD"/>
-            <rect class="blink" x="96" y="189" width="12" height="18" fill="#F2EFE6" stroke="none"/>
+            <path d="M62 102h36" stroke="#8EA2D6"/><path d="M110 102h60" stroke="#EDEFF6"/>
+            <path d="M80 126h70" stroke="#D8DEEF"/><path d="M162 126h42" stroke="#8EA2D6"/>
+            <path d="M80 150h34" stroke="#EDEFF6"/><path d="M126 150h84" stroke="#476BBF"/>
+            <path d="M98 174h58" stroke="#D8DEEF"/><path d="M62 198h26" stroke="#8EA2D6"/>
+            <rect class="blink" x="96" y="189" width="12" height="18" fill="#EDEFF6" stroke="none"/>
           </g>
           <g>
-            <path d="M246 122h112a12 12 0 0 1 12 12v50a12 12 0 0 1-12 12h-70l-20 18v-18h-22a12 12 0 0 1-12-12v-50a12 12 0 0 1 12-12z" fill="#E8DCC8"/>
+            <path d="M246 122h112a12 12 0 0 1 12 12v50a12 12 0 0 1-12 12h-70l-20 18v-18h-22a12 12 0 0 1-12-12v-50a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
             <path d="M272 146l-12 13 12 13M334 146l12 13-12 13M314 142l-20 34" stroke="#002FA7" stroke-width="6"/>
           </g>
           <g><g class="bob">
             <path d="M330 38q4 20 24 24q-20 4-24 24q-4-20-24-24q20-4 24-24z" fill="#002FA7" stroke-width="5"/>
-            <path d="M372 92q2 11 12 13q-10 2-12 13q-2-11-12-13q10-2 12-13z" fill="#F2EFE6" stroke-width="4"/>
+            <path d="M372 92q2 11 12 13q-10 2-12 13q-2-11-12-13q10-2 12-13z" fill="#EDEFF6" stroke-width="4"/>
           </g></g>
-          <g><path d="M322 228q3 13 15 15q-12 2-15 15q-3-13-15-15q12-2 15-15z" fill="#91A2CD" stroke-width="4"/></g>
+          <g><path d="M322 228q3 13 15 15q-12 2-15 15q-3-13-15-15q12-2 15-15z" fill="#8EA2D6" stroke-width="4"/></g>
         </svg>
       </div>
     </div>
@@ -607,18 +607,18 @@ html.intro-on .intro{display:block}
 <section class="sec" style="padding-top:0">
   <div class="sechead"><h2>WHAT I <span class="hl">USE</span></h2></div>
   <div class="tiles">
-    <div class="sw" data-reveal><h4>Figma</h4><span>Interfaces, dashboards, prototypes</span></div>
-    <div class="sw" data-reveal><h4>FigJam</h4><span>Research synthesis, diagrams and charts</span></div>
-    <div class="sw" data-reveal><h4>Framer</h4><span>Interactive web prototypes</span></div>
-    <div class="sw" data-reveal><h4>Figma Make</h4><span>Coded prototypes from designs</span></div>
-    <div class="sw" data-reveal><h4>Google Forms</h4><span>Surveys and usability questionnaires</span></div>
-    <div class="sw" data-reveal><h4>Canva</h4><span>Quick visuals and presentations</span></div>
-    <div class="sw" data-reveal><h4>Claude</h4><span>Research, synthesis and writing</span></div>
-    <div class="sw" data-reveal><h4>Claude Code</h4><span>Building and shipping sites, including this one</span></div>
-    <div class="sw" data-reveal><h4>ChatGPT</h4><span>Research support, ideation, image and video generation</span></div>
-    <div class="sw" data-reveal><h4>Gemini</h4><span>Image generation</span></div>
-    <div class="sw" data-reveal><h4>Antigravity</h4><span>Vibecoding prototypes</span></div>
-    <div class="sw" data-reveal><h4>Runway</h4><span>High quality video generation</span></div>
+    <div class="sw" data-reveal><h3>Figma</h3><span>Interfaces, dashboards, prototypes</span></div>
+    <div class="sw" data-reveal><h3>FigJam</h3><span>Research synthesis, diagrams and charts</span></div>
+    <div class="sw" data-reveal><h3>Framer</h3><span>Interactive web prototypes</span></div>
+    <div class="sw" data-reveal><h3>Figma Make</h3><span>Coded prototypes from designs</span></div>
+    <div class="sw" data-reveal><h3>Google Forms</h3><span>Surveys and usability questionnaires</span></div>
+    <div class="sw" data-reveal><h3>Canva</h3><span>Quick visuals and presentations</span></div>
+    <div class="sw" data-reveal><h3>Claude</h3><span>Research, synthesis and writing</span></div>
+    <div class="sw" data-reveal><h3>Claude Code</h3><span>Building and shipping sites, including this one</span></div>
+    <div class="sw" data-reveal><h3>ChatGPT</h3><span>Research support, ideation, image and video generation</span></div>
+    <div class="sw" data-reveal><h3>Gemini</h3><span>Image generation</span></div>
+    <div class="sw" data-reveal><h3>Antigravity</h3><span>Vibecoding prototypes</span></div>
+    <div class="sw" data-reveal><h3>Runway</h3><span>High quality video generation</span></div>
   </div>
 </section>
 

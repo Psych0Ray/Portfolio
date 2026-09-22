@@ -28,13 +28,13 @@
   border:var(--bw) solid var(--ink);background:var(--paper)}
 .story .sc{padding:34px 34px 38px;border-right:2px solid var(--ink);display:flex;flex-direction:column}
 .story .sc:last-child{border-right:0}
-.story .sc h3{font-family:var(--display);font-weight:800;font-size:clamp(21px,2.1vw,30px);
+.story .sc h2{font-family:var(--display);font-weight:800;font-size:clamp(21px,2.1vw,30px);
   letter-spacing:-.035em;line-height:.95;text-transform:uppercase;color:var(--blue)}
-.story .sc h3::after{content:"";display:block;width:44px;height:var(--bw);background:currentColor;margin:18px 0 20px}
+.story .sc h2::after{content:"";display:block;width:44px;height:var(--bw);background:currentColor;margin:18px 0 20px}
 .story .sc p{font-size:16px;line-height:1.7;color:var(--ink)}
 /* the outcome */
 .story .sc:last-child{background:var(--ink)}
-.story .sc:last-child h3{color:var(--blue40)}
+.story .sc:last-child h2{color:var(--blue40)}
 .story .sc:last-child p{color:var(--blue15)}
 
 /* the prototype video. Static by default: one box, sized so the whole video always fits the
@@ -102,7 +102,7 @@
 
 .next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:40px 44px;flex-wrap:wrap;text-decoration:none;color:inherit;margin-top:28px}
 .next .lab{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
-.next h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
+.next h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
 .next .rbtn{width:64px;height:64px;font-size:26px}
 
 @media (max-width:900px){
@@ -115,7 +115,7 @@
   .story{margin:0 22px 44px;grid-template-columns:1fr}
   .story .sc{padding:26px 24px 30px;border-right:0;border-bottom:2px solid var(--ink)}
   .story .sc:last-child{border-bottom:0}
-  .story .sc h3::after{margin:14px 0 16px}
+  .story .sc h2::after{margin:14px 0 16px}
   .meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}   /* minmax: a long word never widens the page */
   .meta div{border-bottom:2px solid var(--ink);padding:18px}
   .meta div:nth-child(even){border-right:0}

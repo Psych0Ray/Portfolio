@@ -16,34 +16,31 @@
 .th .pop i{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--spin)) scale(.18);
   transition:transform .45s cubic-bezier(.55,0,.8,.3),opacity .2s ease .15s}
 .th.on .pop i{opacity:1;transform:none;
-  transition:transform .9s cubic-bezier(.28,1.4,.42,1) var(--dl),opacity .18s ease var(--dl)}
+  transition:transform .9s cubic-bezier(.16,1,.3,1) var(--dl),opacity .18s ease var(--dl)}
 .th.on .pop img{animation:th-bob calc(3s + var(--z) * 1.1s) ease-in-out calc(var(--dl) + .95s) infinite}
 @keyframes th-bob{50%{transform:translateY(-1.1cqw) rotate(1.8deg)}}
 
 .th-uls .logo i,.th-relique .logo i{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.th-uls.on .logo i{transform:scale(.93);transition:transform .7s cubic-bezier(.3,1.6,.5,1)}
+.th-uls.on .logo i{transform:scale(.93);transition:transform .7s cubic-bezier(.16,1,.3,1)}
 .th-relique.on .logo i{transform:scale(.95);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 
 .th-relique .pop i{filter:blur(5px)}
 .th-relique.on .pop i{filter:none;
-  transition:transform .95s cubic-bezier(.28,1.3,.42,1) var(--dl),opacity .2s ease var(--dl),filter .6s ease var(--dl)}
-.th .glow{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .6s ease;
-  background:radial-gradient(46% 42% at 50% 51%,rgba(222,178,112,.26),rgba(222,178,112,0) 72%)}
-.th.on .glow{opacity:1;transition:opacity 1.1s ease .1s}
+  transition:transform .95s cubic-bezier(.16,1,.3,1) var(--dl),opacity .2s ease var(--dl),filter .6s ease var(--dl)}
 
 /* ── Canva AI: gradient washes in, orb and sparkles pop, cursor glides in and clicks ── */
 .th .wash{left:0;top:0;width:100%;z-index:1}
 .th .wash i{opacity:0;transform:scale(1.12);transition:opacity .45s ease,transform .6s ease}
 .th.on .wash i{opacity:1;transform:none;transition:opacity .8s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .th .orb i{opacity:0;transform:scale(0) rotate(-140deg);transition:transform .35s ease-in,opacity .2s ease .1s}
-.th.on .orb i{opacity:1;transform:none;transition:transform 1s cubic-bezier(.3,1.5,.5,1) .12s,opacity .25s ease .12s}
+.th.on .orb i{opacity:1;transform:none;transition:transform 1s cubic-bezier(.16,1,.3,1) .12s,opacity .25s ease .12s}
 .th.on .orb img{animation:th-float 3.4s ease-in-out 1.2s infinite}
 .th .cur{z-index:4}
 .th .cur i{opacity:0;transform:translate(15cqw,17cqw) rotate(14deg);transition:transform .35s ease-in,opacity .2s ease}
 .th.on .cur i{opacity:1;transform:none;transition:transform .95s cubic-bezier(.2,.85,.25,1) .4s,opacity .3s ease .4s}
 .th.on .cur img{animation:th-click .45s ease 1.35s both}
 .th .spark i{opacity:0;transform:scale(0) rotate(-70deg);transition:transform .35s ease-in,opacity .2s ease .1s}
-.th.on .spark i{opacity:1;transform:none;transition:transform .95s cubic-bezier(.3,1.6,.5,1) .24s,opacity .25s ease .24s}
+.th.on .spark i{opacity:1;transform:none;transition:transform .95s cubic-bezier(.16,1,.3,1) .24s,opacity .25s ease .24s}
 .th.on .spark img{animation:th-twinkle 2.6s ease-in-out 1.2s infinite}
 @keyframes th-float{50%{transform:translateY(-1.4cqw) scale(1.03)}}
 @keyframes th-click{45%{transform:scale(.8) translate(-6%,-6%)}100%{transform:none}}
@@ -53,7 +50,7 @@
 .th canvas.dots{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block}
 
 @media (prefers-reduced-motion:reduce){
-  .th .el,.th .el i,.th .el img,.th .glow{transition-duration:.001s !important;transition-delay:0s !important;animation:none !important}
+  .th .el,.th .el i,.th .el img{transition-duration:.001s !important;transition-delay:0s !important;animation:none !important}
 }
 
 /* ── Phones: reel cards. Each project card fills most of the screen and snaps to centre as you

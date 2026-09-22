@@ -125,7 +125,7 @@ HEAD = '''<!DOCTYPE html>
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
 <link rel="stylesheet" href="work.css">
 </head>
@@ -219,7 +219,7 @@ def story(p):
     if not rows:
         return ''
     cells = ''.join(
-        f'\n  <div class="sc"><h3>{html.escape(k)}</h3><p>{v}</p></div>'
+        f'\n  <div class="sc"><h2>{html.escape(k)}</h2><p>{v}</p></div>'
         for k, v in rows)
     return f'<section class="story" data-reveal>{cells}\n</section>\n'
 
@@ -261,11 +261,11 @@ def full_page(p, nxt):
 
 <section class="sec end">
   <a class="next card" href="{p['slug']}.html" data-reveal data-cursor="Back">
-    <div><span class="lab">Back to</span><h3>{p['short']}</h3></div>
+    <div><span class="lab">Back to</span><h2>{p['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg></span>
   </a>
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
-    <div><span class="lab">Next project</span><h3>{nxt['short']}</h3></div>
+    <div><span class="lab">Next project</span><h2>{nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>
@@ -315,7 +315,7 @@ def page(p, nxt):
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if has_full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
   </a>{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
-    <div><span class="lab">Next project</span><h3>{nxt['short']}</h3></div>
+    <div><span class="lab">Next project</span><h2>{nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>

@@ -60,7 +60,6 @@ var THUMBS = (function () {
       out += '<span class="el wash"><i>' + img('canva-bg') + '</i></span>';
     }
     if (slug === 'iccc-surveillance') out += '<canvas class="dots" aria-hidden="true"></canvas>';
-    if (slug === 'relique') out += '<span class="glow" aria-hidden="true"></span>';
     if (d.pieces) out += d.pieces.map(piece).join('');
     var L = d.logo;
     out += '<span class="el logo" style="' + box(L[1], L[2], L[3], L[4]) + '--z:.4"><i>' + img(L[0], name) + '</i></span>';

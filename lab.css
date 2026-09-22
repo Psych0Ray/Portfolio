@@ -1,17 +1,17 @@
 /* ══ Rutujeet · shared system ════════════════════════════════════
    Type: Bricolage Grotesque (variable: opsz / wdth / wght) for every
-   display and heading role. Geist for everything else, reading and labels.
+   display and heading role. Schibsted Grotesk for everything else, reading and labels.
    Emphasis is a solid block (.hl), never a lighter weight.
    The eight ransom faces are loaded only for the hero name + logo.
    Shape rule: cards and slots are sharp (0). Chips, nav, buttons are pill.
 ═══════════════════════════════════════════════════════════════════ */
 :root{
-  --paper:#F2EFE6; --bone:#E8DCC8; --ink:#0A0A0A;
-  --blue:#002FA7; --blue70:#4969BA; --blue40:#91A2CD; --blue15:#CED2DD;
-  --muted:#6B655A; --rule:#D8D2C4; --bw:3px;
+  --paper:#EDEFF6; --bone:#D8DEEF; --ink:#0A0A0A;
+  --blue:#002FA7; --blue70:#476BBF; --blue40:#8EA2D6; --blue15:#C9D2E9;
+  --muted:#5A6072; --rule:#C7D0E6; --bw:3px;
   --display:'Bricolage Grotesque',system-ui,sans-serif;
-  --body:'Geist',system-ui,sans-serif;
-  --label:'Geist',system-ui,sans-serif;
+  --body:'Schibsted Grotesk',system-ui,sans-serif;
+  --label:'Schibsted Grotesk',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-optical-sizing:auto}
@@ -86,16 +86,18 @@ a{color:inherit}
 .logo:hover span{transform:none}
 
 /* ── MARQUEE · home only, twice, by request ── */
-.marquee{overflow:hidden;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
+.marquee{overflow:hidden;padding:10px 0;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
   background:var(--blue);color:var(--paper);display:flex;white-space:nowrap}
 .marquee.ink{background:var(--ink)}
 .marquee > div{display:flex;animation:slide 34s linear infinite;flex:none}
 .marquee.rev > div{animation-direction:reverse}
 .marquee span.w{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:clamp(28px,4.4vw,56px);
-  letter-spacing:0;padding:10px 0;text-transform:uppercase;display:block}
+  letter-spacing:0;padding:4px 0;text-transform:uppercase;display:block}
 .marquee i{font-style:normal;padding:0 26px;display:flex;align-items:center}
 .marquee i::before{content:'';width:10px;height:10px;background:currentColor;transform:rotate(45deg)}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* a reader can stop the ticker to actually read it */
+.marquee:hover > div,.marquee:focus-within > div{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.marquee > div{animation:none}}
 
 /* ── SECTION FURNITURE ── */
@@ -188,10 +190,10 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
 .foot-links a{display:flex;align-items:center;justify-content:space-between;gap:28px;text-decoration:none;
   padding:14px 2px;font-family:var(--display);font-weight:800;font-stretch:80%;
   font-size:clamp(20px,2.1vw,30px);letter-spacing:-.02em;text-transform:uppercase;
-  transition:color .18s ease,padding-left .18s ease}
-.foot-links a:hover{color:var(--blue40);padding-left:12px}
+  transition:color .18s ease,transform .18s ease}
+.foot-links a:hover{color:var(--blue40);transform:translateX(12px)}
 .foot-links a:active{color:var(--paper);transition-duration:.05s}
-.foot-links .ic{width:.78em;height:.78em;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.foot-links .ic{width:.78em;height:.78em;transition:transform .2s cubic-bezier(.16,1,.3,1)}
 .foot-links a:hover .ic{transform:translate(3px,-3px)}
 .foot-base{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   margin-top:78px;padding-top:22px;position:relative;
@@ -200,7 +202,7 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   transform:scaleX(var(--b,1));transform-origin:left center}
 .totop{background:none;border:0;padding:0;color:var(--blue40);font:inherit;text-transform:uppercase;
   letter-spacing:.07em;transition:color .18s;display:inline-flex;align-items:center;gap:8px}
-.totop .ic{width:1.15em;height:1.15em;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.totop .ic{width:1.15em;height:1.15em;transition:transform .2s cubic-bezier(.16,1,.3,1)}
 .totop:hover{color:var(--paper)}
 .totop:hover .ic{transform:translateY(-3px)}
 .totop:active .ic{transform:translateY(-6px);transition-duration:.08s}
@@ -230,7 +232,7 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   .burger{transition:background .3s ease,transform .32s cubic-bezier(.4,0,.2,1),box-shadow .12s ease,border-color .3s ease}
   .burger .bars{position:relative;width:24px;height:18px;display:block}
   .burger .bars i{position:absolute;left:0;width:24px;height:3px;border-radius:2px;background:currentColor;
-    transition:transform .45s cubic-bezier(.7,-.4,.3,1.4),opacity .2s ease,top .45s cubic-bezier(.7,-.4,.3,1.4)}
+    transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .2s ease,top .45s cubic-bezier(.16,1,.3,1)}
   .burger .bars i:nth-child(1){top:0}
   .burger .bars i:nth-child(2){top:7.5px}
   .burger .bars i:nth-child(3){top:15px}
