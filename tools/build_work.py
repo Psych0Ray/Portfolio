@@ -261,11 +261,11 @@ def full_page(p, nxt):
 
 <section class="sec end">
   <a class="next card" href="{p['slug']}.html" data-reveal data-cursor="Back">
-    <div><span class="lab">Back to</span><h2>{p['short']}</h2></div>
+    <div><h2>Back to {p['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg></span>
   </a>
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
-    <div><span class="lab">Next project</span><h2>{nxt['short']}</h2></div>
+    <div><h2>Next: {nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>
@@ -288,7 +288,7 @@ def page(p, nxt):
                '\n  </a>' % (p['behance'] or BEHANCE,
                              'Also on Behance' if not on_profile else 'More work on Behance'))
     meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
-    rest = ''.join(f'\n  <div class="frame" data-reveal>{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
+    rest = ''.join(f'\n  <div class="frame">{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
     out = HEAD.format(title=p['short'], desc=html.escape(summary(p['about'])))
     out += f'''
 <header class="chead">
@@ -315,7 +315,7 @@ def page(p, nxt):
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if has_full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
   </a>{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
-    <div><span class="lab">Next project</span><h2>{nxt['short']}</h2></div>
+    <div><h2>Next: {nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>

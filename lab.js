@@ -341,8 +341,12 @@ window.WATCH_MEDIA = function(){};
 /* reveal once. clearProps so the CSS :hover lift is not overridden */
 (function reveal(){
   if (REDUCED || typeof ScrollTrigger === 'undefined') return;
-  gsap.utils.toArray('[data-reveal]').forEach(function(el, i){
-    gsap.from(el,{ y:30, opacity:0, duration:.55, ease:'power3.out', delay:(i % 3) * .06,
+  gsap.utils.toArray('[data-reveal]').forEach(function(el){
+    /* stagger within the element's own group, so a grid deals itself out and a
+       lone card does not inherit some other section's offset */
+    var sibs = el.parentElement ? [].slice.call(el.parentElement.querySelectorAll(':scope > [data-reveal]')) : [];
+    var n = sibs.indexOf(el);
+    gsap.from(el,{ y:34, opacity:0, duration:.9, ease:'expo.out', delay:(n > 0 ? n % 4 : 0) * .07,
       clearProps:'transform', scrollTrigger:{ trigger:el, start:'top 88%', once:true } });
   });
 })();

@@ -22,6 +22,29 @@ html.lenis,html.lenis body{height:auto}
 .lenis [data-lenis-prevent]{overscroll-behavior:contain}
 .lenis.lenis-smooth iframe{pointer-events:none}
 a{color:inherit}
+
+/* ── BROWSER SURFACES ──────────────────────────────────────────────
+   The parts we did not draw still carry the design. The selection
+   flash, the caret, the scrollbar, the keyboard focus ring and the
+   numerals in data positions all ship with browser defaults that
+   belong to no design system; each one is set from the palette. */
+::selection{background:var(--blue);color:var(--paper);text-shadow:none}
+html{caret-color:var(--blue);accent-color:var(--blue);scrollbar-gutter:stable}
+@supports (scrollbar-width:thin){html{scrollbar-width:thin;scrollbar-color:var(--blue) var(--bone)}}
+/* squared off, like every other edge on the page */
+::-webkit-scrollbar{width:13px;height:13px}
+::-webkit-scrollbar-track{background:var(--bone)}
+::-webkit-scrollbar-thumb{background:var(--blue);border:3px solid var(--bone)}
+::-webkit-scrollbar-thumb:hover{background:var(--ink)}
+/* keyboard focus is a real state here; there was none before */
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+/* the blue ring disappears on blue and ink grounds */
+.foot :focus-visible,.marquee :focus-visible,.nav .cta:focus-visible,
+.km header :focus-visible,.story .sc:last-child :focus-visible{outline-color:var(--paper)}
+/* figures that sit in a column or get compared line up */
+.wc-top,.foot-base,.meta,.rlab,.sechead .count{font-variant-numeric:tabular-nums}
+/* underlines clear the descenders instead of cutting them */
+a{text-underline-offset:.15em;text-decoration-thickness:.075em}
 /* the custom cursor is only for a real mouse; phones that claim hover never get it */
 @media (hover:hover) and (pointer:fine){ body,a,button{cursor:none} }
 

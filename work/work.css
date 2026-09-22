@@ -64,10 +64,12 @@
    is what kills the inline whitespace between them; a stray margin here would
    show as a hairline seam. One ink frame wraps the lot. */
 .fhead{padding:128px 40px 30px}
-.fback{display:inline-flex;align-items:center;gap:9px;font-family:var(--label);font-size:12px;font-weight:700;
-  letter-spacing:.07em;text-transform:uppercase;color:var(--blue);text-decoration:none}
-.fback .ic{width:15px;height:15px;stroke-width:3.4}
-.fback:hover{text-decoration:underline;text-underline-offset:3px}
+/* A way back, not a label above the title: body face, sentence case, no accent
+   weight. The arrow carries the direction. */
+.fback{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-size:15px;font-weight:500;
+  letter-spacing:0;color:var(--muted);text-decoration:none}
+.fback .ic{width:16px;height:16px;stroke-width:2.6}
+.fback:hover{color:var(--ink);text-decoration:underline}
 .fhead h1{margin-top:20px;font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,96px);
   letter-spacing:-.05em;line-height:.88;text-transform:uppercase}
 .fhead p{margin-top:16px;max-width:52ch;font-size:16px;line-height:1.65;color:var(--muted)}
@@ -101,7 +103,6 @@
 .bhalt:active{transform:scale(.995);transition:transform .05s}
 
 .next{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:40px 44px;flex-wrap:wrap;text-decoration:none;color:inherit;margin-top:28px}
-.next .lab{font-family:var(--label);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);font-weight:700;display:block;margin-bottom:14px}
 .next h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,48px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
 .next .rbtn{width:64px;height:64px;font-size:26px}
 
