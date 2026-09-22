@@ -734,6 +734,15 @@ Last updated: 2026-09-21
     - **Get to know me, reworked because it looked out of place:** it was the only rounded, permanently shadowed thing in the page body, and its arrow slid into the pill's 9px padding on hover. Options given: (1) a smaller sibling of the Behance "Interested in seeing more?" row, (2) a bare heading-style text link, (3) a link in the hero. **Built (1):** `class="meet card"`, full width, sharp corners, the ink border, flat until hover, then `.card`'s lift (-5px, 10px hard shadow) and a blue fill; the face sticker tips from -6deg to 5deg; **the arrow does not move**, only its colours swap. 94px tall on desktop, 76px on phones; the words are `min(26px, (100vw - 194px) / 8.3)` on phones (8.2x their size wide; 15px at 320px, 24px at 390px), always one line.
     - **Verified:** 1440x900, 1024x768, iPhone 13, iPhone SE - text fits beside sticker and arrow, no horizontal overflow, no console errors, reduced motion fine.
 
+85. **Home and About tidy-up (2026-09-22).** [index.html](index.html), [about.html](about.html).
+    - **"Four projects" removed** from beside SELECTED WORK.
+    - **Card lines in the section headings' style** (the user pointed at SELECTED as the reference): Bricolage 800, capitals, -.04em, line-height .95, `clamp(20px,1.9vw,28px)`, balanced wrapping. Replaces item 84's Geist 600. Desktop: ICCC wraps to 2 lines, the rest 1; phones 2-3 lines.
+    - **The quote lost its quotation mark** - it only ever had an opening one (the `.mark` span and its CSS are gone; the paragraph's top margin with it).
+    - **Get to know me moved straight under "Interested in seeing more?"** and only there (out of What I Bring). 16px under that row (14px on phones), padded 36px left and 42px right so its sticker lines up with that row's heading and its arrow's centre with that row's arrow (both 1329px at 1440). **The Behance row's arrow no longer slides on hover either** (it only swaps colours), so the two stacked rows behave alike; the user had disliked the slide on the pill.
+    - **Phones: the Behance row's spacer is hidden** - stacked, `.grow` put a second 24px gap above the arrow (row 252 -> 228px). It predated this round.
+    - **About:** the opening line drops "Hi" (HI THERE is right above it): "I am **Rutujeet Nayak**, a designer from Pune, ..."; the Hotel Raviraj internship's organisation is now **"Hotel Raviraj, Pune"**, matching "Accenture, Bangalore".
+    - **Verified** at 1440x900 and iPhone 13: no horizontal overflow, no console errors.
+
 
 ## In progress / not yet confirmed
 

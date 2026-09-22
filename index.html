@@ -113,11 +113,12 @@
 @media (max-width:340px) and (orientation:portrait){.ransom{--k:0.549}}
 @media (max-width:320px) and (orientation:portrait){.ransom{--k:0.513}}
 
-/* ── GET TO KNOW ME · the way from the home page to About, besides the nav. A card like everything
-   else you can click here (the work cards, the Behance row): sharp corners, the ink border, flat until
-   hovered, then it lifts with the hard shadow and turns blue (.card does the lift). Smaller than the
-   Behance row: one line, the face as a sticker. The arrow never moves; only its colours swap. */
-.meet{display:flex;align-items:center;gap:22px;margin-top:64px;padding:16px 22px 16px 18px;text-decoration:none;color:var(--ink);
+/* ── GET TO KNOW ME · the way from the home page to About, besides the nav. It sits straight under
+   the Behance row as its smaller sibling: the same card (sharp corners, the ink border, flat until
+   hovered, then the lift, the hard shadow and the blue; .card does the lift), one line, the face as a
+   sticker. Padded so its sticker lines up with that row's heading and its arrow with that row's arrow
+   (36px in; 42px on the right centres a 52px arrow on the other's 64px one). */
+.meet{display:flex;align-items:center;gap:22px;margin-top:16px;padding:16px 42px 16px 36px;text-decoration:none;color:var(--ink);
   transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
 .meet img{width:56px;height:56px;flex:none;border-radius:50%;border:2.5px solid var(--ink);object-fit:cover;
   transform:rotate(-6deg);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
@@ -128,7 +129,7 @@
 .meet:hover img{transform:rotate(5deg)}
 .meet:hover .rbtn{background:var(--paper);color:var(--ink)}
 @media (max-width:600px){
-  .meet{gap:14px;margin-top:44px;padding:12px 14px 12px 12px}
+  .meet{gap:14px;margin-top:14px;padding:12px 14px 12px 12px}
   /* the words are 8.2x their size wide and get what the sticker, the arrow, the gaps, padding and
      border leave (100vw - 194px), so the one line fits down to a 320px screen */
   .meet b{font-size:min(26px,(100vw - 194px) / 8.3)}
@@ -146,7 +147,7 @@
 .more:hover p{color:var(--blue15)}
 .more .grow{flex:1}
 .more .rbtn{width:64px;height:64px;font-size:24px;transition:transform .18s ease,background .18s,color .18s}
-.more:hover .rbtn{background:var(--paper);color:var(--ink);transform:translateX(8px)}
+.more:hover .rbtn{background:var(--paper);color:var(--ink)}
 .more:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink);transition-duration:.06s}
 
 /* ── KIT · what I do, cross linked to what I use ──────────────────
@@ -207,10 +208,8 @@
 /* ── QUOTE ── */
 .quote{padding:40px 40px 104px;display:block}
 .quote .inner{max-width:min(940px,100%)}
-.quote .mark{display:block;font-family:var(--display);font-weight:800;font-size:clamp(84px,11vw,160px);
-  line-height:.42;color:var(--blue)}
 .quote p{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,64px);letter-spacing:-.04em;
-  line-height:1.04;text-transform:uppercase;margin-top:14px}
+  line-height:1.04;text-transform:uppercase}
 
 /* ── WORK · the Figma card ── */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
@@ -221,8 +220,8 @@
 /* under the thumbnail, what the project is (not its name: the thumbnail already carries that), then
    the tags. margin-top:auto keeps the tags and arrows of a row of cards level when one line wraps */
 .wc-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:auto;padding-top:20px}
-.wc h3{font-family:var(--body);font-weight:600;font-size:clamp(17px,1.45vw,21px);letter-spacing:-.01em;line-height:1.3;
-  text-wrap:balance;margin-bottom:14px}
+.wc h3{font-family:var(--display);font-weight:800;font-size:clamp(20px,1.9vw,28px);letter-spacing:-.04em;line-height:.95;
+  text-transform:uppercase;text-wrap:balance;margin-bottom:16px}   /* the section headings' face, at card size */
 .wc-tags{display:flex;gap:8px 10px;flex-wrap:wrap}
 .wc-tags .chip{padding:7px 12px;font-size:10px;box-shadow:none}
 
@@ -238,6 +237,7 @@
   /* reel cards: a screen-tall card per project, next one peeking below */
   .wc{height:calc(100svh - 140px);min-height:520px;max-height:760px;padding:18px 18px 20px}
   .more{flex-direction:column;align-items:flex-start;gap:24px;padding:28px}
+  .more .grow{display:none}   /* stacked, the spacer only added a second gap above the arrow */
   .kit{grid-template-columns:1fr;gap:36px}
   .tiles{gap:16px}
   .sw{padding:18px}
@@ -336,7 +336,6 @@ html.intro-on .intro{display:block}
 <section class="sec" id="work">
   <div class="sechead">
     <h2>SELECTED <span class="hl">WORK</span></h2>
-    <span class="count">Four projects</span>
   </div>
   <div class="grid" id="grid"></div>
   <a class="more" href="https://www.behance.net/rutujeetnayak" target="_blank" rel="noopener" data-cursor="Behance">
@@ -345,6 +344,11 @@ html.intro-on .intro{display:block}
       <p>Look at the rest of my work, all on Behance.</p>
     </div>
     <span class="grow"></span>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
+  </a>
+  <a class="meet card" href="about.html" data-cursor="About" data-reveal>
+    <img src="img/me-avatar.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+    <b>Get to know me</b>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
 </section>
@@ -598,11 +602,6 @@ html.intro-on .intro{display:block}
     </div>
   </div>
   <div class="kit-m" id="kitM"></div>
-  <a class="meet card" href="about.html" data-cursor="About" data-reveal>
-    <img src="img/me-avatar.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
-    <b>Get to know me</b>
-    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
-  </a>
 </section>
 
 <section class="sec" style="padding-top:0">
@@ -625,7 +624,6 @@ html.intro-on .intro{display:block}
 
 <blockquote class="quote">
   <div class="inner">
-    <span class="mark" aria-hidden="true">&ldquo;</span>
     <p>The details are where the <span class="hl">experience</span> lives.</p>
   </div>
 </blockquote>
