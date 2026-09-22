@@ -725,8 +725,18 @@ Last updated: 2026-09-21
     - **Get to know me (`.meet`):** a pill link to about.html at the end of What I Bring - a cropped face sticker (`img/me-avatar.webp`, 240px, 15KB, cut from `img/hobby/portrait.webp` around the face at 452,372), GET TO KNOW ME in Bricolage 800, the round arrow; paper with an ink border and the nav's `0 5px 0` hard shadow. Hover: fills blue, the sticker tips from -6deg to 6deg, the arrow moves 6px. 420x84 at 1440. Phones: full width, the words sized `min(24px, (100vw - 186px) / 8.2)` so the one line fits even at 320px (16px there). Cursor label "About"; scroll-reveals like the rest.
     - **Verified:** 1440x900, 1280x720, and iPhone SE / Galaxy S9+ / 12 Mini / 13 / 15 Pro Max / Pixel 7 / Galaxy S24, five landscape phones, 932x430 and iPad Mini: the paragraph ends on the first screen everywhere, nothing hits the nav, no horizontal overflow. First visit (opener -> entrance), reduced motion (all visible), no "product design" left in visible text, no console errors; About and a project page's cursor labels unaffected.
 
+84. **Follow-ups to 83: card descriptions, the sway back, UI/UX design, and Get to know me as a card (2026-09-22).** [index.html](index.html) only.
+    - **Card text:** each card has a line under the thumbnail saying what the project is, given by the user: ULS **Urban Labour Services**, ICCC **Dashboard for Industrial Command Center**, Canva **Redesign of Canva's Conversational AI**, Relique **A Storytelling Museum Website** (`desc` in `WORK`). Bricolage 700, title case as given, `clamp(19px,1.7vw,25px)`, `text-wrap:balance`, then the tags. `.wc-bot` is `margin-top:auto` so tags and arrows stay level across a row when one line wraps (checked at 1024). Card `aria-label` = "name, description". One line on desktop at 1280+, 2-3 lines on phones (the phone cards keep their height; the thumbnail gives way).
+    - **Flag for the user:** the ULS case study and deck say **"Urban Labour System"**; the card now says "Services" as asked. One of them is probably wrong.
+    - **The name's mouse sway is back** in `ransom()`, exactly as before item 83 (each letter by `(i % 3 + 1) * 5`, odd ones mirrored). The hero is otherwise still effect-less.
+    - **What I Bring's first item is "UI/UX design"** (the ticker still says "UX design"; the hero line still says UX DESIGNER).
+    - **Get to know me, reworked because it looked out of place:** it was the only rounded, permanently shadowed thing in the page body, and its arrow slid into the pill's 9px padding on hover. Options given: (1) a smaller sibling of the Behance "Interested in seeing more?" row, (2) a bare heading-style text link, (3) a link in the hero. **Built (1):** `class="meet card"`, full width, sharp corners, the ink border, flat until hover, then `.card`'s lift (-5px, 10px hard shadow) and a blue fill; the face sticker tips from -6deg to 5deg; **the arrow does not move**, only its colours swap. 94px tall on desktop, 76px on phones; the words are `min(26px, (100vw - 194px) / 8.3)` on phones (8.2x their size wide; 15px at 320px, 24px at 390px), always one line.
+    - **Verified:** 1440x900, 1024x768, iPhone 13, iPhone SE - text fits beside sticker and arrow, no horizontal overflow, no console errors, reduced motion fine.
+
 
 ## In progress / not yet confirmed
+
+- **ULS naming:** the home card says "Urban Labour Services" (user's wording) but the case study says "Urban Labour System" - ask which is right.
 
 - **Item 79's phone layout needs the user's eye on a real phone** (only emulated so far), especially iOS Safari with its toolbars and a landscape Pro Max.
 

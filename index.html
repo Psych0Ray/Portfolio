@@ -113,27 +113,26 @@
 @media (max-width:340px) and (orientation:portrait){.ransom{--k:0.549}}
 @media (max-width:320px) and (orientation:portrait){.ransom{--k:0.513}}
 
-/* ── GET TO KNOW ME · the way from the home page to About, besides the nav. A pill like the site's
-   buttons, only bigger: the face as a sticker, the words, the arrow. It fills blue on hover while the
-   sticker tips the other way and the arrow moves on. One line, about 80px tall. */
-.meet{display:inline-flex;align-items:center;gap:18px;margin-top:64px;padding:9px;border:var(--bw) solid var(--ink);
-  border-radius:100px;background:var(--paper);color:var(--ink);text-decoration:none;box-shadow:0 5px 0 var(--ink);
-  transition:background .18s ease,color .18s ease,transform .12s ease,box-shadow .12s ease}
-.meet img{width:60px;height:60px;flex:none;border-radius:50%;border:2.5px solid var(--ink);object-fit:cover;
+/* ── GET TO KNOW ME · the way from the home page to About, besides the nav. A card like everything
+   else you can click here (the work cards, the Behance row): sharp corners, the ink border, flat until
+   hovered, then it lifts with the hard shadow and turns blue (.card does the lift). Smaller than the
+   Behance row: one line, the face as a sticker. The arrow never moves; only its colours swap. */
+.meet{display:flex;align-items:center;gap:22px;margin-top:64px;padding:16px 22px 16px 18px;text-decoration:none;color:var(--ink);
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
+.meet img{width:56px;height:56px;flex:none;border-radius:50%;border:2.5px solid var(--ink);object-fit:cover;
   transform:rotate(-6deg);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
-.meet b{font-family:var(--display);font-weight:800;font-size:clamp(22px,2.1vw,30px);letter-spacing:-.035em;line-height:1;
-  text-transform:uppercase;white-space:nowrap;padding-right:6px}
-.meet .rbtn{width:54px;height:54px;font-size:20px;transition:transform .18s ease,background .18s,color .18s}
+.meet b{flex:1;min-width:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,2.5vw,36px);letter-spacing:-.04em;
+  line-height:1;text-transform:uppercase;white-space:nowrap}
+.meet .rbtn{width:52px;height:52px;font-size:20px}
 .meet:hover{background:var(--blue);color:var(--paper)}
-.meet:hover img{transform:rotate(6deg) scale(1.06)}
-.meet:hover .rbtn{background:var(--paper);color:var(--ink);transform:translateX(6px)}
-.meet:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink);transition-duration:.06s}
+.meet:hover img{transform:rotate(5deg)}
+.meet:hover .rbtn{background:var(--paper);color:var(--ink)}
 @media (max-width:600px){
-  /* the width of the column, and the words sized to what is left beside the face and the arrow,
-     so the one line always fits (16px on a 320px phone, 24px from 390px up) */
-  .meet{display:flex;gap:12px;margin-top:44px}
-  .meet b{flex:1;min-width:0;padding-right:0;font-size:min(24px,(100vw - 186px) / 8.2)}
-  .meet img{width:48px;height:48px}
+  .meet{gap:14px;margin-top:44px;padding:12px 14px 12px 12px}
+  /* the words are 8.2x their size wide and get what the sticker, the arrow, the gaps, padding and
+     border leave (100vw - 194px), so the one line fits down to a 320px screen */
+  .meet b{font-size:min(26px,(100vw - 194px) / 8.3)}
+  .meet img{width:46px;height:46px}
   .meet .rbtn{width:44px;height:44px;font-size:17px}
 }
 
@@ -219,8 +218,11 @@
 .wc-top{display:flex;justify-content:space-between;font-family:var(--label);font-size:11px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px}
 .wc-thumb{flex:1;min-height:0}
-/* no title under the thumbnail: the thumbnail already carries the project's name */
-.wc-bot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px}
+/* under the thumbnail, what the project is (not its name: the thumbnail already carries that), then
+   the tags. margin-top:auto keeps the tags and arrows of a row of cards level when one line wraps */
+.wc-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:auto;padding-top:20px}
+.wc h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,1.7vw,25px);letter-spacing:-.025em;line-height:1.12;
+  text-wrap:balance;margin-bottom:14px}
 .wc-tags{display:flex;gap:8px 10px;flex-wrap:wrap}
 .wc-tags .chip{padding:7px 12px;font-size:10px;box-shadow:none}
 
@@ -355,7 +357,7 @@ html.intro-on .intro{display:block}
   </defs></svg>
   <div class="kit" id="kit">
     <ul class="skills">
-      <li><button type="button" data-art="product-design"><span>UX design</span></button></li>
+      <li><button type="button" data-art="product-design"><span>UI/UX design</span></button></li>
       <li><button type="button" data-art="research"><span>Research</span></button></li>
       <li><button type="button" data-art="user-centric-design"><span>User-centric design</span></button></li>
       <li><button type="button" data-art="user-testing"><span>User testing</span></button></li>
@@ -596,7 +598,7 @@ html.intro-on .intro{display:block}
     </div>
   </div>
   <div class="kit-m" id="kitM"></div>
-  <a class="meet" href="about.html" data-cursor="About" data-reveal>
+  <a class="meet card" href="about.html" data-cursor="About" data-reveal>
     <img src="img/me-avatar.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
     <b>Get to know me</b>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
@@ -651,16 +653,16 @@ html.intro-on .intro{display:block}
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var WORK = [
-  {name:'ULS',               slug:'uls',               cat:'Service design',          yr:'2026', tags:['Dashboard']},
-  {name:'ICCC Surveillance', slug:'iccc-surveillance', cat:'OOUX',                    yr:'2026', tags:['Dashboard']},
-  {name:'Canva AI redesign', slug:'canva-ai',          cat:'Redesign',                yr:'2025', tags:['AI design']},
-  {name:'Relique',           slug:'relique',           cat:'Semiotics and semantics', yr:'2025', tags:['Website design']}
+  {name:'ULS',               slug:'uls',               cat:'Service design',          yr:'2026', tags:['Dashboard'],      desc:'Urban Labour Services'},
+  {name:'ICCC Surveillance', slug:'iccc-surveillance', cat:'OOUX',                    yr:'2026', tags:['Dashboard'],      desc:'Dashboard for Industrial Command Center'},
+  {name:'Canva AI redesign', slug:'canva-ai',          cat:'Redesign',                yr:'2025', tags:['AI design'],      desc:'Redesign of Canva’s Conversational AI'},
+  {name:'Relique',           slug:'relique',           cat:'Semiotics and semantics', yr:'2025', tags:['Website design'], desc:'A Storytelling Museum Website'}
 ];
 document.getElementById('grid').innerHTML = WORK.map(function(p, i){
-  return '<a class="wc card" data-reveal data-cursor="Read" href="work/' + p.slug + '.html" aria-label="' + p.name + '">'
+  return '<a class="wc card" data-reveal data-cursor="Read" href="work/' + p.slug + '.html" aria-label="' + p.name + ', ' + p.desc + '">'
     + '<div class="wc-top"><span>' + String(i + 1).padStart(3, '0') + '</span><span>' + p.yr + '</span></div>'
     + THUMBS.html(p.slug, p.name)
-    + '<div class="wc-bot"><div class="wc-tags">' + [p.cat].concat(p.tags).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join('') + '</div>'
+    + '<div class="wc-bot"><div><h3>' + p.desc + '</h3><div class="wc-tags">' + [p.cat].concat(p.tags).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join('') + '</div></div>'
     + '<span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span></div></a>';
 }).join('');
 THUMBS.wire(document.getElementById('grid'));
@@ -750,7 +752,7 @@ THUMBS.wire(document.getElementById('grid'));
            first.querySelector('button').textContent.trim(), first);
     }});
   } else {
-    show('product-design', 'UX design', first);
+    show('product-design', 'UI/UX design', first);
   }
 })();
 </script>
@@ -816,6 +818,14 @@ THUMBS.wire(document.getElementById('grid'));
     .from(block,{ scale:.2, rotation:-16, opacity:0, duration:.75, ease:'back.out(2.2)' }, '-=.35')
     /* and the paragraph rises in last, once the line above it has landed */
     .from('.lede',{ y:22, opacity:0, duration:.7, ease:'power3.out' }, '-=.4');
+  /* the letters sway a little with the mouse, each by its own amount, odd ones the other way */
+  var hero = document.getElementById('hero');
+  var set = letters.map(function(el){ return { x:gsap.quickTo(el,'x',{duration:.7,ease:'power3'}), y:gsap.quickTo(el,'y',{duration:.7,ease:'power3'}) }; });
+  hero.addEventListener('mousemove', function(e){
+    var r = hero.getBoundingClientRect(), dx = (e.clientX - r.left)/r.width - .5, dy = (e.clientY - r.top)/r.height - .5;
+    set.forEach(function(s,i){ var d = (i % 3 + 1) * 5; s.x(dx * d * (i % 2 ? -1 : 1)); s.y(dy * d * .6); });
+  });
+  hero.addEventListener('mouseleave', function(){ set.forEach(function(s){ s.x(0); s.y(0); }); });
   if (intro) document.addEventListener('intro:done', function(){ tl.play(); }, { once:true });
 })();
 
