@@ -29,7 +29,9 @@ a{color:inherit}
    numerals in data positions all ship with browser defaults that
    belong to no design system; each one is set from the palette. */
 ::selection{background:var(--blue);color:var(--paper);text-shadow:none}
-html{caret-color:var(--blue);accent-color:var(--blue);scrollbar-gutter:stable}
+/* the palette is light by design; declaring it stops a browser auto-dark pass
+   from re-painting the page and keeps native UI surfaces on the right side */
+html{color-scheme:only light;caret-color:var(--blue);accent-color:var(--blue);scrollbar-gutter:stable}
 @supports (scrollbar-width:thin){html{scrollbar-width:thin;scrollbar-color:var(--blue) var(--bone)}}
 /* squared off, like every other edge on the page */
 ::-webkit-scrollbar{width:13px;height:13px}
