@@ -53,14 +53,10 @@ function glideTo(target){
     gsap.to(tag,{scale:1,rotation:-4,opacity:1,duration:.24,ease:'back.out(1.8)',overwrite:true});
     gsap.to(dot,{scale:1.35,duration:.2,overwrite:true});
   }
-  function tagOut(s){
+  function tagOut(){
     gsap.to(tag,{scale:.6,opacity:0,duration:.16,overwrite:true});
-    gsap.to(dot,{scale:s || 1,duration:.2,overwrite:true});
+    gsap.to(dot,{scale:1,duration:.2,overwrite:true});
   }
-  /* a label for scripts, where there is no [data-cursor] element to hang it on:
-     cursorLabel('Text') shows it; cursorLabel(null, 'Text', dotScale) hides it, but only if
-     'Text' is still the label showing, so it never takes down one a link has just put up */
-  window.cursorLabel = function(t, was, s){ if (t) tagIn(t); else if (tag.textContent === was) tagOut(s); };
 
   document.querySelectorAll('[data-cursor]').forEach(function(el){
     el.addEventListener('mouseenter', function(){ tagIn(el.getAttribute('data-cursor')); });
