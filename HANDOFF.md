@@ -802,6 +802,7 @@ Last updated: 2026-09-21
     - Canva AI: **`Conversational AI design` · `Prompt testing`** (replaces `Redesign` and the now-redundant `AI design`; prompt testing is the listed method, 50 prompts).
     - Relique: **`Historical storytelling` · `Visual semiotics`** (replaces the course name `Semiotics and semantics` and the generic `Website design`; the site explains itself through symbols).
     - **Held back on purpose, for later stages:** changes to the Home hero and its icon, the trailer section redesign, and how the phone video behaves in the trailer. The trailer section comes next.
+    - **Pushed to `main` as `8da68ef` and live** on https://www.rutujeetnayak.me (2026-09-24; checked that the served HTML has the new tags).
 
 ## In progress / not yet confirmed
 
