@@ -796,6 +796,13 @@ Last updated: 2026-09-21
     - **UNRESOLVED, carried forward: the user's browser extension reported ~20 findings on localhost in Opera GX**, against 46 from the CLI on the same URL. The extension reports a *subset*, so it is not evidence of extra problems, but the actual list was never seen and so never checked. Three explanations were raised and all three failed: it was not the stale live design (the user confirmed localhost), forced dark mode did not reproduce (a Chromium force-dark render came back pixel-identical), and font-blocking was never confirmed. **Ask for the rule names before theorising again.**
     - **On the contrast question, what was actually measured** (so it is not re-litigated from scratch): with animation frozen, glyph fill made transparent, per-viewport screenshots (not `fullPage`, which drifts against lazy images) and a median-of-5 pixel sample behind every text run - **0 contrast failures across 106 text runs**. Independently: 47 text runs have colour `#EDEFF6`; 46 of them sit on Klein blue or ink. The detector reports 41 as `#edeff6 on #edeff6`, i.e. it substitutes the page background. **Two earlier attempts produced phantom failures** (1 and 13 respectively) through weaker methods - a parent-walk that cannot see pseudo-elements, and a `fullPage` capture that misaligned. Not tested: hover/focus-state contrast, engines other than Chromium.
 
+90. **Professor feedback, stage 1: home project card tags (2026-09-24).** [index.html](index.html) only, the `WORK` array. Only the tag text changed; chip styling and layout did not. Each tag is taken from the project's own copy in `tools/build_work.py`.
+    - ULS: `Service design` · **`Informal labour` · `Field research`** (replaces `Dashboard`).
+    - ICCC: `OOUX` · **`Cognitive load reduction`** (replaces `Dashboard`; this is the 408 -> 109 bits, 73.4% result).
+    - Canva AI: **`Conversational AI design` · `Prompt testing`** (replaces `Redesign` and the now-redundant `AI design`; prompt testing is the listed method, 50 prompts).
+    - Relique: **`Historical storytelling` · `Visual semiotics`** (replaces the course name `Semiotics and semantics` and the generic `Website design`; the site explains itself through symbols).
+    - **Held back on purpose, for later stages:** changes to the Home hero and its icon, the trailer section redesign, and how the phone video behaves in the trailer. The trailer section comes next.
+
 ## In progress / not yet confirmed
 
 - **The new palette and body face are LIVE** (item 89), merged to `main` and deployed on 2026-09-23. The user asked for it before giving a verdict on the look itself, so if the cool ground or Schibsted Grotesk is wrong, roll back per item 89 rather than re-deriving it.
@@ -813,6 +820,8 @@ Last updated: 2026-09-21
 - Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 
 ## Next up (not started)
+
+- **Professor feedback, next stages (after item 90):** (2) redesign the trailer section on the project pages, (3) change how the phone video behaves and is laid out in the trailers, (4) the Home hero and icon changes. Wait for the user's detailed brief on each.
 
 - **START HERE NEXT SESSION (asked for on 2026-09-20, for 2026-09-21):**
   1. **Add animations.** The user did not say where; ask which pages or sections they mean (the project pages and the About page are the least animated so far).

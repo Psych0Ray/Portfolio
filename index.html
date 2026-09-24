@@ -651,10 +651,10 @@ html.intro-on .intro{display:block}
 <script>
 gsap.registerPlugin(ScrollTrigger);
 var WORK = [
-  {name:'ULS',               slug:'uls',               cat:'Service design',          yr:'2026', tags:['Dashboard'],      desc:'Urban Labour Services'},
-  {name:'ICCC Surveillance', slug:'iccc-surveillance', cat:'OOUX',                    yr:'2026', tags:['Dashboard'],      desc:'Dashboard for Industrial Command Center'},
-  {name:'Canva AI redesign', slug:'canva-ai',          cat:'Redesign',                yr:'2025', tags:['AI design'],      desc:'Redesign of Canva’s Conversational AI'},
-  {name:'Relique',           slug:'relique',           cat:'Semiotics and semantics', yr:'2025', tags:['Website design'], desc:'A Storytelling Museum Website'}
+  {name:'ULS',               slug:'uls',               cat:'Service design',           yr:'2026', tags:['Informal labour', 'Field research'], desc:'Urban Labour Services'},
+  {name:'ICCC Surveillance', slug:'iccc-surveillance', cat:'OOUX',                     yr:'2026', tags:['Cognitive load reduction'],         desc:'Dashboard for Industrial Command Center'},
+  {name:'Canva AI redesign', slug:'canva-ai',          cat:'Conversational AI design', yr:'2025', tags:['Prompt testing'],                   desc:'Redesign of Canva’s Conversational AI'},
+  {name:'Relique',           slug:'relique',           cat:'Historical storytelling',  yr:'2025', tags:['Visual semiotics'],                 desc:'A Storytelling Museum Website'}
 ];
 document.getElementById('grid').innerHTML = WORK.map(function(p, i){
   return '<a class="wc card" data-reveal data-cursor="Read" href="work/' + p.slug + '.html" aria-label="' + p.name + ', ' + p.desc + '">'
