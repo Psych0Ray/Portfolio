@@ -1,13 +1,21 @@
 """Builds the four project pages in work/ from the data below.
 
 Run from the repo root:  python tools/build_work.py   (needs Pillow)
-Edit the copy here, not in the generated HTML, or the next build will overwrite it.
+Edit the copy here and in tools/trailers/, not in the generated HTML, or the next build will
+overwrite it.
 
-Each page is a trailer, not a case study: title, detail boxes, cover, a short
-description, the prototype video, the remaining snippets, then the hand-off to Behance.
-The snippets are the frames in the Figma section "Claude · Project trailer snippets"
-(file uG8MdK8svbC6sa0wQ5kyIK, node 2298:739), exported at 2880px wide to
-work/img/<slug>/NN.webp. 01 is always the cover. Keep every deck's own style.
+Each page is a trailer, not a case study: title, detail boxes, then the cover and the story,
+told in the order a viewer needs it: the problem, what was made and how it works, what changed, and
+only then the project's video. The site's own elements (nav, title, detail boxes, the
+full-project and next-project links, footer) keep the site's look exactly. The part that
+shows the work, div.deck.p-<slug>, opens with the cover edge to edge and wears the project's
+own deck styling, from
+work/ui/<slug>.css, along with any interface rebuilt in code (with work/ui/<slug>.js), drawn
+from the Figma decks, file uG8MdK8svbC6sa0wQ5kyIK.
+
+The story for each project lives in tools/trailers/<slug>.html, written in the one shared
+trailer layout (work/work.css, THE TRAILER: t-sec, t-lead, t-text, t-feat, t-inset, t-pair,
+plate). {{video}} in that file is replaced with the project's player.
 """
 import html
 import os
@@ -19,99 +27,163 @@ LINKEDIN = 'https://www.linkedin.com/in/rutujeet-nayak-b5a47129b'
 
 PROJECTS = [
   dict(
-    slug='uls', film='ULS teaser film', title='ULS', short='ULS',
+    slug='uls', title='ULS', short='ULS',
     meta=[('Course', 'Service design'),
           ('My role', 'Research &amp; Analysis, Design Direction, Models and Blueprints'),
           ('Methods', 'Field interviews, systems mapping, service blueprint'),
           ('Year', '2026')],
-    about='ULS, the Urban Labour System, brings a record to informal naka hiring. Built from field research '
-          'at nakas in Pune, it gives every daily wage worker a QR-linked ID, matches them to work through a '
-          'naka coordinator based on real demand, and logs every wage and attendance mark for workers, '
-          'foremen and contractors alike.',
-    story=[
-      ('The brief',
-       'A four-week service design project. We started at the nakas in Pune, where daily wage workers wait each morning for someone to hire them. Contractors pick by looks and by who they recognise. Pay is agreed out loud and handed over in cash. Nothing gets written down anywhere.'),
-      ('The aim',
-       'We wanted to give this system a record, without forcing anyone to work differently. Three things had to change. A worker should be able to prove what they can do, even to a contractor who has never met them. They should know if there is work before making the trip to the naka. And the wage agreed in the morning should be the wage that gets paid.'),
-      ('The outcome',
-       'ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service: an app for workers, a console for foremen in Hindi, and a dashboard for contractors.'),
-    ],
+    about='ULS, the Urban Labour System, brings a record to informal naka hiring: a QR-linked ID for every '
+          'daily wage worker, and screens for workers, foremen and contractors built around it.',
+    # the teaser ad the team made to launch the service: cinematic, not a walkthrough
+    video=dict(dur=23.73, label='ULS teaser film', chapters=[]),
+    # the deck is set in Satoshi (Fontshare); the rebuilt screens keep their own Inter
+    fonts=['https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap',
+           'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap'],
+    libs=['ui/lucide.js'],
     behance='https://www.behance.net/gallery/255996487/ULS-Service-Design',
     # Behance flagged this one as spam; the gallery is a dead end for anyone but the owner,
     # so no secondary link to it from the page.
     hide_behance=True,
-    alts=['ULS billboard reading Designed for Real Work, Not Office Work',
-          'The new ULS service blueprint from pre-job to project end',
-          'ULS analytics dashboard: hiring, wage trends, attendance and site performance',
-          'Contractor dashboard for selecting workers by skill, reliability and wage']),
+    cover_alt='ULS billboard reading Designed for Real Work, Not Office Work'),
   dict(
-    slug='iccc-surveillance', film='Walkthrough of the working ICCC dashboard prototype', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
+    slug='iccc-surveillance', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
           ('My role', 'High-Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
           ('Methods', 'Field observation, interviews, task modelling'),
           ('Year', '2026')],
-    about='A redesign of the monitoring dashboard at the Integrated Command and Control Centre in Taloja MIDC, '
-          'where a single screen watches an entire industrial estate. Using object-oriented UX, we rebuilt it '
-          'around how operators actually verify, escalate and resolve alerts, and cut what they have to keep '
-          'in their head by 73.4%.',
-    story=[
-      ('The brief',
-       'The command centre at Taloja MIDC watches one industrial estate: 310 cameras, 349 street lights and over a thousand smart poles, spread across 900 hectares and 950 factories. It all lands on one dashboard, and someone is watching it every hour of the day. Our job was to redesign that dashboard using object-oriented UX.'),
-      ('The aim',
-       'We wanted the dashboard to fit the operator’s real job, not just to look better. A day in the command centre and interviews with six operators showed us what that job is: checking alerts, sending out field teams and keeping records. All three were happening off the dashboard, by hand, over WhatsApp and in a shared sheet at the end of each shift. The aim was to bring them into one place, and to cut how much an operator has to keep in their head.'),
-      ('The outcome',
-       'Regrouping the system’s objects and actions cut what an operator has to hold in their head from 408 bits of information down to 109, a drop of 73.4%. The new dashboard is built on that. Alerts cluster on a live map. A device card opens in one click and can be acknowledged from there. Alerts can be cleared in bulk, repeat failures get flagged, and a tickets section replaces the WhatsApp thread.'),
-    ],
+    about='A redesign of the monitoring dashboard at MIDC’s Integrated Command and Control Centre (ICCC) in Taloja, '
+          'rebuilt around how operators check, escalate and resolve alerts.',
+    # walkthrough of the working coded prototype; chapter times checked frame by frame
+    video=dict(dur=229.70, label='Walkthrough of the working ICCC dashboard prototype',
+               chapters=[(0, 'Live map'), (12, 'Device card'), (28, 'Active alerts'), (80, 'Device health'),
+                         (100, 'Alert list'), (144, 'Work tickets'), (164, 'Escalation chat'),
+                         (192, 'Ticket progress')]),
+    # the deck's DM Sans; the product screens are shown as they are, so no UI script
+    fonts=['https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap'],
     behance='https://www.behance.net/gallery/255993261/ICCC-Surveillance-Object-Oriented-UX',
-    alts=['ICCC Surveillance cover',
-          'Live map dashboard with device clusters and filters',
-          'Device cards with status, event logs and one-click acknowledge',
-          'Alert summary dashboard with pinned counts across domains']),
+    cover_alt='ICCC Surveillance cover'),
   dict(
-    slug='canva-ai', film='Walkthrough of the redesigned Canva AI prototype', title='CANVA AI REDESIGN', short='Canva AI redesign',
+    slug='canva-ai', title='CANVA AI REDESIGN', short='Canva AI redesign',
     meta=[('Type', 'UI/UX, conversational AI'),
           ('My role', 'Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design'),
           ('Methods', 'Prompt testing, review analysis'),
           ('Year', '2025')],
-    about='A redesign of Canva’s AI assistant for the people who lean on it most: non-designers who can tell '
-          'a design looks wrong but not why. We tested it with 50 real-world prompts, named where it misread '
-          'intent with the CAPABLE framework, and redesigned it to stay inside the file, ask before it changes '
-          'anything, and review a design the way a consultant would.',
-    story=[
-      ('The brief',
-       '180 million people use Canva every month, and most of them are not designers. Its AI assistant has to understand people who cannot say what they want in design words. They can tell the poster looks wrong, but not why. We were asked to test that assistant and then redesign it.'),
-      ('The aim',
-       'We wanted to find the exact moments the assistant stops understanding a non-designer, and design for those, rather than for a vague sense that it felt bad to use. So we read what people complained about on G2 and Reddit, wrote 50 prompts the way a real Canva user would type them, and ran every one to see where it broke.'),
-      ('The outcome',
-       'The failures fell into seven patterns, so we made them into a framework called CAPABLE and redesigned the assistant one pattern at a time. It now works inside the file you already have open instead of starting a new one. It asks before it changes anything. When you tell it a design feels flat, it treats that as a problem to diagnose rather than an order to follow. And it can handle a request with two parts in one go.'),
-    ],
+    about='A redesign of Canva’s AI assistant for non-designers: it works inside the file you have open, '
+          'asks before it changes anything, and reviews a design the way a consultant would.',
+    # recording of the redesigned assistant working on a real poster
+    video=dict(dur=63.90, label='Walkthrough of the redesigned Canva AI prototype',
+               chapters=[(0, 'Ask Orb'), (8, 'Poster review'), (16, 'Fonts applied'), (24, 'New layout'),
+                         (36, 'Second version'), (44, 'Invite message'), (52, 'Save and rename')]),
+    fonts=['https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap'],
+    libs=['ui/lucide.js'],
     behance='https://www.behance.net/gallery/241041049/Redesign-of-Canvas-AI-Model',
-    alts=['Canva AI project cover',
-          'The CAPABLE framework: seven lenses for judging a design AI',
-          'Redesigned Canva AI acting as a design consultant on a poster',
-          'Redesigned Canva AI handling a compound command in the editor']),
+    cover_alt='Canva AI project cover'),
   dict(
-    slug='relique', film='Walkthrough of the Relique website prototype', title='RELIQUE', short='Relique',
+    slug='relique', title='RELIQUE', short='Relique',
     meta=[('Course', 'Semiotics and semantics'),
           ('My role', 'Design Direction, Research, Image and Story Generation'),
           ('Tools', 'Figma, FigJam'),
           ('Year', '2025')],
     about='Relique is a museum website where artifacts tell their own stories, in the first person, and the '
           'design itself does the explaining that a label in a glass case usually does.',
-    story=[
-      ('The brief',
-       'A four-week brief for our semantics and semiotics course: make something where the meaning comes from the design itself, from its shapes and symbols and context, rather than from text explaining it. We chose museums. A museum holds objects with enormous stories behind them, then puts them in a glass case with a name and a date.'),
-      ('The aim',
-       'We wanted the object to tell you its story, instead of a label summarising it for you. That meant building a site you wander through rather than search, and leaving enough unsaid for the visitor to work out on their own.'),
-      ('The outcome',
-       'Relique starts on a map. Pick a museum, open its collection, then hover over an object to unlock My Story, where the artifact narrates its own history in its own voice, in sound and images. The symbols do the explaining: a triangle means a story begins here, + and − show what opens and closes, ‹ and › move you through a life. One artifact’s story leads into another’s.'),
-    ],
+    # walkthrough of the site prototype; chapter times checked frame by frame
+    # the only video with sound: the artifacts' narration
+    video=dict(dur=545.03, label='Walkthrough of the Relique website prototype', audio=True,
+               chapters=[(0, 'Home'), (60, 'The artifact’s page'), (80, 'My Story: Akbar’s armour'),
+                         (270, 'Museum map'), (300, 'Collections'), (380, 'My Story: the Waghnakh'),
+                         (530, 'About Relique')]),
+    fonts=['https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Gelasio:ital@0;1&display=swap'],
     behance='https://www.behance.net/gallery/241042181/Storytelling-Museum-Website',
-    alts=['Relique title over a dark still life painting',
-          'Relique home page on desktop and mobile',
-          'My Story view, where an artifact narrates its own history',
-          'Printed museum tickets and the Relique card']),
+    cover_alt='Relique title over a dark still life painting'),
 ]
+
+
+# The index beside each full case study. Each entry is (group, label, image, y): the section
+# starts `y` pixels down image `image` of work/full/<slug>/ (the images are 2000px wide), a
+# little above the section's heading. Positions were read off the decks by OCR.
+INDEX = {
+  'uls': [
+    ('Context', 'The domain', '01', 1330),
+    ('Context', 'Secondary research', '01', 2500),
+    ('Context', 'Current hiring system', '01', 3930),
+    ('Context', 'Actors', '01', 5070),
+    ('Context', 'Why schemes fail', '02', 2040),
+    ('Context', 'System gaps', '02', 3190),
+    ('Research', 'Primary research', '02', 4330),
+    ('Research', 'Thematic analysis', '03', 1420),
+    ('Research', 'Personas', '03', 3690),
+    ('Models', 'Ecosystem model', '05', 180),
+    ('Models', 'Value flow', '05', 3040),
+    ('Models', 'Value equation', '06', 2080),
+    ('Models', 'Empathy map', '07', 900),
+    ('Models', 'Journey maps', '07', 3610),
+    ('Models', 'Final insights', '08', 4320),
+    ('Models', 'Service gap model', '09', 1410),
+    ('Models', 'Problem statement', '10', 380),
+    ('Ideation', 'How might we', '10', 1630),
+    ('Ideation', 'Opportunity areas', '10', 3240),
+    ('Ideation', 'Service definition', '11', 1730),
+    ('Ideation', 'Primary services', '12', 110),
+    ('Ideation', 'Competitive analysis', '14', 150),
+    ('Ideation', 'Service blueprint', '14', 4540),
+    ('Ideation', 'Information architecture', '15', 1480),
+    ('The solution', 'Unified identity', '16', 1250),
+    ('The solution', 'Worker app', '16', 4930),
+    ('The solution', 'Foreman app', '18', 3330),
+    ('The solution', 'Contractor dashboard', '19', 4440),
+    ('The solution', 'Payments and analytics', '21', 1770),
+    ('The solution', 'Service recovery', '23', 1470),
+    ('The solution', 'Lifetime trajectory', '24', 2560),
+    ('The solution', 'Impact', '24', 4900),
+    ('Wrap-up', 'Service prototype', '25', 960),
+    ('Wrap-up', 'Learnings', '27', 2040),
+  ],
+  'iccc-surveillance': [
+    ('Context', 'Overview', '01', 0),
+    ('Context', 'The system', '02', 0),
+    ('Context', 'ICCC as infrastructure', '04', 0),
+    ('Context', 'Connected devices', '06', 0),
+    ('Research', 'Research method', '07', 0),
+    ('Research', 'Findings', '08', 0),
+    ('Research', 'Actors', '09', 0),
+    ('Research', 'Opportunity', '10', 0),
+    ('Research', 'Focus workflow', '11', 0),
+    ('OOUX', 'User stories', '12', 0),
+    ('OOUX', 'Object mapping', '13', 0),
+    ('OOUX', 'Cognitive load', '15', 0),
+    ('OOUX', 'Workflows', '16', 0),
+    ('OOUX', 'Swim lanes', '17', 0),
+    ('OOUX', 'Attributes', '19', 0),
+    ('OOUX', 'Task prioritisation', '20', 0),
+    ('OOUX', 'Current IA', '21', 0),
+    ('Design', 'Existing dashboard', '22', 0),
+    ('Design', 'New IA and wireframes', '23', 0),
+    ('Design', 'Design system', '24', 0),
+    ('Design', 'Features', '25', 0),
+    ('Design', 'Device cards', '26', 0),
+    ('Design', 'Map side panel', '27', 0),
+    ('Design', 'Alerts and escalation', '28', 0),
+    ('Design', 'Messages and tickets', '30', 0),
+    ('Design', 'Accessibility', '32', 0),
+    ('Wrap-up', 'Learnings', '33', 0),
+  ],
+  'canva-ai': [
+    ('Research', 'Who uses Canva', '00', 920),
+    ('Research', 'Conducting research', '00', 3020),
+    ('Research', 'The CAPABLE framework', '01', 1000),
+    ('Solution', 'The redesign', '02', 100),
+  ],
+  'relique': [
+    ('Context', 'About the project', '00', 1700),
+    ('The website', 'Home page', '00', 3760),
+    ('The website', 'Task flow', '02', 1050),
+    ('The website', 'Storytelling', '03', 540),
+    ('The website', 'About us', '03', 2060),
+    ('Semiotics', 'Signs and meaning', '04', 1010),
+    ('Semiotics', 'The story viewer', '05', 3290),
+    ('Wrap-up', 'Learnings', '05', 3520),
+  ],
+}
 
 HEAD = '''<!DOCTYPE html>
 <html lang="en">
@@ -125,9 +197,9 @@ HEAD = '''<!DOCTYPE html>
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
-<link rel="stylesheet" href="work.css">
+<link rel="stylesheet" href="work.css">{extra}
 </head>
 <body>
 
@@ -135,7 +207,7 @@ HEAD = '''<!DOCTYPE html>
 <div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1"><svg viewBox="0 0 1062 1014" aria-hidden="true"><rect width="1062" height="1014"/><path transform="matrix(1 0 0 -1 142 853.5)" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span></a>
   <span class="grow"></span>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
@@ -167,17 +239,30 @@ FOOT = '''
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../lab.js"></script>
+<!--UI-->
 <script src="work.js"></script>
 </body>
 </html>
 '''.format(behance=BEHANCE, linkedin=LINKEDIN)
+
+# the player's icons: filled play and pause, the circular skip arrows, full screen
+I_PLAY = '<svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>'
+I_PAUSE = '<svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z"/></svg>'
+I_BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 3.5v4h4"/></svg>'
+I_FWD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 3.5v4h-4"/></svg>'
+I_FULL = ('<svg class="i-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>'
+          '<svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M20 15h-5v5M4 15h5v5"/></svg>')
+# sound on and off: Lucide's volume-2 and volume-x
+I_SPK = 'M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z'
+I_VOL = (f'<svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="{I_SPK}"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>'
+         f'<svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="{I_SPK}"/><path d="M22 9l-6 6M16 9l6 6"/></svg>')
 
 
 def summary(text, limit=155):
     """The meta description: the lead paragraph, cut at a word boundary rather than mid-word."""
     if len(text) <= limit:
         return text
-    return text[:limit - 1].rsplit(' ', 1)[0].rstrip(',;:') + '\u2026'
+    return text[:limit - 1].rsplit(' ', 1)[0].rstrip(',;:') + '…'
 
 
 def shots(slug):
@@ -192,36 +277,55 @@ def img(slug, name, alt, eager=False):
             f'alt="{html.escape(alt)}" loading="{load}" decoding="async">')
 
 
-def film(p):
-    """The prototype recording. Muted, looping, no controls. work.js pins it on scroll, zooms it
-    to fill the screen, plays it while it is full screen, then zooms it back out.
-    Without JS (or under reduced motion) it is a plain box sized to fit the viewport height.
-    Encoded to work/vid/<slug>.mp4 (H.264, 1600px, no audio), plus a VP9 .webm for browsers
-    without H.264, and a .webp poster frame."""
-    slug = p['slug']
-    if not os.path.exists(os.path.join(ROOT, 'work', 'vid', slug + '.mp4')):
-        return ''
+def mmss(t):
+    t = int(t)
+    return '%d:%02d' % (t // 60, t % 60)
+
+
+def player(p):
+    """The project's video at a fixed size in the page grid, with its own controls (work.js).
+    Encoded to work/vid/<slug>.mp4 (H.264, 1600px), plus a VP9 .webm for browsers without
+    H.264, and a .webp poster frame. Only a video marked audio=True keeps its sound (Relique's,
+    AAC / Opus); it gets a sound button, and work.js unmutes it when the viewer presses play.
+    Chapters, where the video has parts, sit under it as buttons and as ticks on the seek bar."""
+    slug, v = p['slug'], p['video']
     w, h = Image.open(os.path.join(ROOT, 'work', 'vid', slug + '.webp')).size
-    return (f'<section class="film"><div class="film-stage"><div class="film-box" style="--ar:{w}/{h}">'
-            f'<video poster="vid/{slug}.webp" width="{w}" height="{h}" '
-            f'muted loop playsinline preload="none" aria-label="{html.escape(p["film"])}">'
+    dur = v['dur']
+    marks = ''.join(f'<i class="vp-mark" style="left:{t / dur * 100:.2f}%"></i>'
+                    for t, _ in v['chapters'] if t > 0)
+    chapters = ''
+    if v['chapters']:
+        items = ''.join(f'<li><button type="button" data-t="{t}"><span>{mmss(t)}</span>{html.escape(n)}</button></li>'
+                        for t, n in v['chapters'])
+        chapters = f'\n  <ol class="vp-ch" aria-label="Chapters">{items}</ol>'
+    audio = v.get('audio')
+    vol = (f'    <button type="button" class="vp-vol" aria-label="Turn sound on">{I_VOL}</button>\n' if audio else '')
+    return (f'<figure class="vp{" muted" if audio else ""}" data-dur="{dur}"{" data-audio" if audio else ""} style="--ar:{w}/{h}">\n'
+            f'  <div class="vp-screen">\n'
+            f'    <video poster="vid/{slug}.webp" width="{w}" height="{h}" muted loop playsinline preload="none" '
+            f'aria-label="{html.escape(v["label"])}">'
             f'<source src="vid/{slug}.mp4" type=\'video/mp4; codecs="avc1.640028"\'>'
-            f'<source src="vid/{slug}.webm" type=\'video/webm; codecs="vp9"\'>'
-            f'</video>'
-            f'</div></div></section>\n')
+            f'<source src="vid/{slug}.webm" type=\'video/webm; codecs="vp9"\'></video>\n'
+            f'    <button type="button" class="vp-big" aria-label="Play video">{I_PLAY}</button>\n'
+            f'  </div>\n'
+            f'  <div class="vp-bar">\n'
+            f'    <button type="button" class="vp-play" aria-label="Play">{I_PLAY}{I_PAUSE}</button>\n'
+            f'    <button type="button" class="vp-back vp-skip" aria-label="Back 10 seconds">{I_BACK}<b>10</b></button>\n'
+            f'    <button type="button" class="vp-fwd vp-skip" aria-label="Forward 10 seconds">{I_FWD}<b>10</b></button>\n'
+            f'{vol}'
+            f'    <span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-dur"> / {mmss(dur)}</span></span>\n'
+            f'    <div class="vp-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" '
+            f'aria-valuemax="{int(dur)}" aria-valuenow="0" aria-valuetext="0:00 of {mmss(dur)}">'
+            f'{marks}<div class="vp-fill"></div><div class="vp-knob"></div></div>\n'
+            f'    <button type="button" class="vp-full" aria-label="Full screen">{I_FULL}</button>\n'
+            f'  </div>{chapters}\n'
+            f'</figure>')
 
 
-def story(p):
-    """The brief, the aim and the outcome, read off the project's own deck.
-    One ink-bordered strip of three panels; the outcome is inverted so the payoff lands
-    hardest. Skipped entirely for a project that has no story= yet."""
-    rows = p.get('story')
-    if not rows:
-        return ''
-    cells = ''.join(
-        f'\n  <div class="sc"><h2>{html.escape(k)}</h2><p>{v}</p></div>'
-        for k, v in rows)
-    return f'<section class="story" data-reveal>{cells}\n</section>\n'
+def trailer(p):
+    path = os.path.join(ROOT, 'tools', 'trailers', p['slug'] + '.html')
+    with open(path, encoding='utf-8') as f:
+        return f.read().replace('{{video}}', player(p))
 
 
 def full_shots(slug):
@@ -232,20 +336,44 @@ def full_shots(slug):
     return sorted(f for f in os.listdir(folder) if f.endswith('.jpg'))
 
 
+def index_nav(slug, sizes):
+    """The fixed index beside the deck: groups of section links. Each link carries where its
+    section starts as a fraction of its image's height, which work.js turns into a scroll
+    position (the images are stacked, so this holds at any width)."""
+    items = INDEX.get(slug)
+    if not items:
+        return ''
+    out, group = '', None
+    for i, (g, label, img_name, y) in enumerate(items):
+        if g != group:
+            out += ('\n    </ol>' if group else '') + f'\n    <p>{html.escape(g)}</p>\n    <ol>'
+            group = g
+        h = sizes[img_name + '.jpg'][1]
+        out += (f'\n      <li><a href="#s{i + 1}" data-shot="{img_name}" data-y="{y / h:.4f}">'
+                f'{html.escape(label)}</a></li>')
+    return ('\n<nav class="findex" aria-label="Sections of the case study">'
+            '\n  <button type="button" class="findex-toggle" aria-expanded="false">Sections</button>'
+            '\n  <div class="findex-list">' + out + '\n    </ol>\n  </div>\n</nav>')
+
+
 def full_page(p, nxt):
     """The whole deck on one page. Every image is stacked flush against the next with no
     gap at all, inside a single ink frame, so it reads as one continuous scroll. Only the
     first image loads eagerly; the rest arrive as you reach them. Every image carries its
-    real width and height so nothing reflows while they load."""
+    real width and height so nothing reflows while they load. An index of the deck's
+    sections stays fixed beside it (INDEX, index_nav), so a visitor can skip straight to
+    the solution."""
     names = full_shots(p['slug'])
+    sizes = {n: Image.open(os.path.join(ROOT, 'work', 'full', p['slug'], n)).size for n in names}
     imgs = ''
     for i, n in enumerate(names):
-        w, h = Image.open(os.path.join(ROOT, 'work', 'full', p['slug'], n)).size
+        w, h = sizes[n]
         load = 'eager" fetchpriority="high' if i == 0 else 'lazy'
-        imgs += (f'\n  <img src="full/{p["slug"]}/{n}" width="{w}" height="{h}" '
+        imgs += (f'\n  <img src="full/{p["slug"]}/{n}" data-name="{n[:-4]}" width="{w}" height="{h}" '
                  f'alt="" loading="{load}" decoding="async">')
+    nav = index_nav(p['slug'], sizes)
     out = HEAD.format(title=p['short'] + ' · Full case study',
-                      desc=html.escape(summary(p['about'])))
+                      desc=html.escape(summary(p['about'])), extra='')
     out += f'''
 <header class="fhead">
   <a class="fback" href="{p['slug']}.html" data-cursor="Back">
@@ -256,8 +384,10 @@ def full_page(p, nxt):
   <p>The full case study, every slide, start to finish.</p>
 </header>
 
+<div class="fwrap">{nav}
 <section class="full">{imgs}
 </section>
+</div>
 
 <section class="sec end">
   <a class="next card" href="{p['slug']}.html" data-reveal data-cursor="Back">
@@ -270,12 +400,11 @@ def full_page(p, nxt):
   </a>
 </section>
 '''
-    return out + FOOT
+    return out + FOOT.replace('<!--UI-->', '<script src="full.js"></script>' if nav else '')
 
 
 def page(p, nxt):
     names = shots(p['slug'])
-    alts = p['alts'] + [''] * len(names)
     has_full = bool(full_shots(p['slug']))
     on_profile = p['behance'] is None
     link = (p['slug'] + '-full.html') if has_full else (p['behance'] or BEHANCE)
@@ -288,29 +417,29 @@ def page(p, nxt):
                '\n  </a>' % (p['behance'] or BEHANCE,
                              'Also on Behance' if not on_profile else 'More work on Behance'))
     meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in p['meta'])
-    rest = ''.join(f'\n  <div class="frame">{img(p["slug"], n, alts[i + 1])}</div>' for i, n in enumerate(names[1:]))
-    out = HEAD.format(title=p['short'], desc=html.escape(summary(p['about'])))
+    # the project's own type and its own stylesheet, only on its own page
+    extra = ''
+    for url in p.get('fonts', []):
+        extra += f'\n<link href="{url}" rel="stylesheet">'
+    extra += f'\n<link rel="stylesheet" href="ui/{p["slug"]}.css">'
+    out = HEAD.format(title=p['short'], desc=html.escape(summary(p['about'])), extra=extra)
     out += f'''
 <header class="chead">
   <h1>{p['title']}</h1>
   <div class="meta">{meta}</div>
 </header>
 
-<div class="cover"><div class="frame">{img(p['slug'], names[0], alts[0], eager=True)}</div></div>
-
-<section class="about">
-  <p>{p['about']}</p>
-</section>
-
-{story(p)}{film(p)}
-<section class="shots">{rest}
-</section>
-
+<div class="deck p-{p['slug']}">
+<figure class="t-cover">{img(p['slug'], names[0], p['cover_alt'], eager=True)}</figure>
+<div class="t-body">
+{trailer(p)}
+</div>
+</div>
 <section class="sec end">
   <a class="bh" href="{link}"{' target="_blank" rel="noopener"' if not has_full else ''} data-cursor="{'Read' if has_full else 'Behance'}" data-reveal>
     <div>
-      <h2>{'VIEW FULL PROJECT' if has_full else 'VIEW ON BEHANCE'}</h2>
-      <p>{'Every slide of the case study, on one page.' if has_full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
+      <h2>{'VIEW FULL CASE STUDY' if has_full else 'VIEW ON BEHANCE'}</h2>
+      <p>{'The research, the models and every slide of the case study, on one page.' if has_full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if has_full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
   </a>{alt}
@@ -320,11 +449,17 @@ def page(p, nxt):
   </a>
 </section>
 '''
-    return out + FOOT
+    libs = ''.join(f'<script src="{src}"></script>\n' for src in p.get('libs', []))
+    if os.path.exists(os.path.join(ROOT, 'work', 'ui', p['slug'] + '.js')):
+        libs += f'<script src="ui/{p["slug"]}.js"></script>'
+    return out + FOOT.replace('<!--UI-->', libs)
 
 
 if __name__ == '__main__':
+    only = os.environ.get('ONLY')
     for i, p in enumerate(PROJECTS):
+        if only and p['slug'] != only:
+            continue
         dest = os.path.join(ROOT, 'work', p['slug'] + '.html')
         with open(dest, 'w', encoding='utf-8', newline='\n') as f:
             f.write(page(p, PROJECTS[(i + 1) % len(PROJECTS)]))

@@ -1,0 +1,15 @@
+/* ICCC Surveillance, in the style of its own deck (Figma file uG8MdK8svbC6sa0wQ5kyIK, deck 2265:8618):
+   white ground, DM Sans, headings #1e1b39, body #5e5e5e and the accent #583bc0. The product screens are the prototype's own, from the
+   deck's UI slides 26 to 32 (2265:13595 to 2265:14290), shown as they are. */
+
+.p-iccc-surveillance{--d-bg:#fff;--d-fg:#1e1b39;--d-dim:#5e5e5e;--d-soft:#77748d;--d-line:#e4e1f0;--d-card:#f6f5fc;
+  --d-accent:#583bc0;--d-on-accent:#fff;--d-font:'DM Sans',system-ui,sans-serif;--d-head:'DM Sans',system-ui,sans-serif;
+  --d-hw:500;--d-lw:400;--d-bw:600;--d-htrack:-.02em;--d-r:16px;--d-sr:10px;
+  --d-shadow:0 0 0 1px rgba(30,27,57,.06),0 24px 48px -24px rgba(56,38,140,.35)}
+/* the nav while the trailer is under it (work.css, INSIDE THE WORK) */
+.on-deck{--n-bg:#fff;--n-fg:#1e1b39;--n-line:#e4e1f0;--n-accent:#583bc0;--n-on-accent:#fff;--n-shadow:0 12px 30px -16px rgba(56,38,140,.35)}
+
+.p-iccc-surveillance .t-facts b{color:var(--d-accent)}
+/* the device card is shorter than its report: give it less width so they read as a pair */
+/* ...and never taller than the window: the report is 1.54x as tall as it is wide */
+.ic-duo{grid-template-columns:minmax(0,.84fr) minmax(0,1fr);width:min(100%,860px,calc((100svh - 190px) * 1.19 + 56px))}

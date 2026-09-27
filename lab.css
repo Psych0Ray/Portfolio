@@ -99,16 +99,29 @@ a{text-underline-offset:.15em;text-decoration-thickness:.075em}
 .logo{transition:transform .12s ease}
 .logo:active{transform:translateY(2px) scale(.96)}
 
-/* ── LOGO · RT/JT hand-set like the name, no box ── */
-.logo{display:flex;align-items:flex-end;text-decoration:none;gap:0;line-height:1;padding:4px 2px}
-.logo span{display:block;font-size:24px;line-height:.8}
-.logo .l1{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--blue);transform:rotate(-8deg);font-size:30px}
-.logo .l2{font-family:'Bebas Neue',sans-serif;transform:rotate(4deg) translateY(1px);font-size:32px;margin-left:-2px}
-.logo .l3{font-family:'Courier Prime',monospace;font-weight:700;color:var(--blue);transform:rotate(-12deg);margin:0 -1px 0 1px;font-size:29px}
-.logo .l4{font-family:'Abril Fatface',serif;transform:rotate(6deg) translateY(2px);font-size:29px}
-.logo .l5{font-family:'JetBrains Mono',monospace;font-weight:700;transform:rotate(-5deg);font-size:23px;margin-left:1px;
-  background:var(--blue);color:var(--paper);padding:2px 4px 3px}
-.logo:hover span{transform:none}
+/* ── LOGO · the R of the home hero name (index.html .L1), drawn as a vector: the Archivo Black R outline on
+   its blue block, placed as the name places it (measured off the name at 1000px; viewBox units are thousandths
+   of the name's font size), then 80 units more blue on every side, since at nav size the name's own margins
+   read as cramped. Same -4deg tilt as the name.
+   Hovered (or focused), it is selected the way Figma selects a layer: a thin frame with four square
+   handles, turned with the layer. --sel is the frame colour, --sel-fill the handles' face. ── */
+.logo{--sel:var(--blue);--sel-fill:var(--paper);display:flex;align-items:center;text-decoration:none;line-height:1;padding:0 6px}
+.logo span{display:block;position:relative;transform:rotate(-4deg)}
+.logo svg{display:block;height:38px;width:calc(38px * 1062 / 1014)}
+.logo rect{fill:var(--blue)}
+.logo path{fill:var(--paper)}
+.logo .sel{position:absolute;inset:-4px;border:1.5px solid var(--sel);pointer-events:none;opacity:0;transform:scale(.9);
+  transition:opacity .14s ease,transform .24s cubic-bezier(.16,1,.3,1)}
+.logo .sel b{position:absolute;width:6px;height:6px;background:var(--sel-fill);border:1.5px solid var(--sel);transform:translate(-50%,-50%) scale(0);
+  transition:transform .2s cubic-bezier(.16,1,.3,1) .06s}
+.logo .sel b:nth-child(1){left:-.75px;top:-.75px}
+.logo .sel b:nth-child(2){left:calc(100% + .75px);top:-.75px}
+.logo .sel b:nth-child(3){left:-.75px;top:calc(100% + .75px)}
+.logo .sel b:nth-child(4){left:calc(100% + .75px);top:calc(100% + .75px)}
+.logo:hover .sel,.logo:focus-visible .sel{opacity:1;transform:none}
+.logo:hover .sel b,.logo:focus-visible .sel b{transform:translate(-50%,-50%) scale(1)}
+.logo:focus-visible{outline:0}   /* the selection is its focus ring */
+@media (prefers-reduced-motion:reduce){.logo .sel,.logo .sel b{transition:none}}
 
 /* ── MARQUEE · home only, twice, by request ── */
 .marquee{overflow:hidden;padding:10px 0;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);
@@ -274,9 +287,9 @@ button.rbtn:active{transform:scale(.9);transition-duration:.05s}
   .mm-panel::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.22;
     background-image:radial-gradient(var(--blue40) 1.6px,transparent 1.7px);background-size:14px 14px}
   .mm-top{position:relative;height:58px;display:flex;align-items:center}
-  .mm-top .logo span{color:var(--paper)}
-  .mm-top .logo .l1,.mm-top .logo .l3{color:var(--bone)}
-  .mm-top .logo .l5{background:var(--paper);color:var(--blue)}
+  .mm-top .logo{--sel:var(--paper);--sel-fill:var(--blue)}
+  .mm-top .logo rect{fill:var(--paper)}
+  .mm-top .logo path{fill:var(--blue)}
   .mm-links{position:relative;list-style:none;margin:auto 0;display:flex;flex-direction:column;gap:4px}
   .mm-links li{overflow:hidden;padding:4px 0}
   .mm-links a{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:var(--paper);

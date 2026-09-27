@@ -4,15 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Canva AI redesign · Rutujeet’s Portfolio</title>
-<meta name="description" content="A redesign of Canva’s AI assistant for the people who lean on it most: non-designers who can tell a design looks wrong but not why. We tested it with 50…">
+<meta name="description" content="A redesign of Canva’s AI assistant for non-designers: it works inside the file you have open, asks before it changes anything, and reviews a design the…">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
 <link rel="stylesheet" href="work.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/canva-ai.css">
 </head>
 <body>
 
@@ -20,7 +22,7 @@
 <div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1"><svg viewBox="0 0 1062 1014" aria-hidden="true"><rect width="1062" height="1014"/><path transform="matrix(1 0 0 -1 142 853.5)" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span></a>
   <span class="grow"></span>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
@@ -33,30 +35,176 @@
   <div class="meta"><div><b>Type</b><span>UI/UX, conversational AI</span></div><div><b>My role</b><span>Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design</span></div><div><b>Methods</b><span>Prompt testing, review analysis</span></div><div><b>Year</b><span>2025</span></div></div>
 </header>
 
-<div class="cover"><div class="frame"><img src="img/canva-ai/01.webp" width="2880" height="1695" alt="Canva AI project cover" loading="eager" fetchpriority="high" decoding="async"></div></div>
-
-<section class="about">
-  <p>A redesign of Canva’s AI assistant for the people who lean on it most: non-designers who can tell a design looks wrong but not why. We tested it with 50 real-world prompts, named where it misread intent with the CAPABLE framework, and redesigned it to stay inside the file, ask before it changes anything, and review a design the way a consultant would.</p>
+<div class="deck p-canva-ai">
+<figure class="t-cover"><img src="img/canva-ai/01.webp" width="2880" height="1695" alt="Canva AI project cover" loading="eager" fetchpriority="high" decoding="async"></figure>
+<div class="t-body">
+<section class="t-sec">
+  <p class="t-lead">Most of Canva&rsquo;s 180 million monthly users aren&rsquo;t designers. They can tell when a poster looks wrong, but not why, and they can&rsquo;t put it in design words.</p>
+  <div class="t-pair">
+    <figure><div class="t-media">
+      <ol class="cv-bars">
+        <li style="--v:22.51"><b>22.51%</b><i></i><span>Owners</span></li>
+        <li style="--v:12.83"><b>12.83%</b><i></i><span>Founders</span></li>
+        <li style="--v:4.97"><b>4.97%</b><i></i><span>Co-founders</span></li>
+        <li style="--v:3.4"><b>3.4%</b><i></i><span>Business owners</span></li>
+        <li style="--v:1.83"><b>1.83%</b><i></i><span>Business development</span></li>
+      </ol></div>
+      <figcaption class="t-cap"><b>Small business.</b> Canva&rsquo;s reviewers on G2 by role, March 2025.</figcaption></figure>
+    <figure><div class="t-media">
+      <ol class="cv-bars" style="--max:4.68">
+        <li style="--v:4.68"><b>4.68%</b><i></i><span>Teachers</span></li>
+        <li style="--v:2.59"><b>2.59%</b><i></i><span>Administrators</span></li>
+        <li style="--v:1.82"><b>1.82%</b><i></i><span>Students</span></li>
+        <li style="--v:1.56"><b>1.56%</b><i></i><span>Professors</span></li>
+        <li style="--v:1.04"><b>1.04%</b><i></i><span>Graduate assistants</span></li>
+      </ol></div>
+      <figcaption class="t-cap"><b>Education.</b> The same reviews, from schools and universities.</figcaption></figure>
+  </div>
 </section>
 
-<section class="story" data-reveal>
-  <div class="sc"><h2>The brief</h2><p>180 million people use Canva every month, and most of them are not designers. Its AI assistant has to understand people who cannot say what they want in design words. They can tell the poster looks wrong, but not why. We were asked to test that assistant and then redesign it.</p></div>
-  <div class="sc"><h2>The aim</h2><p>We wanted to find the exact moments the assistant stops understanding a non-designer, and design for those, rather than for a vague sense that it felt bad to use. So we read what people complained about on G2 and Reddit, wrote 50 prompts the way a real Canva user would type them, and ran every one to see where it broke.</p></div>
-  <div class="sc"><h2>The outcome</h2><p>The failures fell into seven patterns, so we made them into a framework called CAPABLE and redesigned the assistant one pattern at a time. It now works inside the file you already have open instead of starting a new one. It asks before it changes anything. When you tell it a design feels flat, it treats that as a problem to diagnose rather than an order to follow. And it can handle a request with two parts in one go.</p></div>
-</section>
-<section class="film"><div class="film-stage"><div class="film-box" style="--ar:1600/774"><video poster="vid/canva-ai.webp" width="1600" height="774" muted loop playsinline preload="none" aria-label="Walkthrough of the redesigned Canva AI prototype"><source src="vid/canva-ai.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/canva-ai.webm" type='video/webm; codecs="vp9"'></video></div></div></section>
-
-<section class="shots">
-  <div class="frame"><img src="img/canva-ai/02.webp" width="2880" height="2856" alt="The CAPABLE framework: seven lenses for judging a design AI" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/canva-ai/03.webp" width="2880" height="1922" alt="Redesigned Canva AI acting as a design consultant on a poster" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/canva-ai/04.webp" width="2880" height="1922" alt="Redesigned Canva AI handling a compound command in the editor" loading="lazy" decoding="async"></div>
+<section class="t-sec" aria-labelledby="cv-lit">
+  <div class="t-text">
+    <h2 class="t-h" id="cv-lit">Canva AI took them literally.</h2>
+    <p class="t-p">We evaluated Canva AI, Canva&rsquo;s built-in assistant, with 50 prompts written the way these users write. It did what was typed, not what was meant: a new file instead of an edit, bold text for &ldquo;more intense&rdquo;.</p>
+  </div>
+  <figure class="t-text t-obj">
+    <blockquote class="cv-ask">&ldquo;I am all out of content to put and this poster still feels monotonous.&rdquo;</blockquote>
+    <figcaption class="t-cap"><b>A real request, with no design words in it.</b> The redesign is built around answering this one well.</figcaption>
+  </figure>
 </section>
 
+<section class="t-sec" aria-labelledby="orb-h">
+  <div class="t-text">
+    <h2 class="t-h" id="orb-h">We redesigned it as Orb, a design consultant.</h2>
+    <p class="t-p">Orb is our redesign of Canva AI. It sits beside your design, works in the file you have open, and asks before it changes anything. Step through one conversation with it.</p>
+  </div>
+  <div class="cv-steps" data-steps>
+    <ol class="cv-steps-list">
+      <li><button type="button" aria-pressed="true" data-step="0"><b>1</b><span><strong>It starts where you are</strong><em>Orb opens beside your design with an example prompt. Type or talk to it.</em></span></button></li>
+      <li><button type="button" aria-pressed="false" data-step="1"><b>2</b><span><strong>It shows that it is working</strong><em>Asked for a review, it scans the poster and says so while it looks.</em></span></button></li>
+      <li><button type="button" aria-pressed="false" data-step="2"><b>3</b><span><strong>It knows what &ldquo;usual&rdquo; means</strong><em>&ldquo;My usual font size&rdquo; brings in the type styles from earlier projects.</em></span></button></li>
+      <li><button type="button" aria-pressed="false" data-step="3"><b>4</b><span><strong>It diagnoses, then asks</strong><em>&ldquo;Feels monotonous&rdquo; is treated as a problem. Orb names the layout issue and asks before fixing it.</em></span></button></li>
+      <li><button type="button" aria-pressed="false" data-step="4"><b>5</b><span><strong>It keeps what you asked it to keep</strong><em>&ldquo;A similar version in blue&rdquo; changes the background and nothing else.</em></span></button></li>
+      <li><button type="button" aria-pressed="false" data-step="5"><b>6</b><span><strong>It does two things at once</strong><em>One message saves the changes and renames the file.</em></span></button></li>
+    </ol>
+    <div class="t-media"><div class="cv-steps-view" aria-live="polite">
+      <img class="on" src="ui/canva/steps/1.webp" width="1240" height="774" alt="Orb opens beside the poster with a microphone, the title Canva Orb and an example prompt" loading="lazy" decoding="async">
+      <img src="ui/canva/steps/2.webp" width="1240" height="774" alt="A blue sheen over the poster while Orb shows scanning design" loading="lazy" decoding="async">
+      <img src="ui/canva/steps/3.webp" width="1240" height="774" alt="Orb replies that the heading and subheadings now use the same font styles as previous projects" loading="lazy" decoding="async">
+      <img src="ui/canva/steps/4.webp" width="1240" height="774" alt="Orb suggests aligning the heading left and moving the date and venue down, and asks: Want me to show you how?" loading="lazy" decoding="async">
+      <img src="ui/canva/steps/5.webp" width="1240" height="774" alt="A second poster with a blue background beside the first, same layout, with Orb asking if it is ready to export" loading="lazy" decoding="async">
+      <img src="ui/canva/steps/6.webp" width="1240" height="774" alt="The file now titled Bharat Expo Poster in the top bar, and Orb replying All done" loading="lazy" decoding="async">
+    </div></div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="cv-try">
+  <div class="t-text">
+    <h2 class="t-h" id="cv-try">Try step 4 yourself.</h2>
+    <p class="t-p">Canva&rsquo;s editor with Orb, rebuilt in code. Press send, and Orb reviews the poster, then asks before it changes anything.</p>
+  </div>
+  <div class="t-feat">
+    <div class="t-media">
+      <div class="stage" data-w="1880" data-min="0.32" data-focus="0.97"><div>
+      <div class="cv-ui" id="cva" aria-label="Canva editor with the redesigned Orb assistant">
+        <header class="cv-top">
+          <span class="i"><i data-lucide="menu"></i></span><span>File</span>
+          <span class="crown"><i data-lucide="crown"></i>Resize</span>
+          <span class="edit"><i data-lucide="pencil"></i>Editing<i data-lucide="chevron-down"></i></span>
+          <span class="div"></span><span class="i"><i data-lucide="undo-2"></i></span><span class="i dim"><i data-lucide="redo-2"></i></span>
+          <span class="div"></span><span class="i"><i data-lucide="cloud"></i></span>
+          <span class="grow"></span>
+          <span class="doc">Untitled Design - Poster</span>
+          <span class="pro"><i data-lucide="crown"></i>Upgrade to Canva Pro</span>
+          <span class="me">PT</span><span class="plus"><i data-lucide="plus"></i></span>
+          <span class="sq"><i data-lucide="chart-no-axes-column"></i></span><span class="sq"><i data-lucide="message-circle"></i></span>
+          <span class="present"><i data-lucide="presentation"></i>Present</span>
+          <span class="share"><i data-lucide="share"></i>Share</span>
+        </header>
+        <aside class="cv-rail">
+          <span><i data-lucide="panel-left"></i>Design</span><span><i data-lucide="shapes"></i>Elements</span><span><i data-lucide="type"></i>Text</span>
+          <span><i data-lucide="briefcase"></i>Brand</span><span><i data-lucide="cloud-upload"></i>Uploads</span><span><i data-lucide="pen-tool"></i>Tools</span>
+          <span><i data-lucide="folder"></i>Projects</span><span><i data-lucide="blocks"></i>Apps</span><hr>
+          <span><i data-lucide="image-plus"></i>Magic Media</span><span><i data-lucide="chart-no-axes-column"></i>Charts</span>
+        </aside>
+        <div class="cv-canvas">
+          <div class="cv-poster">
+            <img class="a" src="ui/canva/poster-a.webp" width="450" height="644" alt="The Bharat AI Expo 2025 poster, with the title, date and venue centred">
+            <img class="b" src="ui/canva/poster-b.webp" width="450" height="644" alt="The same poster rearranged: title, date and venue aligned left, entry fee further down" loading="lazy">
+            <span class="sheen" aria-hidden="true"></span>
+          </div>
+          <div class="cv-pages"><span class="thumb"><img src="ui/canva/poster-a.webp" alt=""><b>1</b></span><span class="add"><i data-lucide="plus"></i></span><span class="more"><i data-lucide="chevron-down"></i></span></div>
+        </div>
+        <section class="cv-orb" aria-label="Orb assistant">
+          <span class="x"><i data-lucide="x"></i></span>
+          <img class="ball" src="ui/canva/orb.png" width="160" height="160" alt="">
+          <div class="cv-chat" aria-live="polite">
+            <p class="ai old">Applied. The heading and subheadings now use the same font styles as previous projects for consistency. Anything else?</p>
+          </div>
+          <form class="cv-input" onsubmit="return false">
+            <input type="text" readonly placeholder="Enter text..." value="I am all out of content to put and this poster still feels monotonous." aria-label="Message to Orb">
+            <button type="submit" class="send" aria-label="Send"><i data-lucide="send-horizontal"></i></button>
+          </form>
+        </section>
+        <footer class="cv-bot">
+          <span><i data-lucide="notebook-pen"></i>Notes</span><span><i data-lucide="square-play"></i>Duration</span><span><i data-lucide="timer"></i>Timer</span>
+          <span class="grow"></span>
+          <span class="slider"><i></i></span><span class="pct">59%</span>
+          <span class="pages"><i data-lucide="layout-panel-top"></i>Pages</span><span>1 / 10</span>
+          <span class="i"><i data-lucide="grid-2x2"></i></span><span class="i"><i data-lucide="maximize-2"></i></span><span class="i"><i data-lucide="circle-help"></i></span>
+        </footer>
+      </div>
+    </div></div>
+    </div>
+    <button type="button" class="cv-replay" hidden>Play it again</button>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="cv-out">
+  <div class="t-text">
+    <h2 class="t-h" id="cv-out">Orb fixes what Canva AI got wrong.</h2>
+  </div>
+  <dl class="t-rows swap">
+    <div class="t-rows-h" aria-hidden="true"><span>Canva AI today</span><span>Orb</span></div>
+    <div><dt>Opened a new file</dt><dd>Works in the file you have open</dd></div>
+    <div><dt>Read &ldquo;more intense&rdquo; as bold</dt><dd>Knows what &ldquo;my usual font size&rdquo; means</dd></div>
+    <div><dt>Did exactly what was typed</dt><dd>Diagnoses the problem, then asks</dd></div>
+    <div><dt>Moved text it was told to keep</dt><dd>Keeps the layout and text it is told to keep</dd></div>
+    <div><dt>Needed trial and error</dt><dd>Takes two requests in one message</dd></div>
+  </dl>
+</section>
+
+<section class="t-sec" aria-labelledby="cv-film">
+  <div class="t-text">
+    <h2 class="t-h" id="cv-film">Watch the whole conversation.</h2>
+    <p class="t-p">Orb on the real poster, from the first question to the renamed file. Jump to any part.</p>
+  </div>
+  <div class="t-media film">
+  <figure class="vp" data-dur="63.9" style="--ar:1600/774">
+  <div class="vp-screen">
+    <video poster="vid/canva-ai.webp" width="1600" height="774" muted loop playsinline preload="none" aria-label="Walkthrough of the redesigned Canva AI prototype"><source src="vid/canva-ai.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/canva-ai.webm" type='video/webm; codecs="vp9"'></video>
+    <button type="button" class="vp-big" aria-label="Play video"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+  </div>
+  <div class="vp-bar">
+    <button type="button" class="vp-play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z"/></svg></button>
+    <button type="button" class="vp-back vp-skip" aria-label="Back 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 3.5v4h4"/></svg><b>10</b></button>
+    <button type="button" class="vp-fwd vp-skip" aria-label="Forward 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 3.5v4h-4"/></svg><b>10</b></button>
+    <span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-dur"> / 1:03</span></span>
+    <div class="vp-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="63" aria-valuenow="0" aria-valuetext="0:00 of 1:03"><i class="vp-mark" style="left:12.52%"></i><i class="vp-mark" style="left:25.04%"></i><i class="vp-mark" style="left:37.56%"></i><i class="vp-mark" style="left:56.34%"></i><i class="vp-mark" style="left:68.86%"></i><i class="vp-mark" style="left:81.38%"></i><div class="vp-fill"></div><div class="vp-knob"></div></div>
+    <button type="button" class="vp-full" aria-label="Full screen"><svg class="i-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M20 15h-5v5M4 15h5v5"/></svg></button>
+  </div>
+  <ol class="vp-ch" aria-label="Chapters"><li><button type="button" data-t="0"><span>0:00</span>Ask Orb</button></li><li><button type="button" data-t="8"><span>0:08</span>Poster review</button></li><li><button type="button" data-t="16"><span>0:16</span>Fonts applied</button></li><li><button type="button" data-t="24"><span>0:24</span>New layout</button></li><li><button type="button" data-t="36"><span>0:36</span>Second version</button></li><li><button type="button" data-t="44"><span>0:44</span>Invite message</button></li><li><button type="button" data-t="52"><span>0:52</span>Save and rename</button></li></ol>
+</figure>
+  </div>
+</section>
+
+</div>
+</div>
 <section class="sec end">
   <a class="bh" href="canva-ai-full.html" data-cursor="Read" data-reveal>
     <div>
-      <h2>VIEW FULL PROJECT</h2>
-      <p>Every slide of the case study, on one page.</p>
+      <h2>VIEW FULL CASE STUDY</h2>
+      <p>The research, the models and every slide of the case study, on one page.</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
@@ -92,6 +240,8 @@
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../lab.js"></script>
+<script src="ui/lucide.js"></script>
+<script src="ui/canva-ai.js"></script>
 <script src="work.js"></script>
 </body>
 </html>

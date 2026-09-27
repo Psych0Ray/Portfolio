@@ -4,15 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICCC Surveillance · Rutujeet’s Portfolio</title>
-<meta name="description" content="A redesign of the monitoring dashboard at the Integrated Command and Control Centre in Taloja MIDC, where a single screen watches an entire industrial…">
+<meta name="description" content="A redesign of the monitoring dashboard at MIDC’s Integrated Command and Control Centre (ICCC) in Taloja, rebuilt around how operators check, escalate and…">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
 <link rel="stylesheet" href="work.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/iccc-surveillance.css">
 </head>
 <body>
 
@@ -20,7 +22,7 @@
 <div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1"><svg viewBox="0 0 1062 1014" aria-hidden="true"><rect width="1062" height="1014"/><path transform="matrix(1 0 0 -1 142 853.5)" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span></a>
   <span class="grow"></span>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
@@ -33,30 +35,116 @@
   <div class="meta"><div><b>Course</b><span>Object-oriented UX</span></div><div><b>My role</b><span>High-Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming</span></div><div><b>Methods</b><span>Field observation, interviews, task modelling</span></div><div><b>Year</b><span>2026</span></div></div>
 </header>
 
-<div class="cover"><div class="frame"><img src="img/iccc-surveillance/01.webp" width="2880" height="1643" alt="ICCC Surveillance cover" loading="eager" fetchpriority="high" decoding="async"></div></div>
-
-<section class="about">
-  <p>A redesign of the monitoring dashboard at the Integrated Command and Control Centre in Taloja MIDC, where a single screen watches an entire industrial estate. Using object-oriented UX, we rebuilt it around how operators actually verify, escalate and resolve alerts, and cut what they have to keep in their head by 73.4%.</p>
+<div class="deck p-iccc-surveillance">
+<figure class="t-cover"><img src="img/iccc-surveillance/01.webp" width="2880" height="1643" alt="ICCC Surveillance cover" loading="eager" fetchpriority="high" decoding="async"></figure>
+<div class="t-body">
+<section class="t-sec">
+  <p class="t-lead">MIDC, the Maharashtra Industrial Development Corporation, runs the state&rsquo;s industrial estates. Its Integrated Command and Control Centre (ICCC) at Taloja watches the whole estate on a single dashboard.</p>
+  <ul class="t-facts" aria-label="Taloja MIDC at a glance">
+    <li><b>950+</b><span>industries</span></li>
+    <li><b>900</b><span>hectares</span></li>
+    <li><b>1000+</b><span>connected devices</span></li>
+    <li><b>24/7</b><span>monitoring</span></li>
+  </ul>
 </section>
 
-<section class="story" data-reveal>
-  <div class="sc"><h2>The brief</h2><p>The command centre at Taloja MIDC watches one industrial estate: 310 cameras, 349 street lights and over a thousand smart poles, spread across 900 hectares and 950 factories. It all lands on one dashboard, and someone is watching it every hour of the day. Our job was to redesign that dashboard using object-oriented UX.</p></div>
-  <div class="sc"><h2>The aim</h2><p>We wanted the dashboard to fit the operator’s real job, not just to look better. A day in the command centre and interviews with six operators showed us what that job is: checking alerts, sending out field teams and keeping records. All three were happening off the dashboard, by hand, over WhatsApp and in a shared sheet at the end of each shift. The aim was to bring them into one place, and to cut how much an operator has to keep in their head.</p></div>
-  <div class="sc"><h2>The outcome</h2><p>Regrouping the system’s objects and actions cut what an operator has to hold in their head from 408 bits of information down to 109, a drop of 73.4%. The new dashboard is built on that. Alerts cluster on a live map. A device card opens in one click and can be acknowledged from there. Alerts can be cleared in bulk, repeat failures get flagged, and a tickets section replaces the WhatsApp thread.</p></div>
-</section>
-<section class="film"><div class="film-stage"><div class="film-box" style="--ar:1600/828"><video poster="vid/iccc-surveillance.webp" width="1600" height="828" muted loop playsinline preload="none" aria-label="Walkthrough of the working ICCC dashboard prototype"><source src="vid/iccc-surveillance.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/iccc-surveillance.webm" type='video/webm; codecs="vp9"'></video></div></div></section>
-
-<section class="shots">
-  <div class="frame"><img src="img/iccc-surveillance/02.webp" width="2880" height="1649" alt="Live map dashboard with device clusters and filters" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/iccc-surveillance/03.webp" width="2880" height="1695" alt="Device cards with status, event logs and one-click acknowledge" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/iccc-surveillance/04.webp" width="2880" height="1829" alt="Alert summary dashboard with pinned counts across domains" loading="lazy" decoding="async"></div>
+<section class="t-sec" aria-labelledby="ic-p">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-p">But the dashboard only raised the alarm.</h2>
+    <p class="t-p">Cameras, smart poles, street lights, sensors and water meters all report to it. Checking an alert, sending a field team and keeping the record all happened by hand, over WhatsApp and a shared sheet filled in at the end of each shift.</p>
+  </div>
 </section>
 
+<section class="t-sec" aria-labelledby="ic-h">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-h">We rebuilt it around what operators do.</h2>
+    <p class="t-p">See an alert, check it, send someone, close it. Every screen shortens one of those steps.</p>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">The live map is the home screen</h3>
+      <p class="t-p">Alerts stay pinned on it, devices are coloured by status, and crowded areas fold into numbered clusters.</p>
+    </div>
+    <div class="t-media screen"><img class="shot" src="ui/iccc/map.webp" width="1600" height="1004" alt="The ICCC live map of Taloja: zones, coloured device pins and numbered clusters, with filters along the top" loading="lazy" decoding="async"></div>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">One click opens the whole device</h3>
+      <p class="t-p">Acknowledge or ignore it from the card. The full report adds the event log and a progress timeline.</p>
+    </div>
+    <div class="t-media"><div class="duo ic-duo">
+      <img class="shot" src="ui/iccc/card-t.webp" width="534" height="640" alt="Device card for Water Meter 14: critical meter malfunction in the C2 Assembly Area, with Acknowledge, Ignore and View Full Report" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/report-t.webp" width="670" height="1032" alt="The full report for the same meter: status, severity, location, action progress, issue description and event log" loading="lazy" decoding="async">
+    </div></div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-h2">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-h2">Everything after the alarm now has a place.</h2>
+    <p class="t-p">Escalating, assigning and messaging used to happen outside the dashboard. Now each has its own screen.</p>
+  </div>
+  <div class="t-slides" data-slides>
+    <div class="t-slides-view" aria-live="polite">
+      <img class="shot on" src="ui/iccc/panel.webp" width="1600" height="826" alt="The map with the Active Alerts panel and an AI Overview open on the right" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/escalation.webp" width="1600" height="1023" alt="The Escalation tab: a board of escalated alerts, each with its timeline, assignee and Ping and Escalate buttons" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/tickets.webp" width="1600" height="1004" alt="Work Tickets for the field supervisor: a toxic gas alert ticket with its details and an Assign Task list of engineers" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/messages.webp" width="1600" height="1004" alt="Messages: an All Staff broadcast channel with emergency notices, and conversations with field staff" loading="lazy" decoding="async">
+      <button type="button" class="t-slides-arrow bwd" data-dir="-1" aria-label="Previous screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+      <button type="button" class="t-slides-arrow fwd" data-dir="1" aria-label="Next screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
+    </div>
+    <div class="t-slides-tabs" role="group" aria-label="Choose a screen">
+      <button type="button" aria-pressed="true"><i aria-hidden="true"></i><b>Side panel</b><span>Every active alert beside the map, with an AI overview of repeat failures.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Escalation</b><span>Every open alert at every level, with Ping and Escalate on the card.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Tickets</b><span>The field supervisor picks a ticket, picks an agent, and it is assigned.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Messages</b><span>Linked to the device they are about, with one broadcast for emergencies.</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-out">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-out">Operators hold far less in their head.</h2>
+    <p class="t-p">We counted the bits of information an operator has to keep in mind to handle alerts, before and after.</p>
+  </div>
+  <div class="t-drop">
+    <div class="was"><b>408</b><span>before</span></div>
+    <div class="to" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></div>
+    <div><b>109</b><span>after, 73.4% fewer</span></div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-film">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-film">See the prototype working.</h2>
+    <p class="t-p">From the live map to tickets and escalation. Jump to any part.</p>
+  </div>
+  <div class="t-media film">
+  <figure class="vp" data-dur="229.7" style="--ar:1600/828">
+  <div class="vp-screen">
+    <video poster="vid/iccc-surveillance.webp" width="1600" height="828" muted loop playsinline preload="none" aria-label="Walkthrough of the working ICCC dashboard prototype"><source src="vid/iccc-surveillance.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/iccc-surveillance.webm" type='video/webm; codecs="vp9"'></video>
+    <button type="button" class="vp-big" aria-label="Play video"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+  </div>
+  <div class="vp-bar">
+    <button type="button" class="vp-play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z"/></svg></button>
+    <button type="button" class="vp-back vp-skip" aria-label="Back 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 3.5v4h4"/></svg><b>10</b></button>
+    <button type="button" class="vp-fwd vp-skip" aria-label="Forward 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 3.5v4h-4"/></svg><b>10</b></button>
+    <span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-dur"> / 3:49</span></span>
+    <div class="vp-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="229" aria-valuenow="0" aria-valuetext="0:00 of 3:49"><i class="vp-mark" style="left:5.22%"></i><i class="vp-mark" style="left:12.19%"></i><i class="vp-mark" style="left:34.83%"></i><i class="vp-mark" style="left:43.54%"></i><i class="vp-mark" style="left:62.69%"></i><i class="vp-mark" style="left:71.40%"></i><i class="vp-mark" style="left:83.59%"></i><div class="vp-fill"></div><div class="vp-knob"></div></div>
+    <button type="button" class="vp-full" aria-label="Full screen"><svg class="i-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M20 15h-5v5M4 15h5v5"/></svg></button>
+  </div>
+  <ol class="vp-ch" aria-label="Chapters"><li><button type="button" data-t="0"><span>0:00</span>Live map</button></li><li><button type="button" data-t="12"><span>0:12</span>Device card</button></li><li><button type="button" data-t="28"><span>0:28</span>Active alerts</button></li><li><button type="button" data-t="80"><span>1:20</span>Device health</button></li><li><button type="button" data-t="100"><span>1:40</span>Alert list</button></li><li><button type="button" data-t="144"><span>2:24</span>Work tickets</button></li><li><button type="button" data-t="164"><span>2:44</span>Escalation chat</button></li><li><button type="button" data-t="192"><span>3:12</span>Ticket progress</button></li></ol>
+</figure>
+  </div>
+</section>
+
+</div>
+</div>
 <section class="sec end">
   <a class="bh" href="iccc-surveillance-full.html" data-cursor="Read" data-reveal>
     <div>
-      <h2>VIEW FULL PROJECT</h2>
-      <p>Every slide of the case study, on one page.</p>
+      <h2>VIEW FULL CASE STUDY</h2>
+      <p>The research, the models and every slide of the case study, on one page.</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
@@ -92,6 +180,7 @@
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../lab.js"></script>
+
 <script src="work.js"></script>
 </body>
 </html>

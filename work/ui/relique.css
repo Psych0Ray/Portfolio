@@ -1,0 +1,167 @@
+/* Relique, rebuilt from the website prototype (Figma deck 2266:15159 and the walkthrough
+   recording): black ground, Geist for the interface (the "Ancient one" card, 2010:998),
+   Gelasio for the RELIQUE wordmark (2303:809), grey-gradient artifact cards that turn white
+   on hover, and the My Story viewer: seven progress bars, a full-bleed scene, the narration
+   on a dark band, round grey arrows. Laid out at the site's 1200px content width.
+   The scenes are the project's own images; the words on them are live text. Scoped to .rl-ui.
+   The page around it wears the deck (2266:15159): the #100800 ground, Gelasio display type in
+   the deck's warm grey #c0ae9c, Geist for everything else, and the rust #9a5a27 of its labels. */
+
+.p-relique{--d-bg:#100800;--d-fg:#f2ebe3;--d-dim:rgba(255,255,255,.7);--d-soft:rgba(255,255,255,.48);--d-line:#3a2c20;--d-card:#1b120a;
+  --d-accent:#c07a42;--d-on-accent:#100800;--d-font:'Geist',system-ui,sans-serif;--d-head:'Gelasio',Georgia,serif;
+  --d-hw:400;--d-lw:400;--d-bw:500;--d-htrack:-.01em;--d-r:6px;--d-sr:4px;
+  --d-shadow:0 0 0 1px rgba(255,236,214,.09),0 30px 60px -30px rgba(0,0,0,.9)}
+/* the nav while the trailer is under it (work.css, INSIDE THE WORK) */
+.on-deck{--n-bg:#1b120a;--n-fg:#f2ebe3;--n-line:#3a2c20;--n-accent:#c07a42;--n-on-accent:#100800;--n-shadow:0 12px 30px -12px rgba(0,0,0,.75)}
+
+.p-relique .t-h,.p-relique .t-lead{color:#d9cabb}
+.p-relique .t-h3{font-family:'Geist',sans-serif;font-weight:500}
+
+/* the problem: a plain museum label */
+.museum-label{width:min(100%,380px);background:#f4efe7;padding:26px 28px 24px;box-shadow:var(--d-shadow);
+  font-family:'Geist',system-ui,sans-serif;color:#1c1c1c;display:flex;flex-direction:column;gap:6px}
+.museum-label b{font-size:19px;line-height:1.25;font-weight:600;margin-bottom:6px}
+.museum-label span{font-size:15px;line-height:1.35;color:#3a3a3a}
+.museum-label small{margin-top:14px;font-size:12.5px;line-height:1.4;color:#6a6a6a}
+
+/* the three moves, as the note beside the site */
+.rl-moves{list-style:none;counter-reset:mv;display:flex;flex-direction:column;gap:16px}
+.rl-moves li{counter-increment:mv;position:relative;padding-left:28px}
+.rl-moves li::before{content:counter(mv);position:absolute;left:0;top:-1px;font-family:'Gelasio',serif;font-size:18px;line-height:1.4;color:var(--d-accent)}
+.t-media > .stage .rl-ui{outline:1px solid #2e2419}
+
+/* the site's three signs, in Relique's own look */
+.t-sec > .rl-signs{grid-column:4 / -1}
+.rl-signs{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gut)}
+.rl-signs li{display:flex;flex-direction:column;gap:22px;padding-top:26px;border-top:1px solid var(--d-line)}
+.rl-signs .g{display:flex;gap:10px}
+.rl-signs svg{width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.rl-signs li:first-child svg{fill:#fff;stroke:none}
+.rl-signs b{font-size:17px;font-weight:500;color:#fff}
+
+/* one story into four: the armour's story on the left, the cards that open from inside it on the right */
+.rl-tree{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:0 56px;align-items:center;width:100%;max-width:1160px}
+.rl-root{margin:0;position:relative}
+.rl-root img{display:block;width:100%;height:auto;border-radius:var(--d-sr)}
+.rl-root figcaption{margin-top:16px}
+.rl-root small,.rl-branches small{display:block;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#c07a42}
+.rl-root b{display:block;margin-top:6px;font-family:'Gelasio',serif;font-weight:400;font-size:24px;color:#e8ddd0}
+.rl-root span{display:block;margin-top:4px;font-size:14px;color:rgba(255,255,255,.55)}
+.rl-branches{list-style:none;display:flex;flex-direction:column;gap:12px;position:relative;padding-left:40px}
+.rl-branches::before{content:"";position:absolute;left:0;top:10%;bottom:10%;border-left:1px solid #c07a42}
+.rl-branches li{position:relative;display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;align-items:center;
+  background:rgba(255,255,255,.93);color:#000;padding:12px 18px 12px 12px}
+.rl-branches li::before{content:"";position:absolute;left:-40px;top:50%;width:40px;border-top:1px solid #c07a42}
+.rl-branches img{display:block;width:112px;height:96px;object-fit:cover}
+.rl-branches small{color:#8a5226}
+.rl-branches b{display:block;margin-top:3px;font-size:17px;font-weight:600}
+.rl-branches p{margin-top:4px;font-size:13.5px;line-height:1.4;color:#333}
+.rl-branches span{display:inline-block;margin-top:8px;padding:6px 12px;background:#000;color:#fff;font-size:12.5px;font-weight:500}
+@media (max-width:900px){
+  .t-sec > .rl-signs{grid-column:1 / -1}
+  .rl-tree{grid-template-columns:minmax(0,1fr);gap:32px}
+  .rl-branches{padding-left:24px}
+  .rl-branches li::before{left:-24px;width:24px}
+}
+@media (max-width:640px){
+  .rl-signs{grid-template-columns:minmax(0,1fr);row-gap:28px}
+  .rl-branches li{grid-template-columns:84px minmax(0,1fr);gap:12px}
+  .rl-branches img{width:84px;height:84px}
+}
+
+.rl-ui,.rl-ui *{box-sizing:border-box;margin:0;padding:0}
+.rl-ui{width:1200px;background:#000;color:#fff;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-align:left;letter-spacing:0;
+  position:relative;overflow:hidden}
+.rl-ui :where(button){font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.rl-nav{height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 89px 0 84px;border-bottom:1px solid #2b2b2b}
+.rl-logo{font-family:'Gelasio',serif;font-size:27px;letter-spacing:-.01em}
+.rl-nav nav{display:flex;gap:46px;font-size:14px;font-weight:500}
+
+/* home: featured artifacts */
+.rl-home{padding:62px 0 0}
+.rl-home h4{padding-left:85px;font-size:33px;font-weight:500;letter-spacing:-.01em}
+.rl-cards{position:relative;display:flex;gap:20px;padding:26px 0 0 83px}
+.rl-card{position:relative;width:242px;height:279px;background:linear-gradient(180deg,#272727 0%,#2f2f2f 30%,#515151 100%);overflow:hidden;outline-offset:3px}
+.rl-card .t{position:absolute;left:14px;top:30px;font-size:17px;line-height:23px;font-weight:500;color:#fff}
+.rl-card .obj{position:absolute;left:0;bottom:0;width:242px;height:187px;display:block}
+.rl-card .hov{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .25s ease;pointer-events:none}
+.rl-card .hov img{position:absolute;left:0;top:85px;width:242px;height:92px}
+.rl-card .hov p{position:absolute;left:14px;right:14px;top:180px;font-size:10.5px;line-height:13.5px;font-weight:500;color:#000}
+.rl-card .my{position:absolute;right:11px;bottom:12px;height:24px;padding:0 9px;background:#000;color:#fff;font-size:12px;font-weight:500}
+.rl-card.live{cursor:pointer}
+.rl-card.live:hover .hov,.rl-card.live:focus-within .hov,.rl-card.live.on .hov{opacity:1;pointer-events:auto}
+.rl-card.live:hover .t,.rl-card.live:focus-within .t,.rl-card.live.on .t{color:#000;z-index:1}
+.rl-next{position:absolute;left:1087px;top:137px;width:58px;height:58px;border-radius:50%;background:#d9d9d9;display:grid;place-items:center}
+/* the prototype's arrows: a bold chevron about 40% of the circle */
+.rl-next svg,.rl-arrow svg{width:32px;height:32px;fill:none;stroke:#000;stroke-width:2.75;stroke-linecap:round;stroke-linejoin:round}
+.rl-banner{display:block;width:1200px;height:188px;margin-top:60px}
+
+/* My Story */
+.rl-story[hidden],.rl-home[hidden]{display:none}
+.rl-bars{display:flex;gap:15px;padding:38px 90px 37px 83px}
+.rl-bars i{flex:1;height:3px;background:#4a4a4a;transition:background .3s}
+.rl-bars i.on{background:#fff}
+.rl-frame{position:relative;width:1200px;height:684px;overflow:hidden;background:#0b0b0b}
+.rl-imgs{position:absolute;left:0;top:0;width:1200px;height:536px}
+.rl-imgs img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease}
+.rl-imgs img.on{opacity:1}
+/* the narration band, below the scene (the recording's own caption is cropped off the images) */
+.rl-band{position:absolute;left:0;right:0;bottom:0;height:148px;background:#0b0b0b}
+.rl-band::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:90px;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(11,11,11,0),#0b0b0b)}
+.rl-text{position:absolute;left:83px;top:26px;width:865px;font-size:19.5px;line-height:26px;font-weight:500;color:#fff}
+.rl-text.in{animation:rl-in .45s ease}
+@keyframes rl-in{from{opacity:0;transform:translateY(6px)}}
+/* hovered, the prototype's arrow turns white inside a dark ring */
+.rl-arrow{position:absolute;top:46px;width:56px;height:56px;border-radius:50%;background:#d9d9d9;display:grid;place-items:center;transition:background .15s,box-shadow .15s}
+.rl-arrow:hover{background:#fff;box-shadow:inset 0 0 0 2px #111}
+.rl-arrow:active{background:#ececec}
+/* not .prev/.next: the site styles .next as its next-project card */
+.rl-arrow.bwd{left:1010px}
+.rl-arrow.fwd{left:1110px}
+.rl-arrow[hidden]{display:none}
+.rl-x{position:absolute;right:34px;top:34px;width:44px;height:44px;border-radius:50%;background:rgba(210,210,210,.85);display:grid;place-items:center}
+.rl-x svg{width:24px;height:24px;fill:none;stroke:#111;stroke-width:2;stroke-linecap:round}
+/* the artifact's title card: My story opens it, Start Story or a key frame begins the story */
+.rl-ov[hidden]{display:none}
+.rl-ov{position:absolute;left:0;right:0;top:88px;bottom:0;background:rgba(0,0,0,.72);z-index:3}
+.rl-ov-box{position:absolute;left:220px;top:40px;bottom:0;width:760px;background:#000;border:1px solid #2a2a2a;border-bottom:0;
+  overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;padding-bottom:28px}
+.rl-ov-box::-webkit-scrollbar{display:none}
+.rl-ov-hero{position:relative;height:372px;overflow:hidden}
+.rl-ov-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.rl-ov-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 45%,#000 100%)}
+.rl-ov-hero .rl-x{right:36px;top:30px;z-index:1}
+.rl-ov-hero h5{position:absolute;left:48px;bottom:14px;z-index:1;font-size:30px;line-height:38px;font-weight:400;color:#fff}
+.rl-ui .rl-start{position:absolute;right:50px;bottom:24px;z-index:1;display:flex;align-items:center;gap:14px;height:36px;padding:0 22px 0 18px;
+  background:#fff;color:#000;font-size:15px;font-weight:500}
+.rl-start svg{width:20px;height:20px;fill:#000}
+.rl-ui .rl-start:hover{background:#e8e8e8}
+.rl-ov-meta{display:flex;flex-wrap:wrap;gap:18px 40px;padding:26px 48px 0}
+.rl-ov-meta span{display:flex;align-items:center;gap:12px;font-size:17px;color:#e6e6e6}
+.rl-ov-meta span:first-child{flex-basis:100%}
+.rl-ov-meta svg{width:24px;height:24px;fill:none;stroke:#bdbdbd;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rl-ov-desc{padding:30px 48px 0;font-size:15px;line-height:19.5px;color:#e6e6e6}
+.rl-ov h6{padding:46px 48px 16px;font-size:21px;font-weight:400;color:#fff}
+.rl-kf{list-style:none;margin:0 48px}
+.rl-kf button{display:flex;align-items:center;gap:28px;width:100%;height:115px;border-bottom:1px solid #3a3a3a;text-align:left;transition:background .15s}
+.rl-kf button:hover,.rl-kf button:focus-visible{background:#333}
+.rl-kf img{width:150px;height:100px;object-fit:cover;flex:none}
+.rl-kf span{font-size:20px;line-height:1.3;color:#fff}
+.rl-kf small{display:block;font-size:20px;color:#8c8c8c}
+
+/* people and things in a scene that open their own story */
+.rl-hot{position:absolute;inset:0 0 148px 0}
+.rl-spot{position:absolute;cursor:pointer}
+.rl-pop{position:absolute;width:273px;padding:25px 25px 20px;background:rgba(255,255,255,.93);color:#000;opacity:0;visibility:hidden;
+  transform:translateY(6px);transition:opacity .2s,transform .2s,visibility .2s;z-index:2}
+.rl-pop.on{opacity:1;visibility:visible;transform:none}
+.rl-pop b{display:block;font-size:20px;line-height:26px;font-weight:600}
+.rl-pop p{margin-top:12px;font-size:14px;line-height:19px}
+.rl-pop span{display:block;margin-top:20px;height:42px;line-height:42px;text-align:center;background:#000;color:#fff;font-size:14px;font-weight:500}
+
+@media (prefers-reduced-motion:reduce){
+  .rl-imgs img,.rl-card .hov,.rl-pop,.rl-bars i{transition:none}
+  .rl-text.in{animation:none}
+}

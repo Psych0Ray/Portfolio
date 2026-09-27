@@ -1,0 +1,154 @@
+/* Canva AI, rebuilt from the redesign's own editor captures (Figma 2304:1553 and 2304:1594,
+   the 1880 x 908 fills "image 30" and "image 29"). Canva's editor chrome: the teal-to-violet
+   bar, the #f0f1f5 canvas, Noto Sans; and the redesigned Orb panel with its gradient header
+   and gradient replies. The posters are the user's own design in Canva, so they stay images.
+   Laid out at 1880 x 908 and scaled to fit by work.js. Scoped to .cv-ui. */
+
+.p-canva-ai{--d-bg:#fff;--d-fg:#1d1d28;--d-dim:#474b57;--d-soft:#6b7180;--d-line:#dfe3ec;--d-card:#fff;--d-accent:#8b3dff;--d-on-accent:#fff;
+  --d-font:'Noto Sans',system-ui,sans-serif;--d-head:'Noto Sans',system-ui,sans-serif;--d-hw:500;--d-lw:400;--d-bw:600;
+  --d-htrack:-.02em;--d-r:18px;--d-sr:12px;--d-shadow:0 0 0 1px rgba(14,19,24,.07),0 30px 60px -30px rgba(76,56,160,.4)}
+/* the nav while the trailer is under it (work.css, INSIDE THE WORK) */
+.on-deck{--n-bg:#fff;--n-fg:#1d1d28;--n-line:#e4e2ee;--n-accent:#8b3dff;--n-on-accent:#fff;--n-shadow:0 12px 30px -16px rgba(76,56,160,.35)}
+
+/* the deck's headings run teal to violet, like the Orb */
+.p-canva-ai .t-h{background:linear-gradient(90deg,#1b93b3 0%,#4f63dc 55%,#7b48e2 100%);-webkit-background-clip:text;background-clip:text;
+  color:transparent;padding-bottom:.08em}
+
+/* who uses Canva: the deck's bar charts, standing on a baseline */
+.cv-bars{--max:22.51;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:end;width:100%;max-width:560px;
+  padding-top:8px}
+.cv-bars li{display:grid;justify-items:center;text-align:center}
+.cv-bars b{font-size:13px;font-weight:500;color:#5a5f6b;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.cv-bars i{display:block;width:26px;height:calc(var(--v) / var(--max) * 180px);min-height:6px;background:#883cfc;border-radius:3px 3px 0 0}
+.cv-bars span{width:100%;padding-top:12px;border-top:1px solid var(--d-line);font-size:13px;line-height:1.3;color:#3c3f48;min-height:2.6em}
+
+/* the request, set as the prompt box the deck uses for its test prompts */
+.cv-ask{width:min(100%,560px);background:#fff;border:1px solid #e4e2ee;border-radius:16px;padding:24px 26px 60px;position:relative;
+  box-shadow:var(--d-shadow);font-weight:500;font-size:clamp(19px,1.7vw,24px);line-height:1.4;color:#1d1d28}
+.cv-ask::after{content:"";position:absolute;right:16px;bottom:14px;width:32px;height:32px;border-radius:50%;
+  background:#efeff5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9aa8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/16px no-repeat}
+
+/* the redesign, one step at a time: the steps on columns 1-4, the frame on 5-12 */
+.cv-steps{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:24px;align-items:start}
+.cv-steps-list{grid-column:1 / span 4;list-style:none;display:flex;flex-direction:column;gap:6px}
+.cv-steps > .t-media{grid-column:5 / -1}
+.cv-steps-list button{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;align-items:start;width:100%;text-align:left;
+  padding:14px 16px;border-radius:14px;background:transparent;border:1.5px solid transparent;font:inherit;color:inherit;
+  cursor:pointer;transition:background .2s,border-color .2s}
+.cv-steps-list button:hover{background:#f6f4fd}
+.cv-steps-list button[aria-pressed="true"]{background:#fff;border-color:#bfe4e6;box-shadow:0 16px 36px -24px rgba(76,56,160,.45)}
+.cv-steps-list b{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:600;color:#fff;
+  background:linear-gradient(135deg,#0f7d97,#7b48e2)}
+.cv-steps-list strong{display:block;padding-top:4px;font-size:16px;font-weight:600;line-height:1.35;color:#1d1d28}
+.cv-steps-list em{display:none;margin-top:6px;font-style:normal;font-size:15px;line-height:1.5;color:#474b57}
+.cv-steps-list [aria-pressed="true"] em{display:block}
+.cv-steps-view{position:relative;width:100%;aspect-ratio:1240/774;border-radius:var(--d-sr);overflow:hidden;background:#f0f1f5;box-shadow:var(--d-shadow)}
+.cv-steps-view img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .35s ease}
+.cv-steps-view img.on{opacity:1}
+@media (max-width:1000px){
+  .cv-steps{grid-template-columns:minmax(0,1fr)}
+  .cv-steps-list,.cv-steps > .t-media{grid-column:1 / -1}
+  .cv-steps > .t-media{grid-row:1}
+}
+@media (max-width:520px){.cv-bars{gap:4px}.cv-bars i{width:16px}.cv-bars span{font-size:12px;overflow-wrap:anywhere;hyphens:auto}.cv-bars b{font-size:12px}}
+
+.cv-ui,.cv-ui *{box-sizing:border-box;margin:0;padding:0}
+.cv-ui{width:1880px;height:908px;position:relative;background:#f0f1f5;font-family:'Noto Sans',system-ui,sans-serif;color:#0e1318;
+  -webkit-font-smoothing:antialiased;text-align:left;letter-spacing:0;overflow:hidden;border-radius:14px;
+  box-shadow:0 1px 2px rgba(14,19,24,.08),0 30px 70px -30px rgba(14,19,24,.4)}
+.cv-ui :where(button,input){font:inherit;color:inherit;background:none;border:0}
+.cv-ui .lc{width:20px;height:20px;stroke-width:1.75;flex:none}
+
+/* top bar */
+.cv-top{position:absolute;left:0;right:0;top:0;height:57px;display:flex;align-items:center;gap:10px;padding:0 8px 0 24px;color:#fff;
+  font-size:14px;font-weight:600;background:linear-gradient(90deg,#01c4cc 0%,#1ba4d2 21%,#3f77da 50%,#5d51e1 74%,#7d2ae8 100%)}
+.cv-top > span{display:flex;align-items:center;gap:7px;height:40px;padding:0 8px;white-space:nowrap}
+.cv-top .i{padding:0 6px}
+.cv-top .dim{opacity:.55}
+.cv-top .crown .lc,.cv-top .pro .lc{width:13px;height:13px;color:#ffc53d;fill:#ffc53d}
+.cv-top .edit .lc:last-child{width:16px;height:16px}
+.cv-top .div{width:1px;height:28px;padding:0;background:rgba(255,255,255,.3)}
+.cv-top .grow{flex:1}
+.cv-top .doc{margin-right:28px}
+.cv-top .pro{border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:0 16px}
+.cv-top .me{width:38px;height:38px;border-radius:50%;background:#1d1d1f;justify-content:center;font-size:17px;font-weight:500;padding:0;margin-left:4px}
+.cv-top .plus{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);justify-content:center;padding:0;margin-left:-14px}
+.cv-top .sq,.cv-top .present{border:1px solid rgba(255,255,255,.35);border-radius:6px}
+.cv-top .sq{width:40px;justify-content:center;padding:0}
+.cv-top .present{padding:0 14px}
+.cv-top .share{background:#fff;color:#0e1318;border-radius:6px;padding:0 14px}
+
+/* left rail */
+.cv-rail{position:absolute;left:0;top:57px;bottom:0;width:72px;display:flex;flex-direction:column;align-items:center;padding-top:22px;gap:23px}
+.cv-rail span{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#0e1318;white-space:nowrap}
+.cv-rail .lc{width:22px;height:22px;stroke-width:1.5}
+.cv-rail hr{width:56px;border:0;border-top:1px solid #dcdfe4;margin:-6px 0}
+
+/* canvas */
+.cv-canvas{position:absolute;left:72px;top:57px;right:0;bottom:38px}
+.cv-poster{position:absolute;left:716px;top:48px;width:450px;height:644px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;background:#000}
+.cv-poster img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cv-poster .b{opacity:0;transition:opacity .9s ease}
+.cv-ui.after .cv-poster .b{opacity:1}
+/* the redesign's "scanning design..." sheen: a band of light passing over the poster */
+.cv-poster .sheen{position:absolute;inset:-20% -60%;opacity:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.34) 50%,transparent 60%);transform:translateX(-60%)}
+.cv-ui.scan .cv-poster .sheen{opacity:1;animation:cv-sheen 1.1s ease-in-out infinite}
+@keyframes cv-sheen{to{transform:translateX(60%)}}
+.cv-pages{position:absolute;left:787px;top:730px;display:flex;gap:14px;align-items:center}
+.cv-pages .thumb{position:relative;width:110px;height:66px;border-radius:7px;border:2px solid #5a5a5a;box-shadow:0 0 0 2px #fff inset;overflow:hidden;background:#000}
+.cv-pages .thumb img{width:100%;height:auto;display:block;margin-top:-34px}
+.cv-pages .thumb b{position:absolute;left:8px;bottom:2px;color:#fff;font-size:12px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.cv-pages .add,.cv-pages .more{height:64px;background:#e6e7eb;display:grid;place-items:center}
+.cv-pages .add{width:72px;border-radius:6px 0 0 6px;margin-right:-13px}
+.cv-pages .more{width:40px;border-radius:0 6px 6px 0}
+.cv-pages .more .lc{width:16px;height:16px}
+
+/* the Orb panel */
+.cv-orb{position:absolute;left:1466px;top:169px;width:381px;height:685px;border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0,#fff 250px),linear-gradient(90deg,#b9ecef 0%,#c5d9f7 50%,#dbc2f6 100%)}
+.cv-orb .x{position:absolute;right:20px;top:20px}
+.cv-orb .x .lc{width:22px;height:22px;stroke-width:1.5}
+.cv-orb .ball{position:absolute;left:111px;top:71px;width:160px;height:160px}
+.cv-ui.scan .cv-orb .ball{animation:cv-orb 1.4s ease-in-out infinite}
+@keyframes cv-orb{50%{transform:scale(1.06) rotate(8deg)}}
+.cv-chat{position:absolute;left:33px;right:32px;top:250px;bottom:78px;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 90px);mask-image:linear-gradient(180deg,transparent 0,#000 90px)}
+.cv-chat p{font-size:16px;line-height:32px}
+.cv-chat .me{text-align:right;color:#000;padding-left:34px}
+.cv-chat .ai{background:linear-gradient(180deg,#2b96b8,#3d41a7);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:6px}
+.cv-chat .ai.old{opacity:.55}
+.cv-chat .status{color:#9aa0a6;font-size:17px}
+.cv-chat .in{animation:cv-in .45s ease both}
+@keyframes cv-in{from{opacity:0;transform:translateY(8px)}}
+.cv-input{position:absolute;left:20px;right:15px;bottom:21px;height:43px;display:flex;gap:11px}
+.cv-input input{flex:1;height:43px;border:1px solid #d9dadf;border-radius:4px;padding:0 15px;font-size:14px;color:#0e1318;background:#fff;min-width:0;
+  text-overflow:ellipsis;cursor:default}
+.cv-input input::placeholder{color:#888d94}
+.cv-input .send{width:57px;height:43px;border-radius:4px;display:grid;place-items:center;color:#fff;cursor:pointer;
+  background:linear-gradient(90deg,#8fd6ea,#c7b8f5);transition:filter .15s,transform .1s}
+.cv-input .send:hover{filter:saturate(1.35) brightness(.97)}
+.cv-input .send:active{transform:scale(.95)}
+.cv-input .send:disabled{opacity:.5;cursor:default}
+.cv-input .send .lc{width:22px;height:22px;fill:#fff}
+.cv-ui.ready .cv-input .send{animation:cv-nudge 1.8s ease-in-out infinite}
+@keyframes cv-nudge{50%{box-shadow:0 0 0 5px rgba(125,42,232,.18)}}
+
+/* bottom bar */
+.cv-bot{position:absolute;left:72px;right:0;bottom:0;height:38px;display:flex;align-items:center;gap:22px;padding:0 20px 0 16px;font-size:14px;font-weight:500;white-space:nowrap}
+.cv-bot span{display:flex;align-items:center;gap:7px}
+.cv-bot .grow{flex:1}
+.cv-bot .slider{width:200px;height:3px;background:#b8bdc6;border-radius:3px;position:relative}
+.cv-bot .slider i{position:absolute;left:92px;top:-8px;width:18px;height:18px;border-radius:50%;background:#fff;border:1px solid #c9ccd3;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.cv-bot .pct{margin-left:4px}
+.cv-bot .pages{background:#e1e3e8;border-radius:6px;padding:4px 8px}
+
+/* presentation control under the editor, in the deck's pill style */
+.cv-replay{justify-self:start;background:#fff;border:1.5px solid #8fd6da;border-radius:99px;padding:10px 18px;font-family:'Noto Sans',sans-serif;
+  font-size:14px;font-weight:500;color:#5b33c9;cursor:pointer}
+.cv-replay:hover{border-color:#8b3dff}
+.cv-replay[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){
+  .cv-poster .b{transition:none}
+  .cv-ui.scan .cv-poster .sheen,.cv-ui.scan .cv-orb .ball,.cv-ui.ready .cv-input .send,.cv-chat .in{animation:none}
+}

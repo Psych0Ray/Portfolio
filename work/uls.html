@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ULS · Rutujeet’s Portfolio</title>
-<meta name="description" content="ULS, the Urban Labour System, brings a record to informal naka hiring. Built from field research at nakas in Pune, it gives every daily wage worker a…">
+<meta name="description" content="ULS, the Urban Labour System, brings a record to informal naka hiring: a QR-linked ID for every daily wage worker, and screens for workers, foremen and…">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
 <link rel="stylesheet" href="work.css">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/uls.css">
 </head>
 <body>
 
@@ -20,7 +23,7 @@
 <div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1"><svg viewBox="0 0 1062 1014" aria-hidden="true"><rect width="1062" height="1014"/><path transform="matrix(1 0 0 -1 142 853.5)" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span></a>
   <span class="grow"></span>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
@@ -33,30 +36,271 @@
   <div class="meta"><div><b>Course</b><span>Service design</span></div><div><b>My role</b><span>Research &amp; Analysis, Design Direction, Models and Blueprints</span></div><div><b>Methods</b><span>Field interviews, systems mapping, service blueprint</span></div><div><b>Year</b><span>2026</span></div></div>
 </header>
 
-<div class="cover"><div class="frame"><img src="img/uls/01.webp" width="2880" height="1838" alt="ULS billboard reading Designed for Real Work, Not Office Work" loading="eager" fetchpriority="high" decoding="async"></div></div>
-
-<section class="about">
-  <p>ULS, the Urban Labour System, brings a record to informal naka hiring. Built from field research at nakas in Pune, it gives every daily wage worker a QR-linked ID, matches them to work through a naka coordinator based on real demand, and logs every wage and attendance mark for workers, foremen and contractors alike.</p>
+<div class="deck p-uls">
+<figure class="t-cover"><img src="img/uls/01.webp" width="2880" height="1838" alt="ULS billboard reading Designed for Real Work, Not Office Work" loading="eager" fetchpriority="high" decoding="async"></figure>
+<div class="t-body">
+<section class="t-sec">
+  <p class="t-lead">At the naka, a roadside hiring spot, contractors pick daily wage workers by face and pay them in cash. Nothing is written down, so a good worker has no way to prove it.</p>
 </section>
 
-<section class="story" data-reveal>
-  <div class="sc"><h2>The brief</h2><p>A four-week service design project. We started at the nakas in Pune, where daily wage workers wait each morning for someone to hire them. Contractors pick by looks and by who they recognise. Pay is agreed out loud and handed over in cash. Nothing gets written down anywhere.</p></div>
-  <div class="sc"><h2>The aim</h2><p>We wanted to give this system a record, without forcing anyone to work differently. Three things had to change. A worker should be able to prove what they can do, even to a contractor who has never met them. They should know if there is work before making the trip to the naka. And the wage agreed in the morning should be the wage that gets paid.</p></div>
-  <div class="sc"><h2>The outcome</h2><p>ULS gives every worker an ID card with a QR code on it. Scanning it pulls up their skills, their work history and what they have been paid. Workers without a smartphone are not left out: they can sign up on paper at the naka and get job details by SMS or a voice call. Around the card we designed the rest of the service: an app for workers, a console for foremen in Hindi, and a dashboard for contractors.</p></div>
+<section class="t-sec" aria-labelledby="u-naka">
+  <div class="t-text">
+    <h2 class="t-h" id="u-naka">Every morning is a gamble.</h2>
+    <p class="t-p">Workers travel to the naka not knowing if there is work. A contractor drives up, picks in a couple of minutes by looks and familiarity, and agrees a wage out loud. Whoever isn&rsquo;t picked goes home with nothing.</p>
+  </div>
+  <figure class="t-full t-media"><img class="u-hire" src="ui/uls/hiring.webp" width="1480" height="530" alt="How hiring works at the naka, in five steps: the worker waits, the contractor arrives, a quick visual selection, a verbal negotiation, work assigned" loading="lazy" decoding="async"></figure>
+  <dl class="t-rows">
+    <div><dt>Skill goes unseen</dt><dd>Eleven years as a mason count for nothing with a contractor who doesn&rsquo;t know you.</dd></div>
+    <div><dt>Pay leaves no proof</dt><dd>Days go missing from the register and wages get cut, with no receipt to argue with. Women are paid &#8377;50-70 less a day.</dd></div>
+    <div><dt>A middleman decides</dt><dd>The foreman chooses who goes where, and takes a cut from both sides.</dd></div>
+    <div><dt>Nobody to answer to</dt><dd>Caste and gender decide who gets picked. Sites give no safety gear, and there is nowhere to complain.</dd></div>
+  </dl>
 </section>
-<section class="film"><div class="film-stage"><div class="film-box" style="--ar:1280/720"><video poster="vid/uls.webp" width="1280" height="720" muted loop playsinline preload="none" aria-label="ULS teaser film"><source src="vid/uls.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/uls.webm" type='video/webm; codecs="vp9"'></video></div></div></section>
 
-<section class="shots">
-  <div class="frame"><img src="img/uls/02.webp" width="2880" height="2304" alt="The new ULS service blueprint from pre-job to project end" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/uls/03.webp" width="2892" height="3497" alt="ULS analytics dashboard: hiring, wage trends, attendance and site performance" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/uls/04.webp" width="2880" height="1832" alt="Contractor dashboard for selecting workers by skill, reliability and wage" loading="lazy" decoding="async"></div>
+<section class="t-sec" aria-labelledby="u-schemes">
+  <div class="t-text">
+    <h2 class="t-h" id="u-schemes">The schemes meant to help don&rsquo;t reach them.</h2>
+    <p class="t-p">The government runs welfare schemes for informal workers, from e-Shram registration to accident insurance. But it isn&rsquo;t linked to the daily work, and signing up takes help most workers don&rsquo;t have.</p>
+  </div>
+  <ul class="t-facts n3" aria-label="Welfare schemes and informal workers">
+    <li><b>30 cr+</b><span>workers registered on e-Shram, but inactive</span></li>
+    <li><b>60%</b><span>unaware of the schemes, or confused by them</span></li>
+    <li><b>90%</b><span>get no direct or usable benefit</span></li>
+  </ul>
 </section>
 
+<section class="t-sec" aria-labelledby="u-rec">
+  <div class="t-text">
+    <h2 class="t-h" id="u-rec">ULS gives every worker a record.</h2>
+    <p class="t-p">ULS adds a service layer to the naka without replacing it: a QR-coded ID card that carries a worker&rsquo;s skills, work and pay, and three simple screens built around it, for the worker, the foreman and the contractor.</p>
+  </div>
+  <div class="t-inset">
+    <div class="t-media"><img src="ui/uls/id-card.webp" width="1099" height="832" alt="The ULS worker ID card on a lanyard: photo, name, ID number, skill level and a QR code" loading="lazy" decoding="async"></div>
+    <p class="t-note"><b>The card needs no smartphone.</b> A coordinator at the naka scans it, signs new workers up, and links their e-Shram and insurance. Workers without a phone get their job details by SMS.</p>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">The worker&rsquo;s app and the foreman&rsquo;s console</h3>
+      <p class="t-p">The worker knows where to report, when, and for what wage, before leaving home. The foreman logs attendance and pay as they happen, in Hindi first. Mark Prakash present, or switch the language.</p>
+      <div class="u-lang" role="group" aria-label="Console language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="hi" aria-pressed="false" lang="hi">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</button></div>
+    </div>
+    <div class="t-media"><div class="duo">
+      <div class="stage phone" data-w="398"><div>
+        <div class="u-ui u-phone" aria-label="ULS worker app, home screen">
+          <div class="uw-status"><span>9:41</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span>78%</span></div>
+          <div class="uw-body">
+            <div><div class="uw-kick">Today&rsquo;s Work</div><div class="uw-name">Ramesh Kumar</div></div>
+            <div class="uw-card">
+              <div class="uw-top"><span class="uw-state">Assigned</span><span class="uw-day">Day 4/7</span></div>
+              <div class="uw-site">Sunrise Apartments</div>
+              <div class="uw-area">Andheri East, Mumbai</div>
+              <div class="uw-tiles">
+                <div class="uw-tile"><div class="k"><img class="ico" src="ui/uls/i-clock.svg" width="10.5" height="10.5" alt="">Report</div><div class="v">7:00 AM</div></div>
+                <div class="uw-tile"><div class="k"><img class="ico" src="ui/uls/i-rupee.svg" width="10.5" height="10.5" alt="">Wage</div><div class="v">&#8377;750 <small>/day</small></div></div>
+              </div>
+              <div class="uw-acts">
+                <button type="button" class="uw-btn">View Job Details<img class="ico" src="ui/uls/i-chev.svg" width="14" height="14" alt=""></button>
+                <button type="button" class="uw-btn">View Route<img class="ico" src="ui/uls/i-nav.svg" width="14" height="14" alt=""></button>
+                <button type="button" class="uw-btn go"><img class="ico" src="ui/uls/i-pin.svg" width="14" height="14" alt="">Mark Arrival</button>
+              </div>
+            </div>
+            <div class="uw-row"><span class="tile"><img class="ico" src="ui/uls/i-truck.svg" width="17.5" height="17.5" alt=""></span><span class="t">Dispatch: In Transit<small>ETA 7:00 AM &bull; MH-02-AB-4521</small></span><img class="ico" src="ui/uls/i-chev.svg" width="14" height="14" alt=""></div>
+            <div class="uw-naka">
+              <div class="h">Nearby Naka<span>View Map</span></div>
+              <div class="uw-stats"><div><b>47</b><small>Workers</small></div><hr><div><b>12</b><small>Jobs Open</small></div><hr><div><b class="y">&#8377;680</b><small>Avg Wage</small></div></div>
+            </div>
+          </div>
+          <nav class="uw-nav" aria-label="Worker app">
+            <button type="button" class="on"><span class="ni"><img src="ui/uls/n-home-a.svg" alt="" style="left:33.33%;top:45.83%;width:33.33%;height:45.83%"><img src="ui/uls/n-home-b.svg" alt="" style="left:8.33%;top:4.19%;width:83.34%;height:87.48%"></span>Home</button>
+            <button type="button"><span class="ni"><img src="ui/uls/n-map-a.svg" alt="" style="left:12.5%;top:4.18%;width:75%;height:91.67%"><img src="ui/uls/n-map-b.svg" alt="" style="left:33.33%;top:24.98%;width:33.33%;height:33.33%"></span>Map</button>
+            <button type="button"><span class="ni"><img src="ui/uls/n-bell.svg" alt="" style="inset:0;width:100%;height:100%"><span class="badge">2</span></span>Alerts</button>
+            <button type="button"><span class="ni"><img src="ui/uls/n-user-a.svg" alt="" style="left:16.66%;top:58.33%;width:66.67%;height:33.33%"><img src="ui/uls/n-user-b.svg" alt="" style="left:29.16%;top:8.33%;width:41.67%;height:41.67%"></span>Profile</button>
+          </nav>
+        </div>
+      </div></div>
+      <div class="stage phone" data-w="398"><div>
+        <div class="u-ui u-phone" id="uf" aria-label="ULS foreman console" aria-live="polite"></div>
+      </div></div>
+    </div></div>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">The contractor&rsquo;s dashboard</h3>
+      <p class="t-p">Every nearby worker&rsquo;s skills, reliability and wage, side by side, so hiring is on skill rather than looks. Open Ramesh&rsquo;s record, then hire him.</p>
+    </div>
+    <div class="t-media">
+      <div class="stage" data-w="1494" data-min="0.42" data-focus="0.3"><div>
+      <div class="u-ui ud" aria-label="ULS contractor dashboard">
+        <aside class="ud-side">
+          <div class="ud-logo"><img src="ui/uls/logo-naka.png" width="153" height="26" alt="ULS Naka Connect"></div>
+          <nav class="ud-nav" aria-label="Dashboard">
+            <h5>Overview</h5><a class="on"><i data-lucide="layout-grid"></i>Dashboard</a>
+            <h5>Workforce</h5><a><i data-lucide="users"></i>Workers</a><a><i data-lucide="user"></i>Teams</a>
+            <h5>Operations</h5><a><i data-lucide="calendar"></i>Work Allocation</a><a><i data-lucide="clipboard-list"></i>Schedule</a><a><i data-lucide="map-pin"></i>Map View</a>
+            <h5>Finance</h5><a><i data-lucide="wallet"></i>Payments</a><a><i data-lucide="file-text"></i>Wage Reports</a><a><i data-lucide="credit-card"></i>Transactions</a>
+            <h5>Insights</h5><a><i data-lucide="chart-column"></i>Analytics</a><a><i data-lucide="clipboard-list"></i>Attendance</a>
+            <h5>System</h5><a><i data-lucide="message-square"></i>Messages</a>
+          </nav>
+          <div class="ud-foot">
+            <a><i data-lucide="circle-help"></i>Help &amp; Support</a><a><i data-lucide="settings"></i>Settings</a>
+            <div class="ud-me"><i>RC</i><div><b>Raj Contractor</b><small>Site Manager</small></div></div>
+          </div>
+        </aside>
+        <div class="ud-main">
+          <div class="ud-top">
+            <div class="ud-search"><i data-lucide="search"></i>Search workers, sites, payments...</div>
+            <span class="sp"></span>
+            <span class="ud-iconbtn"><i data-lucide="download"></i></span>
+            <span class="ud-iconbtn"><i data-lucide="bell"></i><span class="dot"></span></span>
+          </div>
+          <div class="ud-body">
+            <div class="ud-hello">
+              <div><h3>Good morning, Raj</h3><p>Tuesday, April 7, 2026 &bull; 9:15 AM</p></div>
+              <div class="acts"><span class="ud-btn ghost"><i data-lucide="download"></i>Export</span><span class="ud-btn go"><i data-lucide="plus"></i>Hire Workers</span></div>
+            </div>
+            <div class="ud-kpis">
+              <div class="ud-kpi"><span class="tile" style="background:#d1fae5;color:#10b981"><i data-lucide="users"></i></span><b data-kpi="hired">24</b><small>Workers Hired Today</small><div class="tr up"><i data-lucide="trending-up"></i>+4</div></div>
+              <div class="ud-kpi"><span class="tile" style="background:#fff9e6;color:#ffc107"><i data-lucide="circle-check"></i></span><b>156</b><small>Active Workers</small><div class="tr up"><i data-lucide="trending-up"></i>+12%</div></div>
+              <div class="ud-kpi"><span class="tile" style="background:#fff4e5;color:#f59e0b"><i data-lucide="indian-rupee"></i></span><b>&#8377;650</b><small>Avg Wage Rate</small><div class="tr down"><i data-lucide="trending-down"></i>-&#8377;25</div></div>
+              <div class="ud-kpi"><span class="tile" style="background:#eff6ff;color:#3b82f6"><i data-lucide="trending-up"></i></span><b>92%</b><small>Attendance Rate</small><div class="tr up"><i data-lucide="trending-up"></i>+3%</div></div>
+            </div>
+            <div class="ud-grid">
+              <section class="ud-card">
+                <header><div><h4>Available Workers</h4><p>Today&rsquo;s worker pool from nearby nakas</p></div>
+                  <div class="acts"><span class="ud-chipbtn f"><i data-lucide="filter"></i>Filter</span><span class="ud-chipbtn v">View All<i data-lucide="arrow-right"></i></span></div></header>
+                <div class="ud-w open">
+                  <button type="button" class="ud-wh" aria-expanded="true">
+                    <img src="ui/uls/d-ramesh.jpg" width="42" height="42" alt="">
+                    <span class="who"><span class="nm">Ramesh Kumar</span><span class="ud-tags"><span>Mason</span><span>Plastering</span></span><span class="yrs">12 years &bull; Last: 2 days ago</span></span>
+                    <span class="rate">&#8377;750<small>per day</small></span>
+                    <span class="ud-star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>95%</span>
+                    <span class="chev"><i data-lucide="chevron-down"></i></span>
+                  </button>
+                  <div class="ud-more">
+                    <div class="stats"><div><small>Total Jobs</small><b>45 completed</b></div><div><small>Attendance Rate</small><b class="g">98%</b></div><div><small>Total Earned</small><b>&#8377;33,750</b></div></div>
+                    <div class="pair"><button type="button" class="p">View Profile</button><button type="button" class="h" data-hire>Hire Now</button></div>
+                  </div>
+                </div>
+                <div class="ud-w">
+                  <div class="ud-wh"><img src="ui/uls/d-sunita.jpg" width="42" height="42" alt="">
+                    <span class="who"><span class="nm">Sunita Devi <span class="ud-badge">Working</span></span><span class="ud-tags"><span>Helper</span></span><span class="yrs">3 years &bull; Last: Today</span></span>
+                    <span class="rate">&#8377;500<small>per day</small></span><span class="ud-star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>88%</span><span class="chev"><i data-lucide="chevron-down"></i></span></div>
+                </div>
+                <div class="ud-w">
+                  <div class="ud-wh"><img src="ui/uls/d-vijay.jpg" width="42" height="42" alt="">
+                    <span class="who"><span class="nm">Vijay Singh</span><span class="ud-tags"><span>Carpenter</span><span>Formwork</span></span><span class="yrs">8 years &bull; Last: Yesterday</span></span>
+                    <span class="rate">&#8377;700<small>per day</small></span><span class="ud-star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>92%</span><span class="chev"><i data-lucide="chevron-down"></i></span></div>
+                </div>
+                <div class="ud-w">
+                  <div class="ud-wh"><img src="ui/uls/d-amit.jpg" width="42" height="42" alt="">
+                    <span class="who"><span class="nm">Amit Patel</span><span class="ud-tags"><span>Electrician</span></span><span class="yrs">6 years &bull; Last: 3 days ago</span></span>
+                    <span class="rate">&#8377;800<small>per day</small></span><span class="ud-star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>90%</span><span class="chev"><i data-lucide="chevron-down"></i></span></div>
+                </div>
+              </section>
+              <div>
+                <section class="ud-card">
+                  <header><h4>Recent Activity</h4></header>
+                  <div class="ud-act"><span class="ic ok"><i data-lucide="circle-check"></i></span><div><b>Ramesh Kumar</b><span>Hired for Site A</span><small>30 min ago</small></div></div>
+                  <div class="ud-act"><span class="ic ok"><i data-lucide="circle-check"></i></span><div><b>Sunita Devi</b><span>Payment completed &#8377;500</span><small>1 hr ago</small></div></div>
+                  <div class="ud-act"><span class="ic wait"><i data-lucide="clock"></i></span><div><b>Vijay Singh</b><span>Marked absent</span><small>2 hrs ago</small></div></div>
+                  <div class="ud-act"><span class="ic ok"><i data-lucide="circle-check"></i></span><div><b>Amit Patel</b><span>Hired for Site B</span><small>3 hrs ago</small></div></div>
+                </section>
+                <section class="ud-card ud-alerts">
+                  <header><h4>System Alerts</h4><span class="ud-urgent">2 Urgent</span></header>
+                  <div class="ud-alert red"><i data-lucide="circle-alert"></i><b>Pending Payments</b><span>5 workers have pending payments</span></div>
+                  <div class="ud-alert amb"><i data-lucide="clock"></i><b>Low Attendance</b><span>Site B below target (75%)</span></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="u-sb">
+  <div class="t-text">
+    <h2 class="t-h" id="u-sb">Twenty frames show the service at work.</h2>
+    <p class="t-p">The storyboard follows Ramesh, a mason, Shailesh, a contractor, and Yuvraj, the foreman at the naka: first as things are today, then with ULS.</p>
+  </div>
+  <div class="t-strip" data-strip>
+    <div class="t-strip-h"><h3 class="t-h3">Before ULS</h3><div class="strip-nav"><button type="button" data-dir="-1" aria-label="Previous frames"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" data-dir="1" aria-label="Next frames"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+    <div class="strip" tabindex="0" role="region" aria-label="Storyboard frames 1 to 6, before ULS">
+      <figure class="sb-f"><img src="ui/uls/sb/01.webp" width="800" height="439" alt="Ramesh sits on the bed in a bare room at dawn, looking at his phone" loading="lazy" decoding="async"><figcaption><b class="u-n">1</b><p>Ramesh wakes to no call. He does not know which naka has work today, and spends &#8377;20 on transport before earning a rupee.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/02.webp" width="800" height="439" alt="Shailesh at the wheel of his car, typing on his phone" loading="lazy" decoding="async"><figcaption><b class="u-n">2</b><p>Shailesh, a contractor, needs 3 shuttering workers and 2 helpers by 8 AM. He messages six people and hears back from two.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/03.webp" width="800" height="439" alt="Ramesh on his phone in a crowd of workers at the naka as an SUV pulls up" loading="lazy" decoding="async"><figcaption><b class="u-n">3</b><p>At the naka, a contractor scans 80 workers in 90 seconds and picks familiar faces. Ramesh&rsquo;s 11 years count for nothing.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/04.webp" width="800" height="439" alt="Yuvraj on a phone call, pointing a group of workers in one direction" loading="lazy" decoding="async"><figcaption><b class="u-n">4</b><p>Yuvraj, the foreman, decides who goes where and takes a cut from both sides. Nobody knows how he chooses.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/05.webp" width="800" height="439" alt="The foreman writing names into a paper register while workers wait in line at the site" loading="lazy" decoding="async"><figcaption><b class="u-n">5</b><p>At the site, names go into a paper register. Nobody checks skills, so the &ldquo;electrician&rdquo; is not one.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/06.webp" width="800" height="439" alt="A tired Ramesh holding out his hand as the foreman counts a few notes into it" loading="lazy" decoding="async"><figcaption><b class="u-n">6</b><p>Ramesh worked 22 days. The register says 19. With no record of his own, he takes the loss.</p></figcaption></figure>
+    </div>
+  </div>
+  <div class="t-inset flip">
+    <figure class="t-media"><img src="ui/uls/sb/07.webp" width="800" height="440" alt="A ULS coordinator in a yellow vest at the naka helping workers sign up, with close-ups of phones and ID slips" loading="lazy" decoding="async"></figure>
+    <p class="t-note u-turn"><b class="u-n">7</b>Introducing <em>ULS</em>, a service layer for the naka. The naka does not disappear. It gets organised.</p>
+  </div>
+  <div class="t-strip" data-strip>
+    <div class="t-strip-h"><h3 class="t-h3">With ULS</h3><div class="strip-nav"><button type="button" data-dir="-1" aria-label="Previous frames"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" data-dir="1" aria-label="Next frames"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+    <div class="strip" tabindex="0" role="region" aria-label="Storyboard frames 8 to 20, with ULS">
+      <figure class="sb-f"><img src="ui/uls/sb/08.webp" width="800" height="439" alt="Shailesh at his laptop at night, the screen showing worker profiles" loading="lazy" decoding="async"><figcaption><b class="u-n">8</b><p>The night before, Shailesh posts what he needs: 3 masons, 2 helpers, &#8377;750 a day. The nearest naka sees it.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/09.webp" width="800" height="439" alt="The coordinator scans Ramesh&rsquo;s ULS card while a tablet shows his worker profile" loading="lazy" decoding="async"><figcaption><b class="u-n">9</b><p>At the naka, the coordinator scans Ramesh&rsquo;s card. His profile loads: mason, 11 years, 95% attendance, verified skills.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/10.webp" width="800" height="439" alt="Ramesh smiling at his phone, an SMS reading Job confirmed" loading="lazy" decoding="async"><figcaption><b class="u-n">10</b><p>Ramesh is matched to the job and gets an SMS with the site, the time and the wage before he boards any transport.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/11.webp" width="800" height="439" alt="Workers boarding a ULS bus while a coordinator checks a list" loading="lazy" decoding="async"><figcaption><b class="u-n">11</b><p>He boards a ULS bus with seven others. The app shows the batch, the vehicle and the arrival time.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/12.webp" width="800" height="439" alt="Ramesh and a co-worker at a table with the coordinator, who holds a tablet" loading="lazy" decoding="async"><figcaption><b class="u-n">12</b><p>His e-Shram registration and his insurance are linked to his profile, where the contractor can see them.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/13.webp" width="800" height="439" alt="Ramesh taps his card at the site gate as a green tick appears on the foreman&rsquo;s phone" loading="lazy" decoding="async"><figcaption><b class="u-n">13</b><p>At the site gate he scans his card. The foreman&rsquo;s app, in Hindi, marks him present at 7:00 AM.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/14.webp" width="800" height="439" alt="Yuvraj at the building site holding up a phone showing work areas" loading="lazy" decoding="async"><figcaption><b class="u-n">14</b><p>Yuvraj assigns Ramesh to masonry on Floor 1 with one tap.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/15.webp" width="800" height="439" alt="Ramesh laying bricks while a co-worker checks something on his phone" loading="lazy" decoding="async"><figcaption><b class="u-n">15</b><p>A co-worker vouches for Ramesh&rsquo;s shuttering. The verified skill makes him eligible for a higher wage.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/16.webp" width="800" height="439" alt="Split frame: the foreman tapping his phone, and Ramesh smiling at a bank message" loading="lazy" decoding="async"><figcaption><b class="u-n">16</b><p>The foreman marks him paid. Ramesh gets an SMS: &#8377;15,000 credited. It is his first payment record.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/17.webp" width="800" height="439" alt="Shailesh in his car with a laptop open on the ULS dashboard" loading="lazy" decoding="async"><figcaption><b class="u-n">17</b><p>From his car, Shailesh sees three sites at once: who is present, what was paid, what each site costs.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/18.webp" width="800" height="439" alt="Ramesh holding up his ULS card and a phone showing his verified profile" loading="lazy" decoding="async"><figcaption><b class="u-n">18</b><p>After 22 days, the job is on Ramesh&rsquo;s profile: &#8377;16,500, full attendance, rated 4.8. The next contractor sees it all.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/19.webp" width="800" height="439" alt="The naka from above: workers in ordered lines at a ULS stand, buses waiting" loading="lazy" decoding="async"><figcaption><b class="u-n">19</b><p>The same naka as frame 3, now a coordinated pickup point. Still busy, but organised.</p></figcaption></figure>
+      <figure class="sb-f"><img src="ui/uls/sb/20.webp" width="800" height="439" alt="Three panels: Ramesh with his card, Yuvraj with a tablet, Shailesh at his laptop" loading="lazy" decoding="async"><figcaption><b class="u-n">20</b><p>Ramesh has a record, Yuvraj runs his site from an app, and Shailesh plans the night before instead of guessing at 6 AM.</p></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="u-out">
+  <div class="t-text">
+    <h2 class="t-h" id="u-out">The record is worth more with every job.</h2>
+  </div>
+  <dl class="t-rows">
+    <div><dt>Right away</dt><dd>Less waiting at the naka, and a wage agreed in the open.</dd></div>
+    <div><dt>Over months</dt><dd>Each job adds to a work history, so the right worker finds the right job.</dd></div>
+    <div><dt>Over years</dt><dd>An identity instead of anonymity, and less depending on who you know.</dd></div>
+  </dl>
+</section>
+
+<section class="t-sec" aria-labelledby="u-film">
+  <div class="t-text">
+    <h2 class="t-h" id="u-film">We launched it with a teaser.</h2>
+    <p class="t-p">A 23-second ad in the language of the naka.</p>
+  </div>
+  <div class="t-media film">
+  <figure class="vp" data-dur="23.73" style="--ar:1280/720">
+  <div class="vp-screen">
+    <video poster="vid/uls.webp" width="1280" height="720" muted loop playsinline preload="none" aria-label="ULS teaser film"><source src="vid/uls.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/uls.webm" type='video/webm; codecs="vp9"'></video>
+    <button type="button" class="vp-big" aria-label="Play video"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+  </div>
+  <div class="vp-bar">
+    <button type="button" class="vp-play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z"/></svg></button>
+    <button type="button" class="vp-back vp-skip" aria-label="Back 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 3.5v4h4"/></svg><b>10</b></button>
+    <button type="button" class="vp-fwd vp-skip" aria-label="Forward 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 3.5v4h-4"/></svg><b>10</b></button>
+    <span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-dur"> / 0:23</span></span>
+    <div class="vp-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0" aria-valuetext="0:00 of 0:23"><div class="vp-fill"></div><div class="vp-knob"></div></div>
+    <button type="button" class="vp-full" aria-label="Full screen"><svg class="i-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M20 15h-5v5M4 15h5v5"/></svg></button>
+  </div>
+</figure>
+  </div>
+</section>
+
+</div>
+</div>
 <section class="sec end">
   <a class="bh" href="uls-full.html" data-cursor="Read" data-reveal>
     <div>
-      <h2>VIEW FULL PROJECT</h2>
-      <p>Every slide of the case study, on one page.</p>
+      <h2>VIEW FULL CASE STUDY</h2>
+      <p>The research, the models and every slide of the case study, on one page.</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
@@ -88,6 +332,8 @@
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../lab.js"></script>
+<script src="ui/lucide.js"></script>
+<script src="ui/uls.js"></script>
 <script src="work.js"></script>
 </body>
 </html>

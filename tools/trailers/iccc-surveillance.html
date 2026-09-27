@@ -1,0 +1,85 @@
+<section class="t-sec">
+  <p class="t-lead">MIDC, the Maharashtra Industrial Development Corporation, runs the state&rsquo;s industrial estates. Its Integrated Command and Control Centre (ICCC) at Taloja watches the whole estate on a single dashboard.</p>
+  <ul class="t-facts" aria-label="Taloja MIDC at a glance">
+    <li><b>950+</b><span>industries</span></li>
+    <li><b>900</b><span>hectares</span></li>
+    <li><b>1000+</b><span>connected devices</span></li>
+    <li><b>24/7</b><span>monitoring</span></li>
+  </ul>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-p">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-p">But the dashboard only raised the alarm.</h2>
+    <p class="t-p">Cameras, smart poles, street lights, sensors and water meters all report to it. Checking an alert, sending a field team and keeping the record all happened by hand, over WhatsApp and a shared sheet filled in at the end of each shift.</p>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-h">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-h">We rebuilt it around what operators do.</h2>
+    <p class="t-p">See an alert, check it, send someone, close it. Every screen shortens one of those steps.</p>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">The live map is the home screen</h3>
+      <p class="t-p">Alerts stay pinned on it, devices are coloured by status, and crowded areas fold into numbered clusters.</p>
+    </div>
+    <div class="t-media screen"><img class="shot" src="ui/iccc/map.webp" width="1600" height="1004" alt="The ICCC live map of Taloja: zones, coloured device pins and numbered clusters, with filters along the top" loading="lazy" decoding="async"></div>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">One click opens the whole device</h3>
+      <p class="t-p">Acknowledge or ignore it from the card. The full report adds the event log and a progress timeline.</p>
+    </div>
+    <div class="t-media"><div class="duo ic-duo">
+      <img class="shot" src="ui/iccc/card-t.webp" width="534" height="640" alt="Device card for Water Meter 14: critical meter malfunction in the C2 Assembly Area, with Acknowledge, Ignore and View Full Report" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/report-t.webp" width="670" height="1032" alt="The full report for the same meter: status, severity, location, action progress, issue description and event log" loading="lazy" decoding="async">
+    </div></div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-h2">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-h2">Everything after the alarm now has a place.</h2>
+    <p class="t-p">Escalating, assigning and messaging used to happen outside the dashboard. Now each has its own screen.</p>
+  </div>
+  <div class="t-slides" data-slides>
+    <div class="t-slides-view" aria-live="polite">
+      <img class="shot on" src="ui/iccc/panel.webp" width="1600" height="826" alt="The map with the Active Alerts panel and an AI Overview open on the right" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/escalation.webp" width="1600" height="1023" alt="The Escalation tab: a board of escalated alerts, each with its timeline, assignee and Ping and Escalate buttons" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/tickets.webp" width="1600" height="1004" alt="Work Tickets for the field supervisor: a toxic gas alert ticket with its details and an Assign Task list of engineers" loading="lazy" decoding="async">
+      <img class="shot" src="ui/iccc/messages.webp" width="1600" height="1004" alt="Messages: an All Staff broadcast channel with emergency notices, and conversations with field staff" loading="lazy" decoding="async">
+      <button type="button" class="t-slides-arrow bwd" data-dir="-1" aria-label="Previous screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+      <button type="button" class="t-slides-arrow fwd" data-dir="1" aria-label="Next screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
+    </div>
+    <div class="t-slides-tabs" role="group" aria-label="Choose a screen">
+      <button type="button" aria-pressed="true"><i aria-hidden="true"></i><b>Side panel</b><span>Every active alert beside the map, with an AI overview of repeat failures.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Escalation</b><span>Every open alert at every level, with Ping and Escalate on the card.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Tickets</b><span>The field supervisor picks a ticket, picks an agent, and it is assigned.</span></button>
+      <button type="button" aria-pressed="false"><i aria-hidden="true"></i><b>Messages</b><span>Linked to the device they are about, with one broadcast for emergencies.</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-out">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-out">Operators hold far less in their head.</h2>
+    <p class="t-p">We counted the bits of information an operator has to keep in mind to handle alerts, before and after.</p>
+  </div>
+  <div class="t-drop">
+    <div class="was"><b>408</b><span>before</span></div>
+    <div class="to" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></div>
+    <div><b>109</b><span>after, 73.4% fewer</span></div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="ic-film">
+  <div class="t-text">
+    <h2 class="t-h" id="ic-film">See the prototype working.</h2>
+    <p class="t-p">From the live map to tickets and escalation. Jump to any part.</p>
+  </div>
+  <div class="t-media film">
+  {{video}}
+  </div>
+</section>

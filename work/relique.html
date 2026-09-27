@@ -10,9 +10,11 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@700&family=Abril+Fatface&family=Bebas+Neue&family=Courier+Prime:wght@700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../lab.css">
 <link rel="stylesheet" href="work.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Gelasio:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/relique.css">
 </head>
 <body>
 
@@ -20,7 +22,7 @@
 <div class="cursor" id="cursor"><span class="dot"></span><span class="tag"></span></div>
 
 <div class="navwrap"><nav class="nav">
-  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1">R</span><span class="l2">T</span><span class="l3">/</span><span class="l4">J</span><span class="l5">T</span></a>
+  <a href="../index.html" class="logo" data-cursor="Home" aria-label="Rutujeet, home"><span class="l1"><svg viewBox="0 0 1062 1014" aria-hidden="true"><rect width="1062" height="1014"/><path transform="matrix(1 0 0 -1 142 853.5)" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span></a>
   <span class="grow"></span>
   <a href="../index.html#work" class="lnk on">Work</a>
   <a href="../about.html" class="lnk">About</a>
@@ -33,30 +35,176 @@
   <div class="meta"><div><b>Course</b><span>Semiotics and semantics</span></div><div><b>My role</b><span>Design Direction, Research, Image and Story Generation</span></div><div><b>Tools</b><span>Figma, FigJam</span></div><div><b>Year</b><span>2025</span></div></div>
 </header>
 
-<div class="cover"><div class="frame"><img src="img/relique/01.webp" width="2880" height="2259" alt="Relique title over a dark still life painting" loading="eager" fetchpriority="high" decoding="async"></div></div>
-
-<section class="about">
-  <p>Relique is a museum website where artifacts tell their own stories, in the first person, and the design itself does the explaining that a label in a glass case usually does.</p>
+<div class="deck p-relique">
+<figure class="t-cover"><img src="img/relique/01.webp" width="2880" height="2259" alt="Relique title over a dark still life painting" loading="eager" fetchpriority="high" decoding="async"></figure>
+<div class="t-body">
+<section class="t-sec">
+  <p class="t-lead">A museum label gives you a name and a date. The object is right there, but its story stays behind the glass.</p>
+  <figure class="t-text t-obj">
+    <div class="museum-label" role="img" aria-label="A plain museum label for the Personal Armour of Emperor Akbar">
+      <b>Personal Armour of Emperor Akbar</b>
+      <span>Steel, gold damascene</span>
+      <span>1581 CE</span>
+      <small>Chhatrapati Shivaji Maharaj Vastu Sangrahalaya</small>
+    </div>
+    <figcaption class="t-cap"><b>All a visitor usually gets.</b> Our semiotics brief asked for a design where the meaning comes from shapes and symbols, not from text.</figcaption>
+  </figure>
 </section>
 
-<section class="story" data-reveal>
-  <div class="sc"><h2>The brief</h2><p>A four-week brief for our semantics and semiotics course: make something where the meaning comes from the design itself, from its shapes and symbols and context, rather than from text explaining it. We chose museums. A museum holds objects with enormous stories behind them, then puts them in a glass case with a name and a date.</p></div>
-  <div class="sc"><h2>The aim</h2><p>We wanted the object to tell you its story, instead of a label summarising it for you. That meant building a site you wander through rather than search, and leaving enough unsaid for the visitor to work out on their own.</p></div>
-  <div class="sc"><h2>The outcome</h2><p>Relique starts on a map. Pick a museum, open its collection, then hover over an object to unlock My Story, where the artifact narrates its own history in its own voice, in sound and images. The symbols do the explaining: a triangle means a story begins here, + and − show what opens and closes, ‹ and › move you through a life. One artifact’s story leads into another’s.</p></div>
+<section class="t-sec" aria-labelledby="rl-h">
+  <div class="t-text">
+    <h2 class="t-h" id="rl-h">Relique lets the artifacts speak.</h2>
+    <p class="t-p">Each artifact tells its own story, in the first person, with images, text and voice. Getting to one takes three moves. Try them on the armour.</p>
+  </div>
+  <div class="t-inset">
+    <div class="t-media">
+      <div class="stage" data-w="1200" data-min="0.5" data-focus="0"><div>
+      <div class="rl-ui" id="rlq" aria-label="Relique website">
+        <header class="rl-nav"><span class="rl-logo">RELIQUE</span><nav><span>Home</span><span>Events</span><span>Newsletter</span><span>About us</span><span>Support Us</span></nav></header>
+        <div class="rl-home">
+          <h4>Featured Artifacts</h4>
+          <div class="rl-cards">
+            <div class="rl-card live" tabindex="0" aria-label="Personal Armour of Emperor Akbar">
+              <p class="t">Personal Armour<br>Of Emperor Akbar</p>
+              <img class="obj" src="ui/relique/art-akbar.webp" width="241" height="187" alt="">
+              <div class="hov">
+                <img src="ui/relique/art-akbar-hover.webp" width="241" height="92" alt="">
+                <p>Discover the untold journey of Akbar&rsquo;s armor&mdash;from the royal workshops of Agra to the battlefields where it protected one of history&rsquo;s greatest emperors.</p>
+                <button type="button" class="my" data-open>My story</button>
+              </div>
+            </div>
+            <div class="rl-card"><p class="t">Battle sword<br>of Tipu Sultan</p><img class="obj" src="ui/relique/art-tipu.webp" width="241" height="187" alt=""></div>
+            <div class="rl-card"><p class="t">Venugopal Ganesh<br>and a saint</p><img class="obj" src="ui/relique/art-ganesh.webp" width="241" height="187" alt=""></div>
+            <div class="rl-card"><p class="t">Rupiya of<br>Sher-Shah-Suri</p><img class="obj" src="ui/relique/art-rupiya.webp" width="241" height="187" alt=""></div>
+            <span class="rl-next" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.75 4.5 16.25 12l-7.5 7.5"/></svg></span>
+          </div>
+          <img class="rl-banner" src="ui/relique/banner.webp" width="1200" height="188" alt="" loading="lazy">
+        </div>
+        <div class="rl-ov" hidden role="dialog" aria-label="Personal Armour of Emperor Akbar">
+          <div class="rl-ov-box" data-lenis-prevent>
+            <div class="rl-ov-hero">
+              <img src="ui/relique/title-armour.webp" width="950" height="446" alt="" loading="lazy">
+              <button type="button" class="rl-x" data-ovclose aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+              <h5>Personal Armour<br>of Emperor Akbar</h5>
+              <button type="button" class="rl-start" data-start><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Start Story</button>
+            </div>
+            <div class="rl-ov-meta">
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l7-2v18M11 21h9V9l-9-2M7 8v1M7 12v1M7 16v1M15 11v1M15 15v1"/></svg>Chhatrapati Shivaji Maharaj Vastu Sangrahalaya</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/></svg>1581 CE</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Mumbai, India.</span>
+            </div>
+            <p class="rl-ov-desc">Step into the legacy of the Mughal Empire at CSMVS, Mumbai, and explore the grandeur of Emperor Akbar&rsquo;s personal armor, a masterpiece of 16th-century craftsmanship. This exquisite armor, including a gold-adorned helmet, steel cuirass with Persian inscriptions, and arm guards featuring delicate koftgari work, showcases the fusion of Persian, Central Asian, and Indian influences in Mughal weaponry. Learn about Akbar&rsquo;s direct involvement in designing this armor, documented in the Ain-i-Akbari, which highlights its symbolism of divine protection and intellectual depth. Experience this rare artifact of military and artistic brilliance through interactive exhibits at CSMVS and step into the rich history of the Mughal Empire.</p>
+            <h6>Key Frames</h6>
+            <ol class="rl-kf">
+              <li><button type="button" data-kf="0"><img src="ui/relique/story-1.webp" alt="" loading="lazy"><span><small>01</small>The Creation of Majesty</span></button></li>
+              <li><button type="button" data-kf="1"><img src="ui/relique/story-2.webp" alt="" loading="lazy"><span><small>02</small>Tests of Perfection</span></button></li>
+              <li><button type="button" data-kf="2"><img src="ui/relique/story-3.webp" alt="" loading="lazy"><span><small>03</small>Protector on the Battlefield</span></button></li>
+              <li><button type="button" data-kf="3"><img src="ui/relique/story-4.webp" alt="" loading="lazy"><span><small>04</small>Symbol of Authority</span></button></li>
+              <li><button type="button" data-kf="4"><img src="ui/relique/story-5.webp" alt="" loading="lazy"><span><small>05</small>Marking Authority</span></button></li>
+            </ol>
+          </div>
+        </div>
+        <div class="rl-story" hidden>
+          <div class="rl-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="rl-frame">
+            <div class="rl-imgs"></div>
+            <div class="rl-hot"></div>
+            <div class="rl-band"><p class="rl-text" aria-live="polite"></p>
+              <button type="button" class="rl-arrow bwd" data-prev aria-label="Previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.25 4.5 7.75 12l7.5 7.5"/></svg></button>
+              <button type="button" class="rl-arrow fwd" data-next aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.75 4.5 16.25 12l-7.5 7.5"/></svg></button>
+            </div>
+            <button type="button" class="rl-x" data-close aria-label="Close story"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    </div>
+    <ol class="t-note rl-moves">
+      <li><b>Hover an artifact.</b> Its card turns and offers My story.</li>
+      <li><b>Meet it on its title card:</b> its museum, its age and its place.</li>
+      <li><b>Let it tell its life,</b> one scene at a time.</li>
+    </ol>
+  </div>
 </section>
-<section class="film"><div class="film-stage"><div class="film-box" style="--ar:1600/900"><video poster="vid/relique.webp" width="1600" height="900" muted loop playsinline preload="none" aria-label="Walkthrough of the Relique website prototype"><source src="vid/relique.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/relique.webm" type='video/webm; codecs="vp9"'></video></div></div></section>
 
-<section class="shots">
-  <div class="frame"><img src="img/relique/02.webp" width="2880" height="2259" alt="Relique home page on desktop and mobile" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/relique/03.webp" width="2880" height="1769" alt="My Story view, where an artifact narrates its own history" loading="lazy" decoding="async"></div>
-  <div class="frame"><img src="img/relique/04.webp" width="2880" height="1425" alt="Printed museum tickets and the Relique card" loading="lazy" decoding="async"></div>
+<section class="t-sec" aria-labelledby="rl-wander">
+  <div class="t-text">
+    <h2 class="t-h" id="rl-wander">Or wander in through the museums.</h2>
+    <p class="t-p">A map of museums leads to their collections, which open and close like drawers. Every artifact inside has its own story.</p>
+  </div>
+  <div class="t-pair">
+    <figure><div class="t-media"><img src="ui/relique/map.webp" width="1200" height="900" alt="The Relique museum map, with a museum card for Chhatrapati Shivaji Maharaj Terminus Heritage Museum" loading="lazy" decoding="async"></div>
+      <figcaption class="t-cap"><b>The museum map.</b> Pick a museum to open its page.</figcaption></figure>
+    <figure><div class="t-media"><img src="ui/relique/collections.webp" width="1200" height="900" alt="A museum page with Discover Collections open, Arms and Armour expanded and a sword card offering My story" loading="lazy" decoding="async"></div>
+      <figcaption class="t-cap"><b>Its collections.</b> Arms and Armour open, each piece with My story.</figcaption></figure>
+  </div>
 </section>
 
+<section class="t-sec" aria-labelledby="rl-signs">
+  <div class="t-text">
+    <h2 class="t-h" id="rl-signs">Three symbols do the explaining.</h2>
+    <p class="t-p">Used the same way everywhere on the site, they carry what a label would otherwise have to spell out.</p>
+  </div>
+  <ul class="rl-signs">
+      <li><span class="g"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><b>A story begins here</b></li>
+      <li><span class="g"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></span><b>Open and close a collection</b></li>
+      <li><span class="g"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span><b>Move through a life</b></li>
+    </ul>
+</section>
+
+<section class="t-sec" aria-labelledby="rl-chain">
+  <div class="t-text">
+    <h2 class="t-h" id="rl-chain">One story leads into another.</h2>
+    <p class="t-p">People and objects in a scene light up on hover and open their own stories. From the armour alone, four more begin.</p>
+  </div>
+  <div class="t-media">
+    <div class="rl-tree">
+    <figure class="rl-root">
+      <img src="ui/relique/title-armour.webp" width="950" height="446" alt="The first scene of the armour's story: the armour being forged in a Mughal workshop" loading="lazy" decoding="async">
+      <figcaption><small>My Story</small><b>Personal Armour of Emperor Akbar</b><span>7 scenes</span></figcaption>
+    </figure>
+    <ul class="rl-branches">
+      <li><img src="ui/relique/branch-akbar.webp" width="360" height="300" alt="" loading="lazy"><div><small>In scene 1</small><b>Emperor Akbar</b><p>Emperor Akbar (1542-1605), the third Mughal emperor, was a visionary ruler known for his military conquests&hellip;</p><span>Discover the story</span></div></li>
+      <li><img src="ui/relique/branch-sword.webp" width="360" height="300" alt="" loading="lazy"><div><small>In scene 3</small><b>Emperor&rsquo;s Sword</b><p>Akbar&rsquo;s sword was a finely crafted weapon with curved blade, intricate engravings, and ornate hilt&hellip;</p><span>Discover the story</span></div></li>
+      <li><img src="ui/relique/branch-mansingh.webp" width="360" height="300" alt="" loading="lazy"><div><small>In scene 5</small><b>Raja Man Singh I</b><p>Raja Man Singh I was a trusted commander in Akbar&rsquo;s army, leading many successful campaigns&hellip;</p><span>Discover the story</span></div></li>
+      <li><img src="ui/relique/branch-sparring.webp" width="360" height="300" alt="" loading="lazy"><div><small>In scene 7</small><b>Akbar&rsquo;s Sparring Set</b><p>Akbar&rsquo;s sparring set was likely custom-made, adorned with Mughal craftsmanship, and designed for both training, and demonstration&hellip;</p><span>Discover the story</span></div></li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<section class="t-sec" aria-labelledby="rl-film">
+  <div class="t-text">
+    <h2 class="t-h" id="rl-film">Walk through the website.</h2>
+    <p class="t-p">From the home page to the armour&rsquo;s story, then the museum map and a second story. Jump to any part.</p>
+  </div>
+  <div class="t-media film">
+  <figure class="vp muted" data-dur="545.03" data-audio style="--ar:1600/900">
+  <div class="vp-screen">
+    <video poster="vid/relique.webp" width="1600" height="900" muted loop playsinline preload="none" aria-label="Walkthrough of the Relique website prototype"><source src="vid/relique.mp4" type='video/mp4; codecs="avc1.640028"'><source src="vid/relique.webm" type='video/webm; codecs="vp9"'></video>
+    <button type="button" class="vp-big" aria-label="Play video"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+  </div>
+  <div class="vp-bar">
+    <button type="button" class="vp-play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z"/></svg></button>
+    <button type="button" class="vp-back vp-skip" aria-label="Back 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 3.5v4h4"/></svg><b>10</b></button>
+    <button type="button" class="vp-fwd vp-skip" aria-label="Forward 10 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20 3.5v4h-4"/></svg><b>10</b></button>
+    <button type="button" class="vp-vol" aria-label="Turn sound on"><svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></button>
+    <span class="vp-time"><span class="vp-cur">0:00</span><span class="vp-dur"> / 9:05</span></span>
+    <div class="vp-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="545" aria-valuenow="0" aria-valuetext="0:00 of 9:05"><i class="vp-mark" style="left:11.01%"></i><i class="vp-mark" style="left:14.68%"></i><i class="vp-mark" style="left:49.54%"></i><i class="vp-mark" style="left:55.04%"></i><i class="vp-mark" style="left:69.72%"></i><i class="vp-mark" style="left:97.24%"></i><div class="vp-fill"></div><div class="vp-knob"></div></div>
+    <button type="button" class="vp-full" aria-label="Full screen"><svg class="i-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><svg class="i-exit" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M20 15h-5v5M4 15h5v5"/></svg></button>
+  </div>
+  <ol class="vp-ch" aria-label="Chapters"><li><button type="button" data-t="0"><span>0:00</span>Home</button></li><li><button type="button" data-t="60"><span>1:00</span>The artifact’s page</button></li><li><button type="button" data-t="80"><span>1:20</span>My Story: Akbar’s armour</button></li><li><button type="button" data-t="270"><span>4:30</span>Museum map</button></li><li><button type="button" data-t="300"><span>5:00</span>Collections</button></li><li><button type="button" data-t="380"><span>6:20</span>My Story: the Waghnakh</button></li><li><button type="button" data-t="530"><span>8:50</span>About Relique</button></li></ol>
+</figure>
+  </div>
+</section>
+
+</div>
+</div>
 <section class="sec end">
   <a class="bh" href="relique-full.html" data-cursor="Read" data-reveal>
     <div>
-      <h2>VIEW FULL PROJECT</h2>
-      <p>Every slide of the case study, on one page.</p>
+      <h2>VIEW FULL CASE STUDY</h2>
+      <p>The research, the models and every slide of the case study, on one page.</p>
     </div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
   </a>
@@ -92,6 +240,7 @@
 <script>gsap.registerPlugin(ScrollTrigger);</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../lab.js"></script>
+<script src="ui/relique.js"></script>
 <script src="work.js"></script>
 </body>
 </html>
