@@ -1164,12 +1164,16 @@ Last updated: 2026-09-27
     - **Fonts:** about and the work pages now load only Archivo Black for the logo (Abril, Bebas, Courier and Rubik Mono are gone from them); index.html is unchanged (the hero needs all eight).
     - **Verified:** at rest, hovered (centre, top left, bottom right), keyboard focus, the ULS on-deck colours, and the phone menu, all at 3x.
 
+103. **Items 91-102 pushed and LIVE (2026-09-27).** The user: "push it, make it live on website now". One commit, `ab1a2ea` "Original ransom hero back, R logo with a Figma selection, project trailers", on `main` (the remote is now `github.com/Psych0Ray/Portfolio`). It carries everything that was on localhost: the hero revert, the R logo and favicon (items 101-102), and the project pages (trailers, live UI demos, ICCC slideshow, case-study index, per-project nav colours; items 91-97), including the previously untracked `work/full.js`, `work/ui/` (4.1MB), `tools/serve.py`, `tools/lucide_subset.js` and `tools/trailers/`. `relique.mp4` grew to 29.7MB.
+    - **Left out on purpose:** `.claude/settings.local.json` and `.impeccable/` (local tool config; anything in the repo is publicly served by Vercel). Both are still untracked; adding them to `.gitignore` was not asked.
+    - **Before pushing:** every local `src`/`href`/`url()` in the pages and their CSS/JS was checked against the staged files; the only misses were a code comment and filenames the scripts join onto a folder path (`'ui/uls/' + name`), all present.
+    - **Verified live:** the new logo markup was on www.rutujeetnayak.me about 12s after the push; home, about, all 4 work pages, their `-full` pages, `work/full.js`, `work/ui/*`, the Relique video and the favicons all answer 200/206, and the live `favicon.ico` is byte-identical to the local one. A browser load of the live home at 1440 shows the original ransom name and the R logo, with no console errors.
+
 ## In progress / not yet confirmed
 
-- **Items 101-102 (original hero back, no button; the logo is now just the hero's R on blue, with a Figma selection and pointer on hover; favicon to match) wait for the user's review.** Commit and push only when asked.
+- **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
 
-- **Items 96-97 (ICCC slideshow and sizes, Relique arrows, case-study index) wait for the user's review.** If an index label or a landing spot is off, adjust its row in `INDEX` in `build_work.py` and rebuild.
-- **Trailers rounds 4-5 (items 94-95) wait for the user's review.** Commit and push only when asked. Pushing will add ~6.5MB to `relique.mp4` (now 29.7MB).
+- If a case-study index label or landing spot is off (items 96-97), adjust its row in `INDEX` in `build_work.py` and rebuild.
 - **Open question from the user, answered in chat on 2026-09-25:** why the text sits on the left or indented. Two lines on the 12-column grid: the lead starts at the page margin, and every heading and paragraph starts at column 4. If they want it changed, the options are all on column 1, or a centred reading column.
 
 - **The new palette and body face are LIVE** (item 89), merged to `main` and deployed on 2026-09-23. The user asked for it before giving a verdict on the look itself, so if the cool ground or Schibsted Grotesk is wrong, roll back per item 89 rather than re-deriving it.
@@ -1184,11 +1188,10 @@ Last updated: 2026-09-27
 - **My role content:** the CV page has real role text for **Canva AI** (user research, prompt testing and review analysis; built the CAPABLE framework; designed the high-fidelity conversational UI) and **Relique** (designed the platform; map-based discovery and narrative flows; high-fidelity prototypes). **ULS, ICCC, DriveBuddy and Maison need the user's input.**
 - **Needs the user:** Behance galleries for ULS and ICCC (their pages link to the profile for now); portrait; ~~the CV PDF~~ — **done**, the resume is a Google Doc now (item 56); it still needs link sharing switched on by the user.
 
-- Waiting on user to confirm the Vercel deployment actually updated after the last push (deployment trigger looked correct on the git side; visual confirmation on Vercel dashboard/live URL still pending).
 
 ## Next up (not started)
 
-- **Professor feedback:** stages 2 and 3 (the trailers and their video behaviour) are built as items 91-94 (93 is the layout system, 94 the current state) and wait for the user's review, then a commit and push only when asked. Stage (4): the one-rule redesigns (item 98) and the re-cut hero names (items 99-100) were all dropped; the hero is the original ransom name (item 101), and the logo is its R with a Figma selection on hover (item 102), awaiting review.
+- **Professor feedback:** stages 2-4 are done and live (item 103): the trailers and their video behaviour (items 91-97), and for stage 4 the hero stays the original ransom name (item 101) while the logo became its R with a Figma selection on hover (item 102).
 
 - **START HERE NEXT SESSION (asked for on 2026-09-20, for 2026-09-21):**
   1. **Add animations.** The user did not say where; ask which pages or sections they mean (the project pages and the About page are the least animated so far).
