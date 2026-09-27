@@ -248,7 +248,7 @@
 
   /* slideshows of screens (work.css .t-slides): the arrows, a tab, the arrow keys or a swipe
      change the screen, which slides in from the side it is coming from. While on screen the
-     show also moves on by itself every 7s (the playing tab's line fills; hover pauses it) until
+     show also moves on by itself every 7s (the playing tab's line fills; hover does not pause it) until
      the viewer takes over, after which it stays where they put it. */
   [].forEach.call(document.querySelectorAll('[data-slides]'), function (box) {
     var view = box.querySelector('.t-slides-view');

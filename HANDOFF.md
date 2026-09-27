@@ -1169,9 +1169,15 @@ Last updated: 2026-09-27
     - **Before pushing:** every local `src`/`href`/`url()` in the pages and their CSS/JS was checked against the staged files; the only misses were a code comment and filenames the scripts join onto a folder path (`'ui/uls/' + name`), all present.
     - **Verified live:** the new logo markup was on www.rutujeetnayak.me about 12s after the push; home, about, all 4 work pages, their `-full` pages, `work/full.js`, `work/ui/*`, the Relique video and the favicons all answer 200/206, and the live `favicon.ico` is byte-identical to the local one. A browser load of the live home at 1440 shows the original ransom name and the R logo, with no console errors.
 
+104. **ICCC slideshow no longer pauses on hover (2026-09-27). NOT committed, NOT pushed.** The user (screenshot of the Side panel / Escalation / Tickets / Messages list): "that part and carousel are pausing on hover, make that no pause on hover, only those parts."
+    - `work/work.css`: removed `.t-slides.auto.live:hover ...{animation-play-state:paused}`; the `:focus-within` pause stays (keyboard users). The show autoplays through hover on both the tab list and the screens; a click, arrow, key or swipe still hands control to the viewer as before. Comment in `work/work.js` updated.
+    - **Left alone on purpose:** the home page marquee still pauses on hover (`lab.css .marquee:hover`); the user said only those parts. `.t-slides` is used only on the ICCC page.
+    - **Verified** on localhost: hovering the list, the show went 1 -> 2 after 7s; hovering the screens, 2 -> 3.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
+- **Item 104 (ICCC slideshow no pause on hover) is local only**; push when the user says so.
 
 - If a case-study index label or landing spot is off (items 96-97), adjust its row in `INDEX` in `build_work.py` and rebuild.
 - **Open question from the user, answered in chat on 2026-09-25:** why the text sits on the left or indented. Two lines on the 12-column grid: the lead starts at the page margin, and every heading and paragraph starts at column 4. If they want it changed, the options are all on column 1, or a centred reading column.

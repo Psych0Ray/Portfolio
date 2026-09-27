@@ -140,7 +140,7 @@
 .t-slides-tabs [aria-pressed="true"] i{transform:scaleX(1)}
 .t-slides.auto .t-slides-tabs [aria-pressed="true"] i{transform:scaleX(0);animation:t-fill 7s linear forwards;animation-play-state:paused}
 .t-slides.auto.live .t-slides-tabs [aria-pressed="true"] i{animation-play-state:running}
-.t-slides.auto.live:hover .t-slides-tabs [aria-pressed="true"] i,
+/* no pause on hover (the user's call): only keyboard focus inside the show holds it */
 .t-slides.auto.live:focus-within .t-slides-tabs [aria-pressed="true"] i{animation-play-state:paused}
 @keyframes t-fill{to{transform:scaleX(1)}}
 .t-slides-tabs b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(17px,1.4vw,20px);line-height:1.25;
