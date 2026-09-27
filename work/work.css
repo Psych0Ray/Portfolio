@@ -297,7 +297,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .nav,.burger{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,color .35s ease,transform .32s cubic-bezier(.4,0,.2,1)}
 .nav a.lnk,.logo span{transition:color .35s ease,background .35s ease,transform .12s ease}
 .logo rect,.logo path{transition:fill .35s ease}
-.on-deck .nav{background:var(--n-bg);border-color:var(--n-bg);box-shadow:0 0 0 1px var(--n-line),var(--n-shadow)}
+.on-deck .nav{background:var(--n-bg);border-color:var(--n-bg);box-shadow:0 0 0 1px var(--n-line)}   /* the outline only, no shadow */
 .on-deck .nav a.lnk{color:var(--n-fg)}
 .on-deck .nav a.lnk::after{background:var(--n-accent)}
 .on-deck .nav a.lnk.cta{background:var(--n-accent);color:var(--n-on-accent);border-color:var(--n-accent)}

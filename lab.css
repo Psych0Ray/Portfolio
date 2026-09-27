@@ -82,7 +82,7 @@ a{text-underline-offset:.15em;text-decoration-thickness:.075em}
 .navwrap.hid{transform:translateY(-160%)}
 @media (prefers-reduced-motion:reduce){.navwrap{transition:none}}
 .nav{width:100%;max-width:1120px;display:flex;align-items:center;gap:4px;height:66px;padding:9px 9px 9px 22px;
-  background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px;box-shadow:0 5px 0 var(--ink)}
+  background:var(--bone);border:var(--bw) solid var(--ink);border-radius:100px}
 .nav .grow{flex:1}
 .nav a.lnk{font-family:var(--label);text-transform:uppercase;letter-spacing:.08em;font-size:13px;font-weight:600;
   color:var(--ink);text-decoration:none;padding:12px 18px;border-radius:100px;position:relative}
@@ -135,7 +135,7 @@ a{text-underline-offset:.15em;text-decoration-thickness:.075em}
 .marquee i::before{content:'';width:10px;height:10px;background:currentColor;transform:rotate(45deg)}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* a reader can stop the ticker to actually read it */
-.marquee:hover > div,.marquee:focus-within > div{animation-play-state:paused}
+.marquee:focus-within > div{animation-play-state:paused}   /* never on hover (the user's call) */
 @media (prefers-reduced-motion:reduce){.marquee > div{animation:none}}
 
 /* ── SECTION FURNITURE ── */

@@ -1174,6 +1174,12 @@ Last updated: 2026-09-27
     - **Left alone on purpose:** the home page marquee still pauses on hover (`lab.css .marquee:hover`); the user said only those parts. `.t-slides` is used only on the ICCC page.
     - **Verified** on localhost: hovering the list, the show went 1 -> 2 after 7s; hovering the screens, 2 -> 3.
 
+105. **Home marquee no pause on hover; nav bar shadow removed (2026-09-27). LIVE.** The user: "carousel under hero is also pausing, make it not do that, and remove that shadow on the navbar, keep the stroke."
+    - `lab.css`: `.marquee:hover > div{animation-play-state:paused}` removed (the `:focus-within` pause stays; the strip has nothing focusable today). `.nav` lost `box-shadow:0 5px 0 var(--ink)`; its 3px ink border stays.
+    - `work/work.css`: the project-coloured nav (`.on-deck .nav`) dropped `var(--n-shadow)` and keeps only its 1px `--n-line` outline, since it is the same nav bar. The `--n-shadow` values in `work/ui/*.css` are now unused.
+    - **Not changed:** the round phone menu button (`.burger`, `box-shadow:0 4px 0 var(--ink)`) and the phone menu's Resume pill still have their hard shadows; the user asked about the nav bar only.
+    - **Verified** on localhost: nav `box-shadow: none` with `3px solid` ink border; hovering the marquee it kept running (122px in 1.5s); the ULS on-deck nav shows only its 1px outline.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
