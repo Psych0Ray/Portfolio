@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-09-27
+Last updated: 2026-10-05
 
 ## Project
 
@@ -1179,6 +1179,12 @@ Last updated: 2026-09-27
     - `work/work.css`: the project-coloured nav (`.on-deck .nav`) dropped `var(--n-shadow)` and keeps only its 1px `--n-line` outline, since it is the same nav bar. The `--n-shadow` values in `work/ui/*.css` are now unused.
     - **Not changed:** the round phone menu button (`.burger`, `box-shadow:0 4px 0 var(--ink)`) and the phone menu's Resume pill still have their hard shadows; the user asked about the nav bar only.
     - **Verified** on localhost: nav `box-shadow: none` with `3px solid` ink border; hovering the marquee it kept running (122px in 1.5s); the ULS on-deck nav shows only its 1px outline.
+
+106. **Link preview image: the R logo, selected, on blue (2026-10-05). LIVE.** The user: pasting the link on Instagram showed a close-up of their face; make the thumbnail "the R logo with the Figma hover effect on, on a plain blue bg", everywhere.
+    - **Cause:** the site had no Open Graph or Twitter tags at all, so Instagram (Facebook's crawler) picked an image off the page.
+    - **`og-image.png`** (repo root, 1200x630, 48KB): Klein blue `#002FA7`, the logo's on-blue variant from the phone menu (paper block, blue R) at 300px tall, tilted -4deg, with the hover selection on: a 4px paper frame 24px out and four 26px handles (blue face, paper border). Rendered in the browser at 2x from the same vector R as the nav logo (viewBox 1062x1014) and downsampled. The mark sits inside the centre 630x630 square, so square crops (WhatsApp, some Instagram views) keep it whole.
+    - **Tags** after the apple-touch-icon link on every page: `og:type website`, `og:title` (= the page's `<title>`), `og:description` (work pages only, = their meta description; index and about have none), `og:image` (absolute `https://www.rutujeetnayak.me/og-image.png`) with type/width/height/alt, `twitter:card summary_large_image`, `twitter:image`. index.html and about.html by hand; the 8 work pages through the `HEAD` template in `tools/build_work.py` (rebuilt; before the change a rebuild reproduced the pages byte for byte, so the template is the source of truth). No `og:url` (would need per-page URL plumbing; crawlers use the fetched URL).
+    - **Caching:** Instagram and Facebook cache a link's preview. If an old face thumbnail still shows for a link already shared, re-scrape it in Facebook's Sharing Debugger (developers.facebook.com/tools/debug, "Scrape Again"); new pastes pick up the new image.
 
 ## In progress / not yet confirmed
 
