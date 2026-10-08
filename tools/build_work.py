@@ -472,7 +472,7 @@ def page(p, nxt):
 </div>
 </div>
 <section class="sec end">
-  {'' if early else bar}{alt}
+  {bar}{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
     <div><h2>Next: {nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
