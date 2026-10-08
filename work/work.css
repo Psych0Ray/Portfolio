@@ -724,6 +724,10 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .jm-tabs button:active{transform:scale(.97)}
 .jm-tabs button[aria-selected="true"]::after{display:none}
 .jm-hint{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px;color:var(--d-dim)}
+/* the drag hint sits on the right, level with the tabs */
+.jm-bar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:14px}
+.jm-bar .jm-tabs{margin-bottom:0}
+.jm-bar .jm-hint{margin:0;min-height:41px}
 .jm-hint svg{width:20px;height:20px;fill:none;stroke:var(--d-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .jm-scroll[data-drag]{cursor:grab;-webkit-user-select:none;user-select:none;
   -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 64px),transparent)}
