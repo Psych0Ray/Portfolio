@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-10-05
+Last updated: 2026-10-08
 
 ## Project
 
@@ -1186,6 +1186,8 @@ Last updated: 2026-10-05
     - **Tags** after the apple-touch-icon link on every page: `og:type website`, `og:title` (= the page's `<title>`), `og:description` (work pages only, = their meta description; index and about have none), `og:image` (absolute `https://www.rutujeetnayak.me/og-image.png`) with type/width/height/alt, `twitter:card summary_large_image`, `twitter:image`. index.html and about.html by hand; the 8 work pages through the `HEAD` template in `tools/build_work.py` (rebuilt; before the change a rebuild reproduced the pages byte for byte, so the template is the source of truth). No `og:url` (would need per-page URL plumbing; crawlers use the fetched URL).
     - **Caching:** Instagram and Facebook cache a link's preview. If an old face thumbnail still shows for a link already shared, re-scrape it in Facebook's Sharing Debugger (developers.facebook.com/tools/debug, "Scrape Again"); new pastes pick up the new image.
 
+107. **Industry portfolio review transcribed and translated (2026-10-08).** Nothing on the site changed. The user recorded a 65-minute college industry review (a working designer, in a Hindi-English mix) that covered the intro pitch, ULS (trailer and full case study) and ICCC. Transcribed locally with Whisper large-v3 on the GPU (setup in `~/.whisper`, see the user's memory), then translated to English by hand. Files are kept **outside the repo on purpose** (the repo deploys publicly): `~/Downloads/Portfolio review - English translation.md` and `Portfolio review - raw transcript.txt`. The action items are under "Next up". The reviewer offered to look at ULS and ICCC again by email once they are reworked.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
@@ -1208,6 +1210,15 @@ Last updated: 2026-10-05
 
 
 ## Next up (not started)
+
+- **Industry review action items (item 107; full English translation in `~/Downloads/Portfolio review - English translation.md`). None started; the user has not yet said which to do.**
+  - **All project pages:** far less text (keywords, bullets, infographics instead of paragraphs); give the *why* and the key takeaway, not the *how* (method detail like the OOUX sentence format belongs in the full case study or in conversation); show the decisions: what evidence or which methods agreed and made you confident ("otherwise maybe Claude did it all"); plain words instead of jargon labels.
+  - **All trailers:** move `VIEW FULL CASE STUDY` up to sit right after the solution, so the trailer reads as a teaser. The reviewer did not get the two-page (trailer + full) setup at first.
+  - **ULS trailer, reordered:** (1) three short scannable personas (worker / contractor / foreman), each with a motivation; give a target group (urban), and say the contractor works on a laptop, since nothing currently justifies the laptop dashboard; (2) then "Every morning is a gamble" as their shared morning; (3) complete the hiring journey (the 5-step image at `uls.html:62` stops before work, pay and contract end; about 4 more steps) and **mark each of the 4 problems on the step where it happens**, as boxes on the image, not a list underneath ("Pay leaves no proof" currently has no step); (4) a "by choice or by chance" line on who benefits from the status quo; (5) one interview quote each from worker, contractor and foreman; (6) a competitive-analysis table: e-Shram, MGNREGA (renamed VB-G RAM G), 2-4 more, optionally the Middle East; (7) the service blueprint, prominently, since it is the first thing a service-design hirer looks for; (8) the solution, then the full-case-study link.
+  - **ULS details:** My role (`uls.html:47`, now "Research & Analysis, Design Direction, Models and Blueprints") becomes "End-to-end research and design"; the storyboard's With ULS frames should restart at 1 (they run on 8-20 after Before's 1-7); Before and With should take equal space so they compare side by side.
+  - **ULS full case study:** "context-based research" should just be "Research"; link the interview transcripts (the link exists but is not wired); sections should connect to each other ("content for the sake of content").
+  - **ICCC:** one label, not "Research and discovery" (that wording is not in the page HTML, so it is probably inside a deck slide image); the flow diagram is too small to read without zooming; cut the OOUX explanation to one line on why and what it gave you.
+  - **Off-site, for the user:** a 6-7 line "tell me about yourself" script (name → education/experience → soft skills → hobbies last, as traits); a one-page summary per project; rehearse out loud and fix anything that has to be explained off-screen; send the reworked ULS and ICCC to the reviewer.
 
 - **Professor feedback:** stages 2-4 are done and live (item 103): the trailers and their video behaviour (items 91-97), and for stage 4 the hero stays the original ransom name (item 101) while the logo became its R with a Figma selection on hover (item 102).
 
