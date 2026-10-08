@@ -18,6 +18,7 @@ trailer layout (work/work.css, THE TRAILER: t-sec, t-lead, t-text, t-feat, t-ins
 plate). {{video}} in that file is replaced with the project's player.
 """
 import html
+import re
 import os
 from PIL import Image
 
@@ -324,7 +325,14 @@ def written(slug):
     if not os.path.exists(path):
         return None
     with open(path, encoding='utf-8') as f:
-        return f.read()
+        text = f.read()
+    # one stray </div> closes the page's column early and drops everything after it into the
+    # index column, so refuse to build an unbalanced page
+    for tag in ('div', 'section', 'figure'):
+        opened, closed = len(re.findall(rf'<{tag}[\s>]', text)), text.count(f'</{tag}>')
+        if opened != closed:
+            raise SystemExit(f'{path}: {opened} <{tag}> but {closed} </{tag}>')
+    return text
 
 
 def has_full(slug):
