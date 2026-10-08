@@ -105,9 +105,11 @@ INDEX = {
   # written out as a page (tools/full/), so each entry points at a section's id instead
   'uls': [
     ('Context', 'The naka', '#naka', 0),
-    ('Context', 'Who it is for', '#people', 0),
+    ('Context', 'The ecosystem', '#ecosystem', 0),
     ('Research', 'Interviews and schemes', '#research', 0),
-    ('Research', 'The worker’s journey', '#journey', 0),
+    ('Research', 'Personas', '#people', 0),
+    ('Research', 'Empathy square', '#empathy', 0),
+    ('Research', 'Journey maps', '#journey', 0),
     ('Research', 'By choice or by chance', '#choice', 0),
     ('Research', 'What already exists', '#market', 0),
     ('Research', 'The problem', '#problem', 0),
@@ -117,8 +119,7 @@ INDEX = {
     ('The service', 'Before and after', '#story', 0),
     ('Wrap-up', 'Impact', '#impact', 0),
     ('Wrap-up', 'What I learned', '#learn', 0),
-  ],
-  # written out as a page (tools/full/), so each entry points at a section's id instead
+  ],  # written out as a page (tools/full/), so each entry points at a section's id instead
   'iccc-surveillance': [
     ('Context', 'The ICCC', '#context', 0),
     ('Context', 'Who uses it', '#users', 0),

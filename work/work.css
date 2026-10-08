@@ -492,6 +492,8 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-people img{display:block;width:100%;height:100%;max-height:420px;object-fit:cover;border-radius:calc(var(--d-r) * .6)}
 .cs-noimg{display:grid;place-items:center;min-height:300px;border-radius:calc(var(--d-r) * .6);background:var(--d-line);
   font-family:var(--d-head);font-weight:var(--d-hw);font-size:72px;color:var(--d-soft)}
+.cs-people.short img{max-height:300px}
+.cs-one{margin-top:12px;font-size:14px;line-height:1.5;color:var(--d-dim)}
 .cs-people .who b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:22px;line-height:1.2;color:var(--d-fg)}
 .cs-people .who span{display:block;margin-top:4px;font-size:14px;color:var(--d-soft)}
 .cs-people blockquote{margin:16px 0 0;padding-left:12px;border-left:2px solid var(--d-accent)}
@@ -501,6 +503,32 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-people dl div{margin-top:10px}
 .cs-people dt{font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
 .cs-people dd{margin-top:3px;font-size:14px;line-height:1.5;color:var(--d-dim)}
+/* the line that hands one section to the next */
+.cs-bridge{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(18px,1.5vw,21px);line-height:1.4;color:var(--d-fg);
+  padding-top:22px;border-top:1px solid var(--d-line);max-width:44ch}
+/* full personas: photo, who, their words, then needs / goals / behaviour / pain points / technology */
+.cs-personas{display:grid;gap:var(--gut)}
+.cs-persona{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:28px;padding:22px;
+  background:var(--d-card);border:1px solid var(--d-line);border-radius:var(--d-r)}
+.cs-persona > img,.cs-persona > .cs-noimg{width:100%;height:auto;aspect-ratio:3 / 4.4;object-fit:cover;border-radius:calc(var(--d-r) * .6);align-self:start}
+.cs-persona .who b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:24px;line-height:1.2;color:var(--d-fg)}
+.cs-persona .who span{display:block;margin-top:4px;font-size:14px;color:var(--d-soft)}
+.cs-persona blockquote{margin:16px 0 0;padding-left:12px;border-left:2px solid var(--d-accent);max-width:62ch}
+.cs-persona blockquote p{font-family:var(--d-head);font-weight:500;font-style:italic;font-size:17px;line-height:1.45;color:var(--d-fg)}
+.cs-persona blockquote .en{margin-top:6px;font-family:var(--d-font);font-style:normal;font-weight:400;font-size:14px;color:var(--d-dim)}
+.cs-persona dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;margin-top:20px}
+.cs-persona dt{font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
+.cs-persona dd ul{margin-top:6px;padding-left:16px}
+.cs-persona dd li{font-size:14px;line-height:1.5;color:var(--d-dim)}
+.cs-persona dd li + li{margin-top:4px}
+/* the three journey maps side by side; each opens full size */
+.cs-maps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut)}
+.cs-maps figure{margin:0;display:grid}
+.cs-maps figcaption{justify-self:stretch;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cs-maps figcaption span{display:inline-flex;align-items:center;gap:6px}
+.cs-maps figcaption b{font-family:var(--d-head);font-weight:var(--d-hw);font-size:16px;color:var(--d-fg)}
+.cs-maps img{aspect-ratio:4 / 3.4;object-fit:cover;object-position:0 0}
+.t-media.cs-pair > img{width:min(100%,420px);margin-top:28px}
 /* the journey: one line of stages, each problem marked on the stage where it happens */
 .cs-journey{list-style:none;counter-reset:j;position:relative;border-left:2px solid var(--d-line);margin-left:13px}
 .cs-journey li{counter-increment:j;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-auto-rows:min-content;column-gap:24px;
@@ -519,9 +547,9 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 /* two pictures side by side, and a row of phone screens */
 .cs-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut);align-items:center}
 .cs-two img{display:block;width:100%;height:auto;border-radius:var(--d-sr)}
-.cs-phones{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gut);align-items:end}
+.cs-phones{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gut);align-items:start}
 .cs-phones figure{margin:0}
-.cs-phones img{display:block;width:100%;height:auto}
+.cs-phones img{display:block;width:100%;height:auto;aspect-ratio:52 / 100;object-fit:contain;object-position:50% 0}
 .cs-phones figcaption{margin-top:8px;font-size:13px;color:var(--d-soft);text-align:center}
 .t-media.cs-narrow > img{width:min(100%,520px)}
 .t-media.cs-sms > img{width:min(100%,380px)}
@@ -543,6 +571,10 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
   .cs-phones{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
   .cs-journey li{grid-template-columns:minmax(0,1fr);padding-left:26px}
   .cs-people article{grid-template-columns:minmax(0,1fr);gap:16px}
+  .cs-persona{grid-template-columns:minmax(0,1fr);gap:18px;padding:16px}
+  .cs-persona > img,.cs-persona > .cs-noimg{aspect-ratio:4 / 3;object-position:50% 20%}
+  .cs-persona dl{grid-template-columns:minmax(0,1fr)}
+  .cs-maps{grid-template-columns:minmax(0,1fr)}
   .cs-people img{height:auto;aspect-ratio:4 / 3;max-height:none;object-position:50% 25%}
   .cs-noimg{min-height:0;aspect-ratio:4 / 3;font-size:56px}
   .cs-journey li > i:nth-of-type(n){grid-column:1;grid-row:auto;margin-top:8px;margin-bottom:0}
@@ -627,3 +659,6 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
   .meta div{padding:16px 14px}
   .meta span{font-size:15px}
 }
+
+/* screens cut with their own dark ground and floating cards: no frame or shadow around them */
+.t-slides.flat .t-slides-view > img{box-shadow:none;border-radius:0}
