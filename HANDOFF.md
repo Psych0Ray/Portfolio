@@ -1231,6 +1231,13 @@ Last updated: 2026-10-08
     - **No frames on models or zoomable images** (`.cs-zoom img` has no radius/shadow; strip ground #151515 = deck ground, so they sit on the page). ULS pill dot removed. "Decision" callouts became a plain "Why:" sentence (both pages). "What I learnt" everywhere. Empathy square re-cut from the union of its blocks.
     - **Critique (impeccable, dual agent) is in the chat log of this date;** its open items (length/density of ULS, illegible diagram text, missing outcome line, bridge rhythm, mobile tables, ICCC #77748d at 4.4995:1) were put to the user as questions.
 
+113. **Critique fixes, as the user chose (2026-10-08). LIVE.** Answers to the critique questions: keep personas whole and cut elsewhere; rebuild the diagrams on the site; add an "In short"; do all four polish groups.
+    - **Diagrams in HTML/SVG** (generator `diagrams.py` in the session scratchpad; output lives in `tools/full/uls.html`): ecosystem = rings SVG with ring names + a legend list of what sits in each ring (`.eco*`; labels inside the rings collided, so they moved to the list); empathy square = four party cards around a yellow circle (`.emp*`, h3s); value flow = a from/to/what flows/where it breaks table (`.vf`); service blueprint = the journey-map grid with stage bars and dashed lines of interaction/visibility/internal operations (`.bp`). The four old images are deleted. The deck's broken words and "Comapny" typo are gone with them.
+    - **In short** (`#short`, first section on both pages, `.cs-short`): problem, what I designed, where it landed. ICCC's result is the 93.8% / 2,467 to 152 bits; ULS's is the prototype set (no tested outcome exists in the deck).
+    - **Cuts:** the naka step list (the illustration names the steps); competitor table cut to 5 rows (job apps grouped, Urban Company, e-Shram, MGNREGA, ULS) x 5 deciding columns; impact and learnings merged into one closing section (index entry "Impact and what I learnt").
+    - **Polish:** `.cs-bridge` has no rule and pulls up into its section; section spacing tighter; phones top-aligned in equal rows; dashboard crops have 90px room so floating chips aren't cut; the ICCC sparse map lost its fake browser bar; **tables stack into labelled cards under 760px** (`data-label` on every td, added by script); ICCC `--d-soft` #77748d -> #6b6882 (5.35:1); the home card says Urban Labour System (one name everywhere); 'Phygital' reworded.
+    - Detector after: 34 findings, all the known false positives (marquee, cursor, clipped body, hidden carousel slides, index rule-lines, skip-button "10").
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

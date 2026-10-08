@@ -50,6 +50,7 @@
   <div class="findex-list">
     <p>Context</p>
     <ol>
+      <li><a href="#short" data-target="short">In short</a></li>
       <li><a href="#context" data-target="context">The ICCC</a></li>
       <li><a href="#users" data-target="users">Who uses it</a></li>
     </ol>
@@ -79,6 +80,14 @@
   </div>
 </nav>
 <div class="fcs-body">
+<section class="t-sec" id="short" aria-label="In short">
+  <dl class="cs-short">
+    <div><dt>The problem</dt><dd>The command centre&rsquo;s dashboard only raised alarms. Checking, escalating and fixing every alert happened by hand, over WhatsApp and a shared sheet.</dd></div>
+    <div><dt>What I designed</dt><dd>A new dashboard built with object-oriented UX: the live map as home, one-click device reports, alerts, tickets and messages inside the system.</dd></div>
+    <div><dt>Where it landed</dt><dd>93.8% less information to hold in mind to read the system (2,467 &rarr; 152 bits), and a working coded prototype.</dd></div>
+  </dl>
+</section>
+
 <section class="t-sec" id="context">
   <p class="cs-label">Context</p>
   <p class="t-lead">MIDC, the Maharashtra Industrial Development Corporation, runs the state&rsquo;s industrial estates. At Taloja, its Integrated Command and Control Centre (ICCC) watches one of the largest of them from a single dashboard.</p>
@@ -200,7 +209,7 @@
       <h3 class="t-h3">2. The first map was too big to use</h3>
       <p class="t-p">Listing every object and action from those stories gave a grid of <b>140 objects by 77 actions</b>. Only 400 of its 10,780 cells were used: the same few things, named many different ways.</p>
     </div>
-    <figure class="t-media"><img class="shot" src="full/iccc-surveillance/sparse-map.webp" width="1600" height="986" alt="The sparse object-action map: a huge, mostly empty spreadsheet with a few scattered marks" loading="lazy" decoding="async"></figure>
+    <figure class="t-media"><img class="shot" src="full/iccc-surveillance/sparse-map.webp" width="1600" height="904" alt="The sparse object-action map: a huge, mostly empty spreadsheet with a few scattered marks" loading="lazy" decoding="async"></figure>
   </div>
 
   <div class="t-feat">
@@ -247,15 +256,15 @@
     <table>
       <thead><tr><th>Task</th><th>Who</th><th>Priority</th><th>On screen</th><th>How to reach it</th></tr></thead>
       <tbody>
-        <tr><td>Monitor alerts</td><td>Operator</td><td><span class="pri p1">Critical</span></td><td>Front and centre</td><td>No clicks: the alert panel refreshes live</td></tr>
-        <tr><td>Analyse alerts</td><td>Operations manager</td><td><span class="pri p2">High</span></td><td>Secondary</td><td>Alerts, then the list, then the alert</td></tr>
-        <tr><td>Analyse a device</td><td>Operations manager</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>Click it on the map, then its full report</td></tr>
-        <tr><td>Resolve a field task</td><td>Field supervisor</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>Tickets, then mark as resolved</td></tr>
-        <tr><td>Coordinate an incident</td><td>Field supervisor</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>Open the ticket, assign a team</td></tr>
-        <tr><td>Report an incident</td><td>Field engineer</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>Messages, then the incident&rsquo;s thread</td></tr>
-        <tr><td>Escalate an alert</td><td>Operations manager</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>Escalation, then the ticket card</td></tr>
-        <tr><td>Check a ticket</td><td>Field supervisor</td><td><span class="pri p3">Medium</span></td><td>Secondary</td><td>One click: the row shows its status</td></tr>
-        <tr><td>Monitor data</td><td>Operations manager</td><td><span class="pri p4">Low</span></td><td>Tucked away</td><td>Alert summary, filtered by day</td></tr>
+        <tr><td data-label="Task">Monitor alerts</td><td data-label="Who">Operator</td><td data-label="Priority"><span class="pri p1">Critical</span></td><td data-label="On screen">Front and centre</td><td data-label="How to reach it">No clicks: the alert panel refreshes live</td></tr>
+        <tr><td data-label="Task">Analyse alerts</td><td data-label="Who">Operations manager</td><td data-label="Priority"><span class="pri p2">High</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Alerts, then the list, then the alert</td></tr>
+        <tr><td data-label="Task">Analyse a device</td><td data-label="Who">Operations manager</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Click it on the map, then its full report</td></tr>
+        <tr><td data-label="Task">Resolve a field task</td><td data-label="Who">Field supervisor</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Tickets, then mark as resolved</td></tr>
+        <tr><td data-label="Task">Coordinate an incident</td><td data-label="Who">Field supervisor</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Open the ticket, assign a team</td></tr>
+        <tr><td data-label="Task">Report an incident</td><td data-label="Who">Field engineer</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Messages, then the incident&rsquo;s thread</td></tr>
+        <tr><td data-label="Task">Escalate an alert</td><td data-label="Who">Operations manager</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">Escalation, then the ticket card</td></tr>
+        <tr><td data-label="Task">Check a ticket</td><td data-label="Who">Field supervisor</td><td data-label="Priority"><span class="pri p3">Medium</span></td><td data-label="On screen">Secondary</td><td data-label="How to reach it">One click: the row shows its status</td></tr>
+        <tr><td data-label="Task">Monitor data</td><td data-label="Who">Operations manager</td><td data-label="Priority"><span class="pri p4">Low</span></td><td data-label="On screen">Tucked away</td><td data-label="How to reach it">Alert summary, filtered by day</td></tr>
       </tbody>
     </table>
   </div>

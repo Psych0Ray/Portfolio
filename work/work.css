@@ -376,7 +376,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
    stacked slide images, whose text came out too small to read. Same frame and index as
    above; inside it, the trailer's layout (THE TRAILER) in the deck's own colours and type
    (work/ui/<slug>.css). The index already holds the left edge, so text runs from column 1. */
-.fcs.deck{margin-top:0;overflow-x:clip;--pad:40px;--sec:clamp(104px,10vw,152px);--row:56px}
+.fcs.deck{margin-top:0;overflow-x:clip;--pad:40px;--sec:clamp(88px,8vw,128px);--row:52px}
 .fcs .fwrap{padding:clamp(48px,5vw,88px) 40px clamp(112px,10vw,160px)}
 .fcs-body{min-width:0}
 /* the index in the deck's colours */
@@ -504,8 +504,8 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-people dt{font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
 .cs-people dd{margin-top:3px;font-size:14px;line-height:1.5;color:var(--d-dim)}
 /* the line that hands one section to the next */
-.cs-bridge{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(18px,1.5vw,21px);line-height:1.4;color:var(--d-fg);
-  padding-top:22px;border-top:1px solid var(--d-line);max-width:44ch}
+.cs-bridge{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(18px,1.5vw,21px);line-height:1.4;color:var(--d-fg);max-width:44ch}
+.fcs .t-sec > .t-text:has(> .cs-bridge){margin-top:calc(var(--row) * -.4)}
 /* full personas: photo, who, their words, then needs / goals / behaviour / pain points / technology */
 .cs-personas{display:grid;gap:var(--gut)}
 .cs-persona{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:28px;padding:22px;
@@ -540,11 +540,12 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 /* two pictures side by side, and a row of phone screens */
 .cs-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut);align-items:center}
 .cs-two img{display:block;width:100%;height:auto;border-radius:var(--d-sr)}
-.cs-phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px var(--gut);align-items:start}
+.cs-phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px var(--gut);align-items:stretch}
 .cs-phones figure{margin:0}
 .cs-phones a{display:block}
 .cs-phones img{display:block;width:min(100%,340px);height:auto;margin-inline:auto}
-.cs-phones figure{display:grid;margin:0}
+.cs-phones figure{display:grid;grid-template-rows:1fr auto;margin:0}
+.cs-phones figure > a{align-self:start}
 .cs-phones figcaption{justify-self:center;margin-top:14px;font-size:15px;color:var(--d-dim);text-align:center}
 .t-media.cs-narrow > img,.cs-zoom.cs-narrow a{width:min(100%,640px)}
 .cs-zoom.cs-sms a{width:min(100%,520px)}
@@ -685,3 +686,67 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .jm-arc circle{fill:var(--d-accent)}
 .jm-arc text{fill:var(--d-fg);font:500 13px var(--d-font);text-anchor:middle}
 @media (max-width:900px){.jm-grid{grid-template-columns:104px repeat(var(--n),240px)}.jm-lane{font-size:11px}}
+
+/* in short: the case in three lines, straight under the cover */
+.cs-short{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);border-top:1px solid var(--d-line);padding-top:26px}
+.cs-short dt{font-size:13px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
+.cs-short dd{margin-top:10px;font-family:var(--d-head);font-weight:var(--d-lw,400);font-size:clamp(17px,1.4vw,20px);line-height:1.45;color:var(--d-fg);max-width:34ch}
+/* ecosystem rings, drawn; the same content as a list on phones */
+.eco{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.eco-svg{display:block;width:100%;height:auto}
+.eco-svg .eco-ring{font:700 17px var(--d-font);letter-spacing:.08em;text-transform:uppercase;fill:#3d3500;text-anchor:middle}
+.eco-svg .eco-core{font:700 24px var(--d-head);fill:#fcd824;text-anchor:middle}
+.eco-list{display:grid;gap:18px}
+.eco-list dt{display:grid;grid-template-columns:14px 1fr;column-gap:10px;align-items:baseline;font-weight:var(--d-bw);color:var(--d-fg)}
+.eco-sw{width:12px;height:12px;border-radius:50%;align-self:center}
+.eco-list dt span{grid-column:2;font-weight:400;font-size:14px;color:var(--d-soft)}
+.eco-list dd{margin:6px 0 0 24px;font-size:15px;line-height:1.55;color:var(--d-dim)}
+/* empathy square: four parties around one square */
+.emp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.7fr) minmax(0,1fr);grid-template-areas:". top ." "left core right" ". bottom .";gap:var(--gut);align-items:center}
+.emp-top{grid-area:top}.emp-left{grid-area:left}.emp-right{grid-area:right}.emp-bottom{grid-area:bottom}
+.emp-core{grid-area:core;justify-self:center;width:min(100%,180px);aspect-ratio:1;border-radius:50%;background:var(--d-accent);color:var(--d-on-accent);
+  display:grid;place-items:center;text-align:center;font:700 17px/1.2 var(--d-head)}
+.emp-c{padding:20px;border:1px solid var(--d-line);border-radius:var(--d-r);background:var(--d-card)}
+.emp-top,.emp-bottom{grid-column:1 / -1;justify-self:center;width:min(100%,560px)}
+.emp-role{font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
+.emp-c h3{margin-top:6px;font:var(--d-hw) 20px/1.25 var(--d-head);color:var(--d-fg)}
+.emp-rel{margin-top:4px;font-size:14px;font-style:italic;color:var(--d-soft)}
+.emp-c dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.emp-left dl,.emp-right dl{grid-template-columns:minmax(0,1fr)}
+.emp-c dt{font-size:12px;font-weight:var(--d-bw);color:var(--d-fg)}
+.emp-c ul{margin-top:4px;padding-left:15px}
+.emp-c li{font-size:14px;line-height:1.45;color:var(--d-dim)}
+/* value flow as a table: the exchange, and where it breaks */
+.vf .vf-arrow{color:var(--d-accent);font-weight:700;width:28px}
+.vf .vf-break{color:var(--d-fg)}
+.vf .vf-break::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#e5484d;margin-right:8px;vertical-align:1px}
+.vf .vf-ok{color:var(--d-soft)}
+/* service blueprint, on the journey-map grid */
+.bp .bp-stage{font-family:var(--d-head);font-weight:var(--d-hw);font-size:16px;color:var(--d-on-accent);background:var(--d-accent);
+  padding:10px 14px !important;margin-right:8px;border-radius:8px;border-bottom:0 !important;align-self:center}
+.bp .bp-line{padding:8px 0 !important;border-bottom:1px dashed var(--d-soft) !important}
+.bp .bp-line span{position:sticky;left:0;font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-soft)}
+.bp .bp-w{color:var(--d-fg)}
+.bp .bp-t{color:var(--d-accent);font-weight:var(--d-bw)}
+/* tables stack into cards on phones, each value labelled with its column */
+@media (max-width:760px){
+  .fcs .cs-table{overflow:visible}
+  .fcs .cs-table table,.fcs .cs-table tbody,.fcs .cs-table tr,.fcs .cs-table td{display:block;min-width:0;width:100%}
+  .fcs .cs-table thead{display:none}
+  .fcs .cs-table tr{padding:14px 0;border-bottom:1px solid var(--d-line)}
+  .fcs .cs-table td{border:0;padding:4px 0;white-space:normal}
+  .fcs .cs-table td[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:var(--d-bw);color:var(--d-soft);margin-bottom:2px}
+  .fcs .cs-table td:first-child{font-size:17px}
+  .fcs .cs-table td:first-child::before{display:none}
+  .fcs .cs-comp tr.us{padding:14px 12px;border-radius:10px}
+  .fcs .cs-comp td[data-label]{display:flex;justify-content:space-between;gap:16px}
+  .fcs .cs-comp td[data-label]::before{margin:0;font-weight:400;color:var(--d-dim)}
+  .fcs .cs-comp tr.us td{background:none;padding-left:0}
+  .vf .vf-arrow{display:none !important}
+  .cs-short{grid-template-columns:minmax(0,1fr);row-gap:22px}
+  .eco{grid-template-columns:minmax(0,1fr)}
+  .eco-svg{width:min(100%,340px);margin-inline:auto}
+  .emp{grid-template-columns:minmax(0,1fr);grid-template-areas:"core" "top" "left" "right" "bottom"}
+  .emp-c dl{grid-template-columns:minmax(0,1fr)}
+  .emp-core{width:140px}
+}

@@ -104,6 +104,7 @@ PROJECTS = [
 INDEX = {
   # written out as a page (tools/full/), so each entry points at a section's id instead
   'uls': [
+    ('Context', 'In short', '#short', 0),
     ('Context', 'The naka', '#naka', 0),
     ('Context', 'The ecosystem', '#ecosystem', 0),
     ('Research', 'Interviews and schemes', '#research', 0),
@@ -117,10 +118,10 @@ INDEX = {
     ('The service', 'The solution', '#solution', 0),
     ('The service', 'When it fails', '#recovery', 0),
     ('The service', 'Before and after', '#story', 0),
-    ('Wrap-up', 'Impact', '#impact', 0),
-    ('Wrap-up', 'What I learnt', '#learn', 0),
+    ('Wrap-up', 'Impact and what I learnt', '#impact', 0),
   ],  # written out as a page (tools/full/), so each entry points at a section's id instead
   'iccc-surveillance': [
+    ('Context', 'In short', '#short', 0),
     ('Context', 'The ICCC', '#context', 0),
     ('Context', 'Who uses it', '#users', 0),
     ('Research', 'On site', '#research', 0),
