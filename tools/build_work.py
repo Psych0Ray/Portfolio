@@ -118,7 +118,7 @@ INDEX = {
     ('The service', 'When it fails', '#recovery', 0),
     ('The service', 'Before and after', '#story', 0),
     ('Wrap-up', 'Impact', '#impact', 0),
-    ('Wrap-up', 'What I learned', '#learn', 0),
+    ('Wrap-up', 'What I learnt', '#learn', 0),
   ],  # written out as a page (tools/full/), so each entry points at a section's id instead
   'iccc-surveillance': [
     ('Context', 'The ICCC', '#context', 0),
@@ -133,7 +133,7 @@ INDEX = {
     ('Design', 'Information architecture', '#ia', 0),
     ('Design', 'The new dashboard', '#new', 0),
     ('Design', 'The prototype', '#film', 0),
-    ('Wrap-up', 'What I learned', '#learn', 0),
+    ('Wrap-up', 'What I learnt', '#learn', 0),
   ],
   'canva-ai': [
     ('Research', 'Who uses Canva', '00', 920),

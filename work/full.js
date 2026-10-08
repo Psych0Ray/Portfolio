@@ -1,3 +1,26 @@
+/* Journey map tabs (ULS): one actor's map at a time; arrow keys move between tabs. */
+(function () {
+  [].forEach.call(document.querySelectorAll('[data-jm]'), function (box) {
+    var tabs = [].slice.call(box.querySelectorAll('[role="tab"]'));
+    function pick(i, focus) {
+      tabs.forEach(function (t, k) {
+        t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+        t.tabIndex = k === i ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = k !== i;
+      });
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(i); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') pick((i + 1) % tabs.length, true);
+        if (e.key === 'ArrowLeft') pick((i - 1 + tabs.length) % tabs.length, true);
+      });
+    });
+    pick(0);
+  });
+})();
+
 /* A dense diagram opens full size in an overlay on the same page (.cs-zoom links), not in a
    new tab: it fits the screen first, a click toggles its real size to pan around, and it
    closes with the X, Esc, the back of the overlay, or the browser's back button. */

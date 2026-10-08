@@ -406,7 +406,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-a .ic{width:14px;height:14px;stroke-width:2.4}
 /* a dense diagram: tap it to open the full-size image */
 .cs-zoom a{display:block;width:100%;cursor:zoom-in}
-.cs-zoom img{display:block;width:100%;height:auto;border-radius:var(--d-sr);box-shadow:var(--d-shadow)}
+.cs-zoom img,.cs-zoom img.shot{display:block;width:100%;height:auto;border-radius:0;box-shadow:none}
 .cs-zoom figcaption{justify-self:end;display:flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--d-soft)}
 .cs-zoom figcaption .ic{width:12px;height:12px;stroke-width:2.4}
 /* ...in an overlay on the same page (full.js). The site's own cursor sits under the overlay,
@@ -462,8 +462,8 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-more p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--d-dim);max-width:62ch}
 .cs-out{grid-column:1 / span 8}
 /* a design decision, under the screen it shaped */
-.cs-dec{margin-top:18px;padding-left:14px;border-left:2px solid var(--d-accent);font-size:15px;line-height:1.55;color:var(--d-fg);max-width:48ch}
-.cs-dec b{display:block;margin-bottom:4px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--d-accent)}
+.cs-dec{margin-top:12px;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:var(--d-dim);max-width:50ch}
+.cs-dec b{font-weight:var(--d-bw,600);color:var(--d-fg)}
 /* tables: they scroll sideways on a phone rather than crush */
 .cs-table{grid-column:1 / -1;overflow-x:auto;overscroll-behavior-x:contain}
 .cs-table table{width:100%;min-width:660px;border-collapse:collapse;font-size:15px;line-height:1.45}
@@ -521,13 +521,6 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-persona dd ul{margin-top:6px;padding-left:16px}
 .cs-persona dd li{font-size:14px;line-height:1.5;color:var(--d-dim)}
 .cs-persona dd li + li{margin-top:4px}
-/* the three journey maps side by side; each opens full size */
-.cs-maps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut)}
-.cs-maps figure{margin:0;display:grid}
-.cs-maps figcaption{justify-self:stretch;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.cs-maps figcaption span{display:inline-flex;align-items:center;gap:6px}
-.cs-maps figcaption b{font-family:var(--d-head);font-weight:var(--d-hw);font-size:16px;color:var(--d-fg)}
-.cs-maps img{aspect-ratio:4 / 3.4;object-fit:cover;object-position:0 0}
 .t-media.cs-pair > img{width:min(100%,420px);margin-top:28px}
 /* the journey: one line of stages, each problem marked on the stage where it happens */
 .cs-journey{list-style:none;counter-reset:j;position:relative;border-left:2px solid var(--d-line);margin-left:13px}
@@ -547,12 +540,14 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 /* two pictures side by side, and a row of phone screens */
 .cs-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut);align-items:center}
 .cs-two img{display:block;width:100%;height:auto;border-radius:var(--d-sr)}
-.cs-phones{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gut);align-items:start}
+.cs-phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px var(--gut);align-items:start}
 .cs-phones figure{margin:0}
-.cs-phones img{display:block;width:100%;height:auto;aspect-ratio:52 / 100;object-fit:contain;object-position:50% 0}
-.cs-phones figcaption{margin-top:8px;font-size:13px;color:var(--d-soft);text-align:center}
-.t-media.cs-narrow > img{width:min(100%,520px)}
-.t-media.cs-sms > img{width:min(100%,380px)}
+.cs-phones a{display:block}
+.cs-phones img{display:block;width:min(100%,340px);height:auto;margin-inline:auto}
+.cs-phones figure{display:grid;margin:0}
+.cs-phones figcaption{justify-self:center;margin-top:14px;font-size:15px;color:var(--d-dim);text-align:center}
+.t-media.cs-narrow > img,.cs-zoom.cs-narrow a{width:min(100%,640px)}
+.cs-zoom.cs-sms a{width:min(100%,520px)}
 .t-media.cs-ill{margin-bottom:8px}
 .t-media.cs-flat figcaption{justify-self:start;margin-top:12px}
 /* the comparison table: the last row is ours */
@@ -574,7 +569,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
   .cs-persona{grid-template-columns:minmax(0,1fr);gap:18px;padding:16px}
   .cs-persona > img,.cs-persona > .cs-noimg{aspect-ratio:4 / 3;object-position:50% 20%}
   .cs-persona dl{grid-template-columns:minmax(0,1fr)}
-  .cs-maps{grid-template-columns:minmax(0,1fr)}
+  .cs-phones{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
   .cs-people img{height:auto;aspect-ratio:4 / 3;max-height:none;object-position:50% 25%}
   .cs-noimg{min-height:0;aspect-ratio:4 / 3;font-size:56px}
   .cs-journey li > i:nth-of-type(n){grid-column:1;grid-row:auto;margin-top:8px;margin-bottom:0}
@@ -662,3 +657,31 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 
 /* screens cut with their own dark ground and floating cards: no frame or shadow around them */
 .t-slides.flat .t-slides-view > img{box-shadow:none;border-radius:0}
+
+.fcs .t-sec > .cs-sub{margin-top:calc(var(--row) * .5)}
+.fcs .t-sec > .cs-sub .t-h3{font-size:clamp(24px,2.2vw,32px)}
+
+/* journey maps (tools/full/uls.html): tabs per actor; a grid of lanes x stages that scrolls
+   sideways; the emotional arc is an SVG at the columns' own width (240px each) */
+.jm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.jm-tabs button{padding:10px 18px;border-radius:999px;border:1px solid var(--d-line);background:transparent;color:var(--d-dim);
+  font:500 15px/1 var(--d-font);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.jm-tabs button:hover{color:var(--d-fg);border-color:var(--d-soft)}
+.jm-tabs button[aria-selected="true"]{background:var(--d-accent);border-color:var(--d-accent);color:var(--d-on-accent)}
+.jm[hidden]{display:none}
+.jm-scroll{overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--d-line) transparent}
+.jm-grid{display:grid;grid-template-columns:150px repeat(var(--n),240px);width:max-content;border-top:1px solid var(--d-line)}
+.jm-grid > div{padding:14px 16px 16px 0;border-bottom:1px solid var(--d-line)}
+.jm-lane{position:sticky;left:0;z-index:1;background:var(--d-bg);font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--d-soft);padding-left:0}
+.jm-h span{display:block;font-size:13px;font-weight:var(--d-bw);color:var(--d-accent)}
+.jm-h b{display:block;margin-top:6px;font-family:var(--d-head);font-weight:var(--d-hw);font-size:18px;line-height:1.25;color:var(--d-fg)}
+.jm-c{font-size:14px;line-height:1.55;color:var(--d-dim)}
+.jm-c.pain{color:var(--d-fg)}
+.jm-c.opp{color:var(--d-accent)}
+.jm-arcrow{padding:0 !important}
+.jm-arc{display:block}
+.jm-arc path{fill:none;stroke:var(--d-accent);stroke-width:2.5;stroke-linejoin:round}
+.jm-arc circle{fill:var(--d-accent)}
+.jm-arc text{fill:var(--d-fg);font:500 13px var(--d-font);text-anchor:middle}
+@media (max-width:900px){.jm-grid{grid-template-columns:104px repeat(var(--n),240px)}.jm-lane{font-size:11px}}
