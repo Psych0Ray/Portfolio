@@ -1200,6 +1200,17 @@ Last updated: 2026-10-08
     - Page height at 1440px: ~19,700px (was ~43,000). Verified: no broken images, index tracks sections, slideshow and player work, no overflow at 390px, no text under 13px.
     - **Python note:** installing Python 3.12 for Whisper (item 107) put a `python` without Pillow on PATH; run the builder with **`py tools/build_work.py`** (3.14, has Pillow).
 
+109. **ULS full case study rewritten as a page, and the reviewer's ULS fixes on the trailer (2026-10-08). LIVE.** Same system as item 108 (`tools/full/uls.html`, INDEX entries are `#ids`). The ULS deck in Figma (`2265:693`) is two tall panels (`2265:694`, `2265:3347`); text was read from them with `use_figma` in y-slices (a single read exceeds the 20 KB return limit).
+    - **Order is the reviewer's:** the naka (5 steps) → **who it is for** (4 personas from the interviews: Sunita and Ramesh, workers; Shailesh, contractor; Mustafa, foreman; each with their own quote in Hindi typed in English plus an English line, wants / phone / hurts; target group stated; the contractor's smartphone use justifies the dashboard) → research (9 interviews, transcripts link, e-Shram 30 cr+/60%/90% with the deck's source links) → **the worker's 9-stage journey with each problem marked on its stage** → **by choice or by chance** (the value equation as gets/pays per role) → **competitive analysis table with MGNREGA added** (user asked; row filled from public facts: rural only, notified wages, bank payments, job card) → problem statement + 5 HMWs → ULS and the **service blueprint** (zoomable, overlay) → the solution (ID card + slip, SMS, 6 worker-app screens, Hindi foreman app, contractor dashboard slideshow: naka map / profile / pipeline / payments, transport), each with a Decision line where there is one → service recovery table (8 failures) → storyboard, **Before 1-6 and With 1-13 numbered separately** → teaser film → impact → learnings.
+    - **Personas and storyboard are different people on purpose** (user): the storyboard keeps Ramesh/Shailesh/Yuvraj with its own roles.
+    - **Cut:** timeline, domain slide, secondary actors, thematic-coding wall, ecosystem model, empathy square, service gap model, contractor/foreman journeys, both value-flow diagrams, levels of value, IA, lifetime trajectory, group and supervisor personas, thank-you. No city names.
+    - **Images:** 19 WebP crops from `D:\Submissions\Behance New\Service Design\*.png` (2898px wide) in `work/full/uls/`, ~1.1 MB; the 28 old JPEG strips (21 MB) deleted. Storyboard frames reuse `work/ui/uls/sb/`. Page ~19,200px at 1440 (was ~85,000).
+    - **Sunita's photo is NOT on the site:** the deck's image carries a stock-photo (Dreamstime) watermark, i.e. unlicensed. Her card shows an "S" placeholder (`.cs-noimg`). The user needs to supply a licensed or own photo.
+    - **Trailer (`tools/trailers/uls.html`, `build_work.py`):** My role is now "End-to-end research and design"; With ULS frames renumbered 1-13 and the turn frame unnumbered; **VIEW FULL CASE STUDY moved up to right after the solution** via a `{{fullcase}}` slot: `page()` closes the deck, puts the site's own `.bh` bar in `section.sec.end.mid`, and reopens `div.deck.cont`; the end section then has only Next. `work.js` now watches every `.deck` for the nav colours. Bar subtitle for written case studies: "The research, the method and the full design, on one page." (ICCC's changed too). The `bar` markup in `page()` was rebuilt with plain `
+` escapes after a heredoc edit broke them again — **edit `build_work.py` with the editor or a Python script file, never a bash heredoc containing `
+`**.
+    - `--d-mark` (deck var) colours the section-label square; ICCC sets lavender, ULS falls back to its yellow accent.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
@@ -1223,7 +1234,7 @@ Last updated: 2026-10-08
 
 ## Next up (not started)
 
-- **Long case studies → written pages (item 108): ICCC done.** Next, per the user: ULS (biggest, most cuts, and the reviewer's restructure), then Canva AI and Relique; then mirror the cuts and fixes in the Figma decks / PDFs.
+- **Long case studies → written pages: ICCC (108) and ULS (109) done.** Next: Canva AI and Relique; then mirror the cuts and fixes in the Figma decks / PDFs. Still open from the review: the other trailers' View full case study position, the off-site items, emailing the reviewer.
 - **Industry review action items (item 107; full English translation in `~/Downloads/Portfolio review - English translation.md`). None started; the user has not yet said which to do.**
   - **All project pages:** far less text (keywords, bullets, infographics instead of paragraphs); give the *why* and the key takeaway, not the *how* (method detail like the OOUX sentence format belongs in the full case study or in conversation); show the decisions: what evidence or which methods agreed and made you confident ("otherwise maybe Claude did it all"); plain words instead of jargon labels.
   - **All trailers:** move `VIEW FULL CASE STUDY` up to sit right after the solution, so the trailer reads as a teaser. The reviewer did not get the two-page (trailer + full) setup at first.

@@ -387,7 +387,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 /* a section's label, as the deck sets it: small capitals beside a lavender square */
 .cs-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--d-font);font-size:13px;font-weight:500;
   letter-spacing:.07em;text-transform:uppercase;color:var(--d-fg)}
-.cs-label::before{content:"";width:10px;height:10px;border-radius:3px;background:#beadfb;flex:none}
+.cs-label::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--d-mark,var(--d-accent));flex:none}
 .t-sec > .cs-label{margin-bottom:calc(18px - var(--row))}
 /* a working link out to the source material */
 .cs-links{margin-top:6px}
@@ -475,10 +475,63 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-trio figcaption{margin-top:10px;font-size:14px;color:var(--d-dim)}
 .cs-kv > div{padding:16px 0}
 .cs-kv dt{font-size:clamp(17px,1.4vw,20px)}
+.cs-a.sm{font-size:13px;margin-left:2px}
+/* personas: a photo beside who they are, their own words, then wants / phone / hurts */
+.cs-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut)}
+.cs-people article{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:22px;padding:18px;
+  background:var(--d-card);border:1px solid var(--d-line);border-radius:var(--d-r)}
+.cs-people img{display:block;width:100%;height:100%;max-height:420px;object-fit:cover;border-radius:calc(var(--d-r) * .6)}
+.cs-noimg{display:grid;place-items:center;min-height:300px;border-radius:calc(var(--d-r) * .6);background:var(--d-line);
+  font-family:var(--d-head);font-weight:var(--d-hw);font-size:72px;color:var(--d-soft)}
+.cs-people .who b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:22px;line-height:1.2;color:var(--d-fg)}
+.cs-people .who span{display:block;margin-top:4px;font-size:14px;color:var(--d-soft)}
+.cs-people blockquote{margin:16px 0 0;padding-left:12px;border-left:2px solid var(--d-accent)}
+.cs-people blockquote p{font-family:var(--d-head);font-weight:500;font-style:italic;font-size:16px;line-height:1.45;color:var(--d-fg)}
+.cs-people blockquote .en{margin-top:6px;font-family:var(--d-font);font-style:normal;font-weight:400;font-size:14px;color:var(--d-dim)}
+.cs-people dl{margin-top:14px}
+.cs-people dl div{margin-top:10px}
+.cs-people dt{font-size:12px;font-weight:var(--d-bw);letter-spacing:.06em;text-transform:uppercase;color:var(--d-accent)}
+.cs-people dd{margin-top:3px;font-size:14px;line-height:1.5;color:var(--d-dim)}
+/* the journey: one line of stages, each problem marked on the stage where it happens */
+.cs-journey{list-style:none;counter-reset:j;position:relative;border-left:2px solid var(--d-line);margin-left:13px}
+.cs-journey li{counter-increment:j;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-auto-rows:min-content;column-gap:24px;
+  padding:0 0 26px 30px}
+.cs-journey li > div{grid-column:1;grid-row:1 / span 3}
+.cs-journey li::before{content:counter(j);position:absolute;left:-15px;top:-2px;width:28px;height:28px;border-radius:50%;
+  background:var(--d-bg);border:2px solid var(--d-line);display:grid;place-items:center;font-size:13px;font-weight:var(--d-bw);color:var(--d-fg)}
+.cs-journey b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(18px,1.5vw,21px);line-height:1.25;color:var(--d-fg)}
+.cs-journey span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--d-dim)}
+.cs-journey i{grid-column:2;grid-row:span 1;align-self:start;justify-self:start;margin-bottom:6px;padding:6px 12px;border:1.5px solid var(--d-accent);
+  border-radius:8px;font-style:normal;font-size:14px;font-weight:500;line-height:1.3;color:var(--d-fg)}
+.cs-journey li:has(i)::before{background:var(--d-accent);border-color:var(--d-accent);color:var(--d-on-accent)}
+.cs-journey li > i:first-of-type{grid-row:1}
+.cs-journey li > i:nth-of-type(2){grid-row:2}
+.cs-journey li > i:nth-of-type(3){grid-row:3}
+/* two pictures side by side, and a row of phone screens */
+.cs-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut);align-items:center}
+.cs-two img{display:block;width:100%;height:auto;border-radius:var(--d-sr)}
+.cs-phones{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gut);align-items:end}
+.cs-phones figure{margin:0}
+.cs-phones img{display:block;width:100%;height:auto}
+.cs-phones figcaption{margin-top:8px;font-size:13px;color:var(--d-soft);text-align:center}
+.t-media.cs-narrow > img{width:min(100%,520px)}
+.t-media.cs-sms > img{width:min(100%,380px)}
+/* the comparison table: the last row is ours */
+.cs-comp table{min-width:980px;font-size:14px}
+.cs-comp td:first-child{white-space:normal}
+.cs-comp tr.us td{color:var(--d-on-accent);background:var(--d-accent);font-weight:var(--d-bw)}
+.cs-comp tr.us td:first-child{border-radius:8px 0 0 8px;padding-left:10px}
+.cs-comp tr.us td:last-child{border-radius:0 8px 8px 0}
 @media (max-width:900px){
   .fcs-body{padding:32px 20px 72px}
   .fcs .t-sec > .t-text,.fcs .t-feat > .t-text,.fcs .t-lead,.fcs .t-slides-view,.cs-more,.cs-out{grid-column:1 / -1}
-  .cs-steps,.cs-marks,.cs-trio,.cs-groups{grid-template-columns:minmax(0,1fr)}
+  .cs-steps,.cs-marks,.cs-trio,.cs-groups,.cs-people,.cs-two{grid-template-columns:minmax(0,1fr)}
+  .cs-phones{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}
+  .cs-journey li{grid-template-columns:minmax(0,1fr);padding-left:26px}
+  .cs-people article{grid-template-columns:minmax(0,1fr);gap:16px}
+  .cs-people img{height:auto;aspect-ratio:4 / 3;max-height:none;object-position:50% 25%}
+  .cs-noimg{min-height:0;aspect-ratio:4 / 3;font-size:56px}
+  .cs-journey li > i:nth-of-type(n){grid-column:1;grid-row:auto;margin-top:8px;margin-bottom:0}
   .cs-steps li{display:grid;grid-template-columns:44px minmax(0,1fr);padding:16px 0;border-bottom:1px solid var(--d-line)}
   .cs-steps li::before{grid-row:span 2;margin:3px 0 0}
 }
@@ -494,6 +547,12 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .bh:hover .rbtn{transform:translate(4px,-4px)}
 .bh:active{transform:scale(.99);transition:transform .05s}
 .bh .rbtn .ic,.next .rbtn .ic{width:.95em;height:.95em}
+
+/* the bar placed mid-trailer, right after the solution: the trailer carries on below it */
+.end.mid{padding:56px 40px 56px}
+.deck.cont{margin-top:0}
+.deck.cont > .t-body{padding-top:clamp(72px,7vw,112px)}
+@media (max-width:900px){.end.mid{padding:40px 22px}}
 
 /* Behance steps down to a secondary line once the case study is hosted here */
 .bhalt{display:flex;align-items:center;gap:14px;margin-top:18px;padding:22px 30px;text-decoration:none;

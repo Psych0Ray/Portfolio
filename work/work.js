@@ -209,16 +209,23 @@
 
   /* the nav wears the project's colours while the trailer is under it (work.css, INSIDE THE
      WORK): an observer watches a one-pixel line through the middle of the nav bar */
-  var deck = document.querySelector('.deck');
-  if (deck && 'IntersectionObserver' in window) {
-    var io = null;
+  /* a trailer can be split in two around the full-case-study bar, so every .deck counts */
+  var decks = [].slice.call(document.querySelectorAll('.deck'));
+  if (decks.length && 'IntersectionObserver' in window) {
+    var io = null, under = [];
     var watch = function () {
       if (io) io.disconnect();
+      under = [];
       var line = 52;   /* the nav bar's middle: 22px from the top, 66px tall (the phone button: 16 + 58) */
       io = new IntersectionObserver(function (es) {
-        document.documentElement.classList.toggle('on-deck', es[es.length - 1].isIntersecting);
+        es.forEach(function (e) {
+          var i = under.indexOf(e.target);
+          if (e.isIntersecting && i < 0) under.push(e.target);
+          if (!e.isIntersecting && i >= 0) under.splice(i, 1);
+        });
+        document.documentElement.classList.toggle('on-deck', under.length > 0);
       }, { rootMargin: '-' + line + 'px 0px -' + Math.max(0, window.innerHeight - line - 1) + 'px 0px' });
-      io.observe(deck);
+      decks.forEach(function (d) { io.observe(d); });
     };
     watch();
     var rt = 0;

@@ -29,7 +29,7 @@ PROJECTS = [
   dict(
     slug='uls', title='ULS', short='ULS',
     meta=[('Course', 'Service design'),
-          ('My role', 'Research &amp; Analysis, Design Direction, Models and Blueprints'),
+          ('My role', 'End-to-end research and design'),
           ('Methods', 'Field interviews, systems mapping, service blueprint'),
           ('Year', '2026')],
     about='ULS, the Urban Labour System, brings a record to informal naka hiring: a QR-linked ID for every '
@@ -102,41 +102,21 @@ PROJECTS = [
 # starts `y` pixels down image `image` of work/full/<slug>/ (the images are 2000px wide), a
 # little above the section's heading. Positions were read off the decks by OCR.
 INDEX = {
+  # written out as a page (tools/full/), so each entry points at a section's id instead
   'uls': [
-    ('Context', 'The domain', '01', 1330),
-    ('Context', 'Secondary research', '01', 2500),
-    ('Context', 'Current hiring system', '01', 3930),
-    ('Context', 'Actors', '01', 5070),
-    ('Context', 'Why schemes fail', '02', 2040),
-    ('Context', 'System gaps', '02', 3190),
-    ('Research', 'Primary research', '02', 4330),
-    ('Research', 'Thematic analysis', '03', 1420),
-    ('Research', 'Personas', '03', 3690),
-    ('Models', 'Ecosystem model', '05', 180),
-    ('Models', 'Value flow', '05', 3040),
-    ('Models', 'Value equation', '06', 2080),
-    ('Models', 'Empathy map', '07', 900),
-    ('Models', 'Journey maps', '07', 3610),
-    ('Models', 'Final insights', '08', 4320),
-    ('Models', 'Service gap model', '09', 1410),
-    ('Models', 'Problem statement', '10', 380),
-    ('Ideation', 'How might we', '10', 1630),
-    ('Ideation', 'Opportunity areas', '10', 3240),
-    ('Ideation', 'Service definition', '11', 1730),
-    ('Ideation', 'Primary services', '12', 110),
-    ('Ideation', 'Competitive analysis', '14', 150),
-    ('Ideation', 'Service blueprint', '14', 4540),
-    ('Ideation', 'Information architecture', '15', 1480),
-    ('The solution', 'Unified identity', '16', 1250),
-    ('The solution', 'Worker app', '16', 4930),
-    ('The solution', 'Foreman app', '18', 3330),
-    ('The solution', 'Contractor dashboard', '19', 4440),
-    ('The solution', 'Payments and analytics', '21', 1770),
-    ('The solution', 'Service recovery', '23', 1470),
-    ('The solution', 'Lifetime trajectory', '24', 2560),
-    ('The solution', 'Impact', '24', 4900),
-    ('Wrap-up', 'Service prototype', '25', 960),
-    ('Wrap-up', 'Learnings', '27', 2040),
+    ('Context', 'The naka', '#naka', 0),
+    ('Context', 'Who it is for', '#people', 0),
+    ('Research', 'Interviews and schemes', '#research', 0),
+    ('Research', 'The worker’s journey', '#journey', 0),
+    ('Research', 'By choice or by chance', '#choice', 0),
+    ('Research', 'What already exists', '#market', 0),
+    ('Research', 'The problem', '#problem', 0),
+    ('The service', 'ULS and its blueprint', '#service', 0),
+    ('The service', 'The solution', '#solution', 0),
+    ('The service', 'When it fails', '#recovery', 0),
+    ('The service', 'Before and after', '#story', 0),
+    ('Wrap-up', 'Impact', '#impact', 0),
+    ('Wrap-up', 'What I learned', '#learn', 0),
   ],
   # written out as a page (tools/full/), so each entry points at a section's id instead
   'iccc-surveillance': [
@@ -451,6 +431,25 @@ def page(p, nxt):
         extra += f'\n<link href="{url}" rel="stylesheet">'
     extra += f'\n<link rel="stylesheet" href="ui/{p["slug"]}.css">'
     out = HEAD.format(title=p['short'], desc=html.escape(summary(p['about'])), extra=extra)
+    lede = ('The research, the method and the full design, on one page.' if written(p['slug']) else
+            'The research, the models and every slide of the case study, on one page.')
+    tgt = '' if full else ' target="_blank" rel="noopener"'
+    arrow = 'M3.5 12h16M13 5l7 7-7 7' if full else 'M6 18 18 6M8 6h10v10'
+    msg = (lede if full else 'The full case study, with every step of the process.' if not on_profile
+           else 'The full case study is on its way. The rest of the work is already there.')
+    bar = (f'<a class="bh" href="{link}"{tgt} data-cursor="{"Read" if full else "Behance"}" data-reveal>\n'
+           f'    <div>\n'
+           f'      <h2>{"VIEW FULL CASE STUDY" if full else "VIEW ON BEHANCE"}</h2>\n'
+           f'      <p>{msg}</p>\n'
+           f'    </div>\n'
+           f'    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{arrow}"/></svg></span>\n'
+           f'  </a>')
+    story = trailer(p)
+    # A trailer can place the hand-off itself, right after its solution ({{fullcase}}): the deck
+    # is closed around the site's own bar there, so the bar keeps the site's look.
+    early = full and '{{fullcase}}' in story
+    story = story.replace('{{fullcase}}', (f'</div>\n</div>\n<section class="sec end mid">\n  {bar}\n</section>\n'
+                                           f'<div class="deck p-{p["slug"]} cont">\n<div class="t-body">') if early else '')
     out += f'''
 <header class="chead">
   <h1>{p['title']}</h1>
@@ -460,17 +459,11 @@ def page(p, nxt):
 <div class="deck p-{p['slug']}">
 <figure class="t-cover">{img(p['slug'], names[0], p['cover_alt'], eager=True)}</figure>
 <div class="t-body">
-{trailer(p)}
+{story}
 </div>
 </div>
 <section class="sec end">
-  <a class="bh" href="{link}"{' target="_blank" rel="noopener"' if not full else ''} data-cursor="{'Read' if full else 'Behance'}" data-reveal>
-    <div>
-      <h2>{'VIEW FULL CASE STUDY' if full else 'VIEW ON BEHANCE'}</h2>
-      <p>{'The research, the models and every slide of the case study, on one page.' if full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
-    </div>
-    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
-  </a>{alt}
+  {'' if early else bar}{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
     <div><h2>Next: {nxt['short']}</h2></div>
     <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
