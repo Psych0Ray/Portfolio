@@ -1,3 +1,24 @@
+/* Sideways maps you can drag (journey maps): press and drag to scroll; the site cursor says
+   "Drag" over them (data-cursor). The fade at the right edge goes once the end is reached. */
+(function () {
+  [].forEach.call(document.querySelectorAll('[data-drag]'), function (el) {
+    var down = false, x0 = 0, s0 = 0, moved = false;
+    function edge() { el.classList.toggle('at-end', el.scrollLeft >= el.scrollWidth - el.clientWidth - 2); }
+    el.addEventListener('scroll', edge, { passive: true }); edge();
+    el.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false; x0 = e.clientX; s0 = el.scrollLeft; el.classList.add('dragging');
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - x0; if (Math.abs(dx) > 3) moved = true;
+      el.scrollLeft = s0 - dx;
+    });
+    window.addEventListener('pointerup', function () { down = false; el.classList.remove('dragging'); });
+    el.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  });
+})();
+
 /* Journey map tabs (ULS): one actor's map at a time; arrow keys move between tabs. */
 (function () {
   [].forEach.call(document.querySelectorAll('[data-jm]'), function (box) {

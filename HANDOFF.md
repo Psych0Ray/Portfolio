@@ -1238,6 +1238,16 @@ Last updated: 2026-10-08
     - **Polish:** `.cs-bridge` has no rule and pulls up into its section; section spacing tighter; phones top-aligned in equal rows; dashboard crops have 90px room so floating chips aren't cut; the ICCC sparse map lost its fake browser bar; **tables stack into labelled cards under 760px** (`data-label` on every td, added by script); ICCC `--d-soft` #77748d -> #6b6882 (5.35:1); the home card says Urban Labour System (one name everywhere); 'Phygital' reworded.
     - Detector after: 34 findings, all the known false positives (marquee, cursor, clipped body, hidden carousel slides, index rule-lines, skip-button "10").
 
+114. **Round 7 on the full case studies (2026-10-09). LIVE.** The user rejected the HTML rebuilds of the ULS models: **the ecosystem, empathy square, value flow and service blueprint are the deck's own images again** (zoomable, no frame), cut from the 1.5x strips in `D:\Submissions\Behance New\Service Design\` (Figma's `get_screenshot` only exports at 1x).
+    - **Deck text fixed in the images without touching the deck:** Satoshi can't be loaded by the Figma plugin, so the six ecosystem labels that broke mid-word (Urbanization, Infrastructure growth, Transportation, Capitalism / wage structures, Contractor regulations, Demand for construction labour) were re-set with Pillow in Satoshi Bold (downloaded from Fontshare) after blending out the old text column by column (script `eco_fix.py` in the session scratchpad; detect text as pixels with RGB sum < 40, not < 250, or the dark ground counts as text). The value flow's "Private Comapny" was fixed by swapping the a/p glyph columns.
+    - **Value flow** now has its insights: "Where value is lost", the deck's 8 points as rows. The value-equation gets/pays table stays after it.
+    - **Schemes have a build-up** (`h3` "The help that exists doesn't reach them" + paragraph before the 30 cr / 60% / 90% facts).
+    - **Worker journey:** a "Stage / Where it breaks" header, red "!" problem pills, red markers on stages with problems.
+    - **Journey maps:** "Choose a journey" prompt, tabs with a chevron and hover/press states, a "Drag sideways" hint, drag-to-scroll with the mouse (`[data-drag]`, block at the top of `work/full.js`), the site cursor says "Drag", a right-edge fade until the end.
+    - **ICCC method explained:** after the grouping, a table of the 11 action groups (words merged, why); "We measured what it saved" now has 3 steps (yes/no cells, entropy, cells x entropy), the formula `H = -[p log2 p + (1-p) log2(1-p)]` in a panel, a worked calculation for both maps (10,780 x 0.229 = 2,467; 154 x 0.988 = 152), the result line; then "5. Every object gets its attributes" (Alert Item's 10 attributes) and "6. Object + action = a task" (6 example pairs). Text is from the deck slides 15/16/20.
+    - **Taste/impeccable layout pass:** In short gutters widened; long lists in the case studies lose the hairline per row (one rule above the group); no en/em dashes in visible copy (ranges use hyphens); unused diagram CSS removed. Detector: 34, all known false positives.
+    - **Next:** the trailer pages (user: "make these changes and then we work on the trailer pages").
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

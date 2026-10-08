@@ -133,7 +133,7 @@
   <ul class="t-facts n3" aria-label="How we researched">
     <li><b>6</b><span>people interviewed, 1 woman and 5 men</span></li>
     <li><b>2</b><span>methods: semi-structured interviews and field observation</span></li>
-    <li><b>10&ndash;15</b><span>minutes per interview, in person</span></li>
+    <li><b>10-15</b><span>minutes per interview, in person</span></li>
   </ul>
   <p class="cs-links"><a class="cs-a" href="https://www.figma.com/board/t5k74Ua0LAJQQD605pF6qL/Questionnaire-and-Translated-Transcripts-Group-12?node-id=0-1&amp;p=f&amp;t=ABE3rrKYA3LWujWl-0" target="_blank" rel="noopener">The questions and translated transcripts <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a></p>
 </section>
@@ -145,7 +145,7 @@
   </div>
   <dl class="t-rows">
     <div><dt>Too many alerts to check</dt><dd><b>5 of 6</b> operators said checking alerts by hand in busy periods wears them out, and real faults get missed.</dd></div>
-    <div><dt>Each check takes minutes</dt><dd>Operators cross-check device status, logs and camera feeds by hand: <b>3&ndash;7 minutes</b> per alert.</dd></div>
+    <div><dt>Each check takes minutes</dt><dd>Operators cross-check device status, logs and camera feeds by hand: <b>3-7 minutes</b> per alert.</dd></div>
     <div><dt>WhatsApp is the workflow</dt><dd><b>All 6</b> said dispatch, updates and emergencies run over WhatsApp and phone calls, so nothing is on record.</dd></div>
     <div><dt>No one sees where a repair is</dt><dd>Supervisors and managers track tasks by calling around or by updating a shared master sheet.</dd></div>
     <div><dt>Repeat failures go unnoticed</dt><dd><b>4 of 6</b> said a device that keeps failing raises a fresh alert each time, with no history attached.</dd></div>
@@ -228,21 +228,72 @@
     <p class="cs-links"><a class="cs-a" href="https://docs.google.com/spreadsheets/d/15RePP2uSUL62duD87vE1lis7jdO0qOlIeSIrC8cFMcM/edit?gid=247916930#gid=247916930" target="_blank" rel="noopener">Both maps in the spreadsheet <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a></p>
   </div>
 
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">What we merged, and why</h3>
+      <p class="t-p">Each action group, the words it absorbed from the stories, and what they have in common. Objects were grouped the same way.</p>
+    </div>
+    <div class="cs-table" tabindex="0" role="region" aria-label="How actions were grouped"><table><thead><tr><th>Group</th><th>Words merged into it</th><th>Why</th></tr></thead><tbody><tr><td data-label="Group">Monitor</td><td data-label="Words merged into it">monitor, check, inspect, view, operate, function, navigate, run, supervise, access</td><td data-label="Why">Watching and verifying system status and infrastructure in real time</td></tr><tr><td data-label="Group">Detect</td><td data-label="Words merged into it">detect, identify, malfunction, troubleshoot, understand, appear</td><td data-label="Why">Discovering and flagging that a problem exists</td></tr><tr><td data-label="Group">Analyse</td><td data-label="Words merged into it">analyse, investigate, diagnose, evaluate, assess, estimate</td><td data-label="Why">Finding the root cause, impact or severity of an issue</td></tr><tr><td data-label="Group">Coordinate</td><td data-label="Words merged into it">work together, guide, communicate</td><td data-label="Why">Collaboration between field teams, engineers, operators and agencies</td></tr><tr><td data-label="Group">Manage</td><td data-label="Words merged into it">handle, ensure, maintain, address</td><td data-label="Why">Keeping an issue under control until it&rsquo;s handled</td></tr><tr><td data-label="Group">Track</td><td data-label="Words merged into it">record, log, document, continue, review, verify, confirm</td><td data-label="Why">Following an incident, repair or change over time</td></tr><tr><td data-label="Group">Repair</td><td data-label="Words merged into it">fix, restore, visit, resume, bring, move</td><td data-label="Why">Physical or technical work to fix a device on site</td></tr><tr><td data-label="Group">Report</td><td data-label="Words merged into it">generate, share, export, upload, show, provide</td><td data-label="Why">Producing and sharing reports and summaries</td></tr><tr><td data-label="Group">Escalate</td><td data-label="Words merged into it">raise, notify, inform, send, increase, intervene</td><td data-label="Why">Raising priority and handing an incident to a higher level</td></tr><tr><td data-label="Group">Update</td><td data-label="Words merged into it">improve, hand over, affect, return</td><td data-label="Why">Recording changes, repair status and handovers</td></tr><tr><td data-label="Group">Resolve</td><td data-label="Words merged into it">close, complete, minimise, reduce, acknowledge, categorise, receive, assign, plan</td><td data-label="Why">Taking an issue through to a formally closed case</td></tr></tbody></table></div>
+  </div>
+
   <div class="t-feat" id="measure">
     <div class="t-text">
       <h3 class="t-h3">4. We measured what it saved</h3>
-      <p class="t-p">The information needed to read the map, in bits, before and after grouping.</p>
+      <p class="t-p">The dense map looked simpler, but &ldquo;looks simpler&rdquo; isn&rsquo;t evidence. So we treated each map as information an operator has to read, and counted it in bits.</p>
+    </div>
+    <ol class="cs-method">
+      <li><b>Every cell is a yes or no.</b><span>Each cell answers one question: does this action apply to this object? A map is a grid of these questions.</span></li>
+      <li><b>Entropy says how much each cell tells you.</b><span>Shannon entropy measures the information in a yes/no answer. If almost every cell is empty, each one tells you very little, but you still have to read them all.</span></li>
+      <li><b>Cells &times; entropy = the whole map.</b><span>Multiply the information per cell by the number of cells to get the total an operator has to take in.</span></li>
+    </ol>
+    <div class="cs-formula" role="img" aria-label="H equals minus open bracket p times log base 2 of p plus 1 minus p times log base 2 of 1 minus p close bracket">
+      <p class="f-eq"><i>H</i> = &minus;[&thinsp;<i>p</i>&thinsp;log<sub>2</sub>&thinsp;<i>p</i> + (1 &minus; <i>p</i>)&thinsp;log<sub>2</sub>(1 &minus; <i>p</i>)&thinsp;]</p>
+      <p class="f-key"><i>p</i> = the share of cells that are marked &nbsp;&middot;&nbsp; <i>H</i> = bits per cell &nbsp;&middot;&nbsp; total = cells &times; <i>H</i></p>
+    </div>
+    <div class="cs-worked">
+      <div><p class="w-h">Sparse map</p><dl>
+        <div><dt>Size</dt><dd>140 objects &times; 77 actions = 10,780 cells</dd></div>
+        <div><dt>Marked</dt><dd>400 cells, so <i>p</i> = 400 &divide; 10,780 = 0.037</dd></div>
+        <div><dt>Per cell</dt><dd><i>H</i> = 0.229 bits</dd></div>
+        <div><dt>Total</dt><dd><b>10,780 &times; 0.229 = 2,467 bits</b></dd></div>
+      </dl></div>
+      <div><p class="w-h">Dense map</p><dl>
+        <div><dt>Size</dt><dd>14 objects &times; 11 actions = 154 cells</dd></div>
+        <div><dt>Marked</dt><dd>87 cells, so <i>p</i> = 87 &divide; 154 = 0.565</dd></div>
+        <div><dt>Per cell</dt><dd><i>H</i> = 0.988 bits</dd></div>
+        <div><dt>Total</dt><dd><b>154 &times; 0.988 = 152 bits</b></dd></div>
+      </dl></div>
     </div>
     <div class="t-drop">
       <div class="was"><b>2,467</b><span>bits, sparse map</span></div>
       <div class="to" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></div>
-      <div><b>152</b><span>bits, dense map: 93.8% less</span></div>
+      <div><b>152</b><span>bits, dense map</span></div>
     </div>
-    <details class="cs-more">
-      <summary>How we measured it</summary>
-      <p>We treated each map as an information system: every cell is either marked or empty, and its entropy gives the bits needed to read it. Sparse: 10,780 cells, 400 marked, 0.229 bits per cell, so 2,467 bits. Dense: 154 cells, 87 marked, 0.988 bits per cell, so 152 bits. More information to read means a heavier load on the person reading it.</p>
-    </details>
-    <p class="t-p cs-out">It also told us what to build around: seven objects, <b>Alert, Device, Fault, Ticket, Field task, Infrastructure and Report</b>. Every field on screen had to trace back to one of them.</p>
+    <p class="t-p cs-out">1 &minus; 152 &divide; 2,467 = <b>93.8% less</b> to read: the dense map is 6.2% of the original load. Each of its cells is close to the most informative a yes/no can be (1 bit), and there are 70 times fewer of them.</p>
+  </div>
+
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">5. Every object gets its attributes</h3>
+      <p class="t-p">Before any screen, we wrote down the information that lives inside each of the seven core objects the dense map left us with (Alert, Device, Fault, Ticket, Field task, Infrastructure and Report): their sub-objects, and the fields that describe them. An Alert Item, for example:</p>
+    </div>
+    <ul class="cs-attrs" aria-label="Attributes of an Alert Item"><li>Alert type</li><li>Severity</li><li>Alert status</li><li>Location</li><li>Zone</li><li>Issue description</li><li>Failure count</li><li>Last updated</li><li>Assigned to</li><li>Assigned role</li></ul>
+    <p class="t-p cs-out">This is what lets a screen be justified field by field: an operator monitoring an alert needs its severity, status and location, so those are exactly what an alert card shows.</p>
+  </div>
+
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">6. Object + action = a task</h3>
+      <p class="t-p">Pairing each object with the actions that apply to it gave the real tasks people do in the system. The ones on our chosen workflow became the task list we ranked next.</p>
+    </div>
+    <ul class="cs-pairs" aria-label="Examples of object-action pairs">
+      <li><span>Alert</span><i>+</i><span>Monitor</span><i>=</i><b>Monitor alerts</b></li>
+      <li><span>Alert</span><i>+</i><span>Escalate</span><i>=</i><b>Escalate an alert</b></li>
+      <li><span>Device</span><i>+</i><span>Analyse</span><i>=</i><b>Analyse a device</b></li>
+      <li><span>Fault</span><i>+</i><span>Repair</span><i>=</i><b>Repair a fault</b></li>
+      <li><span>Incident</span><i>+</i><span>Coordinate</span><i>=</i><b>Coordinate an incident</b></li>
+      <li><span>Ticket</span><i>+</i><span>Track</span><i>=</i><b>Check a ticket</b></li>
+    </ul>
   </div>
 </section>
 
