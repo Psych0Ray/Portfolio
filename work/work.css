@@ -400,6 +400,24 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-zoom img{display:block;width:100%;height:auto;border-radius:var(--d-sr);box-shadow:var(--d-shadow)}
 .cs-zoom figcaption{justify-self:end;display:flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--d-soft)}
 .cs-zoom figcaption .ic{width:12px;height:12px;stroke-width:2.4}
+/* ...in an overlay on the same page (full.js). The site's own cursor sits under the overlay,
+   so the system cursor comes back inside it. */
+.lb{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;
+  background:rgba(12,12,16,.94);color:#fff;overflow:hidden}
+.lb::backdrop{background:transparent}
+.lb[open]{display:flex;flex-direction:column}
+.lb,.lb *{cursor:default}
+.lb-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px 14px 24px;flex:none}
+.lb-hint{font-family:var(--body);font-size:14px;color:rgba(255,255,255,.7)}
+.lb-x{width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#111;display:grid;place-items:center;cursor:pointer;flex:none}
+.lb-x:hover{transform:scale(1.06)}
+.lb-x svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.lb-view{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;place-items:center;padding:0 24px 24px}
+.lb-view img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:8px;background:#fff;cursor:zoom-in}
+.lb.zoomed .lb-view{place-items:start}
+.lb.zoomed .lb-view img{max-width:none;max-height:none;width:auto;cursor:zoom-out}
+@media (max-width:900px){.lb-bar{padding:10px 10px 10px 16px}.lb-hint{font-size:13px}.lb-view{padding:0 10px 10px}}
+
 /* the numbered breakdowns under the swim lane, numbered as the diagram marks them */
 .cs-marks{list-style:none;counter-reset:m;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px var(--gut);margin-top:24px}
 .cs-marks li{counter-increment:m;display:flex;gap:12px;font-size:15px;line-height:1.5;color:var(--d-dim)}

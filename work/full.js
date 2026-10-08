@@ -1,3 +1,57 @@
+/* A dense diagram opens full size in an overlay on the same page (.cs-zoom links), not in a
+   new tab: it fits the screen first, a click toggles its real size to pan around, and it
+   closes with the X, Esc, the back of the overlay, or the browser's back button. */
+(function () {
+  var links = document.querySelectorAll('.cs-zoom a[href]');
+  if (!links.length || !window.HTMLDialogElement) return;
+  var X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  var lb = document.createElement('dialog');
+  lb.className = 'lb';
+  lb.setAttribute('aria-label', 'Diagram, full size');
+  lb.innerHTML = '<div class="lb-bar"><p class="lb-hint">Click the diagram to zoom in or out</p>' +
+    '<button type="button" class="lb-x" aria-label="Close">' + X + '</button></div>' +
+    '<div class="lb-view" data-lenis-prevent><img alt=""></div>';
+  document.body.appendChild(lb);
+  var view = lb.querySelector('.lb-view'), pic = view.querySelector('img'), pushed = false;
+  if (window.matchMedia('(hover: none)').matches) lb.querySelector('.lb-hint').textContent = 'Tap the diagram to zoom in or out';
+
+  function open(a) {
+    var im = a.querySelector('img');
+    pic.src = a.getAttribute('href');
+    pic.alt = im ? im.alt : '';
+    lb.classList.remove('zoomed');
+    lb.showModal();
+    view.scrollTo(0, 0);
+    if (window.LENIS) window.LENIS.stop();
+    document.documentElement.classList.add('lb-open');
+    history.pushState({ lb: 1 }, '');
+    pushed = true;
+  }
+  function closed() {
+    if (window.LENIS) window.LENIS.start();
+    document.documentElement.classList.remove('lb-open');
+    if (pushed) { pushed = false; history.back(); }
+  }
+  [].forEach.call(links, function (a) {
+    a.removeAttribute('target');
+    a.addEventListener('click', function (e) { e.preventDefault(); open(a); });
+  });
+  lb.addEventListener('close', closed);
+  lb.querySelector('.lb-x').addEventListener('click', function () { lb.close(); });
+  /* a click on the dark space around the diagram closes it */
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target === view) lb.close(); });
+  pic.addEventListener('click', function (e) {
+    var r = pic.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+    lb.classList.toggle('zoomed');
+    /* zooming in keeps the spot that was clicked under the pointer */
+    if (lb.classList.contains('zoomed')) {
+      view.scrollTo(fx * pic.offsetWidth - view.clientWidth / 2, fy * pic.offsetHeight - view.clientHeight / 2);
+    }
+  });
+  /* the browser's back button closes the overlay instead of leaving the page */
+  window.addEventListener('popstate', function () { if (lb.open) { pushed = false; lb.close(); } });
+})();
+
 /* Full case studies: the index beside the deck.
    Each link knows which image its section is in and how far down it starts, as a fraction of
    that image's height, so the position holds at any width. A click scrolls there (through the
