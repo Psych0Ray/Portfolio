@@ -151,7 +151,6 @@ INDEX = {
     ('Design', 'The old dashboard', '#old', 0),
     ('Design', 'The new dashboard', '#new', 0),
     ('Design', 'The prototype', '#film', 0),
-    ('Design', 'Accessibility', '#a11y', 0),
     ('Wrap-up', 'What I learned', '#learn', 0),
   ],
   'canva-ai': [

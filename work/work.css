@@ -448,9 +448,6 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-table .p2{background:#fdedd6;color:#8a4f00}
 .cs-table .p3{background:#ebe7fb;color:var(--d-accent)}
 .cs-table .p4{background:#eef0f3;color:#5e5e5e}
-.cs-table .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:10px;vertical-align:-1px}
-.cs-table .ok{color:#15803d;font-weight:600}
-.cs-table .no{color:#b42318;font-weight:600}
 /* three photos in a row */
 .cs-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut)}
 .cs-trio figure{margin:0}
