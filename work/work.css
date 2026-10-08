@@ -496,7 +496,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-one{margin-top:12px;font-size:14px;line-height:1.5;color:var(--d-dim)}
 .cs-people .who b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:22px;line-height:1.2;color:var(--d-fg)}
 .cs-people .who span{display:block;margin-top:4px;font-size:14px;color:var(--d-soft)}
-.cs-people blockquote{margin:16px 0 0;padding-left:12px;border-left:2px solid var(--d-accent)}
+.cs-people blockquote{margin:16px 0 0}
 .cs-people blockquote p{font-family:var(--d-head);font-weight:500;font-style:italic;font-size:16px;line-height:1.45;color:var(--d-fg)}
 .cs-people blockquote .en{margin-top:6px;font-family:var(--d-font);font-style:normal;font-weight:400;font-size:14px;color:var(--d-dim)}
 .cs-people dl{margin-top:14px}
@@ -513,7 +513,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-persona > img,.cs-persona > .cs-noimg{width:100%;height:auto;aspect-ratio:3 / 4.4;object-fit:cover;border-radius:calc(var(--d-r) * .6);align-self:start}
 .cs-persona .who b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:24px;line-height:1.2;color:var(--d-fg)}
 .cs-persona .who span{display:block;margin-top:4px;font-size:14px;color:var(--d-soft)}
-.cs-persona blockquote{margin:16px 0 0;padding-left:12px;border-left:2px solid var(--d-accent);max-width:62ch}
+.cs-persona blockquote{margin:16px 0 0;max-width:62ch}
 .cs-persona blockquote p{font-family:var(--d-head);font-weight:500;font-style:italic;font-size:17px;line-height:1.45;color:var(--d-fg)}
 .cs-persona blockquote .en{margin-top:6px;font-family:var(--d-font);font-style:normal;font-weight:400;font-size:14px;color:var(--d-dim)}
 .cs-persona dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;margin-top:20px}
