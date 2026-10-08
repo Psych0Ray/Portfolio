@@ -790,3 +790,12 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
   .u-track b{padding-top:4px}
   .u-track i{justify-self:start}
 }
+
+/* quotes from users (Canva AI): two side by side, the deck's head face */
+.cs-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px var(--gut)}
+.cs-quotes figure{margin:0;padding-top:20px;border-top:2px solid var(--d-accent)}
+.cs-quotes blockquote{margin:0}
+.cs-quotes p{font-family:var(--d-head);font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:var(--d-fg)}
+.cs-quotes p b{display:block;margin-bottom:8px;font-weight:var(--d-bw)}
+.cs-quotes figcaption{margin-top:14px;font-size:14px;color:var(--d-soft)}
+@media (max-width:760px){.cs-quotes{grid-template-columns:minmax(0,1fr)}}

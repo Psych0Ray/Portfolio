@@ -165,3 +165,20 @@
   .rl-imgs img,.rl-card .hov,.rl-pop,.rl-bars i{transition:none}
   .rl-text.in{animation:none}
 }
+
+/* full case study: the deck's italic for the highlighted phrase, the story strip, and the seven signs */
+.p-relique.fcs .t-h em,.p-relique.fcs .t-lead em{font-style:italic;color:#c9b8a6}
+.p-relique .sb-f{margin:0}
+.p-relique .sb-f img{width:100%;height:auto;display:block;border-radius:var(--d-sr)}
+.p-relique .sb-f figcaption{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;margin-top:16px}
+.p-relique .sb-f .u-n{font-family:var(--d-head);font-size:22px;line-height:1;color:var(--d-accent)}
+.p-relique .sb-f p{font-size:15px;line-height:1.55;color:var(--d-dim)}
+.rl-speak{max-width:900px;justify-self:center}
+.rl-speak img{width:100%;height:auto;display:block}
+.rl-signgrid{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px var(--gut)}
+.rl-signgrid li{display:grid;grid-template-rows:260px auto;gap:20px}
+.rl-signgrid img{width:100%;max-width:400px;height:100%;object-fit:contain;object-position:left center}
+.rl-signgrid .rl-tag{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--d-accent)}
+.rl-signgrid h3{margin-top:6px;font-family:var(--d-head);font-weight:400;font-size:22px;color:#d9cabb}
+.rl-signgrid div > p:last-child{margin-top:8px;max-width:46ch;font-size:16px;line-height:1.55;color:var(--d-dim)}
+@media (max-width:760px){.rl-signgrid{grid-template-columns:minmax(0,1fr);gap:40px}.rl-signgrid li{grid-template-rows:200px auto}}

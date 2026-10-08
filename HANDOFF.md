@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-10-08
+Last updated: 2026-10-09
 
 ## Project
 
@@ -1253,6 +1253,16 @@ Last updated: 2026-10-08
     - **ULS trailer, from the review transcript:** the 5-step hiring picture + four problem rows are replaced by the worker's whole 9-stage journey on one line (`ol.u-track`), each problem a red box under the stage where it happens (vertical below 1100px). The deck's service blueprint is added before the solution ("One job, end to end", zoomable; `page()` now loads `full.js` on any trailer with a `.cs-zoom`).
     - **The mid-page black bar is gone.** `{{fullcase}}` now renders a small deck-styled line + pill link, "This page is the short version. Full case study ->" (`.t-teaser`), placed in the solution's opening text on **ULS and ICCC**. The big end bar stays at the bottom.
 
+116. **ULS trailer/full fixes, and Canva AI + Relique brought in line with ULS/ICCC (2026-10-09). LIVE.** The user: introduce ULS before the service blueprint on the trailer; put the "drag sideways" prompt on the right, level with the journey tabs; and do for Canva AI and Relique whatever was done for ULS and ICCC (the reviewer didn't see those two, so the same feedback applies).
+    - **ULS trailer:** order is now schemes -> "ULS gives every worker a record." (intro + full-case-study teaser + ID card) -> "One job, end to end." (blueprint, text now says it shows how ULS runs) -> "Three screens are built around the card." (worker/foreman/dashboard demos).
+    - **ULS full journey maps:** `.jm-bar` wraps the tab group and the hint; hint sits right, bottom-aligned with the 41px tabs (wraps under them on phones).
+    - **Canva AI and Relique full case studies are written pages now** (`tools/full/canva-ai.html`, `tools/full/relique.html`), cover first, deck-styled, INDEX entries are `#ids`; the old slide JPEGs are deleted. Text taken from the course PDFs with pymupdf (`Conv Int\...Canva Re-design Mid-Course.pdf`, `Semiotics (1)\Semantics & Semiotics Final PPT.pdf`); crops rendered from the same PDFs into `work/full/<slug>/*.webp`. Relique crops have the deck's glowing brown ground flattened to the page's #100800 (brown-ish pixels under max 62 blended to bg) so they don't show as boxes.
+      - **Canva:** In short, who uses Canva (facts + G2 bars), Reddit quotes (`.cs-quotes`, new in work.css), 50 prompts + the two prompts up close (zoomable screenshots) + what went wrong, CAPABLE as the deck's letter cards (`.cv-cap` in canva-ai.css) + the ten changes it asked for, Orb's six steps (reuse `ui/canva/steps`) each with a Why: line and its CAPABLE criteria (`.cv-fw`), the video, outcome table, What I learnt. The deck's "500 million nonprofits" figure was dropped (clearly wrong).
+      - **Relique:** In short, context (semiotics/semantics explained in plain words, aim/goal), home page, the 4-step task flow, storytelling (7-scene strip with the armour's narration from relique.js, plus the story tree), About us page, semiotics (the 3 symbols + the deck's 7 numbered uses as a grid, `.rl-signgrid`), the video, What I learnt (from the deck). Headline `em` is the deck's italic in relique.css.
+      - **What I learnt on Canva is drafted from the project** (the deck has no learnings slide): the user should confirm or rewrite it. Relique's comes from the deck.
+    - **Trailers:** `{{fullcase}}` teaser added where the solution starts on Canva AI (Orb) and Relique ("Relique lets the artifacts speak."), so all four trailers match. Canva's trailer gains a short CAPABLE section (the seven letters, `.cv-cap.short`) before Orb, as ULS shows its blueprint: the method, not just the screens.
+    - Verified at 1440 and 390: no overflow, no broken images, every index link has a target, no console errors.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
@@ -1276,7 +1286,7 @@ Last updated: 2026-10-08
 
 ## Next up (not started)
 
-- **Long case studies → written pages: ICCC (108) and ULS (109) done.** Next: Canva AI and Relique; then mirror the cuts and fixes in the Figma decks / PDFs. Still open from the review: the other trailers' View full case study position, the off-site items, emailing the reviewer.
+- **Long case studies → written pages: all four done (108, 109, 116).** Next: the user confirms Canva's drafted What I learnt; then mirror the cuts and fixes in the Figma decks / PDFs. Still open from the review: the off-site items, emailing the reviewer.
 - **Industry review action items (item 107; full English translation in `~/Downloads/Portfolio review - English translation.md`). None started; the user has not yet said which to do.**
   - **All project pages:** far less text (keywords, bullets, infographics instead of paragraphs); give the *why* and the key takeaway, not the *how* (method detail like the OOUX sentence format belongs in the full case study or in conversation); show the decisions: what evidence or which methods agreed and made you confident ("otherwise maybe Claude did it all"); plain words instead of jargon labels.
   - **All trailers:** move `VIEW FULL CASE STUDY` up to sit right after the solution, so the trailer reads as a teaser. The reviewer did not get the two-page (trailer + full) setup at first.

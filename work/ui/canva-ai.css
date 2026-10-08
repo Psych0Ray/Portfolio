@@ -152,3 +152,24 @@
   .cv-poster .b{transition:none}
   .cv-ui.scan .cv-poster .sheen,.cv-ui.scan .cv-orb .ball,.cv-ui.ready .cv-input .send,.cv-chat .in{animation:none}
 }
+
+/* full case study: the CAPABLE framework as the deck draws it, a big letter, the quality, the failure that named it */
+.cv-cap{list-style:none;display:grid;gap:14px}
+.cv-cap li{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:8px 28px;align-items:center;padding:20px 28px 20px 20px;
+  border:1.5px solid transparent;border-radius:14px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#1b93b3,#7b48e2) border-box}
+.cv-cap .l{font-size:56px;line-height:1;font-weight:500;text-align:center;background:linear-gradient(180deg,#4f63dc,#7b48e2);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.cv-cap h3{font-size:18px;font-weight:600;color:var(--d-fg)}
+.cv-cap div p{margin-top:2px;font-size:15px;color:var(--d-dim)}
+.cv-cap .ex{padding-left:24px;border-left:1px solid var(--d-line);font-size:15px;line-height:1.5;color:var(--d-dim)}
+.cv-fw{margin-top:12px;font-size:13px;line-height:1.5;color:var(--d-soft)}
+@media (max-width:760px){
+  .cv-cap li{grid-template-columns:48px minmax(0,1fr);padding:16px 18px 16px 12px}
+  .cv-cap .l{font-size:40px;grid-row:span 2}
+  .cv-cap .ex{padding-left:0;border-left:0}
+}
+/* the trailer's short version: the seven letters and their names only */
+.cv-cap.short{grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px}
+.cv-cap.short li{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:10px;padding:22px 12px}
+.cv-cap.short .l{grid-row:auto}
+.cv-cap.short h3{font-size:15px;line-height:1.3}
