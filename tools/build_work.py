@@ -138,34 +138,21 @@ INDEX = {
     ('Wrap-up', 'Service prototype', '25', 960),
     ('Wrap-up', 'Learnings', '27', 2040),
   ],
+  # written out as a page (tools/full/), so each entry points at a section's id instead
   'iccc-surveillance': [
-    ('Context', 'Overview', '01', 0),
-    ('Context', 'The system', '02', 0),
-    ('Context', 'ICCC as infrastructure', '04', 0),
-    ('Context', 'Connected devices', '06', 0),
-    ('Research', 'Research method', '07', 0),
-    ('Research', 'Findings', '08', 0),
-    ('Research', 'Actors', '09', 0),
-    ('Research', 'Opportunity', '10', 0),
-    ('Research', 'Focus workflow', '11', 0),
-    ('OOUX', 'User stories', '12', 0),
-    ('OOUX', 'Object mapping', '13', 0),
-    ('OOUX', 'Cognitive load', '15', 0),
-    ('OOUX', 'Workflows', '16', 0),
-    ('OOUX', 'Swim lanes', '17', 0),
-    ('OOUX', 'Attributes', '19', 0),
-    ('OOUX', 'Task prioritisation', '20', 0),
-    ('OOUX', 'Current IA', '21', 0),
-    ('Design', 'Existing dashboard', '22', 0),
-    ('Design', 'New IA and wireframes', '23', 0),
-    ('Design', 'Design system', '24', 0),
-    ('Design', 'Features', '25', 0),
-    ('Design', 'Device cards', '26', 0),
-    ('Design', 'Map side panel', '27', 0),
-    ('Design', 'Alerts and escalation', '28', 0),
-    ('Design', 'Messages and tickets', '30', 0),
-    ('Design', 'Accessibility', '32', 0),
-    ('Wrap-up', 'Learnings', '33', 0),
+    ('Context', 'The ICCC', '#context', 0),
+    ('Context', 'Who uses it', '#users', 0),
+    ('Research', 'On site', '#research', 0),
+    ('Research', 'What we found', '#problems', 0),
+    ('Research', 'Focus', '#focus', 0),
+    ('Object-oriented UX', 'User stories to objects', '#ooux', 0),
+    ('Object-oriented UX', 'What it saved', '#measure', 0),
+    ('Object-oriented UX', 'Task ranking', '#tasks', 0),
+    ('Design', 'The old dashboard', '#old', 0),
+    ('Design', 'The new dashboard', '#new', 0),
+    ('Design', 'The prototype', '#film', 0),
+    ('Design', 'Accessibility', '#a11y', 0),
+    ('Wrap-up', 'What I learned', '#learn', 0),
   ],
   'canva-ai': [
     ('Research', 'Who uses Canva', '00', 920),
@@ -347,6 +334,21 @@ def full_shots(slug):
     return sorted(f for f in os.listdir(folder) if f.endswith('.jpg'))
 
 
+def written(slug):
+    """A case study written out as a page, tools/full/<slug>.html: real text in the deck's
+    style, with only the diagrams, photos and screens as pictures (work/full/<slug>/*.webp).
+    It replaces the stack of slide images, whose text came out too small to read."""
+    path = os.path.join(ROOT, 'tools', 'full', slug + '.html')
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding='utf-8') as f:
+        return f.read()
+
+
+def has_full(slug):
+    return bool(written(slug) or full_shots(slug))
+
+
 def index_nav(slug, sizes):
     """The fixed index beside the deck: groups of section links. Each link carries where its
     section starts as a fraction of its image's height, which work.js turns into a scroll
@@ -359,6 +361,10 @@ def index_nav(slug, sizes):
         if g != group:
             out += ('\n    </ol>' if group else '') + f'\n    <p>{html.escape(g)}</p>\n    <ol>'
             group = g
+        if img_name.startswith('#'):   # a written case study: the section's own id
+            out += (f'\n      <li><a href="{img_name}" data-target="{img_name[1:]}">'
+                    f'{html.escape(label)}</a></li>')
+            continue
         h = sizes[img_name + '.jpg'][1]
         out += (f'\n      <li><a href="#s{i + 1}" data-shot="{img_name}" data-y="{y / h:.4f}">'
                 f'{html.escape(label)}</a></li>')
@@ -374,17 +380,31 @@ def full_page(p, nxt):
     real width and height so nothing reflows while they load. An index of the deck's
     sections stays fixed beside it (INDEX, index_nav), so a visitor can skip straight to
     the solution."""
-    names = full_shots(p['slug'])
-    sizes = {n: Image.open(os.path.join(ROOT, 'work', 'full', p['slug'], n)).size for n in names}
-    imgs = ''
-    for i, n in enumerate(names):
-        w, h = sizes[n]
-        load = 'eager" fetchpriority="high' if i == 0 else 'lazy'
-        imgs += (f'\n  <img src="full/{p["slug"]}/{n}" data-name="{n[:-4]}" width="{w}" height="{h}" '
-                 f'alt="" loading="{load}" decoding="async">')
-    nav = index_nav(p['slug'], sizes)
+    text = written(p['slug'])
+    extra = ''
+    if text:
+        # the written page: the deck's own type and colours inside the frame, as on the trailer
+        body = (f'\n<div class="full deck fcs p-{p["slug"]}"><div class="fcs-body">\n'
+                + text.replace('{{video}}', player(p)) + '</div></div>')
+        nav = index_nav(p['slug'], {})
+        for url in p.get('fonts', []):
+            extra += f'\n<link href="{url}" rel="stylesheet">'
+        extra += f'\n<link rel="stylesheet" href="ui/{p["slug"]}.css">'
+        lede = 'The full case study: the research, the method and the design, start to finish.'
+    else:
+        names = full_shots(p['slug'])
+        sizes = {n: Image.open(os.path.join(ROOT, 'work', 'full', p['slug'], n)).size for n in names}
+        imgs = ''
+        for i, n in enumerate(names):
+            w, h = sizes[n]
+            load = 'eager" fetchpriority="high' if i == 0 else 'lazy'
+            imgs += (f'\n  <img src="full/{p["slug"]}/{n}" data-name="{n[:-4]}" width="{w}" height="{h}" '
+                     f'alt="" loading="{load}" decoding="async">')
+        body = f'\n<section class="full">{imgs}\n</section>'
+        nav = index_nav(p['slug'], sizes)
+        lede = 'The full case study, every slide, start to finish.'
     out = HEAD.format(title=p['short'] + ' · Full case study',
-                      desc=html.escape(summary(p['about'])), extra='')
+                      desc=html.escape(summary(p['about'])), extra=extra)
     out += f'''
 <header class="fhead">
   <a class="fback" href="{p['slug']}.html" data-cursor="Back">
@@ -392,12 +412,10 @@ def full_page(p, nxt):
     Back to {p['short']}
   </a>
   <h1>{p['title']}</h1>
-  <p>The full case study, every slide, start to finish.</p>
+  <p>{lede}</p>
 </header>
 
-<div class="fwrap">{nav}
-<section class="full">{imgs}
-</section>
+<div class="fwrap">{nav}{body}
 </div>
 
 <section class="sec end">
@@ -416,12 +434,12 @@ def full_page(p, nxt):
 
 def page(p, nxt):
     names = shots(p['slug'])
-    has_full = bool(full_shots(p['slug']))
+    full = has_full(p['slug'])
     on_profile = p['behance'] is None
-    link = (p['slug'] + '-full.html') if has_full else (p['behance'] or BEHANCE)
+    link = (p['slug'] + '-full.html') if full else (p['behance'] or BEHANCE)
     # When the case study lives on the site, Behance drops to a secondary line under it.
     alt = ''
-    if has_full and not p.get('hide_behance'):
+    if full and not p.get('hide_behance'):
         alt = ('\n  <a class="bhalt" href="%s" target="_blank" rel="noopener" data-cursor="Behance" data-reveal>'
                '\n    <span>%s</span>'
                '\n    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>'
@@ -447,12 +465,12 @@ def page(p, nxt):
 </div>
 </div>
 <section class="sec end">
-  <a class="bh" href="{link}"{' target="_blank" rel="noopener"' if not has_full else ''} data-cursor="{'Read' if has_full else 'Behance'}" data-reveal>
+  <a class="bh" href="{link}"{' target="_blank" rel="noopener"' if not full else ''} data-cursor="{'Read' if full else 'Behance'}" data-reveal>
     <div>
-      <h2>{'VIEW FULL CASE STUDY' if has_full else 'VIEW ON BEHANCE'}</h2>
-      <p>{'The research, the models and every slide of the case study, on one page.' if has_full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
+      <h2>{'VIEW FULL CASE STUDY' if full else 'VIEW ON BEHANCE'}</h2>
+      <p>{'The research, the models and every slide of the case study, on one page.' if full else 'The full case study, with every step of the process.' if not on_profile else 'The full case study is on its way. The rest of the work is already there.'}</p>
     </div>
-    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if has_full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{'M3.5 12h16M13 5l7 7-7 7' if full else 'M6 18 18 6M8 6h10v10'}"/></svg></span>
   </a>{alt}
   <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
     <div><h2>Next: {nxt['short']}</h2></div>
@@ -475,8 +493,8 @@ if __name__ == '__main__':
         with open(dest, 'w', encoding='utf-8', newline='\n') as f:
             f.write(page(p, PROJECTS[(i + 1) % len(PROJECTS)]))
         print('wrote', os.path.relpath(dest, ROOT))
-        if full_shots(p['slug']):
+        if has_full(p['slug']):
             d2 = os.path.join(ROOT, 'work', p['slug'] + '-full.html')
             with open(d2, 'w', encoding='utf-8', newline='\n') as f2:
                 f2.write(full_page(p, PROJECTS[(i + 1) % len(PROJECTS)]))
-            print('wrote', os.path.relpath(d2, ROOT), len(full_shots(p['slug'])), 'images')
+            print('wrote', os.path.relpath(d2, ROOT), '(written)' if written(p['slug']) else '%d images' % len(full_shots(p['slug'])))

@@ -6,7 +6,9 @@
 (function () {
   var nav = document.querySelector('.findex');
   if (!nav) return;
-  var links = [].slice.call(nav.querySelectorAll('a[data-shot]'));
+  /* a deck shown as slide images (data-shot, data-y), or a case study written as a page,
+     whose links point at section ids (data-target) */
+  var links = [].slice.call(nav.querySelectorAll('a[data-shot],a[data-target]'));
   var imgs = {};
   [].forEach.call(document.querySelectorAll('.full img[data-name]'), function (im) { imgs[im.getAttribute('data-name')] = im; });
   var toggle = nav.querySelector('.findex-toggle');
@@ -34,6 +36,11 @@
   /* where a section starts on the page, measured fresh each time (images above may still be
      loading, but they carry their real width and height, so the layout is already final) */
   function top(a) {
+    var id = a.getAttribute('data-target');
+    if (id) {
+      var el = document.getElementById(id);
+      return el ? el.getBoundingClientRect().top + window.scrollY : 0;
+    }
     var im = imgs[a.getAttribute('data-shot')];
     if (!im) return 0;
     var r = im.getBoundingClientRect();
@@ -91,6 +98,7 @@
   document.addEventListener('click', function (e) { if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false); });
 
   /* arriving with #sN in the address goes straight to that section */
-  var m = location.hash.match(/^#s(\d+)$/);
-  if (m && links[+m[1] - 1]) window.addEventListener('load', function () { window.scrollTo(0, Math.max(0, top(links[+m[1] - 1]) - OFFSET)); });
+  var m = location.hash.match(/^#s(\d+)$/), hit = m && links[+m[1] - 1];
+  if (!hit && location.hash) hit = links.filter(function (a) { return a.getAttribute('href') === location.hash; })[0];
+  if (hit) window.addEventListener('load', function () { window.scrollTo(0, Math.max(0, top(hit) - OFFSET)); });
 })();

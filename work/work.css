@@ -7,7 +7,8 @@
    site's look. Only the trailer, div.deck.p-<slug>, wears its deck's colours and type, and it
    does so through one shared layout (THE TRAILER, below): every project uses the same grid,
    type scale and spacing, and work/ui/<slug>.css only paints it.
-   The full case-study pages (*-full.html) have no .deck and stay on the site's look. */
+   The full case-study pages (*-full.html) stay on the site's look, except one written out as a
+   page (WRITTEN CASE STUDY, below), whose framed body is a .deck too. */
 
 .chead{padding:128px 40px 40px}
 .chead h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7.4vw,104px);letter-spacing:-.05em;line-height:.86;text-transform:uppercase}
@@ -370,6 +371,102 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
   .findex.open .findex-list{display:block}
 }
 @media (prefers-reduced-motion:reduce){.findex a,.findex a::before{transition:none}}
+
+/* ── WRITTEN CASE STUDY ── a full case study set as a page (tools/full/<slug>.html) instead of
+   stacked slide images, whose text came out too small to read. Same frame and index as
+   above; inside it, the trailer's layout (THE TRAILER) in the deck's own colours and type
+   (work/ui/<slug>.css). The index already holds the left edge, so text runs from column 1. */
+.fwrap > .fcs{font-size:inherit;background:var(--d-bg);margin:0;overflow:visible}
+.fcs-body{--pad:clamp(24px,4.4vw,64px);padding:clamp(48px,5vw,80px) var(--pad) clamp(80px,7vw,112px)}
+.fcs{--sec:clamp(104px,10vw,152px);--row:56px}
+.fcs .t-sec > .t-text,.fcs .t-feat > .t-text{grid-column:1 / span 8}
+.fcs .t-lead{grid-column:1 / span 10}
+.fcs .t-rows,.fcs .t-drop,.fcs .t-facts.n3,.fcs .t-feat > .t-media.screen{grid-column:1 / -1}
+.fcs .t-slides-view{grid-column:4 / -1}
+.fcs [id]{scroll-margin-top:96px}
+/* a section's label, as the deck sets it: small capitals beside a lavender square */
+.cs-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--d-font);font-size:13px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--d-fg)}
+.cs-label::before{content:"";width:10px;height:10px;border-radius:3px;background:#beadfb;flex:none}
+.t-sec > .cs-label{margin-bottom:calc(18px - var(--row))}
+/* a working link out to the source material */
+.cs-links{margin-top:6px}
+.cs-a{display:inline-flex;align-items:center;gap:6px;font-size:16px;font-weight:500;color:var(--d-accent);
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.cs-a:hover{text-decoration-thickness:2px}
+.cs-a .ic{width:14px;height:14px;stroke-width:2.4}
+/* a dense diagram: tap it to open the full-size image */
+.cs-zoom a{display:block;width:100%;cursor:zoom-in}
+.cs-zoom img{display:block;width:100%;height:auto;border-radius:var(--d-sr);box-shadow:var(--d-shadow)}
+.cs-zoom figcaption{justify-self:end;display:flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--d-soft)}
+.cs-zoom figcaption .ic{width:12px;height:12px;stroke-width:2.4}
+/* the numbered breakdowns under the swim lane, numbered as the diagram marks them */
+.cs-marks{list-style:none;counter-reset:m;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px var(--gut);margin-top:24px}
+.cs-marks li{counter-increment:m;display:flex;gap:12px;font-size:15px;line-height:1.5;color:var(--d-dim)}
+.cs-marks li::before{content:counter(m);flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid #c93b3b;color:#c93b3b;
+  display:grid;place-items:center;font-size:13px;font-weight:600;line-height:1}
+/* the workflow, five steps on a hairline */
+.cs-steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:var(--gut);
+  border-top:1px solid var(--d-line)}
+.cs-steps li{counter-increment:s;padding-top:22px}
+.cs-steps li::before{content:"0" counter(s);display:block;margin-bottom:14px;font-size:13px;font-weight:600;color:var(--d-accent)}
+.cs-steps b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(20px,1.7vw,24px);line-height:1.2;color:var(--d-fg)}
+.cs-steps span{display:block;margin-top:8px;font-size:15px;line-height:1.5;color:var(--d-dim);max-width:24ch}
+/* one user story, marked up the way the deck marks them */
+.cs-story{margin:0}
+.cs-story p{font-family:var(--d-head);font-weight:400;font-size:clamp(22px,2.2vw,32px);line-height:1.5;letter-spacing:-.01em;color:var(--d-fg);max-width:36ch}
+.cs-story b{font-weight:600}
+.cs-story mark,.cs-story figcaption span::before{color:inherit;border-radius:6px}
+.cs-story mark{padding:.04em .24em}
+.cs-story .m-o,.cs-story .k-o::before{background:#c6f1d6}
+.cs-story .m-a,.cs-story .k-a::before{background:#fbeeab}
+.cs-story .m-t,.cs-story .k-t::before{background:#d3e8fb}
+.cs-story figcaption{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px;font-size:14px;color:var(--d-dim)}
+.cs-story figcaption span{display:inline-flex;align-items:center;gap:8px}
+.cs-story figcaption span::before{content:"";width:22px;height:14px;border-radius:4px}
+/* the grouped objects and actions as chips */
+.cs-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px var(--gut);margin-bottom:20px}
+.cs-groups p{margin-bottom:12px;font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--d-soft)}
+.cs-groups ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.cs-groups li{padding:7px 13px;border:1px solid var(--d-line);border-radius:999px;background:var(--d-card);font-size:15px;line-height:1.2;color:var(--d-fg)}
+/* the method, kept out of the way unless asked for */
+.cs-more{grid-column:1 / span 8;border-top:1px solid var(--d-line);padding-top:16px}
+.cs-more summary{cursor:pointer;font-size:15px;font-weight:500;color:var(--d-accent)}
+.cs-more p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--d-dim);max-width:62ch}
+.cs-out{grid-column:1 / span 8}
+/* a design decision, under the screen it shaped */
+.cs-dec{margin-top:18px;padding-left:14px;border-left:2px solid var(--d-accent);font-size:15px;line-height:1.55;color:var(--d-fg);max-width:48ch}
+.cs-dec b{display:block;margin-bottom:4px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--d-accent)}
+/* tables: they scroll sideways on a phone rather than crush */
+.cs-table{grid-column:1 / -1;overflow-x:auto;overscroll-behavior-x:contain}
+.cs-table table{width:100%;min-width:660px;border-collapse:collapse;font-size:15px;line-height:1.45}
+.cs-table th{padding:0 14px 12px 0;text-align:left;font-size:13px;font-weight:600;color:var(--d-soft);border-bottom:1px solid var(--d-line)}
+.cs-table td{padding:14px 14px 14px 0;color:var(--d-dim);border-bottom:1px solid var(--d-line);vertical-align:top}
+.cs-table td:first-child{color:var(--d-fg);font-weight:500;white-space:nowrap}
+.cs-table .pri{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.cs-table .p1{background:#fde4e4;color:#a8231b}
+.cs-table .p2{background:#fdedd6;color:#8a4f00}
+.cs-table .p3{background:#ebe7fb;color:var(--d-accent)}
+.cs-table .p4{background:#eef0f3;color:#5e5e5e}
+.cs-table .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:10px;vertical-align:-1px}
+.cs-table .ok{color:#15803d;font-weight:600}
+.cs-table .no{color:#b42318;font-weight:600}
+/* three photos in a row */
+.cs-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut)}
+.cs-trio figure{margin:0}
+.cs-trio img{display:block;width:100%;height:auto;aspect-ratio:16 / 10;object-fit:cover;border-radius:var(--d-sr)}
+/* a drawing on white needs no screen edge */
+.t-media.cs-flat > img{box-shadow:none;border-radius:0}
+.cs-trio figcaption{margin-top:10px;font-size:14px;color:var(--d-dim)}
+.cs-kv > div{padding:16px 0}
+.cs-kv dt{font-size:clamp(17px,1.4vw,20px)}
+@media (max-width:900px){
+  .fcs-body{padding:32px 20px 72px}
+  .fcs .t-sec > .t-text,.fcs .t-feat > .t-text,.fcs .t-lead,.fcs .t-slides-view,.cs-more,.cs-out{grid-column:1 / -1}
+  .cs-steps,.cs-marks,.cs-trio,.cs-groups{grid-template-columns:minmax(0,1fr)}
+  .cs-steps li{display:grid;grid-template-columns:44px minmax(0,1fr);padding:16px 0;border-bottom:1px solid var(--d-line)}
+  .cs-steps li::before{grid-row:span 2;margin:3px 0 0}
+}
 
 /* the hand-off: same bar language as the Behance link under the home grid */
 .end{padding-top:72px}
