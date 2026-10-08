@@ -590,12 +590,6 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .bh:active{transform:scale(.99);transition:transform .05s}
 .bh .rbtn .ic,.next .rbtn .ic{width:.95em;height:.95em}
 
-/* the bar placed mid-trailer, right after the solution: the trailer carries on below it */
-.end.mid{padding:56px 40px 56px}
-.deck.cont{margin-top:0}
-.deck.cont > .t-body{padding-top:clamp(72px,7vw,112px)}
-@media (max-width:900px){.end.mid{padding:40px 22px}}
-
 /* Behance steps down to a secondary line once the case study is hosted here */
 .bhalt{display:flex;align-items:center;gap:14px;margin-top:18px;padding:22px 30px;text-decoration:none;
   color:var(--ink);background:var(--paper);border:var(--bw) solid var(--ink);
@@ -765,3 +759,30 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 }
 
 .fcs .cs-worked + .t-drop{margin-top:clamp(32px,4vw,56px)}
+
+/* the short page says it is the short version, where the solution starts */
+.t-teaser{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:22px;font-size:15px;color:var(--d-dim)}
+.t-teaser a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1.5px solid var(--d-accent);
+  color:var(--d-fg);font-weight:600;text-decoration:none;transition:background .15s ease,color .15s ease}
+.t-teaser a:hover{background:var(--d-accent);color:var(--d-on-accent)}
+.t-teaser a:active{transform:scale(.97)}
+.t-teaser svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+/* the worker's whole journey on one line, problems boxed under the stage they hit */
+.u-track{grid-column:1 / -1;list-style:none;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:10px;position:relative;padding-top:6px}
+.u-track::before{content:"";position:absolute;left:14px;right:14px;top:20px;height:2px;background:var(--d-line)}
+.u-track li{position:relative;display:flex;flex-direction:column;gap:8px}
+.u-track .n{position:relative;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;
+  background:var(--d-bg);border:2px solid var(--d-line);color:var(--d-fg)}
+.u-track li.hit .n{background:#e5484d;border-color:#e5484d;color:#fff}
+.u-track b{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(15px,1.15vw,17px);line-height:1.25;color:var(--d-fg)}
+.u-track i{font-style:normal;font-size:13px;font-weight:500;line-height:1.35;color:var(--d-fg);padding:7px 9px;border-radius:8px;
+  border:1.5px solid #e5484d;background:color-mix(in srgb,#e5484d 12%,transparent)}
+.u-track em{font-style:normal;font-size:13px;line-height:1.35;color:var(--d-soft)}
+@media (max-width:1100px){
+  .u-track{grid-template-columns:minmax(0,1fr);row-gap:18px;padding-left:44px}
+  .u-track::before{left:14px;right:auto;top:6px;bottom:6px;width:2px;height:auto}
+  .u-track li{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+  .u-track .n{position:absolute;left:-44px;top:0}
+  .u-track b{padding-top:4px}
+  .u-track i{justify-self:start}
+}

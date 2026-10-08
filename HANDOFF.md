@@ -1248,6 +1248,11 @@ Last updated: 2026-10-08
     - **Taste/impeccable layout pass:** In short gutters widened; long lists in the case studies lose the hairline per row (one rule above the group); no en/em dashes in visible copy (ranges use hyphens); unused diagram CSS removed. Detector: 34, all known false positives.
     - **Next:** the trailer pages (user: "make these changes and then we work on the trailer pages").
 
+115. **Layout bug fixed; trailers start round 1 (2026-10-09). LIVE.**
+    - **The bug the user saw (half the ULS full page squeezed into a 123px column, screens looking blurry until clicked):** round 7's blueprint swap left one stray `</div>` in `tools/full/uls.html`, which closed `.fcs-body` early; every section after it became a grid item in the index's column. Removed, and **`written()` in `build_work.py` now refuses to build a page whose `<div>`, `<section>` or `<figure>` tags don't balance.**
+    - **ULS trailer, from the review transcript:** the 5-step hiring picture + four problem rows are replaced by the worker's whole 9-stage journey on one line (`ol.u-track`), each problem a red box under the stage where it happens (vertical below 1100px). The deck's service blueprint is added before the solution ("One job, end to end", zoomable; `page()` now loads `full.js` on any trailer with a `.cs-zoom`).
+    - **The mid-page black bar is gone.** `{{fullcase}}` now renders a small deck-styled line + pill link, "This page is the short version. Full case study ->" (`.t-teaser`), placed in the solution's opening text on **ULS and ICCC**. The big end bar stays at the bottom.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

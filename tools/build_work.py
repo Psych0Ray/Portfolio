@@ -464,11 +464,12 @@ def page(p, nxt):
            f'    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{arrow}"/></svg></span>\n'
            f'  </a>')
     story = trailer(p)
-    # A trailer can place the hand-off itself, right after its solution ({{fullcase}}): the deck
-    # is closed around the site's own bar there, so the bar keeps the site's look.
-    early = full and '{{fullcase}}' in story
-    story = story.replace('{{fullcase}}', (f'</div>\n</div>\n<section class="sec end mid">\n  {bar}\n</section>\n'
-                                           f'<div class="deck p-{p["slug"]} cont">\n<div class="t-body">') if early else '')
+    # Where the solution starts ({{fullcase}}), a small link in the deck's own style says this
+    # page is the short version; the site's big bar stays at the end.
+    teaser = (f'<p class="t-teaser"><span>This page is the short version.</span>'
+              f'<a href="{link}" data-cursor="Read">Full case study<svg viewBox="0 0 24 24" aria-hidden="true">'
+              f'<path d="M3.5 12h16M13 5l7 7-7 7"/></svg></a></p>')
+    story = story.replace('{{fullcase}}', teaser if full else '')
     out += f'''
 <header class="chead">
   <h1>{p['title']}</h1>
@@ -492,6 +493,8 @@ def page(p, nxt):
     libs = ''.join(f'<script src="{src}"></script>\n' for src in p.get('libs', []))
     if os.path.exists(os.path.join(ROOT, 'work', 'ui', p['slug'] + '.js')):
         libs += f'<script src="ui/{p["slug"]}.js"></script>'
+    if 'cs-zoom' in story:   # a diagram that opens full size: the overlay lives in full.js
+        libs += '\n<script src="full.js"></script>'
     return out + FOOT.replace('<!--UI-->', libs)
 
 
