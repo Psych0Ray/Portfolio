@@ -129,6 +129,7 @@ INDEX = {
     ('Object-oriented UX', 'What it saved', '#measure', 0),
     ('Object-oriented UX', 'Task ranking', '#tasks', 0),
     ('Design', 'The old dashboard', '#old', 0),
+    ('Design', 'Information architecture', '#ia', 0),
     ('Design', 'The new dashboard', '#new', 0),
     ('Design', 'The prototype', '#film', 0),
     ('Wrap-up', 'What I learned', '#learn', 0),
@@ -362,9 +363,7 @@ def full_page(p, nxt):
     text = written(p['slug'])
     extra = ''
     if text:
-        # the written page: the deck's own type and colours inside the frame, as on the trailer
-        body = (f'\n<div class="full deck fcs p-{p["slug"]}"><div class="fcs-body">\n'
-                + text.replace('{{video}}', player(p)) + '</div></div>')
+        body = '\n<div class="fcs-body">\n' + text.replace('{{video}}', player(p)) + '</div>'
         nav = index_nav(p['slug'], {})
         for url in p.get('fonts', []):
             extra += f'\n<link href="{url}" rel="stylesheet">'
@@ -384,7 +383,16 @@ def full_page(p, nxt):
         lede = 'The full case study, every slide, start to finish.'
     out = HEAD.format(title=p['short'] + ' · Full case study',
                       desc=html.escape(summary(p['about'])), extra=extra)
-    out += f'''
+    if text:
+        # A written case study wears its deck the whole way down, like its trailer: the
+        # project's own cover edge to edge, then the index and the story on the deck's ground.
+        # No site title block; the cover is the title.
+        out += (f'\n<div class="deck fcs p-{p["slug"]}">\n'
+                f'<h1 class="sr-only">{p["short"]}, the full case study</h1>\n'
+                f'<figure class="t-cover">{img(p["slug"], shots(p["slug"])[0], p["cover_alt"], eager=True)}</figure>\n'
+                f'<div class="fwrap">{nav}{body}\n</div>\n</div>\n')
+    else:
+        out += f'''
 <header class="fhead">
   <a class="fback" href="{p['slug']}.html" data-cursor="Back">
     <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg>
@@ -396,7 +404,8 @@ def full_page(p, nxt):
 
 <div class="fwrap">{nav}{body}
 </div>
-
+'''
+    out += f'''
 <section class="sec end">
   <a class="next card" href="{p['slug']}.html" data-reveal data-cursor="Back">
     <div><h2>Back to {p['short']}</h2></div>

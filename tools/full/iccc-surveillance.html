@@ -20,7 +20,7 @@
 <section class="t-sec" id="users" aria-labelledby="cs-users">
   <div class="t-text">
     <p class="cs-label">Who uses it</p>
-    <h2 class="t-h" id="cs-users">Seven roles handle a single alert.</h2>
+    <h2 class="t-h" id="cs-users">Seven roles handle <em>a single alert.</em></h2>
     <p class="t-p">Each of them sees a different part of it.</p>
   </div>
   <dl class="t-rows">
@@ -37,7 +37,7 @@
 <section class="t-sec" id="research" aria-labelledby="cs-research">
   <div class="t-text">
     <p class="cs-label">Research</p>
-    <h2 class="t-h" id="cs-research">We watched the control room at work.</h2>
+    <h2 class="t-h" id="cs-research">We watched the control room <em>at work.</em></h2>
     <p class="t-p">We spent time in the command centre at Taloja, observing how operators handle alerts, and interviewed six people across the roles.</p>
   </div>
   <ul class="t-facts n3" aria-label="How we researched">
@@ -84,7 +84,7 @@
 <section class="t-sec" id="focus" aria-labelledby="cs-focus">
   <div class="t-text">
     <p class="cs-label">Focus</p>
-    <h2 class="t-h" id="cs-focus">We designed for the one workflow everything depends on.</h2>
+    <h2 class="t-h" id="cs-focus">We designed for the one workflow <em>everything depends on.</em></h2>
     <p class="t-p">An alert, from the moment a device raises it to the moment it is closed.</p>
   </div>
   <ol class="cs-steps">
@@ -99,7 +99,7 @@
 <section class="t-sec" id="ooux" aria-labelledby="cs-ooux">
   <div class="t-text">
     <p class="cs-label">Object-oriented UX</p>
-    <h2 class="t-h" id="cs-ooux">We designed around things, not pages.</h2>
+    <h2 class="t-h" id="cs-ooux">We designed around <em>things,</em> not pages.</h2>
     <p class="t-p">Object-oriented UX starts from the things people work with, like alerts, devices and tickets, and what they do to them. Screens come last.</p>
   </div>
 
@@ -159,7 +159,7 @@
 <section class="t-sec" id="tasks" aria-labelledby="cs-tasks">
   <div class="t-text">
     <p class="cs-label">From objects to screens</p>
-    <h2 class="t-h" id="cs-tasks">Then we ranked the tasks.</h2>
+    <h2 class="t-h" id="cs-tasks">Then we <em>ranked</em> the tasks.</h2>
     <p class="t-p">Each task was scored by how often it came up and how critical it is. The rank decided where it sits on screen and how many clicks it takes.</p>
   </div>
   <div class="cs-table" tabindex="0" role="region" aria-label="Task ranking">
@@ -183,7 +183,7 @@
 <section class="t-sec" id="old" aria-labelledby="cs-old">
   <div class="t-text">
     <p class="cs-label">The old dashboard</p>
-    <h2 class="t-h" id="cs-old">It showed everything at once.</h2>
+    <h2 class="t-h" id="cs-old">It showed <em>everything</em> at once.</h2>
     <p class="t-p">The vendor&rsquo;s dashboard, built by Amnex: dark, dense, colour-coded eight ways, and with no map.</p>
   </div>
   <div class="cs-trio">
@@ -203,14 +203,42 @@
       <p class="t-p">The map as home, alert cards, the alert list, work tickets and messages, before any pixels.</p>
     </div>
     <figure class="t-media cs-flat"><img src="full/iccc-surveillance/sketches.webp" width="1800" height="895" alt="Six hand-drawn wireframes: the map with alerts beside it, alert summary cards, the alert list, alert cards, work tickets and messages" loading="lazy" decoding="async"></figure>
-    <p class="cs-links"><a class="cs-a" href="https://www.figma.com/board/QtzpLPiDR6DSTnAbTPvQ5v/Group-12-OOUX?node-id=7-1066&amp;t=aZIaUNKlnWD3Ee0y-1" target="_blank" rel="noopener">The full information architecture, on FigJam <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a></p>
+  </div>
+</section>
+
+<section class="t-sec" id="ia" aria-labelledby="cs-ia">
+  <div class="t-text">
+    <p class="cs-label">Information architecture</p>
+    <h2 class="t-h" id="cs-ia">From a maze of menus to <em>one map.</em></h2>
+    <p class="t-p">We mapped the vendor&rsquo;s dashboard first, to see how operators actually move through it, then rebuilt the structure around the objects and the ranked tasks.</p>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">Before: the current system</h3>
+      <p class="t-p">Alerts sit four levels deep, behind a dashboard, a tab and a list view, and the same data appears under several branches.</p>
+    </div>
+    <figure class="t-media cs-zoom">
+      <a href="full/iccc-surveillance/ia-old.webp" data-cursor="Zoom"><img class="shot" src="full/iccc-surveillance/ia-old.webp" width="3706" height="2228" alt="Information architecture of the current ICCC system: a deep tree from the system interface through dashboards, alert lists, tables and actions" loading="lazy" decoding="async"></a>
+      <figcaption><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg> View full size</figcaption>
+    </figure>
+  </div>
+  <div class="t-feat">
+    <div class="t-text">
+      <h3 class="t-h3">After: flat, with the map first</h3>
+      <p class="t-p">Nine sections sit on one level, with the live map first. Alerts, tickets and messages are always one click away, and every device opens from the map itself.</p>
+    </div>
+    <figure class="t-media cs-zoom">
+      <a href="full/iccc-surveillance/ia-new.webp" data-cursor="Zoom"><img class="shot" src="full/iccc-surveillance/ia-new.webp" width="7948" height="1824" alt="Information architecture of the new ICCC dashboard: the live map at the root, with alerts, tickets, messages and their screens and components below" loading="lazy" decoding="async"></a>
+      <figcaption><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg> View full size</figcaption>
+    </figure>
+    <p class="cs-links"><a class="cs-a" href="https://www.figma.com/board/QtzpLPiDR6DSTnAbTPvQ5v/Group-12-OOUX?node-id=7-1066&amp;t=aZIaUNKlnWD3Ee0y-1" target="_blank" rel="noopener">Explore the full IA on FigJam <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg></a></p>
   </div>
 </section>
 
 <section class="t-sec" id="new" aria-labelledby="cs-new">
   <div class="t-text">
     <p class="cs-label">The new dashboard</p>
-    <h2 class="t-h" id="cs-new">Each screen shortens one step.</h2>
+    <h2 class="t-h" id="cs-new">Each screen shortens <em>one step.</em></h2>
     <p class="t-p">Light mode for better visibility, one typeface, and one purple for everything you can act on.</p>
   </div>
 
@@ -298,7 +326,7 @@
 <section class="t-sec" id="learn" aria-labelledby="cs-learn">
   <div class="t-text">
     <p class="cs-label">What I learned</p>
-    <h2 class="t-h" id="cs-learn">Name the things before drawing the screens.</h2>
+    <h2 class="t-h" id="cs-learn">Name the things <em>before</em> drawing the screens.</h2>
   </div>
   <dl class="t-rows">
     <div><dt>Objects first</dt><dd>Defining Alert, Device, Fault and Ticket before any screen kept the dashboard to what really exists in the system.</dd></div>

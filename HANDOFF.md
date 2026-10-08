@@ -1211,6 +1211,13 @@ Last updated: 2026-10-08
 `**.
     - `--d-mark` (deck var) colours the section-label square; ICCC sets lavender, ULS falls back to its yellow accent.
 
+110. **Full case studies wear their deck the whole way down (2026-10-08). LIVE.** The user, on item 109: the site's title block ("Back to ULS", big title, lede) did not use the project's style; remove it, use the project's real cover, make the whole page the project's style as the trailers are, use the deck's imagery, and give ICCC its information architecture with the FigJam link.
+    - **Structure (`full_page()`, written pages only):** `div.deck.fcs.p-<slug>` wraps everything: an `sr-only` h1, the trailer's cover (`work/img/<slug>/01.webp`, the deck's own cover, edge to edge with the fade), then `.fwrap` (index + `.fcs-body`). No `.fhead`, no ink frame. End cards and footer stay site-styled (as on the trailers); the nav takes the deck colours. Image-stack pages (Canva, Relique) are unchanged.
+    - **CSS:** WRITTEN CASE STUDY block reworked: the index in deck colours, `em` in `.t-h`/`.t-lead` takes `--d-hl` (falls back to the accent), `.sr-only`. **`.fcs.deck` must keep `overflow-x:clip`** (not hidden: sticky index; not visible: the storyboard strip bleeds and widens the page by 10px on phones). ULS labels are the deck's rounded grey pill with a yellow dot (`work/ui/uls.css`).
+    - **ULS imagery added:** the deck's yellow line illustrations of the 5 naka steps (`naka-steps.webp`), the research photo mosaic, the worker-trust recovery curve. The system-gaps photo was **not** used: it carries a stock watermark too (like Sunita's portrait).
+    - **ICCC IA section (`#ia`, after the old dashboard):** the current-system IA from slide PNG 22 (`ia-old.webp`) and the new IA exported straight from FigJam (`QtzpLPiDR6DSTnAbTPvQ5v`, node `7:1066`, 13101x3008, exported at 8000 wide via `get_screenshot`, `ia-new.webp` 163 KB), both zoomable in the overlay, plus "Explore the full IA on FigJam". In the new IA the nine sections are siblings with the live map first (the copy says so; it is not a tree under the map).
+    - Headings on both pages carry a highlighted phrase (`<em>`), echoing the decks' two-tone titles.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
