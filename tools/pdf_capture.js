@@ -10,7 +10,9 @@ const css = document.createElement('style');
 css.textContent = \`
   .navwrap,.cursor,#cursor,.findex,.sec.end,footer.foot,.lb,.strip-nav,.vp-bar,.vp-big,.vp-chapters,.vp-ch,.t-slides-arrow,.jm-bar,.jm-pick,.jm-hint,.findex-toggle{display:none!important}
   html,body{cursor:auto!important}
-  .fwrap{display:block!important;padding:0 120px!important}
+  html{scrollbar-gutter:auto!important;scrollbar-width:none!important}
+  ::-webkit-scrollbar{display:none!important;width:0!important}
+  .fwrap{display:block!important;padding:0 120px 140px!important}
   .fcs-body{max-width:1200px;margin:0 auto}
   [data-reveal]{opacity:1!important;transform:none!important}
   *{animation:none!important;transition:none!important}
@@ -83,7 +85,7 @@ document.querySelectorAll('.t-text, .cs-sub, h2, h3, .t-lead').forEach(t => {
   if (b - a < LIM) atoms.push([a, b]);
 });
 atoms.sort((x, y) => x[0] - y[0]);
-const H = document.querySelector('.fwrap').getBoundingClientRect().bottom + scrollY + 120;
+const H = Math.min(document.querySelector('.fwrap').getBoundingClientRect().bottom + scrollY, document.documentElement.scrollHeight);
 const cover = document.querySelector('.t-cover').getBoundingClientRect().bottom + scrollY;
 // merge overlapping atoms into covered spans
 const spans = [];
