@@ -1299,6 +1299,8 @@ Last updated: 2026-10-14
     - **In the ULS deck (not on the site):** the "Click to View" Drive file `1cf6h50U2pgMDx_IIYCMf9NkB_HBuL93-` returns Page not found to visitors; the user should fix or share it in the deck.
     - The Drive and Figma connectors were disconnected this session, so the user's own Drive could not be searched for the right ICCC video.
 
+124. **Portfolio PDF spacing pass (2026-10-14).** The user: check spacing issues on the paged PDF. A scan of all pages found uneven margins: content 0-24px from a page edge on 36 pages (breaks fell in the 10-20px gaps between cards), and 160px of empty space at the end of each project. `long_pdf.py` now trims every page break back to the content and adds `PAD = 64` css px of that section's own background colour above and below (the colour sampled from the gap), so every page has a 64px margin; project covers stay edge to edge. Also removed a stale duplicate `cuts()` that had been overriding the clean one. Result: 73 pages, 555-1881 tall, all margins 64-68px, no colour seams, 9.2 MB, 46 links + 4 jumps, in `D:/Submissions/CV`. The user dropped the new-tab request (PDF links cannot force a new tab; a JavaScript workaround is unreliable in Chrome/Edge and gets PDFs flagged).
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

@@ -17,6 +17,7 @@ MAXW = int(sys.argv[2]) if len(sys.argv) > 2 else 2400
 DENSITY = float(sys.argv[3]) if len(sys.argv) > 3 else 1.5
 W = 1440                      # page width in points (1 css px = 1pt)
 MIN, MAX = 900, 1800          # page height range, in css px
+PAD = 64                      # the margin above and below every page's content
 OUT = 'D:/Submissions/CV/Rutujeet Nayak Portfolio 2026.pdf'
 
 
@@ -130,7 +131,7 @@ def cuts(page, bottom):
     css px, so pages end between sections, never through a paragraph or a picture."""
     pt = 0.3                                  # 1 css px = 0.3pt on a part
     lo, hi = MIN * pt, MAX * pt
-    every = [(a, b) for a, b in bands(page) if b <= bottom]
+    every = [(a, b) for a, b in bands(page) if a < bottom]
     gaps = [(a, b) for a, b in every if b - a >= 6]       # 20+ css px: between sections
     small = [(a, b) for a, b in every if b - a >= 3]      # 10+ css px: between cards
     out, y = [0.0], 0.0
@@ -152,7 +153,7 @@ def cuts(page, bottom):
     if bottom - y < lo / 2 and len(out) > 1:   # a stub at the end joins the page before it
         out.pop()
     out.append(bottom)
-    return out
+    return out, every
 
 
 def bands(page):
@@ -173,57 +174,53 @@ def bands(page):
     return out
 
 
-def cuts(page, bottom):
-    """Where to break a part into pages: in the tallest gap that leaves a page between MIN and MAX
-    css px, so pages end between sections, never through a paragraph or a picture."""
-    pt = 0.3                                  # 1 css px = 0.3pt on a part
-    lo, hi = MIN * pt, MAX * pt
-    every = [(a, b) for a, b in bands(page) if b <= bottom]
-    gaps = [(a, b) for a, b in every if b - a >= 6]       # 20+ css px: between sections
-    small = [(a, b) for a, b in every if b - a >= 3]      # 10+ css px: between cards
-    out, y = [0.0], 0.0
-    while bottom - y > hi:
-        win = [(a, b) for a, b in gaps if y + lo <= (a + b) / 2 <= y + hi]
-        if win:
-            a, b = max(win, key=lambda g: (round((g[1] - g[0]) / 6), (g[0] + g[1]) / 2))
-            c = (a + b) / 2
-        else:
-            win = [(a, b) for a, b in small if y + lo <= (a + b) / 2 <= y + hi]
-        if win:
-            a, b = max(win, key=lambda g: (round((g[1] - g[0]) / 3), (g[0] + g[1]) / 2))
-            c = (a + b) / 2
-        else:
-            # nothing between sections in range (a tall picture or table): run on to the next gap
-            later = [(a + b) / 2 for a, b in gaps if (a + b) / 2 > y + hi]
-            c = min(later) if later else bottom
-            if c >= bottom:
-                break
-        out.append(c); y = c
-    if bottom - y < lo / 2 and len(out) > 1:   # a stub at the end joins the page before it
-        out.pop()
-    out.append(bottom)
-    return out
+def band_at(bs, y):
+    for a, b in bs:
+        if a - 0.5 <= y <= b + 0.5:
+            return a, b
+    return None
+
+
+def colour_at(doc, y):
+    """The plain background colour of a part at height y, as a 0-1 RGB tuple."""
+    pix = doc[0].get_pixmap(matrix=fitz.Matrix(1, 1), clip=fitz.Rect(0, max(0, y - 1), 4, y + 1))
+    return tuple(v / 255 for v in pix.pixel(1, 0)[:3])
 
 
 out = fitz.open()
 k = W / parts[0][1][0].rect.width            # part points to page points
-pages = []                                    # (part name, part doc, y0, y1) in part points
+pages = []                                    # (part name, part doc, y0, y1, pad top, pad bottom, colours)
 for name, d, bottom, meta in parts:
-    cs = [0.0, bottom] if name == 'cover' else cuts(d[0], bottom)
-    for y0, y1 in zip(cs, cs[1:]):
-        pages.append((name, d, y0, y1))
+    if name == 'cover':
+        pages.append((name, d, 0.0, bottom, 0, 0, None, None)); continue
+    cs, bs = cuts(d[0], bottom)
+    for j, (y0, y1) in enumerate(zip(cs, cs[1:])):
+        pt = pb = 0
+        ct = cb = None
+        # every page edge gets the same margin: trim the gap back to the content, then pad
+        if j > 0 and band_at(bs, y0):
+            ct = colour_at(d, y0); y0 = band_at(bs, y0)[1]; pt = PAD
+        g = band_at(bs, y1 - 1) if y1 >= bottom else band_at(bs, y1)
+        if g:
+            cb = colour_at(d, min(y1, g[1]) - 1); y1 = g[0]; pb = PAD
+        pages.append((name, d, y0, y1, pt, pb, ct, cb))
 
 starts, links, go = {}, [], []
-for i, (name, d, y0, y1) in enumerate(pages):
+for i, (name, d, y0, y1, pt, pb, ct, cb) in enumerate(pages):
     src = d[0]
-    page = out.new_page(width=W, height=(y1 - y0) * k)
-    page.show_pdf_page(page.rect, d, 0, clip=fitz.Rect(0, y0, src.rect.width, y1))
+    h = (y1 - y0) * k
+    page = out.new_page(width=W, height=pt + h + pb)
+    if pt:
+        page.draw_rect(fitz.Rect(0, 0, W, pt + 1), color=None, fill=ct)
+    if pb:
+        page.draw_rect(fitz.Rect(0, pt + h - 1, W, pt + h + pb), color=None, fill=cb)
+    page.show_pdf_page(fitz.Rect(0, pt, W, pt + h), d, 0, clip=fitz.Rect(0, y0, src.rect.width, y1))
     starts.setdefault(name, i)
     for l in src.get_links():
         r = l['from']
         if not l.get('uri') or r.y1 <= y0 or r.y0 >= y1:
             continue
-        rr = fitz.Rect(r.x0 * k, (max(r.y0, y0) - y0) * k, r.x1 * k, (min(r.y1, y1) - y0) * k)
+        rr = fitz.Rect(r.x0 * k, pt + (max(r.y0, y0) - y0) * k, r.x1 * k, pt + (min(r.y1, y1) - y0) * k)
         if rr.height < 12 and r.height * k > 24:   # a sliver of a link's empty padding past a cut
             continue
         page.insert_link({'kind': fitz.LINK_URI, 'from': rr, 'uri': l['uri']})
