@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-10-09
+Last updated: 2026-10-13
 
 ## Project
 
@@ -1263,6 +1263,8 @@ Last updated: 2026-10-09
     - **Trailers:** `{{fullcase}}` teaser added where the solution starts on Canva AI (Orb) and Relique ("Relique lets the artifacts speak."), so all four trailers match. Canva's trailer gains a short CAPABLE section (the seven letters, `.cv-cap.short`) before Orb, as ULS shows its blueprint: the method, not just the screens.
     - Verified at 1440 and 390: no overflow, no broken images, every index link has a target, no console errors.
     - **Round 2 (same day, LIVE):** the user: no eyebrows on Canva or Relique (their decks don't use them), and the images were broken. **Eyebrows (`cs-label`) removed from both full pages**; In short's labels are sentence-case small headings there; Relique's sign type moved from a kicker into the h3's end (`<span>semiotics</span>`); Relique's last section is titled "What I learnt." **Images now come from the PDFs' embedded originals** (`fitz.Pixmap(doc, xref)`, listed with `page.get_image_info(xrefs=True)`): Canva's Orb steps are the deck's 3760px editor screens (`full/canva-ai/orb-1..6.webp` at 2400), the two research screenshots are flat (no deck gradient box); Relique's home page, story viewer (s6) and title card (s7) are flat originals. Cards the deck tilts (museum page, pillar, museum card, Start Story, sword card, collections) are rendered at 3x and **straightened** by finding the rotation that gives the tightest bounding box, then trimmed. Script: `fix_imgs.py` in the session scratchpad.
+
+117. **Portfolio-link slide restyled in Figma (2026-10-13).** Nothing in the repo changed except this file. File `uG8MdK8svbC6sa0wQ5kyIK`, frame `2468:3977` ("Slide 16:9 - 232", 1920x1080). The user: put the portfolio's style on this one slide, with the R logo and its Figma selection on top. Now: paper ground #EDEFF6; the R logo (blue box, paper R) with the site's selection frame and four paper handles, tilted 4 degrees counter-clockwise like the nav logo, as one SVG node `2470:44` "R logo, selected"; "Portfolio Link" in Bricolage Grotesque ExtraBold 132, -4.5% tracking, ink; the URL in Schibsted Grotesk Medium 64, brand blue, underlined; all centred. **The URL still reads rutujeetfolio.vercel.app** (it redirects to the domain); offered to change it to www.rutujeetnayak.me.
 
 ## In progress / not yet confirmed
 
