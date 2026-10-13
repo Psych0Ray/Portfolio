@@ -1301,6 +1301,11 @@ Last updated: 2026-10-14
 
 124. **Portfolio PDF spacing pass (2026-10-14).** The user: check spacing issues on the paged PDF. A scan of all pages found uneven margins: content 0-24px from a page edge on 36 pages (breaks fell in the 10-20px gaps between cards), and 160px of empty space at the end of each project. `long_pdf.py` now trims every page break back to the content and adds `PAD = 64` css px of that section's own background colour above and below (the colour sampled from the gap), so every page has a 64px margin; project covers stay edge to edge. Also removed a stale duplicate `cuts()` that had been overriding the clean one. Result: 73 pages, 555-1881 tall, all margins 64-68px, no colour seams, 9.2 MB, 46 links + 4 jumps, in `D:/Submissions/CV`. The user dropped the new-tab request (PDF links cannot force a new tab; a JavaScript workaround is unreliable in Chrome/Edge and gets PDFs flagged).
 
+125. **Ather copy of the portfolio PDF: self-contained (2026-10-14).** Ather accept only PDFs and will not open anything else, and a link pulls a reviewer out of the PDF (pressing back lands at the top). **`D:/Submissions/CV/Rutujeet Nayak Portfolio 2026 - Ather.pdf`**: 73 pages, 9.5 MB, built with `SELF=1` for both scripts (`SELF=1 node vector_pdf.js`, `SELF=1 py long_pdf.py`; parts in `tools/pdf/parts-self/`, gitignored).
+    - **Removed:** every picture link (30; clicks on images are the usual accident), the four "Watch the film" links (films are now plain stills, play button hidden, at full column width), Canva's "Try step 4 yourself". Picture widths are frozen before unlinking because one rule (`relique/home.webp` width) was keyed on the href.
+    - **Kept (14):** cover email, LinkedIn and site; the four contents jumps; the research links (ULS transcripts, two news sources, ICCC transcripts, the object-action sheet, the FigJam IA).
+    - The regular version (with all links) is unchanged next to it. Note: in that version the film link wrapper shrinks the films a little; the Ather copy has them full width.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

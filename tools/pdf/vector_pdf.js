@@ -10,7 +10,11 @@ const { PREP, FIT } = require('./prep.js');
 
 const SITE = 'https://rutujeetfolio.vercel.app';
 const LOCAL = 'http://localhost:8080';
-const S = 0.4;   // print scale: keeps each part under the 200-inch PDF page limit
+const S = 0.4;
+// SELF=1: a self-contained copy (for reviewers who only read the PDF): pictures are not links,
+// films are still frames, no "try it on the site". Contact, contents and research links stay.
+const SELF = process.env.SELF === '1';
+const DIR = SELF ? 'parts-self' : 'parts';   // print scale: keeps each part under the 200-inch PDF page limit
 const PARTS = [
   { name: 'cover', url: `${LOCAL}/tools/pdf/cover.html` },
   { name: 'uls', url: `${LOCAL}/work/uls-full.html` },
@@ -50,8 +54,30 @@ st.textContent =
 document.head.appendChild(st);
 `;
 
+// self-contained: the same link rewriting minus everything that leaves the PDF by accident
+const SELF_CONTAINED = `
+// keep each picture exactly as laid out (some sizes are keyed on the href), then unlink it
+document.querySelectorAll('.cs-zoom a[href], a.cs-zoom[href], .cs-phones a[href]').forEach(a => {
+  a.style.width = getComputedStyle(a).width; a.style.display = getComputedStyle(a).display;
+});
+document.querySelectorAll('.cs-zoom a[href], a.cs-zoom[href], .cs-phones a[href]').forEach(a => a.removeAttribute('href'));
+document.querySelectorAll('.cs-links').forEach(p => { if (p.querySelector('a[href^="canva-ai.html"]')) p.remove(); });
+document.querySelectorAll('a[href]').forEach(a => {
+  const h = a.getAttribute('href');
+  if (/^(https?:|mailto:)/.test(h) && !h.startsWith('${LOCAL}')) return;
+  a.removeAttribute('href');          // anything else pointed back into the site
+});
+const st = document.createElement('style');
+st.textContent = '.grain{display:none!important}' +
+  '.t-media.screen > img{max-height:810px!important}.vp{width:100%!important}' +
+  '.p-canva-ai .t-h{background:none!important;-webkit-text-fill-color:#4f63dc!important;color:#4f63dc!important}' +
+  '.cv-cap .l{background:none!important;-webkit-text-fill-color:#6a4fe0!important;color:#6a4fe0!important}' +
+  '.vp-big{display:none!important}';      // films show as a plain still frame
+document.head.appendChild(st);
+`;
+
 (async () => {
-  fs.mkdirSync('parts', { recursive: true });
+  fs.mkdirSync(DIR, { recursive: true });
   const b = await chromium.launch();
   for (const part of PARTS) {
     const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -62,7 +88,7 @@ document.head.appendChild(st);
       await p.waitForTimeout(400);
       await p.evaluate(FIT);
     }
-    await p.evaluate(LINKS(part.name));
+    await p.evaluate(SELF ? SELF_CONTAINED : LINKS(part.name));
     // load every image before printing
     const H0 = await p.evaluate(() => document.documentElement.scrollHeight);
     for (let y = 0; y < H0; y += 900) { await p.evaluate(y => window.scrollTo(0, y), y); await p.waitForTimeout(30); }
@@ -77,10 +103,10 @@ document.head.appendChild(st);
       });
       return { H, go };
     });
-    await p.pdf({ path: `parts/${part.name}.pdf`, width: `${Math.ceil(1440 * S)}px`, height: `${Math.ceil(info.H * S * 1.15)}px`,
+    await p.pdf({ path: `${DIR}/${part.name}.pdf`, width: `${Math.ceil(1440 * S)}px`, height: `${Math.ceil(info.H * S * 1.15)}px`,
                   scale: S, printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
-    fs.writeFileSync(`parts/${part.name}.json`, JSON.stringify({ H: info.H, go: info.go, scale: S }));
-    console.log(part.name, info.H, fs.statSync(`parts/${part.name}.pdf`).size >> 10, 'KB');
+    fs.writeFileSync(`${DIR}/${part.name}.json`, JSON.stringify({ H: info.H, go: info.go, scale: S }));
+    console.log(part.name, info.H, fs.statSync(`${DIR}/${part.name}.pdf`).size >> 10, 'KB');
     await p.close();
   }
   await b.close();

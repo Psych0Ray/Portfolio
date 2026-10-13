@@ -18,7 +18,9 @@ DENSITY = float(sys.argv[3]) if len(sys.argv) > 3 else 1.5
 W = 1440                      # page width in points (1 css px = 1pt)
 MIN, MAX = 900, 1800          # page height range, in css px
 PAD = 64                      # the margin above and below every page's content
-OUT = 'D:/Submissions/CV/Rutujeet Nayak Portfolio 2026.pdf'
+SELF = os.environ.get('SELF') == '1'      # the self-contained copy (see vector_pdf.js)
+DIR = 'parts-self' if SELF else 'parts'
+OUT = 'D:/Submissions/CV/Rutujeet Nayak Portfolio 2026%s.pdf' % (' - Ather' if SELF else '')
 
 
 def recompress(doc, quality, maxw):
@@ -101,10 +103,10 @@ def refine(page, rough, base):
 
 parts = []
 for name in NAMES:
-    d = fitz.open(f'parts/{name}.pdf')
+    d = fitz.open(f'{DIR}/{name}.pdf')
     assert len(d) == 1, (name, len(d))
     recompress(d, 90 if name == 'cover' else Q, MAXW)
-    meta = json.load(open(f'parts/{name}.json'))
+    meta = json.load(open(f'{DIR}/{name}.json'))
     bottom = meta['H'] * meta['scale'] * 0.75 if name == 'cover' else content_bottom(d[0])
     parts.append((name, d, bottom, meta))
 
