@@ -35,6 +35,7 @@ ang = math.radians(45)
 ca, sa = math.cos(ang), math.sin(ang)
 step = CELL
 R = OUT_W + OUT_H
+dots = []
 for i in range(-R // step, R // step + 1):
     for j in range(-R // step, R // step + 1):
         u, v = i * step, j * step
@@ -47,8 +48,18 @@ for i in range(-R // step, R // step + 1):
         if dark < 0.09:
             continue
         r = step * 0.62 * math.sqrt(dark)
+        dots.append((x, y, r))
         X, Y, rr = x * SS, y * SS, r * SS
         d.ellipse((X - rr, Y - rr, X + rr, Y + rr), fill=BLUE)
 canvas = canvas.resize((OUT_W, OUT_H), Image.LANCZOS)
 canvas.save('halftone.png')
+# a print copy with only the two inks (no grey edge pixels), which compresses far better in a PDF
+two = canvas.convert('L').point(lambda p: 255 if p > 150 else 0)
+Image.merge('RGB', [two.point(lambda p, c=c: PAPER[c] if p else BLUE[c]) for c in range(3)]).save('halftone-print.png', optimize=True)
+# the same dots as vectors, for the PDF: crisp at any zoom and a fraction of the size
+clip = '<clipPath id="c"><rect width="%d" height="%d"/></clipPath>' % (OUT_W, OUT_H)
+circles = ''.join('<circle cx="%.1f" cy="%.1f" r="%.2f"/>' % d for d in dots)
+open('halftone.svg', 'w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d"><defs>%s</defs>'
+    '<rect width="%d" height="%d" fill="#EDEFF6"/><g clip-path="url(#c)" fill="#002FA7">%s</g></svg>'
+    % (OUT_W, OUT_H, clip, OUT_W, OUT_H, circles))
 print('ok', canvas.size)

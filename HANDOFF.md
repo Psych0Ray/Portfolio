@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-10-13
+Last updated: 2026-10-14
 
 ## Project
 
@@ -1280,6 +1280,13 @@ Last updated: 2026-10-13
     - **Cover (`tools/pdf/cover.html`, now 1440x1103, rendered full page):** logo top left, "Portfolio 2026" top right; "Rutujeet Nayak" at 212px Bricolage 800 leads; the halftone portrait is a 320x421 print to its right (`halftone.py` now takes `W H CELL`: `py halftone.py 760 1000 8`); a rule, then the intro line and the four-project contents side by side; site/email/LinkedIn.
     - **PDF:** `tools/pdf/long_pdf.py` stacks the cover and all 66 pages on **one PDF page**, 1440 wide and 99,901 tall. Viewers cap a page side at 14400 units, so it is drawn at 1/8 and `UserUnit 8` restores the real size. `~/Downloads/Rutujeet Nayak Portfolio 2026.pdf`, 33 MB, verified seamless joins.
     - **Figma:** the 67 frames now sit inside one vertical auto-layout frame **"Rutujeet Nayak Portfolio 2026" (`2483:2`, 1440x99901)** on page `2475:3976`, cover first; exporting that one frame gives the long page.
+
+121. **Portfolio PDF rebuilt as a real PDF: text, links, under 10 MB (2026-10-14).** The user: keep the quality but under 10 MB; links must be clickable (site link = rutujeetfolio.vercel.app); everything was an image.
+    - **Now:** `~/Downloads/Rutujeet Nayak Portfolio 2026.pdf`, **9.16 MB (9,6xx,xxx bytes), one long page** (1440 x 98,220, drawn at 1/8 with UserUnit 8). Text is real text (selectable, searchable, sharp at any zoom); only photos and screens are pictures.
+    - **Links (51):** cover: rutujeetfolio.vercel.app, mailto, LinkedIn, and the four contents rows jump to their project inside the PDF. In the projects: transcripts (Figma), the object-action sheet, the FigJam boards, Drive recordings, news sources; every diagram/screenshot opens its full-size image on rutujeetfolio.vercel.app; each film links to its page's #film (with a "Watch the film on rutujeetfolio.vercel.app" line); Canva's "Try step 4 yourself" goes to the live demo. All relative links are rewritten to rutujeetfolio.vercel.app (none point at localhost).
+    - **Pipeline (`tools/pdf/`):** `vector_pdf.js` (serve the site on :8080 first) prints `cover.html` and the four full pages with Chromium at scale 0.4 into `parts/*.pdf` (+ link targets in `parts/*.json`; parts/ is gitignored, ~150 MB). Page prep is shared in `prep.js` (also used by `tools/pdf_capture.js`). For print it hides `.grain` (its blend mode made Chromium flatten the whole page into one 1802x19040 bitmap), pins svh-based sizes, and prints Canva's gradient-clipped headings and CAPABLE letters in one colour (gradient text left hairline boxes in PDF viewers). Then `long_pdf.py [quality] [maxw] [density]` (defaults 76 / 2400 / 1.5) re-encodes every picture as JPEG in place at 1.5x its drawn size (pymupdf's `rewrite_images` broke CSS-background patterns, so it is done by hand on the same objects), trims each part to its last content row (pixel-accurate), stacks them on one page and re-adds every link.
+    - **Cover halftone** is now `halftone-print.png`, a two-ink 1280x1684 version (`halftone.py 1280 1684 13`), 130 KB; JPEG of the dots was 523 KB and SVG dots 1.4 MB.
+    - **Figma "Portfolio PDF" frame (`2483:2`) is still the earlier image version** (Figma was disconnected this session); it has no working links. The PDF in Downloads is the one to send.
 
 ## In progress / not yet confirmed
 
