@@ -1293,6 +1293,12 @@ Last updated: 2026-10-14
     - **How the breaks are chosen (`long_pdf.py` `cuts()`):** each part is scanned for plain background rows; a page ends in the tallest gap that keeps it 900-1800 css px (20+ px gaps between sections first, then 10+ px gaps between cards, e.g. the five persona cards); a single tall picture runs the page on to the next gap. No cut goes through text or a picture; link slivers left in a picture's padding past a cut are dropped. Projects always start on a new page.
     - The older single-page version is still in `~/Downloads` (same name); the Submissions copy is the current one.
 
+123. **Link audit of the portfolio PDF (2026-10-14).** The user: the ICCC "prototype video" link at the end opened an empty service-design Drive folder; check every link against the decks.
+    - **Cause:** `drive.google.com/drive/folders/1__KTXMdre0WThFkfeRdC77Gieae--57s` ("Group 12 Prototype") shows no files to visitors. It came from the ICCC deck itself ("Prototyped Video Link" in `D:\Submissions\OOUX\Group 12 OOUX endcourse.pdf`), so the deck link is wrong too. **Removed** from the ICCC full page (site and PDF); the film plays on the page and the PDF's "Watch the film" link goes there. If the user supplies the right Drive link, put it back in `tools/full/iccc-surveillance.html` (after `{{video}}` in `#film`) and rebuild.
+    - **Checked:** all 46 links open (HTTP 200), and every one matches its deck's hyperlink (read from the deck PDFs on disk: OOUX endcourse/mid-course, Service Design Group 12 ECS): ULS transcripts board, e-Shram sources (gktoday, TOI), ICCC transcripts board, the "Object action mapping" sheet, the OOUX FigJam (IA frame), site/email/LinkedIn, the image and film links on rutujeetfolio.vercel.app. Figma board titles cannot be read from here (Figma serves bots a blank page), so those are matched to the decks only.
+    - **In the ULS deck (not on the site):** the "Click to View" Drive file `1cf6h50U2pgMDx_IIYCMf9NkB_HBuL93-` returns Page not found to visitors; the user should fix or share it in the deck.
+    - The Drive and Figma connectors were disconnected this session, so the user's own Drive could not be searched for the right ICCC video.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
