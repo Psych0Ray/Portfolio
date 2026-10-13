@@ -6,36 +6,45 @@
 <style>
   :root{--paper:#EDEFF6;--ink:#0A0A0A;--blue:#002FA7;--muted:#5A6072;--rule:#C7D0E6}
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:1440px;height:1024px;background:var(--paper);overflow:hidden}
-  body{display:grid;grid-template-columns:1fr 778px;font-family:'Schibsted Grotesk',sans-serif;color:var(--ink)}
-  .l{display:flex;flex-direction:column;padding:72px 64px 64px 72px}
-  .logo{position:relative;width:76px;height:73px;transform:rotate(-4deg);margin:6px 0 0 6px}
+  html,body{width:1440px;background:var(--paper)}
+  body{padding:72px 96px 88px;font-family:'Schibsted Grotesk',sans-serif;color:var(--ink)}
+  .top{display:flex;justify-content:space-between;align-items:center}
+  .logo{position:relative;width:64px;height:61px;transform:rotate(-4deg);margin:6px}
   .logo svg{display:block;width:100%;height:100%}
-  .sel{position:absolute;inset:-7px;border:2px solid var(--blue)}
-  .sel b{position:absolute;width:10px;height:10px;background:var(--paper);border:2px solid var(--blue);transform:translate(-50%,-50%)}
+  .sel{position:absolute;inset:-6px;border:2px solid var(--blue)}
+  .sel b{position:absolute;width:9px;height:9px;background:var(--paper);border:2px solid var(--blue);transform:translate(-50%,-50%)}
   .sel b:nth-child(1){left:-1px;top:-1px}.sel b:nth-child(2){left:calc(100% + 1px);top:-1px}
   .sel b:nth-child(3){left:-1px;top:calc(100% + 1px)}.sel b:nth-child(4){left:calc(100% + 1px);top:calc(100% + 1px)}
-  h1{margin-top:auto;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:124px;line-height:.86;letter-spacing:-.045em}
-  .yr{margin-top:28px;display:flex;align-items:baseline;gap:16px;font-size:30px;font-weight:500;letter-spacing:-.01em}
+  .yr{font-size:26px;font-weight:500;letter-spacing:-.01em}
   .yr span{color:var(--blue)}
-  .lede{margin-top:28px;max-width:30ch;font-size:21px;line-height:1.45;color:var(--muted)}
+  .hero{display:grid;grid-template-columns:1fr 320px;gap:56px;align-items:end;margin-top:96px}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:212px;line-height:.84;letter-spacing:-.05em}
+  figure{margin:0}
+  figure img{display:block;width:320px;height:421px}
+  figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+  .low{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:72px;padding-top:28px;border-top:2px solid var(--ink)}
+  .lede{max-width:28ch;font-size:24px;line-height:1.4;color:var(--muted)}
   .lede b{color:var(--ink);font-weight:600;white-space:nowrap}
-  ol{list-style:none;margin-top:44px;border-top:2px solid var(--ink)}
-  li{display:grid;grid-template-columns:40px 1fr auto;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule);font-size:17px}
+  ol{list-style:none}
+  li{display:grid;grid-template-columns:40px 1fr auto;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule);font-size:17px}
+  li:first-child{padding-top:0}
   li i{font-style:normal;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums}
   li b{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;letter-spacing:-.02em}
   li span{color:var(--muted)}
-  .foot{margin-top:28px;display:flex;gap:28px;font-size:15px;font-weight:500}
+  .foot{margin-top:40px;display:flex;gap:32px;font-size:15px;font-weight:500}
   .foot a{color:var(--ink);text-decoration:none;white-space:nowrap}
-  .r{position:relative}
-  .r img{display:block;width:778px;height:1024px}
 </style>
 </head>
 <body>
-  <div class="l">
+  <div class="top">
     <div class="logo"><svg viewBox="0 0 1062 1014"><rect width="1062" height="1014" fill="#002FA7"/><path transform="matrix(1 0 0 -1 142 853.5)" fill="#EDEFF6" d="M594 288 747 0H499L377 251H295V0H74V688H495Q569 688 621.5 659.5Q674 631 700.5 582.5Q727 534 727 477Q727 414 693.0 363.0Q659 312 594 288ZM440 531H295V404H440Q466 404 484.0 422.5Q502 441 502 468Q502 495 484.0 513.0Q466 531 440 531Z"/></svg><i class="sel"><b></b><b></b><b></b><b></b></i></div>
-    <h1>Rutujeet<br>Nayak</h1>
     <p class="yr">Portfolio <span>2026</span></p>
+  </div>
+  <div class="hero">
+    <h1>Rutujeet<br>Nayak</h1>
+    <figure><img src="halftone.png" alt=""></figure>
+  </div>
+  <div class="low">
     <p class="lede">A UX designer who combines research, user-centric design and systems thinking, with a growing focus on <b>AI-powered experiences</b>.</p>
     <ol>
       <li><i>01</i><b>ULS</b><span>Service design</span></li>
@@ -43,8 +52,7 @@
       <li><i>03</i><b>Canva AI redesign</b><span>Conversational AI</span></li>
       <li><i>04</i><b>Relique</b><span>Semiotics and semantics</span></li>
     </ol>
-    <p class="foot"><a>rutujeetnayak.me</a><a>rutujeetnayak@gmail.com</a><a>LinkedIn</a></p>
   </div>
-  <div class="r"><img src="halftone.png" alt=""></div>
+  <p class="foot"><a>rutujeetnayak.me</a><a>rutujeetnayak@gmail.com</a><a>LinkedIn</a></p>
 </body>
 </html>

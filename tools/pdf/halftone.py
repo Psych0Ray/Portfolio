@@ -4,8 +4,9 @@ from PIL import Image, ImageOps, ImageEnhance, ImageDraw, ImageFilter
 
 SRC = 'd:/Vibecode Portfolio/img/hobby/portrait.webp'
 PAPER, BLUE = (237, 239, 246), (0, 47, 167)
-OUT_W, OUT_H = 1520, 2000          # final pixels (the cover shows it at 760x1000)
-CELL = 11
+import sys
+OUT_W, OUT_H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (1520, 2000)
+CELL = int(sys.argv[3]) if len(sys.argv) > 3 else 11
 SS = 3                              # supersample for smooth dots
 
 import numpy as np, cv2

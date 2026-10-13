@@ -1276,6 +1276,11 @@ Last updated: 2026-10-13
     - **Figma page "Portfolio PDF" (`2475:3976`) now holds one sequence of 67 top-level frames** (the four sections were deleted): "01 Cover", then ULS 01-26, ICCC 01-16, Canva AI 01-11, Relique 01-13, left to right, 1440 wide, and the layers panel lists them top to bottom in page order (cover on top).
     - **The finished file is `~/Downloads/Rutujeet Nayak Portfolio 2026.pdf`** (67 pages, 1440pt wide, 34 MB), assembled with img2pdf from the same images, so it does not depend on Figma's export order. Pages are images: text not selectable, links not clickable.
 
+120. **The portfolio PDF is one long scrolling page; the cover photo is smaller (2026-10-13).** The user: the PDF should scroll as one long page, not separate pages; the photo was too big (asked: smaller).
+    - **Cover (`tools/pdf/cover.html`, now 1440x1103, rendered full page):** logo top left, "Portfolio 2026" top right; "Rutujeet Nayak" at 212px Bricolage 800 leads; the halftone portrait is a 320x421 print to its right (`halftone.py` now takes `W H CELL`: `py halftone.py 760 1000 8`); a rule, then the intro line and the four-project contents side by side; site/email/LinkedIn.
+    - **PDF:** `tools/pdf/long_pdf.py` stacks the cover and all 66 pages on **one PDF page**, 1440 wide and 99,901 tall. Viewers cap a page side at 14400 units, so it is drawn at 1/8 and `UserUnit 8` restores the real size. `~/Downloads/Rutujeet Nayak Portfolio 2026.pdf`, 33 MB, verified seamless joins.
+    - **Figma:** the 67 frames now sit inside one vertical auto-layout frame **"Rutujeet Nayak Portfolio 2026" (`2483:2`, 1440x99901)** on page `2475:3976`, cover first; exporting that one frame gives the long page.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
