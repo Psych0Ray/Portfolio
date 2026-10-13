@@ -2,10 +2,9 @@
 
 Each part is a real PDF page (text, vectors, links). Here every part's pictures are recompressed
 to JPEG at twice their on-page size, the spare space under each part is trimmed, and the parts are
-stacked on one page with every link carried over. The cover's contents rows jump to their project.
-
-PDF viewers cap a page side at 14400 units, so the page is drawn at 1/8 and UserUnit 8 gives it
-back its real size (1440pt wide).
+cut into pages at the gaps between sections (900-1800 px tall, each project starting on a new
+page), with every link carried over. The cover's contents rows jump to their project.
+Set the viewer to continuous scrolling and it reads as one long page.
 
 Run from tools/pdf:  py long_pdf.py [quality]
 """
@@ -16,9 +15,9 @@ NAMES = ['cover', 'uls', 'iccc-surveillance', 'canva-ai', 'relique']
 Q = int(sys.argv[1]) if len(sys.argv) > 1 else 76
 MAXW = int(sys.argv[2]) if len(sys.argv) > 2 else 2400
 DENSITY = float(sys.argv[3]) if len(sys.argv) > 3 else 1.5
-U = 8
-W = 1440 / U                 # target width in page units
-OUT = os.path.expanduser('~/Downloads/Rutujeet Nayak Portfolio 2026.pdf')
+W = 1440                      # page width in points (1 css px = 1pt)
+MIN, MAX = 900, 1800          # page height range, in css px
+OUT = 'D:/Submissions/CV/Rutujeet Nayak Portfolio 2026.pdf'
 
 
 def recompress(doc, quality, maxw):
@@ -108,37 +107,136 @@ for name in NAMES:
     bottom = meta['H'] * meta['scale'] * 0.75 if name == 'cover' else content_bottom(d[0])
     parts.append((name, d, bottom, meta))
 
+def bands(page):
+    """Runs of plain background rows (no text, no picture) in a part, in points: (start, end)."""
+    pix = page.get_pixmap(matrix=fitz.Matrix(1, 1))
+    w, h, n, s = pix.width, pix.height, pix.n, pix.samples
+    out, start = [], None
+    for y in range(h):
+        row = s[y * pix.stride:y * pix.stride + w * n]
+        first = row[:3]
+        plain = all(sum(abs(row[x + c] - first[c]) for c in range(3)) <= 6 for x in range(0, w * n, n * 3))
+        if plain and start is None:
+            start = y
+        elif not plain and start is not None:
+            out.append((start, y)); start = None
+    if start is not None:
+        out.append((start, h))
+    return out
+
+
+def cuts(page, bottom):
+    """Where to break a part into pages: in the tallest gap that leaves a page between MIN and MAX
+    css px, so pages end between sections, never through a paragraph or a picture."""
+    pt = 0.3                                  # 1 css px = 0.3pt on a part
+    lo, hi = MIN * pt, MAX * pt
+    every = [(a, b) for a, b in bands(page) if b <= bottom]
+    gaps = [(a, b) for a, b in every if b - a >= 6]       # 20+ css px: between sections
+    small = [(a, b) for a, b in every if b - a >= 3]      # 10+ css px: between cards
+    out, y = [0.0], 0.0
+    while bottom - y > hi:
+        c = None
+        for pool, unit in ((gaps, 6), (small, 3)):   # prefer a gap between sections
+            win = [(a, b) for a, b in pool if y + lo <= (a + b) / 2 <= y + hi]
+            if win:
+                a, b = max(win, key=lambda g: (round((g[1] - g[0]) / unit), (g[0] + g[1]) / 2))
+                c = (a + b) / 2
+                break
+        if c is None:
+            # nothing in range (one tall picture): run on to the next gap after it
+            later = [(a + b) / 2 for a, b in small if (a + b) / 2 > y + hi]
+            if not later:
+                break
+            c = min(later)
+        out.append(c); y = c
+    if bottom - y < lo / 2 and len(out) > 1:   # a stub at the end joins the page before it
+        out.pop()
+    out.append(bottom)
+    return out
+
+
+def bands(page):
+    """Runs of plain background rows (no text, no picture) in a part, in points: (start, end)."""
+    pix = page.get_pixmap(matrix=fitz.Matrix(1, 1))
+    w, h, n, s = pix.width, pix.height, pix.n, pix.samples
+    out, start = [], None
+    for y in range(h):
+        row = s[y * pix.stride:y * pix.stride + w * n]
+        first = row[:3]
+        plain = all(sum(abs(row[x + c] - first[c]) for c in range(3)) <= 6 for x in range(0, w * n, n * 3))
+        if plain and start is None:
+            start = y
+        elif not plain and start is not None:
+            out.append((start, y)); start = None
+    if start is not None:
+        out.append((start, h))
+    return out
+
+
+def cuts(page, bottom):
+    """Where to break a part into pages: in the tallest gap that leaves a page between MIN and MAX
+    css px, so pages end between sections, never through a paragraph or a picture."""
+    pt = 0.3                                  # 1 css px = 0.3pt on a part
+    lo, hi = MIN * pt, MAX * pt
+    every = [(a, b) for a, b in bands(page) if b <= bottom]
+    gaps = [(a, b) for a, b in every if b - a >= 6]       # 20+ css px: between sections
+    small = [(a, b) for a, b in every if b - a >= 3]      # 10+ css px: between cards
+    out, y = [0.0], 0.0
+    while bottom - y > hi:
+        win = [(a, b) for a, b in gaps if y + lo <= (a + b) / 2 <= y + hi]
+        if win:
+            a, b = max(win, key=lambda g: (round((g[1] - g[0]) / 6), (g[0] + g[1]) / 2))
+            c = (a + b) / 2
+        else:
+            win = [(a, b) for a, b in small if y + lo <= (a + b) / 2 <= y + hi]
+        if win:
+            a, b = max(win, key=lambda g: (round((g[1] - g[0]) / 3), (g[0] + g[1]) / 2))
+            c = (a + b) / 2
+        else:
+            # nothing between sections in range (a tall picture or table): run on to the next gap
+            later = [(a + b) / 2 for a, b in gaps if (a + b) / 2 > y + hi]
+            c = min(later) if later else bottom
+            if c >= bottom:
+                break
+        out.append(c); y = c
+    if bottom - y < lo / 2 and len(out) > 1:   # a stub at the end joins the page before it
+        out.pop()
+    out.append(bottom)
+    return out
+
+
 out = fitz.open()
-k = W / parts[0][1][0].rect.width
-H = sum(b for _, _, b, _ in parts) * k
-assert H <= 14400, H
-page = out.new_page(width=W, height=H)
-y = 0
-starts = {}
-links = []
+k = W / parts[0][1][0].rect.width            # part points to page points
+pages = []                                    # (part name, part doc, y0, y1) in part points
 for name, d, bottom, meta in parts:
+    cs = [0.0, bottom] if name == 'cover' else cuts(d[0], bottom)
+    for y0, y1 in zip(cs, cs[1:]):
+        pages.append((name, d, y0, y1))
+
+starts, links, go = {}, [], []
+for i, (name, d, y0, y1) in enumerate(pages):
     src = d[0]
-    clip = fitz.Rect(0, 0, src.rect.width, bottom)
-    dest = fitz.Rect(0, y, W, y + bottom * k)
-    page.show_pdf_page(dest, d, 0, clip=clip)
-    starts[name] = y
+    page = out.new_page(width=W, height=(y1 - y0) * k)
+    page.show_pdf_page(page.rect, d, 0, clip=fitz.Rect(0, y0, src.rect.width, y1))
+    starts.setdefault(name, i)
     for l in src.get_links():
         r = l['from']
-        if r.y0 >= bottom or not l.get('uri'):
+        if not l.get('uri') or r.y1 <= y0 or r.y0 >= y1:
             continue
-        links.append((fitz.Rect(r.x0 * k, y + r.y0 * k, r.x1 * k, y + min(r.y1, bottom) * k), l['uri']))
+        rr = fitz.Rect(r.x0 * k, (max(r.y0, y0) - y0) * k, r.x1 * k, (min(r.y1, y1) - y0) * k)
+        if rr.height < 12 and r.height * k > 24:   # a sliver of a link's empty padding past a cut
+            continue
+        page.insert_link({'kind': fitz.LINK_URI, 'from': rr, 'uri': l['uri']})
+        links.append(l['uri'])
     if name == 'cover':
+        meta = [m for n, _, _, m in parts if n == 'cover'][0]
         f = meta['scale'] * 0.75 * k
-        go = [(fitz.Rect(g['x'] * f, y + g['y'] * f, (g['x'] + g['w']) * f, y + (g['y'] + g['h']) * f), g['to']) for g in meta['go']]
-    y += bottom * k
-
-for r, uri in links:
-    page.insert_link({'kind': fitz.LINK_URI, 'from': r, 'uri': uri})
-for r, to in go:
-    page.insert_link({'kind': fitz.LINK_GOTO, 'from': r, 'page': 0, 'to': fitz.Point(0, starts[to]), 'zoom': 0})
-page.set_rotation(0)
-out.xref_set_key(page.xref, 'UserUnit', str(U))
+        go = [(i, fitz.Rect(g['x'] * f, g['y'] * f, (g['x'] + g['w']) * f, (g['y'] + g['h']) * f), g['to']) for g in meta['go']]
+for pno, r, to in go:
+    out[pno].insert_link({'kind': fitz.LINK_GOTO, 'from': r, 'page': starts[to], 'to': fitz.Point(0, 0), 'zoom': 0})
 out.set_metadata({'title': 'Rutujeet Nayak, Portfolio 2026', 'author': 'Rutujeet Nayak'})
+out.set_pagelayout('OneColumn')
 out.save(OUT, garbage=4, deflate=True, deflate_images=True, deflate_fonts=True)
-print({n: round(v * U) for n, v in starts.items()})
-print(OUT, round(os.path.getsize(OUT) / 2**20, 2), 'MB', 'links', len(links), 'jumps', len(go), 'height', round(H * U))
+hs = [round(p.rect.height) for p in out]
+print(len(hs), 'pages, heights', min(hs[1:]), '-', max(hs), {n: i + 1 for n, i in starts.items()})
+print(OUT, round(os.path.getsize(OUT) / 2**20, 2), 'MB', 'links', len(links), 'jumps', len(go))

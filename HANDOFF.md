@@ -1288,6 +1288,11 @@ Last updated: 2026-10-14
     - **Cover halftone** is now `halftone-print.png`, a two-ink 1280x1684 version (`halftone.py 1280 1684 13`), 130 KB; JPEG of the dots was 523 KB and SVG dots 1.4 MB.
     - **Figma "Portfolio PDF" frame (`2483:2`) is still the earlier image version** (Figma was disconnected this session); it has no working links. The PDF in Downloads is the one to send.
 
+122. **Portfolio PDF split into pages, saved to Submissions (2026-10-14).** The user: still a long scroll, but separate pages, none too long; save it in Submissions > CV.
+    - **`D:\Submissions\CV\Rutujeet Nayak Portfolio 2026.pdf`**: 74 pages, 1440pt wide, 648-1850 tall (cover p1, ULS p2, ICCC p32, Canva AI p50, Relique p62), 9.19 MB (9.6 million bytes), page layout OneColumn so viewers scroll it continuously. Same text, pictures and 47 links + 4 contents jumps as item 121; the jumps now go to each project's first page.
+    - **How the breaks are chosen (`long_pdf.py` `cuts()`):** each part is scanned for plain background rows; a page ends in the tallest gap that keeps it 900-1800 css px (20+ px gaps between sections first, then 10+ px gaps between cards, e.g. the five persona cards); a single tall picture runs the page on to the next gap. No cut goes through text or a picture; link slivers left in a picture's padding past a cut are dropped. Projects always start on a new page.
+    - The older single-page version is still in `~/Downloads` (same name); the Submissions copy is the current one.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
