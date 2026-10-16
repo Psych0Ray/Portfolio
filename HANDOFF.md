@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated: 2026-10-14
+Last updated: 2026-10-16
 
 ## Project
 
@@ -1305,6 +1305,12 @@ Last updated: 2026-10-14
     - **Removed:** every picture link (30; clicks on images are the usual accident), the four "Watch the film" links (films are now plain stills, play button hidden, at full column width), Canva's "Try step 4 yourself". Picture widths are frozen before unlinking because one rule (`relique/home.webp` width) was keyed on the href.
     - **Kept (14):** cover email, LinkedIn and site; the four contents jumps; the research links (ULS transcripts, two news sources, ICCC transcripts, the object-action sheet, the FigJam IA).
     - The regular version (with all links) is unchanged next to it. Note: in that version the film link wrapper shrinks the films a little; the Ather copy has them full width.
+
+126. **What I Bring is scroll-driven; Sunita has a portrait; the foreman is Yuvraj (2026-10-16).**
+    - **What I Bring (index.html, `kit()`):** on desktop (>900px) the section now pins and the scroll walks the eight skills instead of hover. One blue bar (`.skills::before`, positioned by the `--by`/`--bh` vars) glides from row to row on a scrubbed timeline (eased move, then a hold at each stop; about half a viewport of scroll per skill); the others dim to 50%; the outgoing illustration's pieces scatter and the next pops in with the existing pop; the screen gets a `01 / 08` counter that rolls and an 8px blue progress rule along its bottom edge. Clicking or tabbing to a skill glides to its stop. The pin is centred on the heading plus kit, leaving out the bottom padding. Phones keep the card stack; **reduced motion keeps the old hover version** (no pin). Also fixed: a hover before the section's first-draw trigger used to get reset to UI/UX design.
+    - **Sunita's portrait:** the user supplied a stock photo (woman carrying a pan of cement on her head); cropped to 520x790, greyscale with autocontrast, `work/full/uls/p-sunita.webp` (55KB), `object-position:50% 65%` inline so the face stays in the 4:3 phone crop. **It is a 123RF stock image with its watermark faintly visible** (on the head scarf and the sky); flagged to the user, who will need a licence or another photo.
+    - **Foreman renamed to Yuvraj, as in the storyboard.** Trailer: Mustafa, 35 -> **Yuvraj, 35**. Full case study: it also had a site supervisor called Yuvraj Mali, 45, so **the two swapped names**: the foreman is now **Yuvraj Mali, 35** and the supervisor **Mustafa Sheikh, 45** (photos stay with their roles). Flagged to the user in case Mustafa should go entirely. Photo files renamed by role: `p-foreman.webp`, `p-supervisor.webp`.
+    - Impeccable's hook flagged two contrast issues in index.html that are static false positives (ink on the bar's blue, which never shows because active text is paper; `.more:hover p` measured against paper rather than the blue hover fill). Its only suppression is file-wide, so they were left standing.
 
 ## In progress / not yet confirmed
 

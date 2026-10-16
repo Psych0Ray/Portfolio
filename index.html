@@ -176,6 +176,21 @@
 .skills li.on button{color:var(--paper)}
 .skills li.on button::before{transform:scaleX(1)}
 
+/* desktop scroll mode (kit() adds .scrolly): the section pins, one blue bar glides down the
+   list with the scroll, and the screen carries a counter and a progress rule */
+.kit.scrolly .skills{position:relative}
+.kit.scrolly .skills::before{content:'';position:absolute;left:0;right:0;top:0;height:var(--bh,0);
+  transform:translateY(var(--by,0));background:var(--blue)}
+.kit.scrolly .skills button::before{display:none}
+.kit.scrolly .skills li{transition:opacity .3s ease}
+.kit.scrolly .skills li:not(.on){opacity:.5}
+.kit.scrolly .art{opacity:1;transition:none}
+.kit-count{position:absolute;top:16px;left:20px;z-index:1;font-family:var(--label);font-size:13px;font-weight:700;
+  letter-spacing:.07em;color:var(--muted);font-variant-numeric:tabular-nums}
+.kit-count span{display:inline-block;overflow:hidden;vertical-align:bottom}
+.kit-count b{display:inline-block;color:var(--ink)}
+.kit-prog{position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--blue);transform:scaleX(0);transform-origin:left center}
+
 /* the screen: line art that draws itself for whichever skill is active */
 .screen{position:relative;border:var(--bw) solid var(--ink);background:var(--paper);box-shadow:10px 10px 0 var(--ink);
   aspect-ratio:4/3;overflow:hidden;
@@ -678,31 +693,45 @@ THUMBS.wire(document.getElementById('grid'));
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="lab.js"></script>
 <script>
-/* Hovering a skill shows its illustration on the screen beside the list. Each illustration is
-   built from top-level <g> pieces (halftone disc first), which pop in one after another. */
+/* What I Bring. On desktop the section pins and the scroll walks the list: one blue bar glides
+   from skill to skill and each illustration pops in on the screen as the last one flies out.
+   Clicking or tabbing to a skill scrolls to it. Phones get one card per skill, and reduced
+   motion keeps the hover version. Each illustration is built from top-level <g> pieces
+   (halftone disc first), which pop in one after another. */
 (function kit(){
   var kit = document.getElementById('kit');
   if (!kit) return;
-  var rows  = [].slice.call(kit.querySelectorAll('.skills li'));
-  var arts  = [].slice.call(kit.querySelectorAll('.art'));
-  var current = null;
+  var sec    = kit.closest('section');
+  var list   = kit.querySelector('.skills');
+  var screen = kit.querySelector('.screen');
+  var rows   = [].slice.call(kit.querySelectorAll('.skills li'));
+  var arts   = [].slice.call(kit.querySelectorAll('.art'));
+  var current = -1, scrolly = false, armed = false, st = null, stepAt = [], count = null;
 
   arts.forEach(function(svg){
     svg.parts = [].slice.call(svg.children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
   });
+  function artFor(i){ return kit.querySelector('.art[data-art="' + rows[i].querySelector('button').getAttribute('data-art') + '"]'); }
 
-  function pop(svg){
+  function pop(svg, delay){
     if (REDUCED) return;
-    gsap.fromTo(svg.parts[0], { scale:.4, opacity:0, transformOrigin:'50% 50%' },
-      { scale:1, opacity:1, duration:.6, ease:'power3.out', overwrite:true });
+    delay = delay || 0;
+    gsap.fromTo(svg.parts[0], { scale:.4, opacity:0, y:0, rotation:0, transformOrigin:'50% 50%' },
+      { scale:1, opacity:1, duration:.6, ease:'power3.out', delay:delay, overwrite:true });
     gsap.fromTo(svg.parts.slice(1),
       { scale:0, opacity:0, rotation:function(i){ return i % 2 ? 14 : -14; }, y:14, transformOrigin:'50% 50%' },
-      { scale:1, opacity:1, rotation:0, y:0, duration:.55, ease:'back.out(1.9)', stagger:.075, delay:.08, overwrite:true });
+      { scale:1, opacity:1, rotation:0, y:0, duration:.55, ease:'back.out(1.9)', stagger:.075, delay:delay + .08, overwrite:true });
   }
   function unpop(svg){
     if (REDUCED) return;
     gsap.killTweensOf(svg.parts);
     gsap.set(svg.parts, { scale:0, opacity:0, transformOrigin:'50% 50%' });
+  }
+  /* the outgoing illustration scatters away while the next one pops in */
+  function fly(svg, dir){
+    if (REDUCED) return;
+    gsap.to(svg.parts, { scale:.5, opacity:0, y:-26 * dir, rotation:function(i){ return i % 2 ? -18 : 18; },
+      duration:.28, ease:'power2.in', stagger:.025, overwrite:true });
   }
 
   /* phones: one card per skill, built from the list and the art, played on arrival */
@@ -731,37 +760,102 @@ THUMBS.wire(document.getElementById('grid'));
     } else cards.forEach(function(c){ pop(c._svg); });
   }
 
-  function show(key, name, row){
-    if (key === current) return;
-    current = key;
-    rows.forEach(function(r){ r.classList.toggle('on', r === row); });
-    arts.forEach(function(svg){
-      var on = svg.getAttribute('data-art') === key;
-      svg.classList.toggle('on', on);
-      if (!on) return;
-      pop(svg);
-    });
+  function show(i){
+    if (i === current) return;
+    var prev = current;
+    current = i;
+    rows.forEach(function(r, j){ r.classList.toggle('on', j === i); });
+    if (scrolly) {
+      var dir = i > prev ? 1 : -1;
+      if (prev > -1) fly(artFor(prev), dir);
+      pop(artFor(i), prev > -1 ? .14 : 0);
+      var b = count.querySelector('b');
+      b.textContent = (i < 9 ? '0' : '') + (i + 1);
+      gsap.fromTo(b, { yPercent:100 * dir, opacity:0 }, { yPercent:0, opacity:1, duration:.4, ease:'power3.out', overwrite:true });
+    } else {
+      arts.forEach(function(svg){
+        var on = svg === artFor(i);
+        svg.classList.toggle('on', on);
+        if (on) pop(svg);
+      });
+    }
+  }
+  function stepTo(i){
+    if (st) glideTo(Math.round(st.start + (st.end - st.start) * stepAt[i]));
   }
 
-  rows.forEach(function(li){
+  rows.forEach(function(li, i){
     var b = li.querySelector('button');
-    var key = b.getAttribute('data-art'), name = b.textContent.trim();
-    var go = function(){ show(key, name, li); };
-    b.addEventListener('mouseenter', go);
-    b.addEventListener('focus', go);
-    b.addEventListener('click', go);
+    b.addEventListener('mouseenter', function(){ if (!scrolly) show(i); });
+    b.addEventListener('focus', function(){ if (scrolly) stepTo(i); else show(i); });
+    b.addEventListener('click', function(){ if (scrolly) stepTo(i); else show(i); });
   });
 
-  // first skill is drawn once the section is reached, so the screen is never blank
-  var first = rows[0];
-  if (typeof ScrollTrigger !== 'undefined') {
-    ScrollTrigger.create({ trigger:kit, start:'top 80%', once:true, onEnter:function(){
-      show(first.querySelector('button').getAttribute('data-art'),
-           first.querySelector('button').textContent.trim(), first);
-    }});
-  } else {
-    show('product-design', 'UI/UX design', first);
-  }
+  if (typeof ScrollTrigger === 'undefined') { show(0); return; }
+
+  /* desktop scroll mode: the bar's position is a continuous index, eased between stops
+     and held at each one, so every skill gets a beat before the next arrives */
+  if (!REDUCED) gsap.matchMedia().add('(min-width: 901px)', function(){
+    var n = rows.length, p = { pos:0 }, tops = [], hs = [], HOLD = .7, i;
+    scrolly = true; current = -1;
+    kit.classList.add('scrolly');
+    arts.forEach(unpop);
+    count = document.createElement('p');
+    count.className = 'kit-count';
+    count.setAttribute('aria-hidden', 'true');
+    count.innerHTML = '<span><b>01</b></span> / 0' + n;
+    var prog = document.createElement('i');
+    prog.className = 'kit-prog';
+    screen.appendChild(count);
+    screen.appendChild(prog);
+
+    function measure(){
+      tops = rows.map(function(r){ return r.offsetTop; });
+      hs   = rows.map(function(r){ return r.offsetHeight; });
+    }
+    function paint(){
+      var a = Math.floor(p.pos), b = Math.min(a + 1, n - 1), f = p.pos - a;
+      list.style.setProperty('--by', (tops[a] + (tops[b] - tops[a]) * f) + 'px');
+      list.style.setProperty('--bh', (hs[a] + (hs[b] - hs[a]) * f) + 'px');
+      if (armed) show(Math.round(p.pos));
+    }
+
+    var tl = gsap.timeline({ defaults:{ ease:'power2.inOut' }, onUpdate:paint });
+    stepAt = [0];
+    tl.to({}, { duration:HOLD / 2 });
+    for (i = 1; i < n; i++) {
+      tl.to(p, { pos:i, duration:1 });
+      stepAt.push(tl.duration() + HOLD * .3);
+      tl.to({}, { duration:i < n - 1 ? HOLD : HOLD / 2 });
+    }
+    stepAt = stepAt.map(function(t){ return t / tl.duration(); });
+    tl.fromTo(prog, { scaleX:0 }, { scaleX:1, ease:'none', duration:tl.duration() }, 0);
+
+    measure(); paint();
+    st = ScrollTrigger.create({
+      trigger:sec, pin:true, animation:tl, scrub:.5, invalidateOnRefresh:true,
+      /* centre the heading and the kit in the viewport, leaving the section's bottom padding out */
+      start:function(){
+        var h = sec.offsetHeight - parseFloat(getComputedStyle(sec).paddingBottom);
+        return 'top top+=' + Math.max(0, Math.round((innerHeight - h) / 2));
+      },
+      end:function(){ return '+=' + Math.round((n - 1) * innerHeight * .5); },
+      onRefresh:function(){ measure(); paint(); }
+    });
+
+    return function(){
+      scrolly = false; st = null; current = -1;
+      kit.classList.remove('scrolly');
+      list.style.removeProperty('--by'); list.style.removeProperty('--bh');
+      count.remove(); prog.remove();
+    };
+  });
+
+  // the first skill is drawn once the section is reached, so the screen is never blank
+  ScrollTrigger.create({ trigger:kit, start:'top 80%', once:true, onEnter:function(){
+    armed = true;
+    if (current < 0) show(0);
+  }});
 })();
 </script>
 <script>
