@@ -46,7 +46,7 @@
 <style>
 /* ── HERO ── */
 .hero{position:relative;min-height:100svh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.ransom{position:relative;z-index:4;display:flex;align-items:flex-end;width:max-content;transform-origin:left top;--k:1.5;
+.ransom{position:relative;z-index:4;display:flex;align-items:flex-end;width:max-content;transform-origin:left top;--k:1;
   transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
 /* padding and overlap in em, so the row keeps its proportions at every screen size */
 .ransom span{display:block;line-height:.74;padding:.042em .062em .072em;margin-right:-.077em;position:relative}
@@ -100,7 +100,7 @@
 /* phones: the lockup is laid out at its full desktop size and then scaled as one block
    (fitName() in the script sets --k). Shrinking the type alone does not work: each letter's
    nudge, like translateY(-16px), is in pixels and would stay huge next to small letters. */
-.ransom-fit{position:relative;z-index:4;height:calc((100vw - 80px) * 236 / 882)}
+.ransom-fit{position:relative;z-index:4;height:236px}
 @media (max-width:900px){
   .hero{min-height:100svh;padding:104px 16px 120px;justify-content:center}
   /* not clipped here: the j's tail paints below its own box, and the hero already clips.
@@ -770,7 +770,6 @@ THUMBS.wire(document.getElementById('grid'));
   var spans = [].slice.call(name.querySelectorAll('span'));
   var flat = window.matchMedia('(orientation:landscape) and (max-height:520px) and (pointer:coarse)');
   function run(){
-    var desk = !window.matchMedia('(max-width:900px)').matches && !flat.matches;
     /* measure the lockup's real visual box: drop the intro tween's inline transforms for a
        moment so only the letters' own tilts count, then put them straight back */
     var saved = spans.map(function(el){ return el.style.transform; });
@@ -788,8 +787,7 @@ THUMBS.wire(document.getElementById('grid'));
     var pad = 3, w = Rt - L, h = B - T, tail = h * .12;   /* room for the j's tail, which paints below its box */
     var burger = document.querySelector('.burger');
     var room = fit.clientWidth - pad * 2 - (flat.matches && burger && burger.offsetWidth ? 76 : 0);   /* on its side: clear of the round menu button */
-    /* phones: never past the design size. Desktop: as wide as the page, up to twice the design size */
-    var k = Math.min(desk ? 2 : 1, room / w);
+    var k = Math.min(1, room / w);   /* never past the design size it is set at */
     /* and short enough that everything under it (the line, the paragraph) still fits on the first
        screen. Measured against the hero's 100svh, which stays put while a phone's toolbars come
        and go, so the name never resizes mid-scroll. Tall phones are limited by width, not this. */
