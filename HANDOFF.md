@@ -1336,6 +1336,13 @@ Last updated: 2026-10-16
     - **Entrance:** it drops onto its nail 1.3s after load (1.4s after the opening on a first visit) and the fall sets it swinging.
     - **Where:** centred in the space right of the name, `translate + scale(min(1, free/400))`, 124px from the hero top; hidden when that space is under 230px, at 900px and below, and on screens without a fine pointer (phones never see it). Reduced motion: it hangs still, flips still work. Verified at 1440, 1280, 1920 (shown), 1100 and 390 (hidden), no script errors.
 
+130. **Keychain rebuilt to look like a real one; drag by the strap; R fob links to About; j selection fixed (2026-10-16).** Supersedes item 129's form and the flip.
+    - **User feedback:** it did not look like an actual keychain; remove the flip; hovering should say "Things I love"; the R should flip to "Get to know me"; drag it by the blue piece; centre it on the name block's horizontal axis; the j's selection was wrong.
+    - **Form, from real keychain anatomy:** a blue strap tab at the top (stitched, with a rivet; the drag handle), a double-coil split ring through its loop, and every charm on its own **jump ring straight on the ring**, hanging as a bunch. Three charms sit right on the ring (helmet, wok, plus the R fob), clapper and controller on two-link chains, the pen on a longer one, so they stagger into tiers instead of hiding each other. Per-charm `data-at` (place on ring), `data-rest` (lean), `data-l` (extra chain px). DOM order back to front: helmet, wok, clapper, controller, pen, R.
+    - **Behaviour:** hobby charms are decorative (`aria-hidden`, cursor sticker "Things I love"; the whole `#keys` is `role=img` with a label listing them). **The R fob is a link to about.html** that turns over on hover/focus to "Get to know me". **Dragging the strap** moves the pivot (clamped inside the hero) and the physics swings everything behind it: the strap and ring are one pendulum from the strap's top, driven by the pivot's acceleration; charms swing from their jump rings. Mouse brushing still pushes charms.
+    - **Placement:** centred horizontally in the space right of whichever reaches further, the name or the BUILDING block, and vertically on the middle of the name-to-line block (measured from layout offsets, not the letters, which are mid-entrance at load). Scale `min(1.2, free / width)`; hidden under 240px free, at 900px and below, without a fine pointer. Measured centre offset vs the text block: 4-9px at 1280, 1440, 1920.
+    - **j selection:** `.L5 .lsel{bottom:-.2em}` so the frame takes in the tail that hangs below the j's box.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

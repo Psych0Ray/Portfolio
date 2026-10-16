@@ -98,44 +98,45 @@
 }
 @media (prefers-reduced-motion:reduce){.lsel,.lsel b{transition:none}}
 
-/* ── KEYCHAIN · things I do off the clock, hanging in the space beside the name ──────────
-   A nail, a split ring on a short chain, and charms on chains of their own, drawn like the What
-   I Bring illustrations (ink outline, blue / bone / paper). keychain() places it in the free
-   space, scales it to fit, and swings it: the ring and every charm are pendulums, pushed by the
-   mouse moving through them. A click flips a charm to its back, a tag with a fact from About.
-   Mouse screens wider than 900px only, and only where it fits beside the name. */
-.keys{--cw:128px;--ring-l:110px;--ring-r:36px;position:absolute;left:0;top:0;z-index:5;width:0;height:0;transform-origin:0 0;
-  --chain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='14'%3E%3Crect x='2' y='1.2' width='6' height='11.6' rx='3' fill='none' stroke='%230A0A0A' stroke-width='2.2'/%3E%3C/svg%3E")}
+/* ── KEYCHAIN · things I love, beside the name ────────────────────────────────────
+   Built like a real one: a blue strap at the top, a double-coil split ring through its loop,
+   and every charm clipped straight onto the ring with a small jump ring, hanging in a bunch.
+   The charms are drawn like the What I Bring illustrations (ink outline, blue / bone / paper).
+   keychain() centres it on the name block's middle, swings it (ring and charms are pendulums
+   pushed by the mouse) and lets the strap be dragged. The R fob flips to "Get to know me" and
+   goes to About. Mouse screens wider than 900px only, where it fits beside the name. */
+.keys{--cw:116px;--rr:40px;--rl:116px;
+  --chain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='14'%3E%3Crect x='2' y='1.2' width='6' height='11.6' rx='3' fill='none' stroke='%230A0A0A' stroke-width='2.2'/%3E%3C/svg%3E");position:absolute;left:0;top:0;z-index:5;width:0;height:0;transform-origin:0 0}
 .keys[hidden]{display:none}
 .keys-in{position:absolute;left:0;top:0}
-.keys-nail{position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:var(--blue);border:3px solid var(--ink);
-  box-shadow:inset -4px -4px 0 rgba(10,10,10,.28)}
-.keys-ring{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
-.keys-strap{position:absolute;left:-5px;top:6px;width:10px;height:calc(var(--ring-l) - var(--ring-r) - 2px);background:var(--chain) repeat-y 50% 0/10px 14px}
-.keys-loop{position:absolute;left:calc(var(--ring-r) * -1);top:calc(var(--ring-l) - var(--ring-r));width:calc(var(--ring-r) * 2);
-  height:calc(var(--ring-r) * 2);border-radius:50%;border:7px solid var(--ink);box-shadow:inset 0 0 0 2.5px var(--paper),inset 0 0 0 5.5px var(--ink)}
-.charm{position:absolute;left:0;top:0;width:var(--cw);display:flex;flex-direction:column;align-items:center;padding:0;border:0;
-  background:none;color:inherit;font:inherit;transform-origin:50% 0;perspective:700px;-webkit-tap-highlight-color:transparent}
-.charm-chain{display:block;flex:none;width:10px;height:calc(var(--l, 30) * 1px);background:var(--chain) repeat-y 50% 0/10px 14px;margin-bottom:-7px}
-.charm-card{position:relative;display:block;flex:none;width:var(--cw);height:var(--cw);transform-style:preserve-3d;
-  transition:transform .62s cubic-bezier(.3,1.35,.5,1)}
-.charm[aria-pressed="true"] .charm-card{transform:rotateY(180deg)}
-.charm-front,.charm-back{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.charm-front svg{display:block;width:100%;height:100%;overflow:visible}
-.charm-back{transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:22px 14px 12px;
-  background:var(--bone);border:3px solid var(--ink);border-radius:14px;text-align:left}
-.charm-back::before{content:"";position:absolute;left:50%;top:5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;
-  background:var(--paper);border:2.5px solid var(--ink)}
-/* the keychain may be scaled down (--s); the label is sized up to match, so it never reads under 11px */
-.charm-back small{font:700 max(12px, calc(11.5px / var(--s, 1)))/1.1 var(--label);letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}
-.charm-back b{font:800 max(17px, calc(13px / var(--s, 1)))/1.05 var(--display);letter-spacing:-.025em;color:var(--ink);text-wrap:balance}
-.charm:focus-visible{outline:0}
-.charm:focus-visible .charm-card{outline:3px solid var(--blue);outline-offset:5px;border-radius:16px}
-/* the R fob: the logo's R on its blue block, hung close to the ring */
-.charm.fob{--cw:64px}
-.fob .charm-front{display:grid;place-items:center;background:var(--blue);color:var(--paper);border:3px solid var(--ink);border-radius:10px;
-  font:400 38px/1 'Archivo Black',sans-serif;padding-top:5px}
-@media (prefers-reduced-motion:reduce){.charm-card{transition:none}}
+.keys-ring,.keys-strap{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
+.keys-ring::before{content:"";position:absolute;left:calc(var(--rr) * -1);top:calc(var(--rl) - var(--rr));width:calc(var(--rr) * 2);
+  height:calc(var(--rr) * 2);box-sizing:border-box;border-radius:50%;border:7px solid var(--ink);
+  box-shadow:inset 0 0 0 2.5px #9AA6C4,inset 0 0 0 5px var(--ink)}
+.keys-strap svg{position:absolute;left:-22px;top:-4px;width:44px;height:96px;overflow:visible;cursor:grab;touch-action:none}
+.keys.dragging .keys-strap svg{cursor:grabbing}
+.charm{position:absolute;left:0;top:0;width:var(--cw);display:flex;flex-direction:column;align-items:center;transform-origin:50% 8px;
+  perspective:700px;text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+.charm-jump{display:block;flex:none;width:16px;height:16px;border-radius:50%;border:3.5px solid var(--ink);box-sizing:border-box}
+.charm-links{display:block;flex:none;width:10px;height:calc(var(--l, 0) * 1px);margin-top:-3px;background:var(--chain) repeat-y 50% 0/10px 14px}
+.charm-card{position:relative;display:block;flex:none;width:var(--cw);height:var(--cw);margin-top:-6px}
+.charm-card svg{display:block;width:100%;height:100%;overflow:visible}
+/* the R fob: the logo's R on its blue block; it turns over to say where it goes */
+.charm.fob{--cw:80px}
+.fob .charm-card{margin-top:-3px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,1.35,.5,1)}
+.fob:hover .charm-card,.fob:focus-visible .charm-card{transform:rotateY(180deg)}
+.fob-front,.fob-back{position:absolute;inset:0;display:grid;place-items:center;border:3.5px solid var(--ink);border-radius:12px;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden}
+.fob-front{background:var(--blue);color:var(--paper);font:400 44px/1 'Archivo Black',sans-serif;padding-top:6px}
+.fob-back{transform:rotateY(180deg);background:var(--paper);color:var(--ink);padding:10px 8px 6px;text-align:center;
+  font:800 15px/1.02 var(--display);letter-spacing:-.02em;text-wrap:balance}
+.fob-front::before,.fob-back::before{content:"";position:absolute;left:50%;top:6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;
+  background:var(--paper);border:2.5px solid var(--ink);box-sizing:border-box}
+.fob:focus-visible{outline:0}
+.fob:focus-visible .charm-card{outline:3px solid var(--blue);outline-offset:5px;border-radius:14px}
+@media (prefers-reduced-motion:reduce){.fob .charm-card{transition:none}}
+/* the j's tail hangs below its box, so its selection frame reaches down to take it in */
+.L5 .lsel{bottom:-.2em}
 /* phones: the lockup is laid out at its full desktop size and then scaled as one block
    (fitName() in the script sets --k). Shrinking the type alone does not work: each letter's
    nudge, like translateY(-16px), is in pixels and would stay huge next to small letters. */
@@ -377,85 +378,78 @@ html.intro-on .intro{display:block}
     <span class="c">BUILDING</span>
   </p>
   <p class="lede">Observing before assuming. Questioning before solving.</p>
-  <!-- the keychain in the empty space beside the name: things I do off the clock, as charms on a ring.
-       keychain() hangs it, swings it with the mouse and flips a charm when clicked. Mouse screens only. -->
-  <div class="keys" id="keys" hidden>
+  <!-- the keychain in the empty space beside the name: things I love, as charms on a split ring, hung from a blue
+       strap you can drag. keychain() places it, swings it and lets the strap be dragged. Mouse screens only. -->
+  <div class="keys" id="keys" role="img" aria-label="A keychain of things I love: motorcycles, movies, design, video games and cooking" hidden>
     <div class="keys-in">
-      <button type="button" class="charm" data-at="-40" data-l="64" data-rest="-44" aria-pressed="false" data-cursor="Flip">
-        <span class="charm-chain" aria-hidden="true"></span>
-        <span class="charm-card">
-          <span class="charm-front" aria-hidden="true"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-            <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
-            <path d="M22 88q0-60 46-60q30 0 38 34l2 26z" fill="#002FA7"/>
-            <path d="M64 56h38q6 0 6 6v12h-44q-8 0-8-8v-2q0-8 8-8z" fill="#D8DEEF"/>
-            <path d="M34 62q6-20 24-24" stroke="#EDEFF6" stroke-width="5"/>
-            <path d="M22 88h86q4 0 4 4v4q0 4-4 4H26q-4 0-4-4z" fill="#0A0A0A"/>
-          </g></svg></span>
-          <span class="charm-back"><small>Motorcycles</small><b>Triumph Speed&nbsp;400, 7,000&nbsp;km</b></span>
-        </span>
-      </button>
-      <button type="button" class="charm" data-at="-20" data-l="150" data-rest="-20" aria-pressed="false" data-cursor="Flip">
-        <span class="charm-chain" aria-hidden="true"></span>
-        <span class="charm-card">
-          <span class="charm-front" aria-hidden="true"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-            <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
-            <rect x="20" y="48" width="80" height="58" rx="6" fill="#D8DEEF"/>
-            <path d="M30 66h40M30 80h56M30 94h28" stroke-width="4"/>
-            <g transform="rotate(-13 20 46)"><rect x="20" y="28" width="80" height="18" rx="3" fill="#0A0A0A"/>
-              <path d="M36 30l-8 14M56 30l-8 14M76 30l-8 14M96 30l-8 14" stroke="#EDEFF6" stroke-width="6"/></g>
-            <path d="M60 16v10" stroke-width="4"/>
-          </g></svg></span>
-          <span class="charm-back"><small>Movies</small><b>In the Mood for&nbsp;Love</b></span>
-        </span>
-      </button>
-      <button type="button" class="charm" data-at="0" data-l="34" data-rest="-2" aria-pressed="false" data-cursor="Flip">
-        <span class="charm-chain" aria-hidden="true"></span>
-        <span class="charm-card">
-          <span class="charm-front" aria-hidden="true"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-            <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
-            <rect x="48" y="16" width="24" height="16" rx="4" fill="#0A0A0A"/>
-            <path d="M60 32l30 34l-18 42H48L30 66z" fill="#002FA7"/>
-            <path d="M60 74v34" stroke="#EDEFF6" stroke-width="4"/>
-            <circle cx="60" cy="66" r="8" fill="#EDEFF6"/>
-          </g></svg></span>
-          <span class="charm-back"><small>Where I study</small><b>UX design at MIT Institute of Design</b></span>
-        </span>
-      </button>
-      <button type="button" class="charm" data-at="20" data-l="118" data-rest="21" aria-pressed="false" data-cursor="Flip">
-        <span class="charm-chain" aria-hidden="true"></span>
-        <span class="charm-card">
-          <span class="charm-front" aria-hidden="true"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-            <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
-            <path d="M60 16v22" stroke-width="4"/>
-            <path d="M34 40h52q16 0 19 15l7 32q3 16-11 16q-9 0-14-10l-6-11H39l-6 11q-5 10-14 10q-14 0-11-16l7-32q3-15 19-15z" fill="#D8DEEF"/>
-            <path d="M36 58v18M27 67h18" stroke-width="6"/>
-            <circle cx="80" cy="60" r="5" fill="#002FA7" stroke-width="3.5"/>
-            <circle cx="92" cy="71" r="5" fill="#002FA7" stroke-width="3.5"/>
-          </g></svg></span>
-          <span class="charm-back"><small>Video games</small><b>Onimusha: Way of the&nbsp;Sword</b></span>
-        </span>
-      </button>
-      <button type="button" class="charm" data-at="40" data-l="66" data-rest="45" aria-pressed="false" data-cursor="Flip">
-        <span class="charm-chain" aria-hidden="true"></span>
-        <span class="charm-card">
-          <span class="charm-front" aria-hidden="true"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-            <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
-            <path d="M60 16v18" stroke-width="4"/>
-            <path d="M30 62q4-28 30-28q26 0 30 28z" fill="#EDEFF6"/>
-            <circle cx="46" cy="52" r="3.5" fill="#002FA7" stroke="none"/><circle cx="64" cy="46" r="3.5" fill="#002FA7" stroke="none"/>
-            <circle cx="74" cy="56" r="3.5" fill="#8EA2D6" stroke="none"/><circle cx="56" cy="56" r="3.5" fill="#8EA2D6" stroke="none"/>
-            <path d="M14 62h92q-4 40-46 40q-42 0-46-40z" fill="#0A0A0A"/>
-            <path d="M104 66l12-6" stroke-width="7"/>
-          </g></svg></span>
-          <span class="charm-back"><small>Cooking</small><b>Cantonese egg fried&nbsp;rice</b></span>
-        </span>
-      </button>
-      <span class="charm fob" data-at="-78" data-l="2" data-rest="-34" aria-hidden="true">
-        <span class="charm-chain"></span>
-        <span class="charm-card"><span class="charm-front">R</span></span>
+      <span class="charm" data-at="-60" data-rest="-42" data-l="0" data-cursor="Things I love" aria-hidden="true">
+        <span class="charm-jump"></span><span class="charm-links"></span>
+        <span class="charm-card"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
+          <path d="M60 16v12" stroke-width="4"/>
+          <path d="M22 88q0-60 46-60q30 0 38 34l2 26z" fill="#002FA7"/>
+          <path d="M64 56h38q6 0 6 6v12h-44q-8 0-8-8v-2q0-8 8-8z" fill="#D8DEEF"/>
+          <path d="M34 62q6-20 24-24" stroke="#EDEFF6" stroke-width="5"/>
+          <path d="M22 88h86q4 0 4 4v4q0 4-4 4H26q-4 0-4-4z" fill="#0A0A0A"/>
+        </g></svg></span>
       </span>
-      <span class="keys-ring" aria-hidden="true"><span class="keys-strap"></span><span class="keys-loop"></span></span>
-      <span class="keys-nail" aria-hidden="true"></span>
+      <span class="charm" data-at="60" data-rest="42" data-l="0" data-cursor="Things I love" aria-hidden="true">
+        <span class="charm-jump"></span><span class="charm-links"></span>
+        <span class="charm-card"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
+          <path d="M60 16v18" stroke-width="4"/>
+          <path d="M30 62q4-28 30-28q26 0 30 28z" fill="#EDEFF6"/>
+          <circle cx="46" cy="52" r="3.5" fill="#002FA7" stroke="none"/><circle cx="64" cy="46" r="3.5" fill="#002FA7" stroke="none"/>
+          <circle cx="74" cy="56" r="3.5" fill="#8EA2D6" stroke="none"/><circle cx="56" cy="56" r="3.5" fill="#8EA2D6" stroke="none"/>
+          <path d="M14 62h92q-4 40-46 40q-42 0-46-40z" fill="#0A0A0A"/>
+          <path d="M104 66l12-6" stroke-width="7"/>
+        </g></svg></span>
+      </span>
+      <span class="charm" data-at="-34" data-rest="-24" data-l="30" data-cursor="Things I love" aria-hidden="true">
+        <span class="charm-jump"></span><span class="charm-links"></span>
+        <span class="charm-card"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
+          <rect x="20" y="48" width="80" height="58" rx="6" fill="#D8DEEF"/>
+          <path d="M30 66h40M30 80h56M30 94h28" stroke-width="4"/>
+          <g transform="rotate(-13 20 46)"><rect x="20" y="28" width="80" height="18" rx="3" fill="#0A0A0A"/>
+            <path d="M36 30l-8 14M56 30l-8 14M76 30l-8 14M96 30l-8 14" stroke="#EDEFF6" stroke-width="6"/></g>
+          <path d="M60 16v10" stroke-width="4"/>
+        </g></svg></span>
+      </span>
+      <span class="charm" data-at="34" data-rest="24" data-l="30" data-cursor="Things I love" aria-hidden="true">
+        <span class="charm-jump"></span><span class="charm-links"></span>
+        <span class="charm-card"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
+          <path d="M60 16v22" stroke-width="4"/>
+          <path d="M34 40h52q16 0 19 15l7 32q3 16-11 16q-9 0-14-10l-6-11H39l-6 11q-5 10-14 10q-14 0-11-16l7-32q3-15 19-15z" fill="#D8DEEF"/>
+          <path d="M36 58v18M27 67h18" stroke-width="6"/>
+          <circle cx="80" cy="60" r="5" fill="#002FA7" stroke-width="3.5"/>
+          <circle cx="92" cy="71" r="5" fill="#002FA7" stroke-width="3.5"/>
+        </g></svg></span>
+      </span>
+      <span class="charm" data-at="8" data-rest="6" data-l="70" data-cursor="Things I love" aria-hidden="true">
+        <span class="charm-jump"></span><span class="charm-links"></span>
+        <span class="charm-card"><svg viewBox="0 0 120 120"><g fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="60" cy="10" r="6" fill="#EDEFF6" stroke-width="4"/>
+          <rect x="48" y="16" width="24" height="16" rx="4" fill="#0A0A0A"/>
+          <path d="M60 32l30 34l-18 42H48L30 66z" fill="#002FA7"/>
+          <path d="M60 74v34" stroke="#EDEFF6" stroke-width="4"/>
+          <circle cx="60" cy="66" r="8" fill="#EDEFF6"/>
+        </g></svg></span>
+      </span>
+      <a class="charm fob" href="about.html" data-at="-24" data-rest="-10" data-l="0">
+        <span class="charm-jump" aria-hidden="true"></span><span class="charm-links" aria-hidden="true"></span>
+        <span class="charm-card">
+          <span class="fob-front" aria-hidden="true">R</span>
+          <span class="fob-back">Get to know me</span>
+        </span>
+      </a>
+      <span class="keys-ring" aria-hidden="true"></span>
+      <span class="keys-strap" data-cursor="Drag" aria-hidden="true"><svg viewBox="0 0 44 96"><g stroke="#0A0A0A" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M6 18q0-14 16-14q16 0 16 14v58q0 10-16 10q-16 0-16-10z" fill="#002FA7"/>
+        <path d="M11 20q0-9 11-9q11 0 11 9v54q0 6-11 6q-11 0-11-6z" fill="none" stroke="#EDEFF6" stroke-width="1.8" stroke-dasharray="4 3.5"/>
+        <circle cx="22" cy="58" r="5.5" fill="#D8DEEF"/>
+      </g></svg></span>
     </div>
   </div>
 </header>
@@ -942,63 +936,84 @@ THUMBS.wire(document.getElementById('grid'));
   });
 })();
 
-/* The keychain beside the name. Two kinds of pendulum: the ring swings from the nail, and each
-   charm swings from its own point on the ring (it feels the ring's motion as its pivot moving).
-   Angles are measured from straight down; a charm's rest angle fans the bunch out the way keys
-   lean on each other. The mouse moving through a charm or the ring pushes it along the direction
-   it can swing. The loop sleeps once everything is still and wakes on the next push. */
+/* The keychain beside the name. The strap's top is the pivot: the strap and ring swing from it
+   as one pendulum, and each charm swings from its jump ring on the ring, feeling that point's
+   motion. Angles are from straight down; each charm's rest angle (data-rest) fans the bunch the
+   way charms lean on each other, data-at is where its jump ring sits on the ring. The mouse moving
+   through a charm pushes it; dragging the strap moves the pivot, so the whole thing swings
+   behind the hand. The loop sleeps once everything is still. */
 (function keychain(){
   var box = document.getElementById('keys');
   if (!box) return;
-  var hero = document.getElementById('hero'), name = document.querySelector('.ransom');
-  var ringEl = box.querySelector('.keys-ring');
+  var hero = document.getElementById('hero'), name = document.querySelector('.ransom'), lede = document.querySelector('.hero .lede');
+  var hang = [box.querySelector('.keys-ring'), box.querySelector('.keys-strap')];
+  var strap = box.querySelector('.keys-strap svg');
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)'), wide = window.matchMedia('(min-width:901px)');
-  var G = 2600, RL = 110, RR = 36, CW = 128, DAMP_R = 1.5, DAMP_C = 1.25;
+  var G = 2600, RL = 116, RR = 40, LR = 170, DAMP_R = 1.6, DAMP_C = 1.3, R = Math.PI / 180;
   var ring = { a: 0, v: 0 };
   var cs = [].slice.call(box.querySelectorAll('.charm')).map(function(el){
-    var l = +el.getAttribute('data-l');
+    var w = el.classList.contains('fob') ? 80 : 116, l = +el.getAttribute('data-l') || 0;
     el.style.setProperty('--l', l);
-    return { el: el, at: +el.getAttribute('data-at') * Math.PI / 180, rest: +el.getAttribute('data-rest') * Math.PI / 180,
-             l: l, w: el.classList.contains('fob') ? 64 : CW, a: 0, v: 0, px: 0, py: 0, pvx: 0, pvy: 0 };
+    return { el: el, w: w, l: l, L: 10 + l + w / 2, at: +el.getAttribute('data-at') * R, rest: +el.getAttribute('data-rest') * R,
+             a: 0, v: 0, px: 0, py: 0, pvx: 0, pvy: 0 };
   });
   cs.forEach(function(c){ c.a = c.rest; });
-  var s = 1, ox = 0, oy = 0, on = false, running = false, last = 0;
+  var s = 1, ox = 0, oy = 0, on = false, running = false, last = 0, dragging = false;
+  var anc = { x: 0, y: 0, vx: 0, vy: 0, ax: 0, ay: 0 };   // the pivot in local units, for its acceleration
 
-  /* where it hangs: centred in the space right of the name, scaled down if that space is narrow */
-  function place(){
-    if (!fine.matches || !wide.matches) { box.hidden = true; on = false; return; }
-    var h = hero.getBoundingClientRect(), right = -Infinity;
-    [].forEach.call(name.querySelectorAll('span'), function(sp){ right = Math.max(right, sp.getBoundingClientRect().right); });
-    var free = h.right - 40 - right;
-    if (free < 230) { box.hidden = true; on = false; return; }
-    s = Math.min(1, free / 400);
-    ox = right - h.left + free / 2; oy = 124;
-    box.style.transform = 'translate(' + ox + 'px,' + oy + 'px) scale(' + s + ')';
-    box.style.setProperty('--s', s);
-    box.hidden = false; on = true;
-    render();
-  }
-
-  function pivot(c){
+  function pivot(c){   // a charm's jump ring, relative to the strap's top
     var cx = RL * Math.sin(ring.a), cy = RL * Math.cos(ring.a), t = ring.a + c.at;
     return [cx + RR * Math.sin(t), cy + RR * Math.cos(t)];
   }
+  /* the keychain's box at rest, in local units: strap top to the lowest charm, widest charm to widest */
+  function restBox(){
+    var t = -4, b = -Infinity, l = Infinity, r = -Infinity;
+    cs.forEach(function(c){
+      var px = RR * Math.sin(c.at), py = RL + RR * Math.cos(c.at), reach = 10 + c.l + c.w;
+      var ex = px + reach * Math.sin(c.rest), ey = py + reach * Math.cos(c.rest);
+      b = Math.max(b, ey + c.w * .35 * Math.abs(Math.sin(c.rest)) + 4);
+      l = Math.min(l, Math.min(px, ex) - c.w / 2); r = Math.max(r, Math.max(px, ex) + c.w / 2);
+    });
+    return { t: t, b: b, l: l, r: r };
+  }
+  /* where it hangs: centred in the free space right of the name, its middle on the middle of the
+     name-to-line block, scaled down if the space is narrow */
+  function place(){
+    if (!fine.matches || !wide.matches) { box.hidden = true; on = false; return; }
+    /* layout positions, not the letters' own boxes: those are mid-entrance when this first runs */
+    var h = hero.getBoundingClientRect(), fit = name.parentNode;
+    var st = document.querySelector('.hero .statement'), blk = st.querySelector('.c');
+    var right = Math.max(name.getBoundingClientRect().right - h.left, st.offsetLeft + blk.offsetLeft + blk.offsetWidth);   /* clear of the name and of BUILDING */
+    var top = fit.offsetTop, bottom = lede.offsetTop + lede.offsetHeight;
+    var free = h.width - 40 - right;
+    if (free < 240) { box.hidden = true; on = false; return; }
+    var rb = restBox();
+    s = Math.min(1.2, free / (rb.r - rb.l + 30));
+    ox = right + free / 2 - (rb.l + rb.r) / 2 * s;
+    oy = (top + bottom) / 2 - (rb.t + rb.b) / 2 * s;
+    box.hidden = false; on = true;
+    move(); render();
+  }
+  function move(){ box.style.transform = 'translate(' + ox + 'px,' + oy + 'px) scale(' + s + ')'; }
   function render(){
-    ringEl.style.transform = 'rotate(' + (-ring.a * 180 / Math.PI) + 'deg)';
+    var rot = 'rotate(' + (-ring.a / R) + 'deg)';
+    hang.forEach(function(el){ el.style.transform = rot; });
     cs.forEach(function(c){
       var p = pivot(c);
-      c.el.style.transform = 'translate(' + (p[0] - c.w / 2) + 'px,' + p[1] + 'px) rotate(' + (-c.a * 180 / Math.PI) + 'deg)';
+      c.el.style.transform = 'translate(' + (p[0] - c.w / 2) + 'px,' + (p[1] - 8) + 'px) rotate(' + (-c.a / R) + 'deg)';
     });
   }
   function step(dt){
-    ring.v += (-(G / RL) * Math.sin(ring.a) - DAMP_R * ring.v) * dt;
+    var x = ox / s, y = oy / s, vx = (x - anc.x) / dt, vy = (y - anc.y) / dt;
+    anc.ax = (vx - anc.vx) / dt; anc.ay = (vy - anc.vy) / dt; anc.x = x; anc.y = y; anc.vx = vx; anc.vy = vy;
+    ring.v += ((-G * Math.sin(ring.a) - anc.ax * Math.cos(ring.a) + anc.ay * Math.sin(ring.a)) / LR - DAMP_R * ring.v) * dt;
     ring.a += ring.v * dt;
-    var calm = Math.abs(ring.v) < .004 && Math.abs(ring.a) < .004;
+    var calm = !dragging && Math.abs(ring.v) < .004 && Math.abs(ring.a) < .004;
     cs.forEach(function(c){
-      var p = pivot(c), vx = (p[0] - c.px) / dt, vy = (p[1] - c.py) / dt;
-      var ax = (vx - c.pvx) / dt, ay = (vy - c.pvy) / dt, L = c.l + c.w / 2;
-      c.px = p[0]; c.py = p[1]; c.pvx = vx; c.pvy = vy;
-      c.v += ((-G * Math.sin(c.a - c.rest) - ax * Math.cos(c.a) + ay * Math.sin(c.a)) / L - DAMP_C * c.v) * dt;
+      var p = pivot(c), wx = p[0] + x, wy = p[1] + y, pvx = (wx - c.px) / dt, pvy = (wy - c.py) / dt;
+      var ax = (pvx - c.pvx) / dt, ay = (pvy - c.pvy) / dt;
+      c.px = wx; c.py = wy; c.pvx = pvx; c.pvy = pvy;
+      c.v += ((-G * Math.sin(c.a - c.rest) - ax * Math.cos(c.a) + ay * Math.sin(c.a)) / c.L - DAMP_C * c.v) * dt;
       c.a += c.v * dt;
       if (Math.abs(c.v) > .004 || Math.abs(c.a - c.rest) > .004) calm = false;
     });
@@ -1014,56 +1029,68 @@ THUMBS.wire(document.getElementById('grid'));
   function wake(){
     if (REDUCED || running || !on) return;
     running = true; last = performance.now();
-    cs.forEach(function(c){ var p = pivot(c); c.px = p[0]; c.py = p[1]; c.pvx = 0; c.pvy = 0; });
+    anc.x = ox / s; anc.y = oy / s; anc.vx = anc.vy = 0;
+    cs.forEach(function(c){ var p = pivot(c); c.px = p[0] + anc.x; c.py = p[1] + anc.y; c.pvx = 0; c.pvy = 0; });
     requestAnimationFrame(tick);
   }
 
-  /* the mouse pushes whatever it passes through, along the way that thing can swing */
+  /* the mouse pushes any charm it passes through, along the way that charm can swing */
   var mx = null, my = null, mt = 0;
   hero.addEventListener('mousemove', function(e){
-    if (!on || REDUCED) return;
+    if (!on || REDUCED || dragging) return;
     var h = hero.getBoundingClientRect(), x = (e.clientX - h.left - ox) / s, y = (e.clientY - h.top - oy) / s, now = performance.now();
     if (mx !== null && now > mt) {
       var dt = Math.max(.008, (now - mt) / 1000), vx = (x - mx) / dt, vy = (y - my) / dt, hit = false;
       cs.forEach(function(c){
-        var p = pivot(c), L = c.l + c.w / 2, bx = p[0] + L * Math.sin(c.a), by = p[1] + L * Math.cos(c.a);
-        var d = Math.hypot(x - bx, y - by), r = c.w * .75;
-        if (d < r) { c.v += (vx * Math.cos(c.a) - vy * Math.sin(c.a)) / L * .045 * (1 - d / r); c.v = Math.max(-9, Math.min(9, c.v)); hit = true; }
+        var p = pivot(c), bx = p[0] + c.L * Math.sin(c.a), by = p[1] + c.L * Math.cos(c.a);
+        var d = Math.hypot(x - bx, y - by), r = c.w * .7;
+        if (d < r) { c.v += (vx * Math.cos(c.a) - vy * Math.sin(c.a)) / c.L * .04 * (1 - d / r); c.v = Math.max(-9, Math.min(9, c.v)); hit = true; }
       });
-      var d = Math.hypot(x - RL * Math.sin(ring.a), y - RL * Math.cos(ring.a));
-      if (d < RR + 18) { ring.v += vx / RL * .02 * (1 - d / (RR + 18)); hit = true; }
       if (hit) wake();
     }
     mx = x; my = y; mt = now;
   });
   hero.addEventListener('mouseleave', function(){ mx = null; });
 
-  /* a click flips a charm to its tag, with a little kick, the way a real one turns in the hand */
-  cs.forEach(function(c){
-    if (c.el.tagName !== 'BUTTON') return;
-    c.el.addEventListener('click', function(){
-      var flipped = c.el.getAttribute('aria-pressed') === 'true';
-      c.el.setAttribute('aria-pressed', flipped ? 'false' : 'true');
-      c.v += flipped ? -2.2 : 2.2; wake();
-    });
+  /* drag by the strap: the pivot follows the hand, kept inside the hero */
+  var grab = null;
+  strap.addEventListener('pointerdown', function(e){
+    if (!on) return;
+    e.preventDefault();
+    var h = hero.getBoundingClientRect();
+    grab = { dx: e.clientX - h.left - ox, dy: e.clientY - h.top - oy };
+    dragging = true; box.classList.add('dragging');
+    strap.setPointerCapture(e.pointerId);
+    wake();
   });
+  strap.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    var h = hero.getBoundingClientRect();
+    ox = Math.max(30, Math.min(h.width - 30, e.clientX - h.left - grab.dx));
+    oy = Math.max(96, Math.min(h.height - 60, e.clientY - h.top - grab.dy));
+    move();
+    if (REDUCED) render(); else wake();
+  });
+  function drop(){ if (!dragging) return; dragging = false; box.classList.remove('dragging'); wake(); }
+  strap.addEventListener('pointerup', drop);
+  strap.addEventListener('pointercancel', drop);
 
   place();
-  window.addEventListener('resize', place);
+  window.addEventListener('resize', function(){ if (!dragging) place(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 
-  /* it drops in on its nail once the name has landed, and the fall sets it swinging */
+  /* it drops in once the name has landed, and the fall sets it swinging */
   if (!on || REDUCED) return;
   var inner = box.querySelector('.keys-in');
-  gsap.set(inner, { y: -520 });
-  function drop(){
+  gsap.set(inner, { y: -620 });
+  function fall(){
     gsap.to(inner, { y: 0, duration: .75, ease: 'power3.in', onComplete: function(){
-      ring.v = 3.4; cs.forEach(function(c, i){ c.v = (i % 2 ? -1 : 1) * (3 + i * .6); }); wake();
+      ring.v = 2.6; cs.forEach(function(c, i){ c.v = (i % 2 ? -1 : 1) * (2.4 + i * .5); }); wake();
     } });
   }
   if (document.documentElement.classList.contains('intro-on'))
-    document.addEventListener('intro:done', function(){ setTimeout(drop, 1400); }, { once: true });
-  else setTimeout(drop, 1300);
+    document.addEventListener('intro:done', function(){ setTimeout(fall, 1400); }, { once: true });
+  else setTimeout(fall, 1300);
 })();
 
 (function ransom(){
