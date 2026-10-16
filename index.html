@@ -126,8 +126,9 @@
   background:var(--bone);border:3px solid var(--ink);border-radius:14px;text-align:left}
 .charm-back::before{content:"";position:absolute;left:50%;top:5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;
   background:var(--paper);border:2.5px solid var(--ink)}
-.charm-back small{font:700 10.5px/1 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
-.charm-back b{font:800 17px/1.02 var(--display);letter-spacing:-.02em;text-transform:uppercase;color:var(--ink);text-wrap:balance}
+/* the keychain may be scaled down (--s); the label is sized up to match, so it never reads under 11px */
+.charm-back small{font:700 max(12px, calc(11.5px / var(--s, 1)))/1.1 var(--label);letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}
+.charm-back b{font:800 max(17px, calc(13px / var(--s, 1)))/1.05 var(--display);letter-spacing:-.025em;color:var(--ink);text-wrap:balance}
 .charm:focus-visible{outline:0}
 .charm:focus-visible .charm-card{outline:3px solid var(--blue);outline-offset:5px;border-radius:16px}
 /* the R fob: the logo's R on its blue block, hung close to the ring */
@@ -973,6 +974,7 @@ THUMBS.wire(document.getElementById('grid'));
     s = Math.min(1, free / 400);
     ox = right - h.left + free / 2; oy = 124;
     box.style.transform = 'translate(' + ox + 'px,' + oy + 'px) scale(' + s + ')';
+    box.style.setProperty('--s', s);
     box.hidden = false; on = true;
     render();
   }
