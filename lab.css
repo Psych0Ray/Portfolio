@@ -32,12 +32,14 @@ a{color:inherit}
 /* the palette is light by design; declaring it stops a browser auto-dark pass
    from re-painting the page and keeps native UI surfaces on the right side */
 html{color-scheme:only light;caret-color:var(--blue);accent-color:var(--blue);scrollbar-gutter:stable}
-@supports (scrollbar-width:thin){html{scrollbar-width:thin;scrollbar-color:var(--blue) var(--bone)}}
+/* --sb-thumb / --sb-track and the --cur-* colours below are set by a project's deck sheet
+   (work/ui/<slug>.css), so its pages scroll and point in that project's colours */
+@supports (scrollbar-width:thin){html{scrollbar-width:thin;scrollbar-color:var(--sb-thumb,var(--blue)) var(--sb-track,var(--bone))}}
 /* squared off, like every other edge on the page */
 ::-webkit-scrollbar{width:13px;height:13px}
-::-webkit-scrollbar-track{background:var(--bone)}
-::-webkit-scrollbar-thumb{background:var(--blue);border:3px solid var(--bone)}
-::-webkit-scrollbar-thumb:hover{background:var(--ink)}
+::-webkit-scrollbar-track{background:var(--sb-track,var(--bone))}
+::-webkit-scrollbar-thumb{background:var(--sb-thumb,var(--blue));border:3px solid var(--sb-track,var(--bone))}
+::-webkit-scrollbar-thumb:hover{background:var(--sb-hover,var(--ink))}
 /* keyboard focus is a real state here; there was none before */
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 /* the blue ring disappears on blue and ink grounds */
@@ -69,9 +71,10 @@ a{text-underline-offset:.15em;text-decoration-thickness:.075em}
 /* ── CURSOR · a sticker dot that grows a label ── */
 .cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform;display:none}
 @media (hover:hover) and (pointer:fine){.cursor{display:block}}
-.cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--blue);border:2.5px solid var(--ink);
+.cursor .dot{display:block;width:16px;height:16px;border-radius:50%;background:var(--cur,var(--blue));border:2.5px solid var(--cur-edge,var(--ink));
   transform:translate(-50%,-50%)}
-.cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--bone);border:2.5px solid var(--ink);
+.cursor .tag{display:block;position:absolute;left:14px;top:12px;background:var(--cur-tag,var(--bone));color:var(--cur-tag-fg,var(--ink));
+  border:2.5px solid var(--cur-edge,var(--ink));
   border-radius:100px;padding:9px 15px;font-family:var(--label);font-size:11px;
   font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;transform:rotate(-4deg) scale(.6);
   opacity:0;transform-origin:left top}

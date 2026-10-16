@@ -184,3 +184,5 @@
 .rl-signgrid h3 span{margin-left:6px;font-family:var(--d-font);font-size:14px;color:var(--d-accent)}
 /* no eyebrows in this deck: In short's labels read as small headings */
 .p-relique.fcs .cs-short dt{font-family:var(--d-head);font-size:20px;font-weight:400;letter-spacing:0;text-transform:none;color:#d9cabb}
+/* the page's scrollbar and cursor in the deck's colours (hooks in lab.css) */
+:root{--sb-thumb:#c07a42;--sb-track:#100800;--sb-hover:#f2ebe3;--cur:#c07a42;--cur-edge:#100800;--cur-tag:#c07a42;--cur-tag-fg:#100800}

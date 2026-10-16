@@ -13,3 +13,5 @@
 /* the device card is shorter than its report: give it less width so they read as a pair */
 /* ...and never taller than the window: the report is 1.54x as tall as it is wide */
 .ic-duo{grid-template-columns:minmax(0,.84fr) minmax(0,1fr);width:min(100%,860px,calc((100svh - 190px) * 1.19 + 56px))}
+/* the page's scrollbar and cursor in the deck's colours (hooks in lab.css) */
+:root{--sb-thumb:#583bc0;--sb-track:#f6f5fc;--sb-hover:#1e1b39;--cur:#583bc0;--cur-edge:#1e1b39;--cur-tag:#583bc0;--cur-tag-fg:#fff}

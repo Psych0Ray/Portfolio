@@ -175,3 +175,5 @@
 .cv-cap.short h3{font-size:15px;line-height:1.3}
 /* no eyebrows in this deck: In short's labels read as small headings */
 .p-canva-ai.fcs .cs-short dt{font-size:18px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--d-fg)}
+/* the page's scrollbar and cursor in the deck's colours (hooks in lab.css) */
+:root{--sb-thumb:#8b3dff;--sb-track:#f4f0fc;--sb-hover:#1d1d28;--cur:#8b3dff;--cur-edge:#1d1d28;--cur-tag:#8b3dff;--cur-tag-fg:#fff}
