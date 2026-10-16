@@ -69,7 +69,7 @@
 .t-lead{grid-column:1 / span 9;font-family:var(--d-head);font-weight:var(--d-lw,var(--d-hw));font-size:clamp(28px,3.2vw,46px);
   line-height:1.2;letter-spacing:var(--d-htrack);color:var(--d-fg);text-wrap:pretty}
 .t-sec > .t-text,.t-feat > .t-text{grid-column:4 / span 7}
-.t-h{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(28px,2.7vw,40px);line-height:1.12;
+.t-h{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(30px,3.4vw,52px);line-height:1.12;
   letter-spacing:var(--d-htrack);color:var(--d-fg);max-width:22ch;text-wrap:balance}
 .t-h3{font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(20px,1.7vw,24px);line-height:1.2;
   letter-spacing:var(--d-htrack);color:var(--d-fg);text-wrap:balance}
@@ -186,6 +186,7 @@
 .t-drop{grid-column:4 / -1;display:flex;align-items:flex-end;gap:clamp(20px,3.5vw,48px);flex-wrap:wrap}
 .t-drop b{display:block;font-family:var(--d-head);font-weight:var(--d-hw);font-size:clamp(88px,11vw,168px);letter-spacing:-.05em;line-height:.82;color:var(--d-fg)}
 .t-drop .was b{color:var(--d-soft)}
+.t-drop > div:last-child b{color:var(--d-accent)}   /* the after number is the one that wins */
 .t-drop span{display:block;margin-top:18px;font-size:15px;line-height:1.4;color:var(--d-dim)}
 .t-drop .to{font-size:clamp(40px,5vw,72px);padding-bottom:clamp(40px,4.5vw,70px);color:var(--d-accent)}
 .t-drop .to .ic{stroke-width:2.5}
@@ -387,7 +388,7 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .fcs .findex a::before{background:var(--d-accent)}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* a heading's key words in the deck's highlight colour, as the decks set their titles */
-.fcs .t-h em,.fcs .t-lead em{font-style:normal;color:var(--d-hl,var(--d-accent))}
+.deck .t-h em,.deck .t-lead em{font-style:normal;color:var(--d-hl,var(--d-accent))}
 .fcs .t-sec > .t-text,.fcs .t-feat > .t-text{grid-column:1 / span 8}
 .fcs .t-lead{grid-column:1 / span 10}
 .fcs .t-rows,.fcs .t-drop,.fcs .t-facts.n3,.fcs .t-feat > .t-media.screen{grid-column:1 / -1}
@@ -799,3 +800,15 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-quotes p b{display:block;margin-bottom:8px;font-weight:var(--d-bw)}
 .cs-quotes figcaption{margin-top:14px;font-size:14px;color:var(--d-soft)}
 @media (max-width:760px){.cs-quotes{grid-template-columns:minmax(0,1fr)}}
+
+/* ── THE BAND ─────────────────────────────────────────────────────────
+   One per trailer at most: the page's loudest moment, edge to edge in the deck's accent (or the
+   deck's own --d-band field). It breaks out of the deck's side margins the way the cover does.
+   work.js (pop) wipes it open from the middle as it scrolls in. */
+.t-band{grid-column:1 / -1;margin-inline:calc(var(--pad) * -1);padding:clamp(72px,8vw,128px) var(--pad);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);
+  background:var(--d-band,var(--d-accent));color:var(--d-on-band,var(--d-on-accent))}
+.t-band > *{grid-column:1 / -1;min-width:0}
+.t-band > .t-text{grid-column:4 / -1}   /* words in a band hang off the text line, like everywhere else */
+@media (max-width:900px){.t-band{grid-template-columns:minmax(0,1fr)}.t-band > .t-text{grid-column:1 / -1}}
+.t-band .t-cap,.t-band .t-note{color:inherit}

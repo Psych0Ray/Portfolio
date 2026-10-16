@@ -301,3 +301,12 @@
 .p-uls .cs-label::before{display:none}
 /* the page's scrollbar and cursor in the deck's colours (hooks in lab.css) */
 :root{--sb-thumb:#fcd824;--sb-track:#151515;--sb-hover:#fff;--cur:#fcd824;--cur-edge:#151515;--cur-tag:#fcd824;--cur-tag-fg:#151515}
+
+/* pop: the numbers in yellow and big, the outcome's timeline in yellow, and the turn of the story
+   ("Introducing ULS") on a full yellow band */
+.p-uls .t-facts b{color:var(--d-accent);font-size:clamp(48px,6vw,92px);font-weight:900;letter-spacing:-.045em}
+.p-uls .t-rows dt{color:var(--d-accent)}
+.p-uls .t-band{--d-band:#fcd824;--d-on-band:#151515}
+.p-uls .t-band .t-media img{box-shadow:0 30px 60px -28px rgba(21,21,21,.55)}
+.p-uls .t-band .t-note.u-turn{color:#151515;font-size:clamp(28px,3.2vw,48px);line-height:1.12;font-weight:500;letter-spacing:-.03em;max-width:15ch}
+.p-uls .t-band .u-turn em{color:#151515;font-weight:900}

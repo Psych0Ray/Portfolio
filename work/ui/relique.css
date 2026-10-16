@@ -167,7 +167,7 @@
 }
 
 /* full case study: the deck's italic for the highlighted phrase, the story strip, and the seven signs */
-.p-relique.fcs .t-h em,.p-relique.fcs .t-lead em{font-style:italic;color:#c9b8a6}
+.p-relique .t-h em,.p-relique .t-lead em{font-style:italic;color:#c9b8a6}
 .p-relique .sb-f{margin:0}
 .p-relique .sb-f img{width:100%;height:auto;display:block;border-radius:var(--d-sr)}
 .p-relique .sb-f figcaption{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;margin-top:16px}

@@ -339,3 +339,77 @@
   } else window.addEventListener('resize', fitAll);
   window.FIT_STAGES = fitAll;
 })();
+
+/* ── POP · scroll moments inside the decks ────────────────────────────
+   Everything that follows the scroll is scrubbed to it, so it is always exactly where the
+   reader is; only the counting numbers run once, on arrival.
+   - big pictures rise and unmask as they come up the screen
+   - a .t-band wipes open from its middle; its contents rise into it
+   - facts count up to their value; a .t-drop's after number counts down from the before one
+   - Canva's bar charts grow from their baseline
+   - a request in a band (.cv-ask) types itself out as you scroll past it
+   Off under reduced motion, where everything is simply there. */
+(function pop() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var decks = document.querySelectorAll('.deck');
+  if (!decks.length) return;
+  var q = function (sel) { return [].slice.call(document.querySelectorAll(sel)); };
+
+  // pictures: the shadow sits outside the box, so the unmask ends well past the edges
+  q('.deck .t-inset > .t-media, .deck .t-sec > .t-media, .deck .t-feat > .t-media, .deck .t-pair > figure').forEach(function (el) {
+    if (el.closest('.t-band')) return;
+    gsap.fromTo(el, { y: 70, clipPath: 'inset(7% 5% 7% 5% round 20px)' },
+      { y: 0, clipPath: 'inset(-15% -15% -15% -15% round 0px)', ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 55%', scrub: .6 } });
+  });
+
+  // the band: opens from a strip in the middle to the full width, then its contents settle
+  q('.deck .t-band').forEach(function (band) {
+    gsap.fromTo(band, { clipPath: 'inset(0% 46% 0% 46%)' },
+      { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.out',
+        scrollTrigger: { trigger: band, start: 'top 92%', end: 'top 35%', scrub: .6 } });
+    gsap.fromTo(band.children, { y: 90, opacity: 0 },
+      { y: 0, opacity: 1, ease: 'power2.out',
+        scrollTrigger: { trigger: band, start: 'top 70%', end: 'top 25%', scrub: .6 } });
+  });
+
+  // numbers: "30 cr+", "60%", "950+", "2,467". Anything with more digits after (24/7) stays as is
+  function counter(b, from) {
+    var m = b.textContent.trim().match(/^([\d,]*\d)(\D*)$/);
+    if (!m) return;
+    var to = parseInt(m[1].replace(/,/g, ''), 10), suffix = m[2], commas = m[1].indexOf(',') > -1;
+    var fmt = function (n) { n = Math.round(n); return (commas ? n.toLocaleString('en-US') : String(n)) + suffix; };
+    var o = { v: from == null ? 0 : from };
+    b.style.fontVariantNumeric = 'tabular-nums';
+    b.textContent = fmt(o.v);
+    ScrollTrigger.create({ trigger: b, start: 'top 88%', once: true, onEnter: function () {
+      gsap.to(o, { v: to, duration: 1.6, ease: 'expo.out', onUpdate: function () { b.textContent = fmt(o.v); } });
+    } });
+  }
+  q('.deck .t-facts b').forEach(function (b) { counter(b); });
+  q('.deck .t-drop').forEach(function (drop) {
+    var bs = drop.querySelectorAll('b');
+    if (bs.length < 2) return;
+    var before = parseInt(bs[0].textContent.replace(/\D/g, ''), 10);
+    counter(bs[bs.length - 1], before);
+  });
+
+  // Canva's bars grow from the baseline, one after another
+  q('.deck .cv-bars').forEach(function (ol) {
+    gsap.fromTo(ol.querySelectorAll('i'), { scaleY: 0 }, { scaleY: 1, ease: 'power2.out', stagger: .12,
+      scrollTrigger: { trigger: ol, start: 'top 90%', end: 'top 45%', scrub: .6 } });
+  });
+
+  // the request types itself out: a transparent copy holds the box's size and is what is read aloud
+  q('.deck .t-band .cv-ask').forEach(function (box) {
+    var text = box.textContent;
+    box.innerHTML = '';
+    var ghost = document.createElement('span'); ghost.className = 'ghost'; ghost.textContent = text;
+    var typed = document.createElement('span'); typed.className = 'typed'; typed.setAttribute('aria-hidden', 'true');
+    box.appendChild(ghost); box.appendChild(typed);
+    var o = { n: 0 };
+    gsap.to(o, { n: text.length, ease: 'none', onUpdate: function () { typed.textContent = text.slice(0, Math.round(o.n)); },
+      scrollTrigger: { trigger: box, start: 'top 82%', end: 'bottom 40%', scrub: .4 } });
+  });
+})();
