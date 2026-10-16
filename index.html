@@ -46,7 +46,8 @@
 <style>
 /* ── HERO ── */
 .hero{position:relative;min-height:100svh;padding:140px 40px 40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.ransom{position:relative;z-index:4;display:flex;align-items:flex-end;margin-left:-10px}
+.ransom{position:relative;z-index:4;display:flex;align-items:flex-end;width:max-content;transform-origin:left top;--k:1.5;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
 /* padding and overlap in em, so the row keeps its proportions at every screen size */
 .ransom span{display:block;line-height:.74;padding:.042em .062em .072em;margin-right:-.077em;position:relative}
 /* each letter's cut */
@@ -60,39 +61,53 @@
 .L7{font-family:'Courier Prime',monospace;font-weight:700;background:var(--blue);color:var(--paper)}
 .L8{font-family:'Rubik Mono One',monospace;color:var(--ink);border:2px dashed var(--ink)}
 /* and where it sits in the name */
-.L1{font-size:clamp(56px,14.4vw,194px);transform:rotate(-4deg);z-index:3}
-.L2{font-size:clamp(60px,15.4vw,208px);transform:rotate(3deg) translateY(-16px);z-index:5}
-.L3{font-size:clamp(68px,17.2vw,234px);transform:rotate(-1.5deg);z-index:2}
-.L4{font-size:clamp(44px,11.2vw,150px);transform:rotate(5deg) translateY(10px);z-index:6}
-.L5{font-size:clamp(58px,14.8vw,200px);transform:rotate(-6deg) translateY(-8px);z-index:7}
-.L6{font-size:clamp(64px,16.2vw,220px);transform:rotate(2deg);z-index:3}
-.L7{font-size:clamp(46px,11.6vw,156px);transform:rotate(-3deg) translateY(12px);z-index:5}
-.L8{font-size:clamp(42px,10.6vw,142px);transform:rotate(4deg) translateY(-6px);z-index:2}
+.L1{font-size:194px;transform:rotate(-4deg);z-index:3}
+.L2{font-size:208px;transform:rotate(3deg) translateY(-16px);z-index:5}
+.L3{font-size:234px;transform:rotate(-1.5deg);z-index:2}
+.L4{font-size:150px;transform:rotate(5deg) translateY(10px);z-index:6}
+.L5{font-size:200px;transform:rotate(-6deg) translateY(-8px);z-index:7}
+.L6{font-size:220px;transform:rotate(2deg);z-index:3}
+.L7{font-size:156px;transform:rotate(-3deg) translateY(12px);z-index:5}
+.L8{font-size:142px;transform:rotate(4deg) translateY(-6px);z-index:2}
 
 .statement{position:relative;z-index:4;margin-top:clamp(44px,4.6vw,66px);display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
   font-family:var(--display);font-size:clamp(30px,5.4vw,74px);letter-spacing:-.045em;line-height:.9}
 .statement .a{font-weight:800}
 .statement .b{font-weight:800;text-transform:uppercase}
 .statement .c{font-weight:800;font-stretch:75%;letter-spacing:0;background:var(--blue);color:var(--paper);padding:2px 18px 8px;transform:rotate(-1.5deg);display:inline-block}
-/* what I do, in one sentence: reading size and the grey of body copy, so the name and the line above
-   it stay the loudest things here; where it is heading is set in ink, as the name is on About */
-.lede{position:relative;z-index:4;margin-top:clamp(24px,2.3vw,34px);max-width:42ch;font-family:var(--body);
-  font-size:clamp(17px,1.6vw,23px);line-height:1.5;color:var(--muted);text-wrap:pretty}
-.lede b{color:var(--ink);font-weight:600;white-space:nowrap}   /* never "AI-" at a line end */
+/* one short line in ink, quieter than the name and the statement but not grey filler */
+.lede{position:relative;z-index:4;margin-top:clamp(22px,2.2vw,32px);max-width:46ch;font-family:var(--label);font-weight:500;
+  font-size:clamp(18px,1.75vw,26px);line-height:1.35;letter-spacing:-.015em;color:var(--ink);text-wrap:balance}
+
+/* hovering a letter selects it the way Figma selects a layer, as the logo does: a frame turned with the
+   letter, four square handles, and a badge under it naming the cut and its size on screen (filled in by
+   select()). The lockup is scaled by --k, so every line and label here is divided by it to stay crisp. */
+.lsel{position:absolute;inset:calc(-6px / var(--k,1));border:calc(2px / var(--k,1)) solid var(--blue);pointer-events:none;
+  opacity:0;transform:scale(.94);transition:opacity .14s ease,transform .24s cubic-bezier(.16,1,.3,1);font-style:normal}
+.lsel b{position:absolute;width:calc(10px / var(--k,1));height:calc(10px / var(--k,1));background:var(--paper);
+  border:calc(2px / var(--k,1)) solid var(--blue);transform:translate(-50%,-50%) scale(0);transition:transform .2s cubic-bezier(.16,1,.3,1) .06s}
+.lsel b:nth-child(1){left:0;top:0}.lsel b:nth-child(2){left:100%;top:0}
+.lsel b:nth-child(3){left:0;top:100%}.lsel b:nth-child(4){left:100%;top:100%}
+.lsel em{position:absolute;left:50%;top:calc(100% + 12px / var(--k,1));transform:translateX(-50%);white-space:nowrap;
+  padding:calc(5px / var(--k,1)) calc(8px / var(--k,1));border-radius:calc(3px / var(--k,1));background:var(--blue);color:var(--paper);
+  font:600 calc(13px / var(--k,1))/1 var(--label);letter-spacing:.01em;font-style:normal;font-variant-numeric:tabular-nums}
+@media (hover:hover) and (pointer:fine){
+  .ransom span:hover{z-index:20}
+  .ransom span:hover .lsel{opacity:1;transform:none}
+  .ransom span:hover .lsel b{transform:translate(-50%,-50%) scale(1)}
+}
+@media (prefers-reduced-motion:reduce){.lsel,.lsel b{transition:none}}
 /* phones: the lockup is laid out at its full desktop size and then scaled as one block
    (fitName() in the script sets --k). Shrinking the type alone does not work: each letter's
    nudge, like translateY(-16px), is in pixels and would stay huge next to small letters. */
-.ransom-fit{position:relative;z-index:4}
+.ransom-fit{position:relative;z-index:4;height:calc((100vw - 80px) * 236 / 882)}
 @media (max-width:900px){
   .hero{min-height:100svh;padding:104px 16px 120px;justify-content:center}
   /* not clipped here: the j's tail paints below its own box, and the hero already clips.
      The --k and height below are a first-paint guess so the full size name never flashes;
      fitName() replaces them with measured values as soon as it runs. */
   .ransom-fit{overflow:visible;height:calc((100vw - 38px) * 196 / 882 + 20px)}
-  .ransom{width:max-content;margin-left:0;transform-origin:left top;--k:.98;
-    transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
-  .L1{font-size:194px}.L2{font-size:208px}.L3{font-size:234px}.L4{font-size:150px}
-  .L5{font-size:200px}.L6{font-size:220px}.L7{font-size:156px}.L8{font-size:142px}
+  .ransom{--k:.98}
   .statement{margin-top:26px;font-size:clamp(23px,7vw,34px);gap:6px 10px;line-height:.98}
   .statement .a{flex-basis:100%}
   .statement .c{padding:2px 12px 6px}
@@ -248,10 +263,7 @@
 @media (orientation:landscape) and (max-height:520px) and (pointer:coarse){
   .hero{min-height:100svh;padding:22px;justify-content:center}
   .ransom-fit{overflow:visible;height:52svh}
-  .ransom{width:max-content;margin-left:0;transform-origin:left top;--k:.62;
-    transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--k))}
-  .L1{font-size:194px}.L2{font-size:208px}.L3{font-size:234px}.L4{font-size:150px}
-  .L5{font-size:200px}.L6{font-size:220px}.L7{font-size:156px}.L8{font-size:142px}
+  .ransom{--k:.62}
   .statement{margin-top:16px;font-size:clamp(18px,6.4svh,28px);gap:6px 10px;line-height:.98}
   .statement .a{flex-basis:auto}
   .statement .c{padding:2px 12px 6px}
@@ -325,7 +337,7 @@ html.intro-on .intro{display:block}
     <span class="b">ALWAYS</span>
     <span class="c">BUILDING</span>
   </p>
-  <p class="lede">I design digital products by combining research, user-centric design and systems thinking, with a growing focus on <b>AI-powered experiences</b>.</p>
+  <p class="lede">Observing before assuming. Questioning before solving.</p>
 </header>
 
 <div class="marquee"><div data-words="UX design|Research|User-centric design|User testing|Wireframing|Prototyping|Storyboarding|Vibecoding"></div></div>
@@ -758,9 +770,7 @@ THUMBS.wire(document.getElementById('grid'));
   var spans = [].slice.call(name.querySelectorAll('span'));
   var flat = window.matchMedia('(orientation:landscape) and (max-height:520px) and (pointer:coarse)');
   function run(){
-    if (!window.matchMedia('(max-width:900px)').matches && !flat.matches) {
-      name.style.removeProperty('--k'); fit.style.height = ''; return;
-    }
+    var desk = !window.matchMedia('(max-width:900px)').matches && !flat.matches;
     /* measure the lockup's real visual box: drop the intro tween's inline transforms for a
        moment so only the letters' own tilts count, then put them straight back */
     var saved = spans.map(function(el){ return el.style.transform; });
@@ -778,7 +788,8 @@ THUMBS.wire(document.getElementById('grid'));
     var pad = 3, w = Rt - L, h = B - T, tail = h * .12;   /* room for the j's tail, which paints below its box */
     var burger = document.querySelector('.burger');
     var room = fit.clientWidth - pad * 2 - (flat.matches && burger && burger.offsetWidth ? 76 : 0);   /* on its side: clear of the round menu button */
-    var k = Math.min(1, room / w);   /* never past the desktop size it is set at */
+    /* phones: never past the design size. Desktop: as wide as the page, up to twice the design size */
+    var k = Math.min(desk ? 2 : 1, room / w);
     /* and short enough that everything under it (the line, the paragraph) still fits on the first
        screen. Measured against the hero's 100svh, which stays put while a phone's toolbars come
        and go, so the name never resizes mid-scroll. Tall phones are limited by width, not this. */
@@ -795,6 +806,22 @@ THUMBS.wire(document.getElementById('grid'));
   run();
   window.addEventListener('resize', run);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+})();
+
+(function select(){
+  var name = document.querySelector('.ransom');
+  if (!name) return;
+  [].slice.call(name.querySelectorAll('span')).forEach(function(el){
+    var sel = document.createElement('i');
+    sel.className = 'lsel'; sel.setAttribute('aria-hidden', 'true');
+    sel.innerHTML = '<b></b><b></b><b></b><b></b><em></em>';
+    el.appendChild(sel);
+    el.addEventListener('mouseenter', function(){
+      var cs = getComputedStyle(el), k = parseFloat(getComputedStyle(name).getPropertyValue('--k')) || 1;
+      var face = cs.fontFamily.split(',')[0].replace(/["']/g, '').trim();
+      sel.lastChild.textContent = face + ' \u00b7 ' + Math.round(parseFloat(cs.fontSize) * k) + 'px';
+    });
+  });
 })();
 
 (function ransom(){

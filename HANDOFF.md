@@ -1323,6 +1323,12 @@ Last updated: 2026-10-16
     - **ICCC / Relique:** keyword highlights on two/three headings each; ICCC's 152 in purple with the count-down.
     - Detector afterwards: new findings are false positives (band "cramped" despite clamp(72-128px) padding; "#8b3dff on #4f63dc" is the em measured against the clipped heading gradient). Not done from the critique (user said no cuts or out of scope): shortening ULS, de-duplicating Canva's poster, ICCC phone duo, Relique symbols section.
 
+128. **Home hero: the name fills the width, letters select like Figma layers, one ink line (2026-10-16).** [index.html](index.html) only.
+    - **Research done first** (Awwwards portfolio winners, ADPList's 2026 list, Studio Moross, Adham Dannaway, Framer sticker/physics kits). Ruled out because the user rejected them before: work footage in the hero (item 77), their photo, loose physics letters ("too much play"), slabs on the right, buttons. Offered: Poster, Anchored split (recommended), Design-tool layer. **The user chose Design-tool layer**, and "one short ink line" for the paragraph.
+    - **One lockup at every width.** The letters are always at their design sizes (194-234px) and `fitName()` now runs on desktop too, scaling the block with `--k` to the page width (up to 2x on desktop, never past 1x on phones) and capping it so the statement and the line fit in the first screen. Measured: k 1.49 at 1440x900 (name 42-1388px), 1.31 at 1280x720, 2 at 1920x1080; phones unchanged (0.64 at 390, 0.79 at 844x390). The phone media queries now only set their first-paint `--k`.
+    - **Figma selection on letters (`select()` + `.lsel`):** hovering a letter (mouse only) shows a blue frame turned with it, four square handles and a blue badge with its typeface and on-screen size ("Bebas Neue · 348px"), filled in on mouseenter. All line widths and the badge are divided by `--k` so they stay crisp at any scale. Same visual language as the logo's hover.
+    - **Paragraph replaced** by `.lede` = "Observing before assuming. Questioning before solving." (the user's own About copy, approved), Geist 500, ink, `clamp(18px,1.75vw,26px)`.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
