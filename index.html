@@ -160,67 +160,41 @@
 .more:hover .rbtn{background:var(--paper);color:var(--ink)}
 .more:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink);transition-duration:.06s}
 
-/* ── KIT · what I do, cross linked to what I use ──────────────────
-   At rest every skill and every tool is fully legible. Hovering or
-   focusing either side lights the ones that go together and fades the
-   rest, so the interaction says something rather than just decorating. */
-.kit{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.skills{list-style:none}
-.skills button{width:100%;text-align:left;background:none;border:0;position:relative;color:var(--ink);display:block;
-  padding:13px 18px;font-family:var(--display);font-weight:800;font-size:clamp(22px,2.7vw,40px);letter-spacing:-.035em;
-  line-height:1.05;text-transform:uppercase;transition:color .2s ease}
-.skills button::before{content:'';position:absolute;inset:0;background:var(--blue);transform:scaleX(0);
-  transform-origin:left center;transition:transform .3s cubic-bezier(.16,1,.3,1)}
-.skills button span{position:relative;display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
-.skills li.on button span{transform:translateX(12px)}
-.skills li.on button{color:var(--paper)}
-.skills li.on button::before{transform:scaleX(1)}
-
-/* desktop scroll mode (kit() adds .scrolly): the section pins, one blue bar glides down the
-   list with the scroll, and the screen carries a counter and a progress rule */
-.kit.scrolly .skills{position:relative}
-.kit.scrolly .skills::before{content:'';position:absolute;left:0;right:0;top:0;height:var(--bh,0);
-  transform:translateY(var(--by,0));background:var(--blue)}
-.kit.scrolly .skills button::before{display:none}
-.kit.scrolly .skills li{transition:opacity .3s ease}
-.kit.scrolly .skills li:not(.on){opacity:.5}
-.kit.scrolly .art{opacity:1;transition:none}
-.kit-count{position:absolute;top:16px;left:20px;z-index:1;font-family:var(--label);font-size:13px;font-weight:700;
-  letter-spacing:.07em;color:var(--muted);font-variant-numeric:tabular-nums}
-.kit-count span{display:inline-block;overflow:hidden;vertical-align:bottom}
-.kit-count b{display:inline-block;color:var(--ink)}
-.kit-prog{position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--blue);transform:scaleX(0);transform-origin:left center}
-
-/* the screen: line art that draws itself for whichever skill is active */
-.screen{position:relative;border:var(--bw) solid var(--ink);background:var(--paper);box-shadow:10px 10px 0 var(--ink);
-  aspect-ratio:4/3;overflow:hidden;
+/* ── WHAT I BRING · a reel of eight framed skills ──────────────────
+   Without JS, or under reduced motion, the frames sit in a grid, fully drawn. On desktop bring()
+   pins the section and pans the reel sideways with the scroll: each frame arrives empty, and its
+   illustration assembles piece by piece as it reaches the middle. Everything is scrubbed to the
+   scroll, so nothing runs on its own clock. Phones scrub the same assembly card by card. */
+.bring-track{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:44px 32px}
+.bp{display:flex;flex-direction:column}
+/* names sit on the frame's top edge, so frames in a row line up even when a name wraps */
+.bp h3{flex:1;display:flex;align-items:flex-end;font-family:var(--display);font-weight:800;font-size:clamp(22px,2.2vw,34px);
+  letter-spacing:-.035em;line-height:1;text-transform:uppercase;margin-bottom:16px;overflow:hidden;padding-bottom:2px}
+.bp h3 span{display:inline-block;padding:8px 14px 6px;transition:background .25s ease,color .25s ease}
+.bp.on h3 span{background:var(--blue);color:var(--paper)}
+.bp-screen{position:relative;aspect-ratio:4/3;padding:5%;overflow:hidden;border:var(--bw) solid var(--ink);
+  background:var(--paper);box-shadow:10px 10px 0 var(--ink);
   background-image:radial-gradient(var(--blue15) 1.5px,transparent 1.6px);background-size:14px 14px}
-.stage{position:absolute;inset:30px}
-.art{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .18s}
-.art.on{opacity:1}
-/* idle life once a piece has landed; pieces are popped in by kit() */
+.bp-screen .art{display:block;width:100%;height:100%;overflow:visible}
+/* idle life once a piece has landed */
 .art .bob{animation:k-bob 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 .art .blink{animation:k-blink 1.05s steps(1) infinite}
 @keyframes k-bob{50%{transform:translateY(-7px)}}
 @keyframes k-blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.art .bob,.art .blink{animation:none}}
-/* phones: one skill per card, stacked for swiping; each card plays its illustration as it
-   reaches the middle of the screen (kit() builds these from the desktop list and art) */
-.kit-m{display:none}
+/* the pinned reel: one screen tall, frames sized to fit it, the first and last centred */
+#bring.pan{--w:min(50vw,calc((100vh - 320px) * 4 / 3));--g:max(64px,8vw);
+  height:100vh;padding:64px 0 0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+#bring.pan .sechead{padding:0 40px;margin-bottom:clamp(24px,4.5vh,44px)}
+#bring.pan .bring-track{display:flex;gap:var(--g);width:max-content;padding:0 calc((100% - var(--w)) / 2);will-change:transform}
+#bring.pan .bp{flex:none;width:var(--w)}
+#bring.pan .bp h3{font-size:clamp(26px,3.1vw,48px)}
 @media (max-width:900px){
-  .kit{display:none}
-  .kit-m{display:flex;flex-direction:column;gap:26px}
-  .km{display:flex;flex-direction:column;
-    background:var(--paper);border:var(--bw) solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
-  .km header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;
-    background:var(--blue);color:var(--paper);border-bottom:var(--bw) solid var(--ink)}
-  .km h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,7.6vw,32px);letter-spacing:-.035em;line-height:.95;text-transform:uppercase}
-  .km small{flex:none;font-family:var(--label);font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--blue15)}
-  .km-screen{aspect-ratio:1/1;position:relative;overflow:hidden;
-    background-image:radial-gradient(var(--blue15) 1.5px,transparent 1.6px);background-size:14px 14px}
-  .km-screen .art{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);opacity:1}
+  .bring-track{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bp h3{font-size:clamp(26px,8vw,34px);margin-bottom:12px}
+  .bp-screen{padding:3%;box-shadow:6px 6px 0 var(--ink)}
 }
-@media (max-width:900px) and (hover:none){.km{scroll-snap-align:center}}
+@media (max-width:900px) and (hover:none){.bp{scroll-snap-align:center}}
 
 /* ── SOFTWARE · the horizontal row ── */
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
@@ -228,7 +202,6 @@
 .sw h3{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:30px;letter-spacing:-.03em;margin-bottom:10px;text-transform:uppercase}
 .sw span{font-size:13px;color:var(--blue40);line-height:1.6}
 @media (max-width:1100px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (prefers-reduced-motion:reduce){.skills button::before{transition:none}}
 
 /* ── QUOTE ── */
 .quote{padding:40px 40px 104px;display:block}
@@ -263,7 +236,6 @@
   .wc{height:calc(100svh - 140px);min-height:520px;max-height:760px;padding:18px 18px 20px}
   .more{flex-direction:column;align-items:flex-start;gap:24px;padding:28px}
   .more .grow{display:none}   /* stacked, the spacer only added a second gap above the arrow */
-  .kit{grid-template-columns:1fr;gap:36px}
   .tiles{gap:16px}
   .sw{padding:18px}
   .sw h3{font-size:22px;overflow-wrap:anywhere}
@@ -378,255 +350,275 @@ html.intro-on .intro{display:block}
   </a>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec" id="bring" style="padding-top:0">
   <div class="sechead"><h2>WHAT I <span class="hl">BRING</span></h2></div>
   <!-- shared halftone for the illustrations, the same dot disc the hobby posters use -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
     <pattern id="kdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.1" fill="#8EA2D6"/></pattern>
   </defs></svg>
-  <div class="kit" id="kit">
-    <ul class="skills">
-      <li><button type="button" data-art="product-design"><span>UI/UX design</span></button></li>
-      <li><button type="button" data-art="research"><span>Research</span></button></li>
-      <li><button type="button" data-art="user-centric-design"><span>User-centric design</span></button></li>
-      <li><button type="button" data-art="user-testing"><span>User testing</span></button></li>
-      <li><button type="button" data-art="wireframing"><span>Wireframing</span></button></li>
-      <li><button type="button" data-art="prototyping"><span>Prototyping</span></button></li>
-      <li><button type="button" data-art="storyboarding"><span>Storyboarding</span></button></li>
-      <li><button type="button" data-art="vibecoding"><span>Vibecoding</span></button></li>
-    </ul>
-    <div class="screen">
-      <div class="stage">
-        <!-- Each illustration: filled shapes, ink outline, blue / bone / paper, halftone disc behind.
-             Every top-level <g> is one piece; kit() pops them in one after another. -->
-        <svg class="art" data-art="product-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <rect x="52" y="46" width="232" height="178" rx="14" fill="#EDEFF6"/>
-            <path d="M52 86V60a14 14 0 0 1 14-14h204a14 14 0 0 1 14 14v26z" fill="#002FA7"/>
-            <circle cx="74" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="92" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="110" cy="66" r="5" fill="#EDEFF6" stroke="none"/>
-          </g>
-          <g>
-            <rect x="72" y="104" width="100" height="76" rx="8" fill="#D8DEEF"/>
-            <path d="M80 172l26-32 18 20 12-12 28 24z" fill="#002FA7" stroke-width="5"/>
-            <circle cx="150" cy="124" r="8" fill="#EDEFF6" stroke-width="5"/>
-          </g>
-          <g>
-            <path d="M190 112h72M190 132h52M190 152h64M72 204h96"/>
-            <rect x="190" y="168" width="66" height="24" rx="12" fill="#002FA7"/>
-          </g>
-          <g><g class="bob">
-            <g transform="rotate(7 314 170)">
-              <rect x="262" y="104" width="104" height="132" rx="12" fill="#D8DEEF"/>
-              <circle cx="290" cy="134" r="12" fill="#002FA7"/>
-              <path d="M314 128h36M314 142h24M280 170h68M280 188h52"/>
-              <rect x="280" y="206" width="42" height="20" rx="10" fill="#EDEFF6" stroke-width="5"/>
-              <circle cx="311" cy="216" r="6" fill="#002FA7" stroke="none"/>
+  <!-- Each illustration: filled shapes, ink outline, blue / bone / paper, halftone disc behind.
+       Every top-level <g> is one piece; bring() assembles them as the frame is scrolled into place. -->
+  <div class="bring">
+    <div class="bring-track">
+      <article class="bp">
+        <h3><span>UI/UX design</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="product-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <rect x="52" y="46" width="232" height="178" rx="14" fill="#EDEFF6"/>
+              <path d="M52 86V60a14 14 0 0 1 14-14h204a14 14 0 0 1 14 14v26z" fill="#002FA7"/>
+              <circle cx="74" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="92" cy="66" r="5" fill="#EDEFF6" stroke="none"/><circle cx="110" cy="66" r="5" fill="#EDEFF6" stroke="none"/>
             </g>
-          </g></g>
-          <g><path d="M222 178v62l15-14 12 27 14-6-12-27 21-2z" fill="#0A0A0A" stroke="#EDEFF6" stroke-width="4"/></g>
-        </svg>
-
-        <svg class="art" data-art="research" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <rect x="46" y="42" width="172" height="218" rx="12" fill="#EDEFF6"/>
-            <path d="M68 130h116" stroke="#8EA2D6" stroke-width="18" stroke-linecap="butt"/>
-            <path d="M70 82h116M70 106h96M70 130h108M70 154h72M70 178h92M70 202h58M70 226h84"/>
-          </g>
-          <g><g class="bob">
-            <path d="M228 208l42 42" stroke-width="20"/>
-            <path d="M228 208l42 42" stroke="#002FA7" stroke-width="8"/>
-            <circle cx="190" cy="170" r="56" fill="#002FA7"/>
-            <circle cx="190" cy="170" r="40" fill="#EDEFF6" stroke-width="5"/>
-            <path d="M170 160h40M170 180h26" stroke-width="7"/>
-            <path d="M166 146a28 28 0 0 1 16-10" stroke="#8EA2D6" stroke-width="6"/>
-          </g></g>
-          <g>
-            <path d="M272 42h86a12 12 0 0 1 12 12v34a12 12 0 0 1-12 12h-52l-18 16v-16h-16a12 12 0 0 1-12-12V54a12 12 0 0 1 12-12z" fill="#002FA7"/>
-            <circle cx="294" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="315" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="336" cy="71" r="5" fill="#EDEFF6" stroke="none"/>
-          </g>
-          <g>
-            <path d="M284 130h72a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12h-14v14l-16-14h-42a12 12 0 0 1-12-12v-26a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
-            <path d="M290 148h52M290 162h32" stroke-width="5"/>
-          </g>
-          <g>
-            <rect x="300" y="212" width="40" height="40" rx="3" fill="#002FA7" transform="rotate(-8 320 232)"/>
-            <rect x="346" y="218" width="40" height="40" rx="3" fill="#D8DEEF" transform="rotate(7 366 238)"/>
-          </g>
-        </svg>
-
-        <svg class="art" data-art="user-centric-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g><ellipse cx="200" cy="160" rx="160" ry="88" stroke="#002FA7" stroke-width="6" stroke-dasharray="1 16"/></g>
-          <g>
-            <path d="M128 264c0-46 30-74 72-74s72 28 72 74z" fill="#002FA7"/>
-            <circle cx="200" cy="130" r="42" fill="#D8DEEF"/>
-            <circle cx="185" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/><circle cx="215" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/>
-            <path d="M186 146q14 11 28 0" stroke-width="5"/>
-          </g>
-          <g><circle cx="40" cy="160" r="27" fill="#D8DEEF"/><path d="M40 174l-13-13a8.5 8.5 0 0 1 13-11 8.5 8.5 0 0 1 13 11z" fill="#002FA7" stroke-width="4"/></g>
-          <g><circle cx="97" cy="92" r="27" fill="#EDEFF6"/><path d="M97 76l5 10 11 1.5-8 7.5 2 11-10-5.5-10 5.5 2-11-8-7.5 11-1.5z" fill="#002FA7" stroke-width="4"/></g>
-          <g><circle cx="303" cy="92" r="27" fill="#D8DEEF"/><path d="M290 92l9 9 17-17" stroke="#002FA7" stroke-width="7"/></g>
-          <g><circle cx="360" cy="160" r="27" fill="#002FA7"/><path d="M348 150h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-12l-8 7v-7h-4a4 4 0 0 1-4-4v-12a4 4 0 0 1 4-4z" fill="#EDEFF6" stroke-width="4"/></g>
-        </svg>
-
-        <svg class="art" data-art="user-testing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <circle cx="72" cy="194" r="42" fill="#EDEFF6"/>
-            <rect x="63" y="140" width="18" height="12" rx="3" fill="#0A0A0A" stroke-width="4"/>
-            <path d="M72 162a32 32 0 0 1 30 22" stroke="#002FA7" stroke-width="9" stroke-linecap="butt"/>
-            <path d="M72 194v-22M72 194l14 10"/>
-          </g>
-          <g>
-            <rect x="130" y="30" width="122" height="240" rx="22" fill="#0A0A0A"/>
-            <path d="M180 42h22" stroke="#EDEFF6" stroke-width="4"/>
-            <rect x="142" y="54" width="98" height="196" rx="8" fill="#EDEFF6" stroke="none"/>
-            <rect x="152" y="66" width="78" height="14" rx="7" fill="#8EA2D6" stroke="none"/>
-            <rect x="152" y="92" width="78" height="52" rx="6" fill="#D8DEEF" stroke-width="4"/>
-            <path d="M154 160h60M154 176h42" stroke-width="5"/>
-            <rect x="152" y="206" width="78" height="26" rx="13" fill="#002FA7" stroke-width="4"/>
-          </g>
-          <g>
-            <circle cx="191" cy="219" r="34" stroke="#002FA7" stroke-width="5" opacity=".55"/>
-            <circle cx="191" cy="219" r="22" stroke="#002FA7" stroke-width="5"/>
-            <circle cx="191" cy="219" r="8" fill="#EDEFF6" stroke-width="4"/>
-          </g>
-          <g><g class="bob">
-            <rect x="274" y="68" width="100" height="156" rx="10" fill="#D8DEEF"/>
-            <rect x="302" y="56" width="44" height="22" rx="6" fill="#002FA7"/>
-            <rect x="288" y="98" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 108l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
-            <rect x="288" y="134" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 144l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
-            <rect x="288" y="170" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/>
-            <path d="M318 108h40M318 144h32M318 180h36" stroke-width="5"/>
-          </g></g>
-        </svg>
-
-        <svg class="art" data-art="wireframing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <rect x="40" y="32" width="270" height="236" rx="12" fill="#EDEFF6"/>
-            <rect x="60" y="50" width="230" height="22" rx="6" fill="#D8DEEF" stroke-width="5"/>
-          </g>
-          <g>
-            <rect x="60" y="88" width="132" height="88" rx="6" fill="#D8DEEF" stroke-width="5"/>
-            <path d="M70 96l112 72M182 96L70 168" stroke-width="4"/>
-          </g>
-          <g>
-            <path d="M208 98h66M208 118h52M208 138h60" stroke-width="5"/>
-            <rect x="208" y="152" width="62" height="24" rx="12" fill="#002FA7" stroke-width="5"/>
-          </g>
-          <g>
-            <rect x="60" y="192" width="68" height="56" rx="6" fill="#002FA7" stroke-width="5"/>
-            <rect x="140" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
-            <rect x="220" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
-            <circle cx="174" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
-            <circle cx="254" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
-          </g>
-          <g><g class="bob">
-            <g transform="rotate(35 330 150)">
-              <rect x="314" y="62" width="32" height="22" rx="7" fill="#8EA2D6"/>
-              <rect x="314" y="82" width="32" height="14" fill="#D8DEEF" stroke-width="5"/>
-              <rect x="314" y="94" width="32" height="118" fill="#002FA7"/>
-              <path d="M314 212h32l-16 34z" fill="#D8DEEF"/>
-              <path d="M324 234l6 12 6-12z" fill="#0A0A0A" stroke-width="4"/>
+            <g>
+              <rect x="72" y="104" width="100" height="76" rx="8" fill="#D8DEEF"/>
+              <path d="M80 172l26-32 18 20 12-12 28 24z" fill="#002FA7" stroke-width="5"/>
+              <circle cx="150" cy="124" r="8" fill="#EDEFF6" stroke-width="5"/>
             </g>
-          </g></g>
-        </svg>
-
-        <svg class="art" data-art="prototyping" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <rect x="32" y="70" width="94" height="164" rx="14" fill="#EDEFF6"/>
-            <rect x="46" y="90" width="66" height="44" rx="6" fill="#D8DEEF" stroke-width="4"/>
-            <path d="M48 150h52M48 166h38" stroke-width="5"/>
-            <rect x="46" y="198" width="66" height="20" rx="10" fill="#002FA7" stroke-width="4"/>
-          </g>
-          <g><path d="M130 152h18M140 142l10 10-10 10" stroke-width="6"/></g>
-          <g><g class="bob">
-            <rect x="154" y="48" width="94" height="186" rx="14" fill="#002FA7"/>
-            <rect x="168" y="70" width="66" height="66" rx="8" fill="#EDEFF6" stroke-width="4"/>
-            <path d="M180 116l14-16 10 10 8-8 12 14" stroke="#002FA7" stroke-width="5"/>
-            <path d="M170 156h56M170 172h40" stroke="#EDEFF6" stroke-width="5"/>
-            <rect x="168" y="198" width="66" height="20" rx="10" fill="#D8DEEF" stroke-width="4"/>
-          </g></g>
-          <g><path d="M252 152h18M262 142l10 10-10 10" stroke-width="6"/></g>
-          <g>
-            <rect x="274" y="70" width="94" height="164" rx="14" fill="#D8DEEF"/>
-            <circle cx="321" cy="120" r="24" fill="#EDEFF6" stroke-width="5"/>
-            <path d="M310 120l8 8 14-15" stroke="#002FA7" stroke-width="6"/>
-            <path d="M292 168h58M300 184h42" stroke-width="5"/>
-          </g>
-          <g><path d="M321 244C321 292 79 292 79 262" stroke="#002FA7" stroke-width="5" stroke-dasharray="1 12"/><path d="M79 244l-11 16h22z" fill="#002FA7" stroke="#002FA7" stroke-width="4"/></g>
-        </svg>
-
-        <svg class="art" data-art="storyboarding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g><rect x="28" y="48" width="344" height="184" rx="12" fill="#D8DEEF"/></g>
-          <g>
-            <rect x="46" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
-            <circle cx="95" cy="98" r="13" fill="#002FA7" stroke-width="4"/>
-            <path d="M95 111v22M80 122h30M95 133l-10 16M95 133l10 16" stroke-width="5"/>
-          </g>
-          <g>
-            <rect x="152" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
-            <rect x="186" y="82" width="32" height="62" rx="6" fill="#0A0A0A" stroke-width="4"/>
-            <rect x="191" y="90" width="22" height="42" rx="2" fill="#002FA7" stroke="none"/>
-            <path d="M172 98l-8-4M170 114h-9M172 130l-8 4" stroke="#002FA7" stroke-width="4"/>
-          </g>
-          <g>
-            <rect x="258" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
-            <circle cx="307" cy="114" r="28" fill="#002FA7" stroke-width="5"/>
-            <circle cx="297" cy="108" r="4" fill="#EDEFF6" stroke="none"/><circle cx="317" cy="108" r="4" fill="#EDEFF6" stroke="none"/>
-            <path d="M295 122q12 11 24 0" stroke="#EDEFF6" stroke-width="5"/>
-          </g>
-          <g><path d="M50 184h66M156 184h58M262 184h70M50 206h40M156 206h34M262 206h46" stroke-width="5"/></g>
-          <g><g class="bob">
-            <g transform="rotate(-8 332 252)">
-              <rect x="292" y="238" width="82" height="50" rx="4" fill="#0A0A0A"/>
-              <path d="M292 220h82v16h-82z" fill="#EDEFF6"/>
-              <path d="M306 220l-8 16M326 220l-8 16M346 220l-8 16M366 220l-8 16" stroke="#002FA7" stroke-width="5"/>
-              <path d="M304 258h40M304 272h26" stroke="#EDEFF6" stroke-width="4"/>
+            <g>
+              <path d="M190 112h72M190 132h52M190 152h64M72 204h96"/>
+              <rect x="190" y="168" width="66" height="24" rx="12" fill="#002FA7"/>
             </g>
-          </g></g>
-        </svg>
-
-        <svg class="art" data-art="vibecoding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
-             stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
-          <g>
-            <rect x="36" y="46" width="252" height="196" rx="14" fill="#0A0A0A"/>
-            <circle cx="60" cy="68" r="5.5" fill="#EDEFF6" stroke="none"/><circle cx="78" cy="68" r="5.5" fill="#D8DEEF" stroke="none"/><circle cx="96" cy="68" r="5.5" fill="#8EA2D6" stroke="none"/>
-          </g>
-          <g stroke-width="8">
-            <path d="M62 102h36" stroke="#8EA2D6"/><path d="M110 102h60" stroke="#EDEFF6"/>
-            <path d="M80 126h70" stroke="#D8DEEF"/><path d="M162 126h42" stroke="#8EA2D6"/>
-            <path d="M80 150h34" stroke="#EDEFF6"/><path d="M126 150h84" stroke="#476BBF"/>
-            <path d="M98 174h58" stroke="#D8DEEF"/><path d="M62 198h26" stroke="#8EA2D6"/>
-            <rect class="blink" x="96" y="189" width="12" height="18" fill="#EDEFF6" stroke="none"/>
-          </g>
-          <g>
-            <path d="M246 122h112a12 12 0 0 1 12 12v50a12 12 0 0 1-12 12h-70l-20 18v-18h-22a12 12 0 0 1-12-12v-50a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
-            <path d="M272 146l-12 13 12 13M334 146l12 13-12 13M314 142l-20 34" stroke="#002FA7" stroke-width="6"/>
-          </g>
-          <g><g class="bob">
-            <path d="M330 38q4 20 24 24q-20 4-24 24q-4-20-24-24q20-4 24-24z" fill="#002FA7" stroke-width="5"/>
-            <path d="M372 92q2 11 12 13q-10 2-12 13q-2-11-12-13q10-2 12-13z" fill="#EDEFF6" stroke-width="4"/>
-          </g></g>
-          <g><path d="M322 228q3 13 15 15q-12 2-15 15q-3-13-15-15q12-2 15-15z" fill="#8EA2D6" stroke-width="4"/></g>
-        </svg>
-      </div>
+            <g><g class="bob">
+              <g transform="rotate(7 314 170)">
+                <rect x="262" y="104" width="104" height="132" rx="12" fill="#D8DEEF"/>
+                <circle cx="290" cy="134" r="12" fill="#002FA7"/>
+                <path d="M314 128h36M314 142h24M280 170h68M280 188h52"/>
+                <rect x="280" y="206" width="42" height="20" rx="10" fill="#EDEFF6" stroke-width="5"/>
+                <circle cx="311" cy="216" r="6" fill="#002FA7" stroke="none"/>
+              </g>
+            </g></g>
+            <g><path d="M222 178v62l15-14 12 27 14-6-12-27 21-2z" fill="#0A0A0A" stroke="#EDEFF6" stroke-width="4"/></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>Research</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="research" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <rect x="46" y="42" width="172" height="218" rx="12" fill="#EDEFF6"/>
+              <path d="M68 130h116" stroke="#8EA2D6" stroke-width="18" stroke-linecap="butt"/>
+              <path d="M70 82h116M70 106h96M70 130h108M70 154h72M70 178h92M70 202h58M70 226h84"/>
+            </g>
+            <g><g class="bob">
+              <path d="M228 208l42 42" stroke-width="20"/>
+              <path d="M228 208l42 42" stroke="#002FA7" stroke-width="8"/>
+              <circle cx="190" cy="170" r="56" fill="#002FA7"/>
+              <circle cx="190" cy="170" r="40" fill="#EDEFF6" stroke-width="5"/>
+              <path d="M170 160h40M170 180h26" stroke-width="7"/>
+              <path d="M166 146a28 28 0 0 1 16-10" stroke="#8EA2D6" stroke-width="6"/>
+            </g></g>
+            <g>
+              <path d="M272 42h86a12 12 0 0 1 12 12v34a12 12 0 0 1-12 12h-52l-18 16v-16h-16a12 12 0 0 1-12-12V54a12 12 0 0 1 12-12z" fill="#002FA7"/>
+              <circle cx="294" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="315" cy="71" r="5" fill="#EDEFF6" stroke="none"/><circle cx="336" cy="71" r="5" fill="#EDEFF6" stroke="none"/>
+            </g>
+            <g>
+              <path d="M284 130h72a12 12 0 0 1 12 12v26a12 12 0 0 1-12 12h-14v14l-16-14h-42a12 12 0 0 1-12-12v-26a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
+              <path d="M290 148h52M290 162h32" stroke-width="5"/>
+            </g>
+            <g>
+              <rect x="300" y="212" width="40" height="40" rx="3" fill="#002FA7" transform="rotate(-8 320 232)"/>
+              <rect x="346" y="218" width="40" height="40" rx="3" fill="#D8DEEF" transform="rotate(7 366 238)"/>
+            </g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>User-centric design</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="user-centric-design" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g><ellipse cx="200" cy="160" rx="160" ry="88" stroke="#002FA7" stroke-width="6" stroke-dasharray="1 16"/></g>
+            <g>
+              <path d="M128 264c0-46 30-74 72-74s72 28 72 74z" fill="#002FA7"/>
+              <circle cx="200" cy="130" r="42" fill="#D8DEEF"/>
+              <circle cx="185" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/><circle cx="215" cy="126" r="4.5" fill="#0A0A0A" stroke="none"/>
+              <path d="M186 146q14 11 28 0" stroke-width="5"/>
+            </g>
+            <g><circle cx="40" cy="160" r="27" fill="#D8DEEF"/><path d="M40 174l-13-13a8.5 8.5 0 0 1 13-11 8.5 8.5 0 0 1 13 11z" fill="#002FA7" stroke-width="4"/></g>
+            <g><circle cx="97" cy="92" r="27" fill="#EDEFF6"/><path d="M97 76l5 10 11 1.5-8 7.5 2 11-10-5.5-10 5.5 2-11-8-7.5 11-1.5z" fill="#002FA7" stroke-width="4"/></g>
+            <g><circle cx="303" cy="92" r="27" fill="#D8DEEF"/><path d="M290 92l9 9 17-17" stroke="#002FA7" stroke-width="7"/></g>
+            <g><circle cx="360" cy="160" r="27" fill="#002FA7"/><path d="M348 150h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-12l-8 7v-7h-4a4 4 0 0 1-4-4v-12a4 4 0 0 1 4-4z" fill="#EDEFF6" stroke-width="4"/></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>User testing</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="user-testing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <circle cx="72" cy="194" r="42" fill="#EDEFF6"/>
+              <rect x="63" y="140" width="18" height="12" rx="3" fill="#0A0A0A" stroke-width="4"/>
+              <path d="M72 162a32 32 0 0 1 30 22" stroke="#002FA7" stroke-width="9" stroke-linecap="butt"/>
+              <path d="M72 194v-22M72 194l14 10"/>
+            </g>
+            <g>
+              <rect x="130" y="30" width="122" height="240" rx="22" fill="#0A0A0A"/>
+              <path d="M180 42h22" stroke="#EDEFF6" stroke-width="4"/>
+              <rect x="142" y="54" width="98" height="196" rx="8" fill="#EDEFF6" stroke="none"/>
+              <rect x="152" y="66" width="78" height="14" rx="7" fill="#8EA2D6" stroke="none"/>
+              <rect x="152" y="92" width="78" height="52" rx="6" fill="#D8DEEF" stroke-width="4"/>
+              <path d="M154 160h60M154 176h42" stroke-width="5"/>
+              <rect x="152" y="206" width="78" height="26" rx="13" fill="#002FA7" stroke-width="4"/>
+            </g>
+            <g>
+              <circle cx="191" cy="219" r="34" stroke="#002FA7" stroke-width="5" opacity=".55"/>
+              <circle cx="191" cy="219" r="22" stroke="#002FA7" stroke-width="5"/>
+              <circle cx="191" cy="219" r="8" fill="#EDEFF6" stroke-width="4"/>
+            </g>
+            <g><g class="bob">
+              <rect x="274" y="68" width="100" height="156" rx="10" fill="#D8DEEF"/>
+              <rect x="302" y="56" width="44" height="22" rx="6" fill="#002FA7"/>
+              <rect x="288" y="98" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 108l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
+              <rect x="288" y="134" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/><path d="M292 144l5 5 10-11" stroke="#002FA7" stroke-width="5"/>
+              <rect x="288" y="170" width="20" height="20" rx="3" fill="#EDEFF6" stroke-width="4"/>
+              <path d="M318 108h40M318 144h32M318 180h36" stroke-width="5"/>
+            </g></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>Wireframing</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="wireframing" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <rect x="40" y="32" width="270" height="236" rx="12" fill="#EDEFF6"/>
+              <rect x="60" y="50" width="230" height="22" rx="6" fill="#D8DEEF" stroke-width="5"/>
+            </g>
+            <g>
+              <rect x="60" y="88" width="132" height="88" rx="6" fill="#D8DEEF" stroke-width="5"/>
+              <path d="M70 96l112 72M182 96L70 168" stroke-width="4"/>
+            </g>
+            <g>
+              <path d="M208 98h66M208 118h52M208 138h60" stroke-width="5"/>
+              <rect x="208" y="152" width="62" height="24" rx="12" fill="#002FA7" stroke-width="5"/>
+            </g>
+            <g>
+              <rect x="60" y="192" width="68" height="56" rx="6" fill="#002FA7" stroke-width="5"/>
+              <rect x="140" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
+              <rect x="220" y="192" width="68" height="56" rx="6" fill="#D8DEEF" stroke-width="5"/>
+              <circle cx="174" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
+              <circle cx="254" cy="220" r="10" fill="#EDEFF6" stroke-width="4"/>
+            </g>
+            <g><g class="bob">
+              <g transform="rotate(35 330 150)">
+                <rect x="314" y="62" width="32" height="22" rx="7" fill="#8EA2D6"/>
+                <rect x="314" y="82" width="32" height="14" fill="#D8DEEF" stroke-width="5"/>
+                <rect x="314" y="94" width="32" height="118" fill="#002FA7"/>
+                <path d="M314 212h32l-16 34z" fill="#D8DEEF"/>
+                <path d="M324 234l6 12 6-12z" fill="#0A0A0A" stroke-width="4"/>
+              </g>
+            </g></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>Prototyping</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="prototyping" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <rect x="32" y="70" width="94" height="164" rx="14" fill="#EDEFF6"/>
+              <rect x="46" y="90" width="66" height="44" rx="6" fill="#D8DEEF" stroke-width="4"/>
+              <path d="M48 150h52M48 166h38" stroke-width="5"/>
+              <rect x="46" y="198" width="66" height="20" rx="10" fill="#002FA7" stroke-width="4"/>
+            </g>
+            <g><path d="M130 152h18M140 142l10 10-10 10" stroke-width="6"/></g>
+            <g><g class="bob">
+              <rect x="154" y="48" width="94" height="186" rx="14" fill="#002FA7"/>
+              <rect x="168" y="70" width="66" height="66" rx="8" fill="#EDEFF6" stroke-width="4"/>
+              <path d="M180 116l14-16 10 10 8-8 12 14" stroke="#002FA7" stroke-width="5"/>
+              <path d="M170 156h56M170 172h40" stroke="#EDEFF6" stroke-width="5"/>
+              <rect x="168" y="198" width="66" height="20" rx="10" fill="#D8DEEF" stroke-width="4"/>
+            </g></g>
+            <g><path d="M252 152h18M262 142l10 10-10 10" stroke-width="6"/></g>
+            <g>
+              <rect x="274" y="70" width="94" height="164" rx="14" fill="#D8DEEF"/>
+              <circle cx="321" cy="120" r="24" fill="#EDEFF6" stroke-width="5"/>
+              <path d="M310 120l8 8 14-15" stroke="#002FA7" stroke-width="6"/>
+              <path d="M292 168h58M300 184h42" stroke-width="5"/>
+            </g>
+            <g><path d="M321 244C321 292 79 292 79 262" stroke="#002FA7" stroke-width="5" stroke-dasharray="1 12"/><path d="M79 244l-11 16h22z" fill="#002FA7" stroke="#002FA7" stroke-width="4"/></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>Storyboarding</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="storyboarding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g><rect x="28" y="48" width="344" height="184" rx="12" fill="#D8DEEF"/></g>
+            <g>
+              <rect x="46" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
+              <circle cx="95" cy="98" r="13" fill="#002FA7" stroke-width="4"/>
+              <path d="M95 111v22M80 122h30M95 133l-10 16M95 133l10 16" stroke-width="5"/>
+            </g>
+            <g>
+              <rect x="152" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
+              <rect x="186" y="82" width="32" height="62" rx="6" fill="#0A0A0A" stroke-width="4"/>
+              <rect x="191" y="90" width="22" height="42" rx="2" fill="#002FA7" stroke="none"/>
+              <path d="M172 98l-8-4M170 114h-9M172 130l-8 4" stroke="#002FA7" stroke-width="4"/>
+            </g>
+            <g>
+              <rect x="258" y="68" width="98" height="92" rx="6" fill="#EDEFF6" stroke-width="5"/>
+              <circle cx="307" cy="114" r="28" fill="#002FA7" stroke-width="5"/>
+              <circle cx="297" cy="108" r="4" fill="#EDEFF6" stroke="none"/><circle cx="317" cy="108" r="4" fill="#EDEFF6" stroke="none"/>
+              <path d="M295 122q12 11 24 0" stroke="#EDEFF6" stroke-width="5"/>
+            </g>
+            <g><path d="M50 184h66M156 184h58M262 184h70M50 206h40M156 206h34M262 206h46" stroke-width="5"/></g>
+            <g><g class="bob">
+              <g transform="rotate(-8 332 252)">
+                <rect x="292" y="238" width="82" height="50" rx="4" fill="#0A0A0A"/>
+                <path d="M292 220h82v16h-82z" fill="#EDEFF6"/>
+                <path d="M306 220l-8 16M326 220l-8 16M346 220l-8 16M366 220l-8 16" stroke="#002FA7" stroke-width="5"/>
+                <path d="M304 258h40M304 272h26" stroke="#EDEFF6" stroke-width="4"/>
+              </g>
+            </g></g>
+          </svg>
+        </div>
+      </article>
+      <article class="bp">
+        <h3><span>Vibecoding</span></h3>
+        <div class="bp-screen">
+          <svg class="art" data-art="vibecoding" viewBox="0 0 400 300" fill="none" stroke="#0A0A0A"
+               stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g><circle cx="200" cy="152" r="130" fill="url(#kdots)" stroke="none"/></g>
+            <g>
+              <rect x="36" y="46" width="252" height="196" rx="14" fill="#0A0A0A"/>
+              <circle cx="60" cy="68" r="5.5" fill="#EDEFF6" stroke="none"/><circle cx="78" cy="68" r="5.5" fill="#D8DEEF" stroke="none"/><circle cx="96" cy="68" r="5.5" fill="#8EA2D6" stroke="none"/>
+            </g>
+            <g stroke-width="8">
+              <path d="M62 102h36" stroke="#8EA2D6"/><path d="M110 102h60" stroke="#EDEFF6"/>
+              <path d="M80 126h70" stroke="#D8DEEF"/><path d="M162 126h42" stroke="#8EA2D6"/>
+              <path d="M80 150h34" stroke="#EDEFF6"/><path d="M126 150h84" stroke="#476BBF"/>
+              <path d="M98 174h58" stroke="#D8DEEF"/><path d="M62 198h26" stroke="#8EA2D6"/>
+              <rect class="blink" x="96" y="189" width="12" height="18" fill="#EDEFF6" stroke="none"/>
+            </g>
+            <g>
+              <path d="M246 122h112a12 12 0 0 1 12 12v50a12 12 0 0 1-12 12h-70l-20 18v-18h-22a12 12 0 0 1-12-12v-50a12 12 0 0 1 12-12z" fill="#D8DEEF"/>
+              <path d="M272 146l-12 13 12 13M334 146l12 13-12 13M314 142l-20 34" stroke="#002FA7" stroke-width="6"/>
+            </g>
+            <g><g class="bob">
+              <path d="M330 38q4 20 24 24q-20 4-24 24q-4-20-24-24q20-4 24-24z" fill="#002FA7" stroke-width="5"/>
+              <path d="M372 92q2 11 12 13q-10 2-12 13q-2-11-12-13q10-2 12-13z" fill="#EDEFF6" stroke-width="4"/>
+            </g></g>
+            <g><path d="M322 228q3 13 15 15q-12 2-15 15q-3-13-15-15q12-2 15-15z" fill="#8EA2D6" stroke-width="4"/></g>
+          </svg>
+        </div>
+      </article>
     </div>
   </div>
-  <div class="kit-m" id="kitM"></div>
 </section>
 
 <section class="sec" style="padding-top:0">
@@ -693,169 +685,68 @@ THUMBS.wire(document.getElementById('grid'));
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="lab.js"></script>
 <script>
-/* What I Bring. On desktop the section pins and the scroll walks the list: one blue bar glides
-   from skill to skill and each illustration pops in on the screen as the last one flies out.
-   Clicking or tabbing to a skill scrolls to it. Phones get one card per skill, and reduced
-   motion keeps the hover version. Each illustration is built from top-level <g> pieces
-   (halftone disc first), which pop in one after another. */
-(function kit(){
-  var kit = document.getElementById('kit');
-  if (!kit) return;
-  var sec    = kit.closest('section');
-  var list   = kit.querySelector('.skills');
-  var screen = kit.querySelector('.screen');
-  var rows   = [].slice.call(kit.querySelectorAll('.skills li'));
-  var arts   = [].slice.call(kit.querySelectorAll('.art'));
-  var current = -1, scrolly = false, armed = false, st = null, stepAt = [], count = null;
+/* What I Bring. Desktop: the section pins and the reel of frames pans sideways with the scroll.
+   Each frame arrives empty; as it travels to the middle its halftone disc grows, its pieces fly
+   in from where they trail behind it, and its name rises. The frame in the middle carries the
+   blue name, and the ones it has passed recede. Phones: the same assembly, card by card, as
+   each card scrolls up. Every tween here is scrubbed, so the drawing is always exactly where
+   the scroll is; nothing plays on a timer. Reduced motion leaves the grid as it is. */
+(function bring(){
+  var sec = document.getElementById('bring');
+  if (!sec || REDUCED || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var track  = sec.querySelector('.bring-track');
+  var frames = [].slice.call(sec.querySelectorAll('.bp'));
 
-  arts.forEach(function(svg){
-    svg.parts = [].slice.call(svg.children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
-  });
-  function artFor(i){ return kit.querySelector('.art[data-art="' + rows[i].querySelector('button').getAttribute('data-art') + '"]'); }
+  function rnd(n){ var x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); }   // fixed scatter, same every visit
 
-  function pop(svg, delay){
-    if (REDUCED) return;
-    delay = delay || 0;
-    gsap.fromTo(svg.parts[0], { scale:.4, opacity:0, y:0, rotation:0, transformOrigin:'50% 50%' },
-      { scale:1, opacity:1, duration:.6, ease:'power3.out', delay:delay, overwrite:true });
-    gsap.fromTo(svg.parts.slice(1),
-      { scale:0, opacity:0, rotation:function(i){ return i % 2 ? 14 : -14; }, y:14, transformOrigin:'50% 50%' },
-      { scale:1, opacity:1, rotation:0, y:0, duration:.55, ease:'back.out(1.9)', stagger:.075, delay:delay + .08, overwrite:true });
-  }
-  function unpop(svg){
-    if (REDUCED) return;
-    gsap.killTweensOf(svg.parts);
-    gsap.set(svg.parts, { scale:0, opacity:0, transformOrigin:'50% 50%' });
-  }
-  /* the outgoing illustration scatters away while the next one pops in */
-  function fly(svg, dir){
-    if (REDUCED) return;
-    gsap.to(svg.parts, { scale:.5, opacity:0, y:-26 * dir, rotation:function(i){ return i % 2 ? -18 : 18; },
-      duration:.28, ease:'power2.in', stagger:.025, overwrite:true });
-  }
-
-  /* phones: one card per skill, built from the list and the art, played on arrival */
-  var km = document.getElementById('kitM');
-  if (km) {
-    var cards = rows.map(function(li, i){
-      var b = li.querySelector('button'), key = b.getAttribute('data-art');
-      var art = kit.querySelector('.art[data-art="' + key + '"]');
-      var card = document.createElement('article');
-      card.className = 'km';
-      card.innerHTML = '<header><h3>' + b.textContent.trim() + '</h3><small>0' + (i + 1) + ' / 0' + rows.length + '</small></header><div class="km-screen"></div>';
-      var svg = art.cloneNode(true);
-      svg.classList.add('on');
-      svg.setAttribute('viewBox', '24 16 352 272');   /* crop the empty margin so the art reads bigger on a phone */
-      svg.parts = [].slice.call(svg.children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
-      card.querySelector('.km-screen').appendChild(svg);
-      km.appendChild(card);
-      card._svg = svg; unpop(svg);
-      return card;
+  /* one frame's assembly. `from` is where the pieces start: trailing to the right when the reel
+     pans (they catch up with the frame), below when a card scrolls up on a phone */
+  function assembly(frame, i, from){
+    var parts = [].slice.call(frame.querySelector('svg').children).filter(function(el){ return el.tagName.toLowerCase() === 'g'; });
+    var tl = gsap.timeline();
+    tl.fromTo(parts[0], { scale:0, opacity:0, transformOrigin:'50% 50%' },
+      { scale:1, opacity:1, duration:.7, ease:'power2.out' }, 0);
+    parts.slice(1).forEach(function(g, j){
+      var k = i * 31 + j * 7, side = from === 'right';
+      tl.fromTo(g, {
+        x: side ? 140 + rnd(k) * 200 : (rnd(k) - .5) * 220,
+        y: side ? (rnd(k + 1) - .5) * 240 : 110 + rnd(k + 1) * 150,
+        rotation:(rnd(k + 2) - .5) * 90, scale:.3 + rnd(k + 3) * .3, opacity:0, transformOrigin:'50% 50%'
+      }, { x:0, y:0, rotation:0, scale:1, opacity:1, duration:.6, ease:'power3.out' }, .12 + j * .1);
     });
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if (e.isIntersecting) pop(e.target._svg); else unpop(e.target._svg); });
-      }, { rootMargin:'-35% 0px -35% 0px' });
-      cards.forEach(function(c){ io.observe(c); });
-    } else cards.forEach(function(c){ pop(c._svg); });
+    tl.fromTo(frame.querySelector('h3 span'), { yPercent:110 }, { yPercent:0, duration:.45, ease:'power3.out' }, .1);
+    return tl;
   }
 
-  function show(i){
-    if (i === current) return;
-    var prev = current;
-    current = i;
-    rows.forEach(function(r, j){ r.classList.toggle('on', j === i); });
-    if (scrolly) {
-      var dir = i > prev ? 1 : -1;
-      if (prev > -1) fly(artFor(prev), dir);
-      pop(artFor(i), prev > -1 ? .14 : 0);
-      var b = count.querySelector('b');
-      b.textContent = (i < 9 ? '0' : '') + (i + 1);
-      gsap.fromTo(b, { yPercent:100 * dir, opacity:0 }, { yPercent:0, opacity:1, duration:.4, ease:'power3.out', overwrite:true });
-    } else {
-      arts.forEach(function(svg){
-        var on = svg === artFor(i);
-        svg.classList.toggle('on', on);
-        if (on) pop(svg);
-      });
-    }
-  }
-  function stepTo(i){
-    if (st) glideTo(Math.round(st.start + (st.end - st.start) * stepAt[i]));
-  }
+  var mm = gsap.matchMedia();
 
-  rows.forEach(function(li, i){
-    var b = li.querySelector('button');
-    b.addEventListener('mouseenter', function(){ if (!scrolly) show(i); });
-    b.addEventListener('focus', function(){ if (scrolly) stepTo(i); else show(i); });
-    b.addEventListener('click', function(){ if (scrolly) stepTo(i); else show(i); });
-  });
-
-  if (typeof ScrollTrigger === 'undefined') { show(0); return; }
-
-  /* desktop scroll mode: the bar's position is a continuous index, eased between stops
-     and held at each one, so every skill gets a beat before the next arrives */
-  if (!REDUCED) gsap.matchMedia().add('(min-width: 901px)', function(){
-    var n = rows.length, p = { pos:0 }, tops = [], hs = [], HOLD = .7, i;
-    scrolly = true; current = -1;
-    kit.classList.add('scrolly');
-    arts.forEach(unpop);
-    count = document.createElement('p');
-    count.className = 'kit-count';
-    count.setAttribute('aria-hidden', 'true');
-    count.innerHTML = '<span><b>01</b></span> / 0' + n;
-    var prog = document.createElement('i');
-    prog.className = 'kit-prog';
-    screen.appendChild(count);
-    screen.appendChild(prog);
-
-    function measure(){
-      tops = rows.map(function(r){ return r.offsetTop; });
-      hs   = rows.map(function(r){ return r.offsetHeight; });
-    }
-    function paint(){
-      var a = Math.floor(p.pos), b = Math.min(a + 1, n - 1), f = p.pos - a;
-      list.style.setProperty('--by', (tops[a] + (tops[b] - tops[a]) * f) + 'px');
-      list.style.setProperty('--bh', (hs[a] + (hs[b] - hs[a]) * f) + 'px');
-      if (armed) show(Math.round(p.pos));
-    }
-
-    var tl = gsap.timeline({ defaults:{ ease:'power2.inOut' }, onUpdate:paint });
-    stepAt = [0];
-    tl.to({}, { duration:HOLD / 2 });
-    for (i = 1; i < n; i++) {
-      tl.to(p, { pos:i, duration:1 });
-      stepAt.push(tl.duration() + HOLD * .3);
-      tl.to({}, { duration:i < n - 1 ? HOLD : HOLD / 2 });
-    }
-    stepAt = stepAt.map(function(t){ return t / tl.duration(); });
-    tl.fromTo(prog, { scaleX:0 }, { scaleX:1, ease:'none', duration:tl.duration() }, 0);
-
-    measure(); paint();
-    st = ScrollTrigger.create({
-      trigger:sec, pin:true, animation:tl, scrub:.5, invalidateOnRefresh:true,
-      /* centre the heading and the kit in the viewport, leaving the section's bottom padding out */
-      start:function(){
-        var h = sec.offsetHeight - parseFloat(getComputedStyle(sec).paddingBottom);
-        return 'top top+=' + Math.max(0, Math.round((innerHeight - h) / 2));
-      },
-      end:function(){ return '+=' + Math.round((n - 1) * innerHeight * .5); },
-      onRefresh:function(){ measure(); paint(); }
+  mm.add('(min-width: 901px)', function(){
+    sec.classList.add('pan');
+    function dist(){ return track.scrollWidth - sec.clientWidth; }
+    var pan = gsap.to(track, { x:function(){ return -dist(); }, ease:'none', scrollTrigger:{
+      trigger:sec, start:'top top', end:function(){ return '+=' + dist(); },
+      pin:true, scrub:.6, invalidateOnRefresh:true
+    }});
+    frames.forEach(function(f, i){
+      var tl = assembly(f, i, 'right');
+      // the first frame is already in the middle, so it assembles while the section rises into place
+      if (i === 0) ScrollTrigger.create({ trigger:sec, start:'top 75%', end:'top top', scrub:.6, animation:tl });
+      else ScrollTrigger.create({ trigger:f, containerAnimation:pan, start:'left right', end:'center center', scrub:.6, animation:tl });
+      ScrollTrigger.create({ trigger:f, containerAnimation:pan, start:'left center', end:'right center',
+        toggleClass:{ targets:f, className:'on' } });
+      if (i < frames.length - 1) gsap.fromTo(f, { opacity:1, scale:1, rotation:0 },
+        { opacity:.3, scale:.88, rotation:-3, ease:'none', transformOrigin:'50% 60%',
+          scrollTrigger:{ trigger:f, containerAnimation:pan, start:'center center', end:'right left', scrub:.6 } });
     });
-
-    return function(){
-      scrolly = false; st = null; current = -1;
-      kit.classList.remove('scrolly');
-      list.style.removeProperty('--by'); list.style.removeProperty('--bh');
-      count.remove(); prog.remove();
-    };
+    return function(){ sec.classList.remove('pan'); };
   });
 
-  // the first skill is drawn once the section is reached, so the screen is never blank
-  ScrollTrigger.create({ trigger:kit, start:'top 80%', once:true, onEnter:function(){
-    armed = true;
-    if (current < 0) show(0);
-  }});
+  mm.add('(max-width: 900px)', function(){
+    frames.forEach(function(f, i){
+      ScrollTrigger.create({ trigger:f, start:'top 88%', end:'center 55%', scrub:.5, animation:assembly(f, i, 'below') });
+      ScrollTrigger.create({ trigger:f, start:'top center', end:'bottom center', toggleClass:{ targets:f, className:'on' } });
+    });
+  });
 })();
 </script>
 <script>

@@ -42,7 +42,7 @@ html{color-scheme:only light;caret-color:var(--blue);accent-color:var(--blue);sc
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 /* the blue ring disappears on blue and ink grounds */
 .foot :focus-visible,.marquee :focus-visible,.nav .cta:focus-visible,
-.km header :focus-visible,.story .sc:last-child :focus-visible{outline-color:var(--paper)}
+.story .sc:last-child :focus-visible{outline-color:var(--paper)}
 /* figures that sit in a column or get compared line up */
 .wc-top,.foot-base,.meta,.rlab,.sechead .count{font-variant-numeric:tabular-nums}
 /* underlines clear the descenders instead of cutting them */
