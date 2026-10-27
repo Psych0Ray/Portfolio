@@ -181,16 +181,16 @@
 
 /* pop: the lead's number in Canva purple, "Orb" picked out of its gradient heading, Orb's side
    of the closing table in purple, and the real request set huge on the Orb panel's own field */
-.p-canva-ai{--d-band:linear-gradient(110deg,#b9ecef 0%,#c5d9f7 50%,#dbc2f6 100%);--d-on-band:#1d1d28}
 .p-canva-ai .t-lead em{color:#8b3dff;font-weight:600}
 .p-canva-ai .t-h em{font-style:normal;color:#8b3dff;-webkit-text-fill-color:#8b3dff}
 .p-canva-ai .t-rows.swap dd{color:#8b3dff}
-.t-band .cv-ask{width:min(100%,1040px);padding:clamp(28px,3vw,44px) clamp(28px,3vw,48px) clamp(76px,7vw,96px);border-radius:24px;
-  font-size:clamp(26px,3.6vw,54px);line-height:1.18;letter-spacing:-.025em;border-color:rgba(255,255,255,.7);
+@media (min-width:901px){.p-canva-ai .t-sec > .cv-hero{grid-column:4 / -1}}
+.cv-hero .cv-ask{width:min(100%,1040px);padding:clamp(28px,3vw,44px) clamp(28px,3vw,48px) clamp(76px,7vw,96px);border-radius:24px;
+  font-size:clamp(26px,3.6vw,54px);line-height:1.18;letter-spacing:-.025em;
   box-shadow:0 40px 80px -40px rgba(76,56,160,.55)}
-.t-band .cv-ask::after{width:44px;height:44px;right:22px;bottom:20px;background-color:#8b3dff;
+.cv-hero .cv-ask::after{width:44px;height:44px;right:22px;bottom:20px;background-color:#8b3dff;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")}
-.t-band .t-obj .t-cap{margin-top:22px;color:#3c3f48;max-width:60ch}
+.cv-hero .t-cap{margin-top:22px;color:#3c3f48;max-width:60ch}
 .cv-ask .ghost{color:transparent}
 .cv-ask .typed{position:absolute;inset:0;padding:inherit;pointer-events:none}
 .cv-ask .typed::after{content:"";display:inline-block;width:.06em;height:.9em;margin-left:.04em;vertical-align:-.08em;background:#8b3dff;

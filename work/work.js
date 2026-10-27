@@ -402,7 +402,7 @@
   });
 
   // the request types itself out: a transparent copy holds the box's size and is what is read aloud
-  q('.deck .t-band .cv-ask').forEach(function (box) {
+  q('.deck .cv-hero .cv-ask').forEach(function (box) {
     var text = box.textContent;
     box.innerHTML = '';
     var ghost = document.createElement('span'); ghost.className = 'ghost'; ghost.textContent = text;
@@ -410,6 +410,6 @@
     box.appendChild(ghost); box.appendChild(typed);
     var o = { n: 0 };
     gsap.to(o, { n: text.length, ease: 'none', onUpdate: function () { typed.textContent = text.slice(0, Math.round(o.n)); },
-      scrollTrigger: { trigger: box, start: 'top 82%', end: 'bottom 40%', scrub: .4 } });
+      scrollTrigger: { trigger: box, start: 'top 85%', end: 'top 50%', scrub: .4 } });
   });
 })();

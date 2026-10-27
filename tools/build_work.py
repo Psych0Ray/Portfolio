@@ -31,7 +31,7 @@ PROJECTS = [
     slug='uls', title='ULS', short='ULS',
     meta=[('Course', 'Service design'),
           ('My role', 'End-to-end research and design'),
-          ('Methods', 'Field interviews, systems mapping, service blueprint'),
+          ('Methods', 'Field interviews, system mapping, service blueprint'),
           ('Year', '2026')],
     about='ULS, the Urban Labour System, brings a record to informal naka hiring: a QR-linked ID for every '
           'daily wage worker, and screens for workers, foremen and contractors built around it.',
@@ -50,7 +50,7 @@ PROJECTS = [
     slug='iccc-surveillance', title='ICCC SURVEILLANCE', short='ICCC Surveillance',
     meta=[('Course', 'Object-oriented UX'),
           ('My role', 'High-Fidelity UI, Research &amp; Analysis, OOUX Calculations, Diagramming'),
-          ('Methods', 'Field observation, interviews, task modelling'),
+          ('Methods', 'Field observation, interviews, object action mapping'),
           ('Year', '2026')],
     about='A redesign of the monitoring dashboard at MIDC’s Integrated Command and Control Centre (ICCC) in Taloja, '
           'rebuilt around how operators check, escalate and resolve alerts.',
@@ -67,7 +67,7 @@ PROJECTS = [
     slug='canva-ai', title='CANVA AI REDESIGN', short='Canva AI redesign',
     meta=[('Type', 'UI/UX, conversational AI'),
           ('My role', 'Visual Design, Research &amp; Analysis, AI Response Analysis, Framework Design'),
-          ('Methods', 'Prompt testing, review analysis'),
+          ('Methods', 'Prompt testing, framework design'),
           ('Year', '2025')],
     about='A redesign of Canva’s AI assistant for non-designers: it works inside the file you have open, '
           'asks before it changes anything, and reviews a design the way a consultant would.',

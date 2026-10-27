@@ -1360,6 +1360,10 @@ Last updated: 2026-10-16
     - **CSS:** the phone "table becomes cards" rules in `work/work.css` were scoped to `.fcs` (full case pages only); widened to `.deck` so trailers get them (no other trailer has a table). **Fixed a pre-existing phone bug on the full ULS page too:** the highlighted ULS row lost its yellow on phones (cells' background removed, row never given one) and its labels were grey on yellow; the row now carries the yellow and dark labels.
     - Checked at 1440 and 390, trailer and full page: no overflow, no console errors.
 
+135. **Canva request out of the gradient band, typing finishes sooner; Methods fixed (2026-10-27).**
+    - **Canva trailer:** the user's screenshot showed the typed request still finishing with the box mostly scrolled past, and they asked to remove the gradient behind it. The request (`.cv-ask`) is no longer in a `.t-band`; it is a plain `figure.t-obj.cv-hero` on the text column (`work/ui/canva-ai.css`), on the page's own white. `--d-band` removed from `.p-canva-ai`, so **the Canva trailer has no band now** (the band's wipe would have clipped the box without its fill). The `.t-band .cv-ask` styles were renamed to `.cv-hero`. Typing in `work/work.js` now scrubs from `top 85%` to `top 50%` (was `top 82%` to `bottom 40%`): complete when the box's top reaches mid-screen, measured 72/72 at 1920x970 and 390x800.
+    - **Methods (in `tools/build_work.py`):** ULS "systems mapping" → "system mapping"; ICCC "task modelling" → "object action mapping" (user's correction); Canva AI "Prompt testing, review analysis" → "Prompt testing, framework design".
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
