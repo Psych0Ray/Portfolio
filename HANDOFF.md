@@ -1353,6 +1353,13 @@ Last updated: 2026-10-16
     - **ULS** (`#u-next`, between the outcome rows and the teaser): *We'd test three questions next.* Rows by role (Contractors / Foremen / Workers), using the three example questions the user gave; no fourth was invented.
     - Checked at 1440 and 390: no overflow, no console errors.
 
+134. **ULS trailer: system analysis section before "ULS gives every worker a record." (2026-10-27).** User asked for a "beautiful" section after the schemes section showing the analysis of the current system leading to the idea. `#u-sys` in `tools/trailers/uls.html`, all content lifted from the full case (`tools/full/uls.html`, sections `#choice`, `#market`, `#problem`), nothing new:
+    - *We traced where the value leaks away.* + one line on the value flow, then the **value flow map** (`full/uls/valueflow.webp`, zoomable `cs-zoom`). On desktop it sits on the text column via `.u-vf` in `work/ui/uls.css` (842px tall at 1440 instead of 1431 full width).
+    - *Nothing that exists works at the naka* + the **competitive table** (`cs-table cs-comp`, ULS row in yellow).
+    - `cs-bridge` line: "Underneath all of it, one problem: nothing at the naka is ever written down." which hands off to the record section.
+    - **CSS:** the phone "table becomes cards" rules in `work/work.css` were scoped to `.fcs` (full case pages only); widened to `.deck` so trailers get them (no other trailer has a table). **Fixed a pre-existing phone bug on the full ULS page too:** the highlighted ULS row lost its yellow on phones (cells' background removed, row never given one) and its labels were grey on yellow; the row now carries the yellow and dark labels.
+    - Checked at 1440 and 390, trailer and full page: no overflow, no console errors.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.

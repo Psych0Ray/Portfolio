@@ -299,6 +299,8 @@
 .p-uls .cs-label{width:max-content;padding:7px 14px;border-radius:100px;background:#2a2a2a;border:1px solid #3a3a3a;
   font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:#d6d6d6}
 .p-uls .cs-label::before{display:none}
+/* the value flow on the trailer sits on the text column, so the near-square map stays inside one screen */
+@media (min-width:901px){.p-uls .t-sec > .u-vf{grid-column:4 / span 7}}
 /* the page's scrollbar and cursor in the deck's colours (hooks in lab.css) */
 :root{--sb-thumb:#fcd824;--sb-track:#151515;--sb-hover:#fff;--cur:#fcd824;--cur-edge:#151515;--cur-tag:#fcd824;--cur-tag-fg:#151515}
 

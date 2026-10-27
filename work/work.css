@@ -688,18 +688,19 @@ body:has(.stage:hover,.vp-bar:hover,.vp-ch:hover) .cursor{visibility:hidden}
 .cs-short dd{margin-top:12px;font-family:var(--d-head);font-weight:var(--d-lw,400);font-size:clamp(17px,1.35vw,19px);line-height:1.55;color:var(--d-fg);max-width:32ch}
 /* tables stack into cards on phones, each value labelled with its column */
 @media (max-width:760px){
-  .fcs .cs-table{overflow:visible}
-  .fcs .cs-table table,.fcs .cs-table tbody,.fcs .cs-table tr,.fcs .cs-table td{display:block;min-width:0;width:100%}
-  .fcs .cs-table thead{display:none}
-  .fcs .cs-table tr{padding:14px 0;border-bottom:1px solid var(--d-line)}
-  .fcs .cs-table td{border:0;padding:4px 0;white-space:normal}
-  .fcs .cs-table td[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:var(--d-bw);color:var(--d-soft);margin-bottom:2px}
-  .fcs .cs-table td:first-child{font-size:17px}
-  .fcs .cs-table td:first-child::before{display:none}
-  .fcs .cs-comp tr.us{padding:14px 12px;border-radius:10px}
-  .fcs .cs-comp td[data-label]{display:flex;justify-content:space-between;gap:16px}
-  .fcs .cs-comp td[data-label]::before{margin:0;font-weight:400;color:var(--d-dim)}
-  .fcs .cs-comp tr.us td{background:none;padding-left:0}
+  .deck .cs-table{overflow:visible}
+  .deck .cs-table table,.deck .cs-table tbody,.deck .cs-table tr,.deck .cs-table td{display:block;min-width:0;width:100%}
+  .deck .cs-table thead{display:none}
+  .deck .cs-table tr{padding:14px 0;border-bottom:1px solid var(--d-line)}
+  .deck .cs-table td{border:0;padding:4px 0;white-space:normal}
+  .deck .cs-table td[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:var(--d-bw);color:var(--d-soft);margin-bottom:2px}
+  .deck .cs-table td:first-child{font-size:17px}
+  .deck .cs-table td:first-child::before{display:none}
+  .deck .cs-comp tr.us{padding:14px 12px;border-radius:10px;background:var(--d-accent)}
+  .deck .cs-comp td[data-label]{display:flex;justify-content:space-between;gap:16px}
+  .deck .cs-comp td[data-label]::before{margin:0;font-weight:400;color:var(--d-dim)}
+  .deck .cs-comp tr.us td{background:none;padding-left:0}
+  .deck .cs-comp tr.us td[data-label]::before{color:var(--d-on-accent);opacity:.7}
   .cs-short{grid-template-columns:minmax(0,1fr);row-gap:22px}
 }
 
