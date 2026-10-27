@@ -1348,6 +1348,11 @@ Last updated: 2026-10-16
 
 132. **Keychain: pen-nib (design) charm removed (2026-10-27).** User: "the pen quill in the keychain is unneeded". Deleted that `.charm` (it was `data-at="8"`) from `#keys` in [index.html](index.html) and dropped "design" from the keychain's `aria-label`. `keychain()` reads charms generically, so no script change. Now four hobby charms (helmet, wok, clapperboard, controller) plus the R fob. Checked at 1440: all visible, no console errors.
 
+133. **Two new trailer sections: ICCC process, ULS next tests (2026-10-27).** Written in `tools/trailers/*.html` and rebuilt with `build_work.py`; no other content changed (diff is +11 lines per page). Both use the shared `t-rows` component.
+    - **ICCC** (`#ic-proc`, after "We rebuilt it around what operators do."): *We mapped the work before any screen.* Rows: What we observed / What OOUX revealed / What we decided. The user left the OOUX step as a placeholder; it was filled **only from the full case study** (`tools/full/iccc-surveillance.html`, steps 1-5): 100+ user stories, 140 objects by 77 actions, the same few things named many ways, merged to seven core objects (Alert, Device, Fault, Ticket named).
+    - **ULS** (`#u-next`, between the outcome rows and the teaser): *We'd test three questions next.* Rows by role (Contractors / Foremen / Workers), using the three example questions the user gave; no fourth was invented.
+    - Checked at 1440 and 390: no overflow, no console errors.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
