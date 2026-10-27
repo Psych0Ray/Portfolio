@@ -1344,6 +1344,8 @@ Last updated: 2026-10-16
     - **Chain lengths tuned for visibility (same day):** a search over chain lengths (15px steps, each charm's real outline traced from its SVG, z-order as in the markup, keychain width capped ~330 and height ~400 local px, and a minimum total overlap so it still reads as a bunch) maximised the least-visible charm. **Now `data-l`: helmet 90, wok 0, clapper 45, controller 30, pen 60, R 0** (at/rest unchanged). Estimated visible share: helmet 88%, wok 86%, clapper 83%, controller 82%, pen 98%, R 100%; before, the helmet showed about half and the pen sat behind the R. The search scripts are not in the repo (scratch only); rerun the idea if charms change.
     - **j selection:** `.L5 .lsel{bottom:-.2em}` so the frame takes in the tail that hangs below the j's box.
 
+131. **New resume swapped in (2026-10-27).** The user's new CV, `D:\Submissions\CV\A4 - Resume 2026 Rutujeet Nayak.pdf` (identical to `A4 - Resume 2026 (Revised).pdf` beside it), replaced `Rutujeet-Nayak-Resume.pdf` at the repo root. Title/author metadata set with `pymupdf`, saved `garbage=3, deflate=True`; one page, 15 links intact. No link changes needed. What's new in it: a Projects section linking to the four `work/*.html` pages on www.rutujeetnayak.me, Accenture listed as Bangalore, tools now include Figma Make, Canva, Claude, Runway, Antigravity. **Flagged, not changed (it's the user's file):** the header's Portfolio link still goes to `rutujeetfolio.vercel.app` while the project links use `rutujeetnayak.me`; "Bachelor's of Design" is still there.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
