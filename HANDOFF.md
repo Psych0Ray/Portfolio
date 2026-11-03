@@ -1366,6 +1366,10 @@ Last updated: 2026-10-16
 
 136. **"Vibecoding" → "Vibe coding" everywhere it shows (2026-10-28).** Three places, all in `index.html`: the ticker's last word, the What I Bring card title, and the Antigravity tile ("Vibe coding prototypes"). The illustration key `data-art="vibecoding"` is internal and was left. No other tracked page or source says it. Checked at 1440 and 390: the card title stays on one line.
 
+137. **Resume: all four projects, exported from Figma, live on the site (2026-11-03).** The current resume frame is now **`2551:2` "A4 - Resume 2026 (Mygate)"** on page `cv` (supersedes `2356:2` as the live one). Added **Canva AI Redesign (2025)** and **Relique (2025)** to the Projects text (`2551:38`) using the one-line descriptions from the previous resume, Figtree 10 Bold name + year, Regular description, bullet list, names hyperlinked to `/work/canva-ai.html` and `/work/relique.html` like ICCC and ULS. To fit, `Frame 3` (`2551:18`) was switched to hug its content and the page frame grew 842 → **866px** (same 20px bottom margin), so the PDF is one slightly-taller-than-A4 page, as the user allowed.
+    - Exported with `download_assets` (pdf), title/author set with pymupdf (the raw export's title was "A4 - Resume 2026 (Mygate)", which would have shown a company name to other recruiters; now "Rutujeet Nayak - Resume"). Written over `D:\Submissions\CV\Resume 2026 Rutujeet Nayak.pdf` (previous version backed up in the session scratchpad only) and `Rutujeet-Nayak-Resume.pdf` here. 1 page, 15 links, text selectable.
+    - Figma's `create_session` was declined by the user this session; `use_figma` worked without it.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
