@@ -98,6 +98,43 @@ PROJECTS = [
     cover_alt='Relique title over a dark still life painting'),
 ]
 
+# The case study from the Accenture internship: the user's own Figma Slides deck (file
+# oML4xS93pz4Z6VtIGNd7ou), shown as it was presented, one slide at a time. The 17 slides are
+# exported at 1920 x 1080 into work/ui/drobe/ (sNN.webp, and sNN-1280.webp for phones).
+# Shared with the manager's go-ahead (2026-11-26). Not one of the four in PROJECTS: the home page
+# links to it from its own bar under the grid, and it has no next/previous place in that loop.
+# Hotspots are the deck's own links, as (left, top, width, height) in slide pixels.
+DROBE = dict(
+  slug='drobe', title='DROBE', short='DROBE at Accenture',
+  meta=[('Company', 'Accenture, Bangalore'),
+        ('My role', 'User experience analyst intern'),
+        ('Year', '2026')],
+  about='DROBE is an AI shopping agent that answers “should I buy this?” from occasion, body type, budget and '
+        'weather, checked against the wardrobe you already own. The case study from my internship at Accenture.',
+  slides=[
+    ('DROBE, your personalized shopping agent: a hanger logo beside an illustration of a man picking clothes from his wardrobe', None),
+    ('Problem statement: shoppers buy blind, with no idea if it will suit them, fit them, or duplicate what they already own', None),
+    ('The opportunity: an AI shopping agent that answers “should I buy this?” using occasion, body type, budget and weather, with wardrobe intelligence as the system that sharpens each answer', None),
+    ('Secondary research: three headline figures, 47%, 25 to 40% and 55%, and four key takeaways', None),
+    ('Primary research: 5 interviews, 10 surveys and a demographic of 18 to 28 year olds', None),
+    ('Seven themes emerged from the interviews', None),
+    ('Persona one: Priya is not sure it will fit, or if she already owns it. Her goals, pain points and what would make her trust an AI agent', None),
+    ('Persona two: Aryan cannot tell if it will suit him, or work with what he owns. His goals, pain points and what would make him trust an AI agent', None),
+    ('The product: DROBE, an agentic AI application that helps you make better fashion decisions and dress smarter, and its five key features', None),
+    ('The agentic architecture: a supervisor agent, Stahr, delegating to five specialist agents, Wren, Reese, Scout, Anne and Remy, over a shared memory', None),
+    ('Information architecture of the app, with a link to the full map in FigJam',
+     ('https://www.figma.com/board/tLNxOspE2Jd7La4EpCo0Gv/AI-Wardrobe-Agent----Full-Product-Flow?node-id=0-1&p=f&t=h6DCgqOcPxUoyExL-0',
+      'View the full information architecture in FigJam', (774, 624, 371, 68))),
+    ('The visual language: the DROBE wordmark, typography and colour palette', None),
+    ('Storyboard: let’s follow the story of Arjun, frames one to four', None),
+    ('Prototype: a hand holding a phone with the DROBE app open, and a link to the built prototype',
+     ('https://www.figma.com/proto/aJlNVX8e22WVsQtgL3S4RG/DROBE?node-id=243-339&t=WaV0e0JEu72HdH7A-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=243%3A339&page-id=87%3A266',
+      'Open the DROBE prototype', (60, 180, 290, 80))),
+    ('Storyboard: coming back to Arjun, frames five to eight', None),
+    ('The AI tools used in this project and what each was used for: Claude, Perplexity, Stitch, ChatGPT and Gemini', None),
+    ('Fin.', None),
+  ])
+
 
 # The index beside each full case study. Each entry is (group, label, image, y): the section
 # starts `y` pixels down image `image` of work/full/<slug>/ (the images are 2000px wide), a
@@ -505,8 +542,69 @@ def page(p, nxt):
     return out + FOOT.replace('<!--UI-->', libs)
 
 
+def slides_page(d, nxt):
+    """The deck as a slideshow: one slide at a time, arrows, keys and swipe (work/ui/drobe.js)."""
+    n = len(d['slides'])
+    meta = ''.join(f'<div><b>{k}</b><span>{v}</span></div>' for k, v in d['meta'])
+    out = HEAD.format(title=d['short'], desc=html.escape(summary(d['about'])),
+                      extra=f'\n<link rel="stylesheet" href="ui/{d["slug"]}.css">')
+    figs = []
+    for i, (alt, hot) in enumerate(d['slides']):
+        k = '%02d' % (i + 1)
+        src = f'ui/{d["slug"]}/s{k}'
+        lazy = '' if i == 0 else ' loading="lazy"'
+        link = ''
+        if hot:
+            url, label, (x, y, w, h) = hot
+            link = (f'<a class="ss-hot" href="{html.escape(url)}" target="_blank" rel="noopener" data-cursor="Open" '
+                    f'style="left:{x / 19.2:.2f}%;top:{y / 10.8:.2f}%;width:{w / 19.2:.2f}%;height:{h / 10.8:.2f}%">'
+                    f'<span class="sr-only">{label}</span></a>')
+        on = ' on' if i == 0 else ''
+        hidden = '' if i == 0 else ' aria-hidden="true" inert'
+        figs.append(f'      <figure class="ss-slide{on}" role="group" aria-roledescription="slide" '
+                    f'aria-label="{i + 1} of {n}"{hidden}>'
+                    f'<img src="{src}.webp" srcset="{src}-1280.webp 1280w, {src}.webp 1920w" '
+                    f'sizes="(max-width: 1400px) 100vw, 1400px" width="1920" height="1080" alt="{html.escape(alt)}"{lazy} decoding="async">'
+                    f'{link}</figure>')
+    slides = '\n'.join(figs)
+    arrow_l = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12h-16M11 5l-7 7 7 7"/></svg>'
+    arrow_r = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg>'
+    out += f'''
+<header class="chead">
+  <h1>{d['title']}</h1>
+  <div class="meta">{meta}</div>
+</header>
+
+<div class="deck p-{d['slug']}">
+  <section class="ss" aria-roledescription="carousel" aria-label="DROBE case study, {n} slides">
+    <div class="ss-view" data-cursor="Swipe">
+{slides}
+    </div>
+    <div class="ss-prog" aria-hidden="true"><span></span></div>
+    <div class="ss-bar">
+      <button type="button" class="ss-btn" data-dir="-1" aria-label="Previous slide" disabled>{arrow_l}</button>
+      <p class="ss-count" aria-live="polite"><span class="ss-n">01</span> / {n:02d}</p>
+      <button type="button" class="ss-btn" data-dir="1" aria-label="Next slide">{arrow_r}</button>
+    </div>
+  </section>
+</div>
+<section class="sec end">
+  <a class="next card" href="{nxt['slug']}.html" data-reveal data-cursor="Next">
+    <div><h2>Next: {nxt['short']}</h2></div>
+    <span class="rbtn" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h16M13 5l7 7-7 7"/></svg></span>
+  </a>
+</section>
+'''
+    return out + FOOT.replace('<!--UI-->', f'<script src="ui/{d["slug"]}.js"></script>')
+
+
 if __name__ == '__main__':
     only = os.environ.get('ONLY')
+    if not only or only == DROBE['slug']:
+        dest = os.path.join(ROOT, 'work', DROBE['slug'] + '.html')
+        with open(dest, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(slides_page(DROBE, PROJECTS[0]))
+        print('wrote', os.path.relpath(dest, ROOT))
     for i, p in enumerate(PROJECTS):
         if only and p['slug'] != only:
             continue

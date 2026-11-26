@@ -1,0 +1,46 @@
+/* DROBE, the case study from the Accenture internship (Figma Slides oML4xS93pz4Z6VtIGNd7ou).
+   The deck is shown as it was presented, one slide at a time: white slides, the brand purple
+   #A100FF and the near-black #1C1C1E from the deck's own visual language slide. The slides are
+   images, so the only type here is the counter. Driven by drobe.js. */
+
+.p-drobe{--d-bg:#fff;--d-fg:#1c1c1e;--d-dim:#55555e;--d-soft:#8a8a93;--d-line:#e7e4ee;--d-card:#fff;--d-accent:#a100ff;--d-on-accent:#fff;
+  --d-font:system-ui,-apple-system,'Segoe UI',sans-serif;--d-head:system-ui,-apple-system,'Segoe UI',sans-serif;--d-hw:600;--d-bw:600}
+/* the nav while the slides are under it (work.css, INSIDE THE WORK) */
+.on-deck{--n-bg:#fff;--n-fg:#1c1c1e;--n-line:#e7e4ee;--n-accent:#a100ff;--n-on-accent:#fff;--n-shadow:0 12px 30px -16px rgba(80,0,140,.3)}
+
+/* as wide as fits the slide and its controls on one screen under the nav (about 230px of chrome) */
+.ss{max-width:min(1400px,max(600px,calc((100svh - 230px) * 16 / 9 + var(--pad) * 2)));margin:0 auto;
+  padding:clamp(40px,5vw,72px) var(--pad) clamp(96px,9vw,140px)}
+
+/* the slides sit on top of each other; only the current one shows. A hairline and a soft
+   purple shadow give the white slide its edge on the white ground */
+.ss-view{position:relative;aspect-ratio:16 / 9;border-radius:14px;overflow:hidden;background:#fff;
+  box-shadow:0 0 0 1px rgba(28,28,30,.08),0 30px 60px -32px rgba(110,0,180,.35);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ss-slide{position:absolute;inset:0;margin:0;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.ss-slide.on{opacity:1;visibility:visible;transition:opacity .35s ease,visibility 0s}
+.ss-slide img{display:block;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}
+
+/* the deck's own links (FigJam, the prototype), over the words that carried them */
+.ss-hot{position:absolute;border-radius:10px;transition:box-shadow .15s ease,background .15s ease}
+.ss-hot:hover,.ss-hot:focus-visible{background:rgba(161,0,255,.08);box-shadow:0 0 0 2px var(--d-accent);outline:0}
+
+.ss-prog{height:2px;margin-top:22px;background:var(--d-line);border-radius:2px;overflow:hidden}
+.ss-prog span{display:block;height:100%;background:var(--d-accent);transform-origin:0 50%;transform:scaleX(calc(1 / 17));
+  transition:transform .35s ease}
+
+.ss-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
+.ss-count{font-size:15px;font-weight:500;letter-spacing:.02em;color:var(--d-soft);font-variant-numeric:tabular-nums}
+.ss-count .ss-n{color:var(--d-fg)}
+.ss-btn{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid var(--d-line);background:#fff;
+  color:var(--d-fg);cursor:pointer;transition:background .15s,color .15s,border-color .15s,transform .12s ease}
+.ss-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ss-btn:hover:not(:disabled){background:var(--d-accent);border-color:var(--d-accent);color:var(--d-on-accent)}
+.ss-btn:active:not(:disabled){transform:scale(.92);transition-duration:.05s}
+.ss-btn:disabled{opacity:.35;cursor:default}
+
+@media (max-width:900px){
+  .ss{padding-top:28px}
+  .ss-view{border-radius:10px}
+  .ss-btn{width:46px;height:46px}
+}
+@media (prefers-reduced-motion:reduce){.ss-slide,.ss-slide.on,.ss-prog span{transition:none}}
