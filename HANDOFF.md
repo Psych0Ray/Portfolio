@@ -1379,6 +1379,13 @@ Last updated: 2026-10-16
     - Checked at 1440 and 390: no overflow, no console errors; buttons, keys, swipe, both link areas verified.
     - **Open:** on phones the slides are 336px wide and their small text is hard to read; landscape helps. No zoom/fullscreen was added (not asked for).
 
+139. **DROBE moved from a logo bar to a work card (2026-11-26).** The user found the item 138 bar off (all-caps heading beside Accenture's lowercase wordmark). After previewing options locally (featured card on top, full-width card, text-only bar; then two half-height versions of the full-width card), they chose **a full-width card at the end of the grid, about half a normal full-width card's height, showing only the DROBE logo on the deck purple.**
+    - **The Accenture logo bar and its CSS are removed** from `index.html`; Accenture appears only as the chip "Internship at Accenture". The Wikimedia logo is no longer used anywhere.
+    - **The card** is appended in the grid renderer in `index.html` after `WORK.map(...)`: `a.wc.wc-wide.card` to `work/drobe.html`, year 2026, title "An AI shopping agent", chips "Internship at Accenture" and "Agentic AI", cursor label "Slides". CSS: `.wc-wide` spans the grid; `.wc-drobe` is the strip (`#a100ff`, `clamp(200px,17vw,250px)` tall, 2.5px ink border like `.th`). On phones (<=900px) the card drops the reel-card height and the strip becomes 16:9.
+    - **The logo is vector** (`img/thumbs/drobe-logo.svg`): the deck's hanger, star and outlined "DROBE" wordmark (Graphik Semibold) exported from Figma Slides `1:90` and `1:84`, recombined in their slide positions. The star's masked inside stroke was replaced with an equivalent filled star. **Sized by width**, not a % height (a % height on that grid item resolved against the image's own 302px and overflowed): `clamp(163px,13.9vw,204px)` on desktop (about 68% of the strip's height), `38.5%` on phones (about 57% of the 16:9 frame).
+    - **Figma:** two new frames in the Portfolio file's Thumbnails section (`2330:3758`, which was extended to 3398px tall): `2636:3976` "DROBE card · wide (home, desktop)" 1296x248 and `2636:3983` "DROBE card · 16:9 (home, phone)" 1192x670, each the purple with the logo centred.
+    - Checked at 1440, 1920 and 390: logo centred (equal gaps), no overflow, no console errors.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
