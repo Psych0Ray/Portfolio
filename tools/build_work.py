@@ -33,7 +33,7 @@ PROJECTS = [
           ('My role', 'End-to-end research and design'),
           ('Methods', 'Field interviews, system mapping, service blueprint'),
           ('Year', '2026')],
-    about='ULS, the Urban Labour System, brings a record to informal naka hiring: a QR-linked ID for every '
+    about='ULS, the Urban Labour Service, brings a record to informal naka hiring: a QR-linked ID for every '
           'daily wage worker, and screens for workers, foremen and contractors built around it.',
     # the teaser ad the team made to launch the service: cinematic, not a walkthrough
     video=dict(dur=23.73, label='ULS teaser film', chapters=[]),
