@@ -1386,6 +1386,8 @@ Last updated: 2026-10-16
     - **Figma:** two new frames in the Portfolio file's Thumbnails section (`2330:3758`, which was extended to 3398px tall): `2636:3976` "DROBE card · wide (home, desktop)" 1296x248 and `2636:3983` "DROBE card · 16:9 (home, phone)" 1192x670, each the purple with the logo centred.
     - Checked at 1440, 1920 and 390: logo centred (equal gaps), no overflow, no console errors.
 
+140. **ULS is the "Urban Labour Service", not "System" (2026-11-27).** User correction. Fixed in `index.html` (card desc), `tools/build_work.py` (about) and `tools/full/uls.html`, pages rebuilt; older notes in this file that say "Urban Labour System" are wrong on the name. **Resume not changed yet:** the site's `Rutujeet-Nayak-Resume.pdf` and `D:\Submissions\CV\Resume 2026 Rutujeet Nayak.pdf` still say "Urban Labour System", while the Figma resume frame `2551:38` now says "United Labour Services" (edited by the user after the last export). Waiting on the user for which name the resume should use.
+
 ## In progress / not yet confirmed
 
 - **Items 91-102 are LIVE (item 103).** Anything the user flags on the live site from here is a normal new round.
